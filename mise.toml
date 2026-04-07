@@ -12,7 +12,9 @@ ruff = "latest"
 dprint = "latest"
 
 [env]
-_.python.venv = { path = ".venv", create = true }
+# Dejado a cargo de uv para evitar conflictos de VIRTUAL_ENV en worktrees
+# _.python.venv = { path = ".venv", create = true }
+VIRTUAL_ENV = ""
 _.file = ".env"
 
 # Dev tasks ==========================================

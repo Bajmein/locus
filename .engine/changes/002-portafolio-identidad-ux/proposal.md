@@ -1,7 +1,7 @@
 ---
 type: proposal
 domain: web-infrastructure
-status: proposed
+status: implemented
 priority: medium
 author: gemini-2-0-flash-exp-001
 created_at: 2026-04-06
@@ -10,6 +10,8 @@ tags:
   - area:portafolio
   - feature:identidad-ux
   - tool:mkdocs
+branch: change/002
+worktree: .worktrees/002
 ---
 
 # Proposal: Portafolio Web de Arquitectura y R&D (Fase 2: Identidad y UX)
