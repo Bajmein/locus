@@ -47,8 +47,6 @@ site/
 .engine/
 .gemini/
 .serena/
-.github/
-src/
 .worktrees/
 .cache/
 CLAUDE.md
