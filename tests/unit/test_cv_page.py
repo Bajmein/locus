@@ -49,8 +49,8 @@ def test_cv_frontmatter_description(cv_page):
 
 def test_cv_iframe_src_is_local(cv_page):
     _, body = cv_page
-    assert 'src="assets/pdf/cv_benjamin_criado.pdf"' in body, (
-        "cv.md must contain an iframe with relative local src"
+    assert 'src="/assets/pdf/cv_benjamin_criado.pdf"' in body, (
+        "cv.md must contain an iframe with absolute local src"
     )
 
 
@@ -88,12 +88,20 @@ def test_cv_grid_card_syntax(cv_page):
 
 def test_cv_in_nav():
     config = yaml.safe_load(MKDOCS_YML.read_text(encoding="utf-8"))
-    nav_values = [list(entry.values())[0] for entry in config.get("nav", []) if isinstance(entry, dict)]
+    nav_values = [
+        next(iter(entry.values()))
+        for entry in config.get("nav", [])
+        if isinstance(entry, dict)
+    ]
     assert "cv.md" in nav_values, "mkdocs.yml nav must include an entry pointing to cv.md"
 
 
 def test_existing_nav_entries_intact():
     config = yaml.safe_load(MKDOCS_YML.read_text(encoding="utf-8"))
-    nav_values = [list(entry.values())[0] for entry in config.get("nav", []) if isinstance(entry, dict)]
+    nav_values = [
+        next(iter(entry.values()))
+        for entry in config.get("nav", [])
+        if isinstance(entry, dict)
+    ]
     for expected in ["index.md", "vigilia/index.md", "forge/index.md", "laboratorio/index.md"]:
         assert expected in nav_values, f"Existing nav entry '{expected}' must remain intact"
