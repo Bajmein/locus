@@ -35,6 +35,18 @@ Ingestión → Análisis en tiempo real → Evaluación de reglas → Acción
 El operador define qué importa (zonas, comportamientos, umbrales); el sistema
 se encarga del resto.
 
+### Arquitectura Híbrida Python/Rust
+
+El Motor de Inferencia y el Procesamiento de Tensores están escritos en
+**Rust**, elegido por sus garantías de seguridad de memoria en tiempo de
+compilación y su rendimiento determinista sin GC pauses. La capa de
+orquestación, configuración y reglas corre en Python — aprovechando su
+ecosistema sin sacrificar el rendimiento donde más importa.
+
+> **Rust-powered core** — Memory-safe video processing que opera completamente
+> fuera del GIL de Python, con operaciones zero-copy entre el decoder de frames
+> y el pipeline de inferencia GPU.
+
 ---
 
 ## Capacidades

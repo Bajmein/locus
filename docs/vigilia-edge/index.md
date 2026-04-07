@@ -42,5 +42,14 @@ La solución combina Multiprocessing (para romper el GIL), Shared Memory (para e
 Iceoryx (para metadatos de ultra-baja latencia) y un núcleo Rust que opera completamente fuera
 del GIL. El resultado: pipeline determinista de cámara a UI en producción.
 
+### Por qué Rust — Python/Rust Hybrid Architecture
+
+| Motivación | Detalle |
+| ---------- | ------- |
+| **Bypass del GIL** | El núcleo Rust (PyO3) corre en threads nativos sin el Global Interpreter Lock — paralelismo real entre el decoder de frames y los workers de inferencia |
+| **Operaciones zero-copy** | Los buffers de frames se asignan una sola vez en Shared Memory; Rust pasa punteros, nunca datos — eliminando el overhead de serialización |
+| **Rendimiento determinista** | Sin garbage collector ni GC pauses: la latencia de cámara a UI es predecible frame a frame (~80ms a 25fps) |
+| **Seguridad de memoria** | El compilador de Rust garantiza en tiempo de compilación que no hay data races ni dangling pointers en el pipeline de video |
+
 [Leer architecture_overview en el showcase](https://github.com/Bajmein/vigilia-edge-showcase/blob/main/architecture_overview.md){ .md-button }
 [Ver repositorio vitrina en GitHub](https://github.com/Bajmein/vigilia-edge-showcase){ .md-button .md-button--primary }

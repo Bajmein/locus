@@ -115,3 +115,10 @@ Forge es la infraestructura que impulsa el proceso de desarrollo de este
 mismo portafolio y de otros proyectos en el repositorio. La sección
 [Laboratorio](/laboratorio/) recoge experimentos y aprendizajes surgidos
 de su uso.
+
+Forge está diseñado para orquestar proyectos de alta complejidad como
+Vigilia — sistemas **híbridos Python/Rust** donde los cambios cruzan la
+frontera entre módulos nativos compilados y la capa de orquestación en Python.
+El pipeline schema-driven garantiza trazabilidad completa incluso cuando un
+mismo cambio afecta al núcleo Rust, los bindings PyO3 y la configuración
+Hydra simultáneamente.
