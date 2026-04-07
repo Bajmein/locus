@@ -1,7 +1,7 @@
 ---
 type: proposal
 domain: content
-status: implemented
+status: archived
 priority: high
 author: claude-sonnet-4-6
 created_at: 2026-04-07
