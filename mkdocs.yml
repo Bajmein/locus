@@ -3,6 +3,21 @@ site_author: Benjamín Criado
 site_description: Portfolio de Arquitectura y R&D
 theme:
   name: material
+  palette:
+    scheme: slate
+    primary: black
+    accent: cyan
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/Bajmein
+    - icon: fontawesome/brands/linkedin
+      link: https://linkedin.com/in/benjamin-criado
 
 nav:
   - Home: index.md
