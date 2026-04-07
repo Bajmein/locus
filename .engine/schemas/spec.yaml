@@ -1,0 +1,124 @@
+id: spec
+description: >
+  A delta specification capturing requirements added, modified, or removed
+  by a change. Specs within a change are deltas that merge into .engine/specs/
+  when archived.
+
+generates:
+  path: .engine/changes/<NNN>-<slug>/specs/<domain>/spec.md
+  folder_pattern: "^[0-9]{3}-[a-z0-9]+(-[a-z0-9]+)*$"
+
+frontmatter:
+  required:
+    type:
+      type: string
+      const: spec
+    domain:
+      type: string
+      description: Area of the system this spec covers
+    status:
+      type: string
+      enum: [draft, approved, implemented]
+      default: draft
+    author:
+      type: string
+      description: Model ID that generated the spec (e.g. claude-sonnet-4-6)
+    created_at:
+      type: string
+      format: date
+      description: Creation date in YYYY-MM-DD format
+    proposal:
+      type: string
+      description: >
+        Relative path to the proposal.md that originated this spec.
+        Present only when a single change has contributed to this spec.
+        Replaced by `changes` when multiple changes have contributed.
+  optional:
+    changes:
+      type: array
+      items:
+        type: string
+      description: >
+        List of proposal.md paths for all changes that have contributed to
+        this spec (accumulated via archive_change). Replaces `proposal` when
+        more than one change has touched the spec. Never remove or overwrite
+        existing entries — always append.
+    issue:
+      type: string
+      description: >
+        GitHub issue URL associated with this spec.
+        Present only when a single change has contributed.
+        Replaced by `issues` when multiple changes have contributed.
+    issues:
+      type: array
+      items:
+        type: string
+      description: >
+        List of GitHub issue URLs for all changes that have contributed to
+        this spec. Replaces `issue` when more than one change has touched
+        the spec. Never remove or overwrite existing entries — always append.
+    tags:
+      type: array
+      items:
+        type: string
+      description: >
+        Semantic tags in category:value format. Valid categories: area, feature,
+        path, route, state, tool, agent-mode. Both category and value must be
+        kebab-case. Example: [area:cli, tool:ast-grep, path:src/locus/cli.py]
+
+sections:
+  - heading: "## Purpose"
+    required: true
+    description: >
+      Description of the domain and what this spec covers. Single paragraph.
+
+  - heading: "## ADDED Requirements"
+    required: true
+    description: >
+      New requirements introduced by this change. Each requirement is an H3
+      with format '### Requirement: <Name>' containing a paragraph with
+      SHALL/MUST/SHOULD language, followed by one or more
+      '#### Scenario: <name>' subsections in GIVEN/WHEN/THEN format.
+
+  - heading: "## MODIFIED Requirements"
+    required: false
+    description: >
+      Existing requirements that this change modifies. Same format as ADDED.
+      Empty section if this is a new feature with no prior spec.
+
+  - heading: "## REMOVED Requirements"
+    required: false
+    description: >
+      Requirements that this change removes from the system. Each entry
+      explains what is being removed and why. Empty if nothing is removed.
+
+requirement_format: |
+  ### Requirement: <Name>
+
+  The system SHALL/MUST/SHOULD <behavior description>.
+
+  #### Scenario: <scenario name>
+
+  **GIVEN** <precondition>
+  **WHEN** <action>
+  **THEN** <expected result>
+
+instruction: >
+  When validating a spec, check that: the folder is inside the change's specs/<domain>/
+  directory, all required frontmatter fields are present, the Purpose section exists,
+  ADDED Requirements has at least one requirement with at least one scenario,
+  and each scenario follows GIVEN/WHEN/THEN format. MODIFIED and REMOVED sections
+  may be empty but their headings must be present.
+
+  IMPORTANT — delta spec vs. accumulated spec:
+  The spec generated inside a change folder (.engine/changes/NNN-slug/specs/<domain>/spec.md)
+  is a DELTA: it only captures what this change adds, modifies, or removes relative to
+  the current accumulated spec at .engine/specs/<domain>/spec.md.
+  When the change is archived, engine.py merges the delta into the accumulated spec
+  automatically — it does NOT replace it. Therefore:
+  - Never copy the full content of the accumulated spec into the delta.
+  - The delta's ADDED section should contain only the new requirements introduced by
+    this specific change.
+  - The delta's frontmatter (proposal, issue) refers only to this change.
+    The accumulated spec will track all contributing changes via the `changes`/`issues`
+    list fields — do not manually edit those fields in the delta.

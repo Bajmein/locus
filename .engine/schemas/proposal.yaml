@@ -1,0 +1,81 @@
+id: proposal
+description: >
+  A structured proposal capturing a feature idea with motivation, changes,
+  capabilities, and impact. First artifact in the locus pipeline.
+
+generates:
+  path: .engine/changes/<NNN>-<slug>/proposal.md
+  folder_pattern: "^[0-9]{3}-[a-z0-9]+(-[a-z0-9]+)*$"
+
+frontmatter:
+  required:
+    type:
+      type: string
+      const: proposal
+    domain:
+      type: string
+      description: Area of the system affected by the proposal
+    status:
+      type: string
+      enum: [draft, proposed, approved, implemented, archived]
+      default: draft
+    priority:
+      type: string
+      enum: [low, medium, high]
+    author:
+      type: string
+      description: Model ID that generated the proposal (e.g. claude-opus-4-6)
+    created_at:
+      type: string
+      format: date
+      description: Creation date in YYYY-MM-DD format
+    model:
+      type: string
+      description: Human-readable model name (e.g. Claude Opus 4.6)
+  optional:
+    session_id:
+      type: string
+      description: Conversation session ID if available
+    discovery_path:
+      type: string
+      description: Absolute path to the target codebase for discovery changes
+    tags:
+      type: array
+      items:
+        type: string
+      description: >
+        Semantic tags in category:value format. Valid categories: area, feature,
+        path, route, state, tool, agent-mode. Both category and value must be
+        kebab-case. Example: [area:cli, tool:ast-grep, path:src/locus/cli.py]
+    branch:
+      type: string
+      description: Git branch created for this change (e.g. change/001-migrate-pipeline-fsm)
+    worktree:
+      type: string
+      description: Path to the git worktree for this change (e.g. .worktrees/001-migrate-pipeline-fsm)
+
+sections:
+  - heading: "## Why"
+    required: true
+    description: Motivation and problem statement
+
+  - heading: "## What Changes"
+    required: true
+    description: High-level behavioral and structural changes
+
+  - heading: "## Capabilities"
+    required: true
+    description: Bulleted list of discrete capabilities introduced
+    items:
+      name_format: kebab-case
+      name_pattern: "^[a-z0-9]+(-[a-z0-9]+)*$"
+      description: One-line description per capability
+
+  - heading: "## Impact"
+    required: true
+    description: Affected system areas, risks, dependencies, breaking changes
+
+instruction: >
+  When validating a proposal, check that the folder name matches folder_pattern,
+  all required frontmatter fields are present with valid values, all 4 sections
+  exist as H2 headings, and capability names follow the kebab-case pattern.

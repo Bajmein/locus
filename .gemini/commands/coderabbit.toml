@@ -1,0 +1,12 @@
+description = "Ejecuta CodeRabbit CLI para una revisión profunda de los cambios (uncommitted, committed o all)."
+
+prompt = """
+Ejecuta CodeRabbit CLI para una revisión profunda de los cambios en el directorio actual.
+
+Usage: `/coderabbit [--type uncommitted|committed|all]`
+
+Usa los argumentos proporcionados: `{{args}}`
+
+Output de CodeRabbit:
+!{coderabbit review {{args}}}
+"""

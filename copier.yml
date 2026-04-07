@@ -1,0 +1,85 @@
+# Questions
+project_name:
+  type: str
+  help: "What is the name of your project?"
+  default: "Locus"
+
+project_slug:
+  type: str
+  help: "What is the slug for your project? (e.g., my-project)"
+  default: "{{ project_name | lower | replace(' ', '-') }}"
+
+project_pkg:
+  type: str
+  help: "What is the python package name? (default: project_slug with underscores)"
+  default: "{{ project_slug | replace('-', '_') }}"
+
+description:
+  type: str
+  help: "A short description of your project."
+  default: "Infrastructure for orchestrating AI agents in a structured development pipeline."
+
+author:
+  type: str
+  help: "Who is the author of this project?"
+  default: "Bajmein"
+
+github_username:
+  type: str
+  help: "What is your GitHub username?"
+  default: "Bajmein"
+
+# Configuration
+_exclude:
+  - ".venv"
+  - "__pycache__"
+  - ".git"
+  - ".pytest_cache"
+  - ".ruff_cache"
+  - ".copier-answers.yml"
+  - "CHANGELOG.md"
+  - "docs/"
+  - ".engine/changes/[0-9]*"
+  - ".engine/ideas/*.md"
+  - ".engine/specs/*"
+  - "!.engine/specs/.gitkeep"
+  # External skills — symlinks resolving outside template root (absolute paths)
+  # Note: _preserve_symlinks is required for _exclude to work on these;
+  # without it copier raises ForbiddenPathError before checking exclusions.
+  - ".agents/skills/external/ast-grep"
+  - ".agents/skills/external/modern-python"
+  - ".agents/skills/external/senior-architect"
+  - ".agents/skills/external/m01-ownership"
+  - ".agents/skills/external/m07-concurrency"
+  - ".agents/skills/external/m10-performance"
+  - ".agents/skills/external/m12-lifecycle"
+  - ".gemini/skills/ast-grep"
+  - ".gemini/skills/modern-python"
+  - ".gemini/skills/senior-architect"
+  - ".gemini/skills/m01-ownership"
+  - ".gemini/skills/m07-concurrency"
+  - ".gemini/skills/m10-performance"
+  - ".gemini/skills/m12-lifecycle"
+  - ".claude/skills/ast-grep"
+  - ".claude/skills/modern-python"
+  - ".claude/skills/senior-architect"
+  - ".claude/skills/m01-ownership"
+  - ".claude/skills/m07-concurrency"
+  - ".claude/skills/m10-performance"
+  - ".claude/skills/m12-lifecycle"
+
+_preserve_symlinks: true
+
+_rename:
+  src/locus: "src/{{ project_pkg }}"
+
+_tasks:
+  # Garantizar que el directorio del paquete se renombre si _rename falló
+  - "if [ -d 'src/locus' ] && [ '{{ project_pkg }}' != 'locus' ]; then mv src/locus src/{{ project_pkg }}; fi"
+  # Reemplazos de texto en archivos
+  - "find . -type f \\( -name '*.py' -o -name '*.md' -o -name '*.toml' -o -name '*.yaml' -o -name '*.yml' -o -name '.env*' \\) -exec sed -i 's/locus/{{ project_pkg }}/g' {} +"
+  - "find . -type f \\( -name '*.py' -o -name '*.md' -o -name '*.toml' -o -name '*.yaml' -o -name '*.yml' -o -name '.env*' \\) -exec sed -i 's/Locus/{{ project_name }}/g' {} +"
+  - "find . -type f \\( -name '*.py' -o -name '*.md' -o -name '*.toml' -o -name '*.yaml' -o -name '*.yml' -o -name '.env*' \\) -exec sed -i 's/LOCUS/{{ project_pkg | upper }}/g' {} +"
+  # Ajustar nombres de proyecto en pyproject.toml y README para usar el slug/name real
+  - "find . -type f -name 'pyproject.toml' -exec sed -i 's/name = \"{{ project_pkg }}\"/name = \"{{ project_slug }}\"/g' {} +"
+  - "find . -type f -name 'README.md' -exec sed -i 's/{{ project_pkg }}/{{ project_slug }}/g' {} +"

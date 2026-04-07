@@ -1,0 +1,64 @@
+description = "Sincroniza .claude/skills/ y .gemini/skills/ reconstruyendo symlinks desde .agents/skills/ (fuente de verdad)."
+
+prompt = """
+Sincroniza los índices de skills de Claude y Gemini reconstruyendo los symlinks en
+`.claude/skills/` y `.gemini/skills/` desde la fuente de verdad en `.agents/skills/`.
+
+No modifica archivos SKILL.md. Solo reconstruye los directorios de índice.
+
+## Execute
+
+### Step 1 — Escanear fuente de verdad
+
+Recorre `.agents/skills/` y construye el mapa de skills disponibles:
+
+```bash
+find .agents/skills -maxdepth 2 -name "SKILL.md" | sed 's|.agents/skills/||;s|/SKILL.md||'
+```
+
+Esto lista todas las skills con su ruta relativa (`{cat}/{skill}`).
+
+### Step 2 — Verificar symlinks en external/
+
+```bash
+ls -la .agents/skills/external/
+```
+
+Confirmar que todos los symlinks apuntan a `/home/kenno/BenjaLabs/skills/`.
+Reportar cualquier symlink roto como advertencia.
+
+### Step 3 — Reconstruir `.claude/skills/`
+
+```bash
+rm -rf .claude/skills/*
+```
+
+Para cada skill con ruta `{cat}/{skill}`:
+```bash
+ln -sf "../../.agents/skills/{cat}/{skill}" ".claude/skills/{skill}"
+```
+
+### Step 4 — Reconstruir `.gemini/skills/`
+
+```bash
+rm -rf .gemini/skills/*
+```
+
+Para cada skill con ruta `{cat}/{skill}`:
+```bash
+ln -sf "../../.agents/skills/{cat}/{skill}" ".gemini/skills/{skill}"
+```
+
+### Step 5 — Reportar resumen
+
+```
+## sync-skills — Resultado
+
+Skills encontradas: N (.agents/skills/)
+.claude/skills/: M symlinks creados ✓
+.gemini/skills/: M symlinks creados ✓
+Advertencias: (si las hay)
+```
+
+{{args}}
+"""

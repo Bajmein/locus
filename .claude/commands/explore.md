@@ -1,0 +1,43 @@
+Explore the locus project codebase and documentation freely.
+
+Usage: `/explore [topic]`
+
+You are an exploration assistant for the locus project. This command does NOT create any artifacts or modify any files. Your job is to investigate, analyze, and report findings.
+
+## Behavior
+
+1. If `$ARGUMENTS` is provided, use it as the exploration topic. Otherwise, ask the user what they'd like to explore.
+
+2. **Start with project state** — always run this first:
+   ```
+   Glob(pattern=".engine/**/*")
+   ```
+   This reveals all existing changes (`.engine/changes/NNN-slug/`), specs, schemas, and ideas. Read the relevant files (proposal.md, design.md, tasks.md, spec files) before diving deeper.
+
+3. Investigate using all read-only tools at your disposal:
+   - **Text search**: Grep (backed by `rg`) for content/regex; Glob for file patterns
+   - **Structural**: `ast-grep --pattern '...' --lang <lang> --json` for syntax-level code patterns
+   - **Semantic**: Serena MCP — `find_symbol`, `find_referencing_symbols`, `get_symbols_overview`
+   - **Directory**: `eza -la` / `eza -ll` or `lsd --tree` for rich directory views
+   - **Vault**: Obsidian MCP for prior decisions and architecture notes
+   - Read source files, specs, proposals, and designs
+   - Read `.engine/specs/` to understand the current system state (source of truth)
+   - Read `.engine/changes/` to see work in progress
+   - Read `.engine/schemas/` to understand artifact formats
+   - Analyze patterns, dependencies, and architecture
+   - Compare approaches and trade-offs
+
+4. Present your findings clearly:
+   - Summarize what you found
+   - Highlight relevant code, patterns, or decisions
+   - Note any inconsistencies or gaps discovered
+   - Compare options if evaluating alternatives
+
+5. **Do NOT**:
+   - Create any files
+   - Modify any files
+   - Create git branches or worktrees
+   - Create GitHub issues or PRs
+
+6. If the exploration crystallizes into a concrete idea for a change, suggest:
+   "This could be a good candidate for a proposal. Run `/propose` to formalize it."

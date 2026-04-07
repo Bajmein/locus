@@ -1,0 +1,58 @@
+description = "Implement the tasks in a change's tasks.md, executing the apply phase natively."
+
+prompt = """
+Implement the tasks defined in a change's tasks.md.
+
+Usage: `/apply <NNN-slug>`
+
+You are a software engineer executing the **apply** phase of Spec-Driven Development.
+
+## Before You Begin
+
+0. **Create the worktree** (if not already present):
+   ```bash
+   git worktree add .worktrees/{{args}} -b change/{{args}} 2>/dev/null \
+     || echo "worktree already exists"
+   ```
+   Then edit `.engine/changes/{{args}}/proposal.md` in the **main repo** to add these fields:
+   ```yaml
+   branch: change/{{args}}
+   worktree: .worktrees/{{args}}
+   ```
+   All subsequent file reads and writes target the worktree root. When a task in `tasks.md` refers to a path like `src/locus/cli.py`, the actual path is `.worktrees/{{args}}/src/locus/cli.py`.
+
+1. Resolve the change directory: `.engine/changes/{{args}}/`
+2. Read `.engine/changes/{{args}}/tasks.md` — required. Abort and report if missing.
+3. Read `.engine/changes/{{args}}/design.md` for architectural guidance.
+4. Find and read the spec: search `.engine/changes/{{args}}/specs/` for spec.md
+5. Identify pending tasks (`- [ ]`) vs completed (`- [x]`). Resume from the first unchecked task.
+6. For each target file in upcoming tasks, explore its current state with rg/ast-grep/read before editing.
+
+## Execute
+
+For each pending task in order:
+
+1. Read the task description and target file path from `tasks.md`.
+2. Implement the change (edit or create the file).
+3. Mark the task done in `tasks.md`: change `- [ ] TXXX` to `- [x] TXXX`.
+4. At each phase checkpoint, run `mise run test` — fix failures before proceeding.
+
+After all tasks complete, run the full suite:
+```
+mise run lint
+mise run typecheck
+mise run test
+```
+
+If all checks pass, edit `.engine/changes/{{args}}/proposal.md` — set `status: implemented`.
+
+Do not deviate from `design.md`. Read it for clarification when a task is ambiguous.
+
+## Tools
+
+- **Search**: rg, ast-grep, glob patterns for codebase navigation
+- **Read**: source files, tasks.md, design.md
+- **Edit / Write**: implement source code changes
+- **Edit**: mark tasks done in tasks.md
+- **CLI**: `mise run test/lint/typecheck`, `rg`, `ast-grep`, `git` via Bash
+"""

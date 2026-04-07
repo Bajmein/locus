@@ -1,0 +1,85 @@
+id: tasks
+description: >
+  A task breakdown document decomposing a design into actionable,
+  phased implementation tasks. Final planning artifact before implementation.
+
+generates:
+  path: .engine/changes/<NNN>-<slug>/tasks.md
+  folder_pattern: "^[0-9]{3}-[a-z0-9]+(-[a-z0-9]+)*$"
+
+frontmatter:
+  required:
+    type:
+      type: string
+      const: tasks
+    domain:
+      type: string
+      description: Area of the system these tasks cover
+    status:
+      type: string
+      enum: [draft, approved, in-progress, done]
+      default: draft
+    author:
+      type: string
+      description: Model ID that generated the tasks (e.g. claude-sonnet-4-6)
+    created_at:
+      type: string
+      format: date
+      description: Creation date in YYYY-MM-DD format
+    spec:
+      type: string
+      description: Relative path to the spec
+    design:
+      type: string
+      description: Relative path to the design document
+
+sections:
+  - heading: "## Phase 1: Setup"
+    required: true
+    description: Project initialization and basic structure tasks.
+
+  - heading: "## Phase 2: Foundational"
+    required: true
+    description: >
+      Core infrastructure that must be complete before feature work.
+      Ends with a checkpoint note.
+
+  - heading: "## Phase N: <feature>"
+    required: true
+    description: >
+      One or more phases, one per acceptance criterion or user story.
+      Each has a Goal line, Independent Test line, grouped tasks,
+      and a checkpoint. Number of phases is dynamic.
+
+  - heading: "## Dependencies & Execution Order"
+    required: true
+    description: >
+      Describes dependencies between phases, which block others,
+      which can run in parallel.
+
+  - heading: "## Implementation Strategy"
+    required: true
+    description: >
+      Two paths: MVP First and Incremental approach descriptions.
+
+task_format: "- [ ] TXXX [P?] [Story?] Description — path/to/file"
+
+task_fields:
+  id:
+    pattern: "^T[0-9]{3}$"
+    description: Sequential task ID (T001, T002, ...)
+  parallel:
+    marker: "[P]"
+    description: Present if task can run in parallel with others
+  story:
+    description: Which acceptance criterion this maps to (e.g., AC1)
+  description:
+    description: Clear, actionable description of the task
+  path:
+    description: Exact file path affected
+
+instruction: >
+  When validating tasks, check that all frontmatter fields are present,
+  Setup and Foundational phases exist, at least one feature phase exists,
+  Dependencies & Execution Order and Implementation Strategy sections exist,
+  task IDs are sequential, and every spec requirement maps to at least one phase.

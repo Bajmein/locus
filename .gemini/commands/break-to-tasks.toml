@@ -1,0 +1,56 @@
+description = "Break a technical design into a phased, ordered task list, executing the break-to-tasks phase natively."
+
+prompt = """
+Break a technical design into an ordered, phased task list.
+
+Usage: `/break-to-tasks <NNN-slug>`
+
+You are a technical lead executing the **break-to-tasks** phase of Spec-Driven Development.
+
+## Before You Begin
+
+1. Resolve the change directory: `.engine/changes/{{args}}/`
+2. Read `.engine/changes/{{args}}/proposal.md` — check `status`. If it is not `proposed`, stop and report:
+   `✗ break-to-tasks requires status: proposed — current status is '<status>'`
+3. Read `.engine/changes/{{args}}/design.md` — required. Abort and report if missing.
+4. Find and read the spec: search `.engine/changes/{{args}}/specs/` for spec.md
+4. Read `.engine/schemas/tasks.yaml` for format validation rules.
+5. Scan the `## Project Structure` section of `design.md` to identify all files to create or modify.
+
+## Execute
+
+1. Write `.engine/changes/{{args}}/tasks.md`:
+
+Frontmatter (required):
+```yaml
+---
+type: tasks
+domain: <from design>
+status: draft
+author: <your model ID>
+created_at: <YYYY-MM-DD>
+spec: specs/<domain>/spec.md
+design: design.md
+---
+```
+
+Required sections:
+- `## Phase 1: Setup` — dependencies, skeleton files
+- `## Phase 2: Foundational` — core infrastructure; end with `> **Checkpoint**: ...`
+- `## Phase N: <feature>` — one per acceptance criterion; include Goal, Independent Test, tasks, Checkpoint
+- `## Dependencies & Execution Order` — ASCII tree of phase dependencies
+- `## Implementation Strategy` — MVP First path and Incremental path
+
+Task format: `- [ ] TXXX [P] [ACN] Description — path/to/file`
+- TXXX: sequential from T001, no gaps
+- [P]: optional parallel marker
+- [ACN]: optional acceptance criterion reference
+- Every spec requirement maps to at least one task
+
+2. Report: tasks.md path, total task count, phase structure.
+
+## Tools
+
+- **Read**: design.md, spec, tasks schema
+- **Write**: create tasks.md
+"""

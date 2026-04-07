@@ -1,0 +1,93 @@
+description = "Verify a change implementation against its spec, design, and tasks, emitting a structured PASS/FAIL report."
+
+prompt = """
+Verify that a change was correctly implemented against its spec, design, and tasks.
+
+Usage: `/verify <NNN-slug>`
+
+You are a QA engineer executing the **verify** phase of Spec-Driven Development.
+
+## Before You Begin
+
+1. Resolve the change directory: `.engine/changes/{{args}}/`
+2. Read `.engine/changes/{{args}}/proposal.md` — note `domain`, `worktree`, and the first line of `## What Changes` for the commit message.
+3. Read all three artifacts:
+   - `.engine/changes/{{args}}/tasks.md`
+   - `.engine/changes/{{args}}/design.md`
+   - Spec: search `.engine/changes/{{args}}/specs/` → read it
+4. Note which tasks are done (`- [x]`) vs pending (`- [ ]`).
+
+## Execute
+
+1. Run quality checks via Bash:
+   ```
+   mise run test
+   mise run lint
+   mise run typecheck
+   ```
+
+2. Cross-reference completed tasks vs code: for each `- [x]` task, verify the change is present in the target file using rg, ast-grep, or read.
+
+3. Cross-reference spec requirements vs implementation: for each ADDED Requirement, verify a corresponding test scenario exists and passes.
+
+4. Emit a Verification Report:
+
+```
+## Verification Report
+
+**Status**: PASS | FAIL
+
+### Quality Checks
+- Tests: PASS | FAIL (N passed, M failed)
+- Lint: PASS | FAIL
+- Typecheck: PASS | FAIL
+
+### Task Completion
+- X / Y tasks marked done
+- Uncompleted: [list]
+
+### Spec Coverage
+- Requirement: <Name> — VERIFIED | MISSING
+
+### Issues Found
+[List discrepancies, failures, missing implementations]
+```
+
+5. **Commit (only when Status is PASS and Issues Found is empty)**
+
+   If there are any issues found: fix them first, re-run the quality checks, and re-emit the report. Only proceed to commit once the report shows PASS with no issues.
+
+   Build the commit message from proposal metadata:
+   - `type`: `feat`
+   - `scope`: `domain` field from proposal frontmatter
+   - `description`: first meaningful line from `## What Changes` (imperative, max 72 chars total)
+
+   Format: `feat(<domain>): <description>`
+
+   If `worktree` is set in proposal frontmatter, stage and commit from the worktree:
+   ```bash
+   git -C .worktrees/{{args}} add -A
+   git -C .worktrees/{{args}} commit -m "feat(<domain>): <description>"
+   ```
+
+   If `worktree` is not set (change predates worktrees), commit from the main repo:
+   ```bash
+   git add -A
+   git commit -m "feat(<domain>): <description>"
+   ```
+
+6. **Update CHANGELOG.md**
+
+   After a successful commit, add an entry under `## [Unreleased]` in `CHANGELOG.md` (main repo root).
+
+   - Determine the appropriate subsection (`### Added`, `### Changed`, `### Fixed`, `### Removed`) from the nature of the change described in `## What Changes`.
+   - Write a concise bullet point summarising what was delivered. Reference the domain and slug.
+   - If the subsection already exists, append to it; if not, add it below `## [Unreleased]`.
+   - Do **not** create a new versioned section — entries accumulate under `[Unreleased]` until a release is cut.
+
+## Tools
+
+- **CLI**: `mise run test/lint/typecheck` via Bash
+- **Search**: rg, ast-grep, glob patterns
+- **Read**: source files, artifacts
+"""

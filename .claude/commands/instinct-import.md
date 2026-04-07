@@ -1,0 +1,9 @@
+Import instincts from a file or directory into the current project.
+
+Usage: `/instinct-import <file-or-directory>`
+
+Run: `python3 ~/.claude/instinctv2/scripts/instinct-cli.py import $ARGUMENTS`
+
+The import performs deduplication: if an instinct with the same ID already exists and has higher confidence, it will be skipped. Use this to share instincts between projects.
+
+After importing, show a summary and suggest running `/instinct-status` to see the updated state.

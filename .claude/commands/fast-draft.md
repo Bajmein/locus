@@ -1,0 +1,44 @@
+Rapidly draft both a proposal and spec for a new idea in a single run (propose + specify).
+
+Usage: `/fast-draft <idea-description>`
+
+You are executing **propose + specify** back-to-back without a human approval gate between them.
+
+## Before You Begin
+
+1. Parse `$ARGUMENTS` as a free-text idea description.
+2. Determine the next change number: `Glob(pattern=".engine/changes/[0-9]*")` → find highest NNN, increment.
+3. Check `.engine/ideas/` for any matching idea file. Read it if found.
+4. Read `.engine/CAMPAIGN.md` or `.engine/changes/roadmap.md` for strategic context if they exist.
+5. Read `.engine/specs/` to understand the current accumulated spec state for the relevant domain. Your delta spec will extend this — do NOT copy its content.
+6. Read `.engine/schemas/spec.yaml` for detailed format validation rules.
+7. Do a lightweight codebase scan for the affected domain:
+   - Serena MCP: `mcp__serena__get_symbols_overview`
+   - Grep / Glob for relevant files
+
+## Execute
+
+**Phase 1 — Propose:** Create `.engine/changes/<NNN>-<slug>/proposal.md`
+
+Frontmatter: `type: proposal`, `domain`, `status: proposed`, `priority`, `author`, `created_at`, `model`, `tags`
+
+Required sections: `## Why`, `## What Changes`, `## Capabilities` (kebab-case names), `## Impact`
+
+**Phase 2 — Specify:** Create `.engine/changes/<NNN>-<slug>/specs/<domain>/spec.md`
+
+Frontmatter: `type: spec`, `domain`, `status: draft`, `author`, `created_at`, `proposal: ../../proposal.md`
+
+Required sections: `## Purpose`, `## ADDED Requirements` (BDD GIVEN/WHEN/THEN), `## MODIFIED Requirements`, `## REMOVED Requirements`
+
+This is a DELTA spec — only include what this change introduces. Do not copy accumulated spec content.
+
+3. Report: change directory, both artifact paths, capabilities and requirements produced.
+
+## Tools
+
+- **Symbol lookup**: Serena MCP — `mcp__serena__find_symbol`, `mcp__serena__get_symbols_overview`
+- **Text search**: Grep
+- **File discovery**: Glob
+- **Structural search**: `ast-grep --pattern '...' --lang <lang> --json` via Bash
+- **Vault**: Obsidian MCP — `mcp__obsidian__search_notes`
+- **Write**: Write tool for both `proposal.md` and `spec.md`

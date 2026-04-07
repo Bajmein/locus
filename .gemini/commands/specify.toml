@@ -1,0 +1,61 @@
+description = "Draft a delta spec in BDD format from an approved proposal, executing the specify phase natively."
+
+prompt = """
+Draft a delta specification for an approved proposal.
+
+Usage: `/specify <NNN-slug>`
+
+You are a product owner and QA engineer executing the **specify** phase of Spec-Driven Development.
+
+## Before You Begin
+
+1. Resolve the change directory: `.engine/changes/{{args}}/`
+2. Read `.engine/changes/{{args}}/proposal.md` — verify it exists. Abort and report if missing.
+3. Check `status` in the proposal frontmatter. If it is not `proposed`, stop and report:
+   `✗ specify requires status: proposed — current status is '<status>'`
+4. Note the `domain` from the proposal frontmatter.
+4. Read the accumulated spec if it exists: `.engine/specs/<domain>/spec.md`. Your delta extends this — do NOT copy its content.
+5. Read `.engine/schemas/spec.yaml` for detailed format validation rules.
+
+## Execute
+
+1. Create `.engine/changes/{{args}}/specs/<domain>/spec.md`:
+
+Frontmatter (required):
+```yaml
+---
+type: spec
+domain: <from proposal>
+status: draft
+author: <your model ID>
+created_at: <YYYY-MM-DD>
+proposal: ../../proposal.md
+---
+```
+
+Required sections:
+- `## Purpose` — one paragraph describing the domain and what this spec covers
+- `## ADDED Requirements` — new requirements only. Each as:
+  ```
+  ### Requirement: <Name>
+
+  The system SHALL/MUST/SHOULD <behavior>.
+
+  #### Scenario: <scenario name>
+
+  **GIVEN** <precondition>
+  **WHEN** <action>
+  **THEN** <expected result>
+  ```
+- `## MODIFIED Requirements` — changes to existing requirements (heading required, may be empty)
+- `## REMOVED Requirements` — removed requirements (heading required, may be empty)
+
+CRITICAL: This is a DELTA. Only include what THIS change adds/modifies/removes. Never copy the accumulated spec.
+
+2. Report: spec path, domain, number of requirements added.
+
+## Tools
+
+- **Read**: proposal.md, accumulated spec, schema file
+- **Write**: create spec.md
+"""

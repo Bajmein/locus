@@ -1,0 +1,14 @@
+Promote high-confidence project instincts to global scope.
+
+Usage: `/instinct-promote [--id <instinct-id>] [--force]`
+
+Run: `python3 ~/.claude/instinctv2/scripts/instinct-cli.py promote $ARGUMENTS`
+
+Promotion requirements:
+
+- Confidence ≥ 0.8
+- Ideally observed in 2+ projects (verify manually before promoting)
+
+Global instincts apply across ALL projects, so be conservative. After promoting, the instinct file is copied to `~/.claude/homunculus/instincts/personal/` with scope updated to `global`.
+
+After the CLI output, remind the user to verify the instinct makes sense globally (not just in this project's context).

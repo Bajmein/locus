@@ -1,0 +1,62 @@
+{
+  "context": {
+    "fileName": [
+      "AGENTS.md",
+      "CLAUDE.md"
+    ]
+  },
+  "mcp": {
+    "servers": {
+      "github": {
+        "command": "npx",
+        "args": [
+          "-y",
+          "@modelcontextprotocol/server-github"
+        ],
+        "env": {
+          "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_PERSONAL_ACCESS_TOKEN}"
+        }
+      },
+      "context7": {
+        "command": "npx",
+        "args": [
+          "-y",
+          "@upstash/context7-mcp"
+        ],
+        "env": {
+          "CONTEXT7_API_KEY": "${CONTEXT7_API_KEY}"
+        }
+      },
+      "obsidian": {
+        "command": "npx",
+        "args": [
+          "@bitbonsai/mcpvault@latest",
+          "/home/kenno/BenjaLabs/episteme"
+        ]
+      },
+      "notion": {
+        "command": "npx",
+        "args": [
+          "-y",
+          "mcp-remote",
+          "https://mcp.notion.com/mcp"
+        ],
+        "description": "Notion MCP server (Official)"
+      },
+      "serena": {
+        "command": "uvx",
+        "args": [
+          "--from",
+          "git+https://github.com/oraios/serena",
+          "serena",
+          "start-mcp-server",
+          "--context",
+          "desktop-app",
+          "--project-path",
+          "/home/kenno/BenjaLabs/forge"
+        ],
+        "description": "Serena MCP server - Advanced code editing and analysis"
+      }
+    }
+  }
+}

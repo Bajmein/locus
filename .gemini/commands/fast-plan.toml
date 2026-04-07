@@ -1,0 +1,45 @@
+description = "Rapidly draft a design and task breakdown for an existing spec in a single run (design + break-to-tasks combined)."
+
+prompt = """
+Rapidly draft both a design and task breakdown for an existing spec in a single run (design + break-to-tasks).
+
+Usage: `/fast-plan <NNN-slug>`
+
+You are executing **design + break-to-tasks** back-to-back for speed.
+
+## Before You Begin
+
+1. Resolve the change directory: `.engine/changes/{{args}}/`
+2. Read `.engine/changes/{{args}}/proposal.md` for domain and context. Check `status` — if it is not `proposed`, stop and report:
+   `✗ fast-plan requires status: proposed — current status is '<status>'`
+3. Find and read the spec: search `.engine/changes/{{args}}/specs/` for spec.md
+4. Read the accumulated spec if it exists: `.engine/specs/<domain>/spec.md`
+5. Read `.engine/schemas/design.yaml` and `.engine/schemas/tasks.yaml` for format validation rules.
+6. Explore the codebase for the affected domain:
+   - Use rg for content searches, glob patterns for file discovery, ast-grep for structural patterns
+   - Read key source files from the proposal's Impact section
+
+## Execute
+
+**Phase 1 — Design:** Write `.engine/changes/{{args}}/design.md`
+
+Frontmatter: `type: design`, `domain`, `status: draft`, `author`, `created_at`, `spec: specs/<domain>/spec.md`
+
+Required sections (all 7): `## Summary`, `## Technical Context` (9-field table: Language/Version, Primary Dependencies, Storage, Testing, Target Platform, Project Type, Performance Goals, Constraints, Scale/Scope), `## Architecture`, `## Data Model`, `## Key Decisions` (each: Decision, Alternatives, Rationale), `## Project Structure` (file tree with `(new)` / `(modified)`), `## Open Questions`
+
+**Phase 2 — Break to Tasks:** Write `.engine/changes/{{args}}/tasks.md`
+
+Frontmatter: `type: tasks`, `domain`, `status: draft`, `author`, `created_at`, `spec: specs/<domain>/spec.md`, `design: design.md`
+
+Required sections: `## Phase 1: Setup`, `## Phase 2: Foundational`, `## Phase N: <feature>` (one per AC), `## Dependencies & Execution Order`, `## Implementation Strategy`
+
+Task format: `- [ ] TXXX [P] [ACN] Description — path/to/file`
+
+3. Report: both artifacts created, key design decisions, total task count, phase structure.
+
+## Tools
+
+- **Search**: rg, ast-grep, glob patterns
+- **Read**: proposal, spec, source files
+- **Write**: create design.md and tasks.md
+"""

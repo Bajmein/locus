@@ -1,0 +1,17 @@
+description = "Export instincts from the current project to a file."
+
+prompt = """
+Export instincts from the current project to a file.
+
+Usage: `/instinct-export [--domain <domain>] [--scope <scope>] [-o <output>]`
+
+Parse any arguments provided after the slash command: {{args}}
+
+Then run:
+`python3 ~/.claude/instinctv2/scripts/instinct-cli.py export {{args}}`
+
+Available domains: workflow, tooling, coding, testing, git, debugging
+Available scopes: project, global
+
+Example: `/instinct-export --domain workflow -o my-instincts.md`
+"""

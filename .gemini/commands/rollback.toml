@@ -1,0 +1,66 @@
+description = "Roll back an applied change to its pre-apply state after a failed /verify."
+
+prompt = """
+Roll back an applied change to its pre-apply state.
+
+Usage: `/rollback <NNN-slug>`
+
+Use this command when `/verify` has failed and the implementation must be discarded
+so the change can be re-applied from a clean state.
+
+## Before You Begin
+
+1. Resolve the change directory: `.engine/changes/{{args}}/`.
+2. Read `proposal.md`. Extract: `status`, `branch`, `worktree`, `domain`, `github_issue`.
+3. Confirm pre-conditions:
+   - `status` must be `implemented` or `approved` (partial rollback when worktree exists).
+   - If `status` is `archived`, stop: "✗ Cannot rollback: change is already archived."
+   - If `status` is `proposed` and no `worktree` field, stop: "✗ Nothing to roll back."
+
+4. Confirm with the user before proceeding (destructive operation).
+
+## Execute
+
+1. **Close open PR** (if any):
+   ```bash
+   gh pr view "change/{{args}}" --json state --jq '.state' 2>/dev/null || echo "not_found"
+   ```
+   If `OPEN`: close it. If `MERGED`: stop — cannot rollback a merged PR.
+
+2. **Remove worktree**:
+   ```bash
+   git worktree remove <worktree_path> --force
+   ```
+
+3. **Delete local branch**:
+   ```bash
+   git branch -D change/{{args}} 2>/dev/null || true
+   git push origin --delete "change/{{args}}" 2>/dev/null || true
+   ```
+
+4. **Reset artifact statuses** (main repo):
+   - `proposal.md`: `status: approved`; remove `branch` and `worktree` fields.
+   - `tasks.md`: `status: draft`; reset all checklist lines to unchecked (`- [ ]`) so `/apply` re-runs tasks.
+   - `design.md`: `status: draft`
+   - `specs/**/*.md`: `status: draft`
+
+5. **Commit**:
+   ```bash
+   git add .engine/changes/{{args}}/
+   git commit -m "chore({{args}}): rollback to approved — re-apply pending"
+   ```
+
+## Output
+
+```
+✓ Change {{args}} rolled back to status: approved
+  - Worktree removed
+  - Branch deleted
+  - Artifacts reset
+
+Next steps:
+  1. Fix the issues from /verify.
+  2. Run /apply {{args}} to re-implement.
+  3. Run /verify {{args}} to validate again.
+```
+"""

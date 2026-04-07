@@ -1,0 +1,27 @@
+# Locus declarative pre-phase hooks
+# Schema: .engine/schemas/hooks.schema.yaml
+#
+# Hooks run before the specified pipeline phase and inject their output
+# as synthetic discovery context (source: hook) into the agent's context.
+#
+# CLI hooks: binary must be in the allow-list (rg, ast-grep, eza, lsd, mise, just, ty, git)
+# MCP hooks: tool must be a registered MCP tool (e.g. mcp__serena__*)
+
+hooks:
+  - phase: pre-design
+    type: cli
+    label: codebase-symbols
+    cmd: rg
+    args_list:
+      - "--type"
+      - "py"
+      - "--files"
+    timeout_s: 30
+
+  - phase: pre-design
+    type: mcp
+    label: serena-overview
+    tool: mcp__serena__get_symbols_overview
+    args:
+      relative_path: "src/locus"
+    timeout_s: 60

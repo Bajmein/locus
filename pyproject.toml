@@ -1,0 +1,87 @@
+[build-system]
+requires = ["uv_build>=0.6.0,<0.7.0"]
+build-backend = "uv_build"
+
+[project]
+name = "locus"
+version = "0.1.0"
+description = "Infrastructure for orchestrating AI agents in a structured development pipeline."
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = []
+
+[dependency-groups]
+dev = [
+  "bandit>=1.9.4",
+  "deptry>=0.24.0",
+  "pre-commit>=4.5.1",
+  "prek>=0.3.5",
+  "pytest>=9.0.2",
+  "pytest-cov>=7.0.0",
+  "pytest-mock>=3.15.1",
+  "pytest-timeout>=2.4.0",
+  "pytest-asyncio>=0.25.3",
+  "ruff>=0.15.6",
+  "monkeytype>=23.3.0",
+  "ty>=0.0.23",
+  "vulture>=2.15",
+  "dprint-py>=0.52.0.0",
+  "pyyaml>=6.0.1",
+]
+
+[tool.prek]
+default_install_hook_types = ["pre-commit"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py314"
+extend-exclude = [
+  ".venv",
+  "venv",
+  ".git",
+  "__pycache__",
+  ".pytest_cache",
+  ".ruff_cache",
+]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "UP", "B", "SIM", "RUF", "S"]
+ignore = ["N802", "N805", "RUF001", "RUF002"]
+fixable = ["ALL"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = ["S101"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+  "-v",
+  "--strict-markers",
+  "--tb=short",
+  "--disable-warnings",
+  "-x",
+  "--timeout=30",
+]
+markers = [
+  "unit: Unit tests (isolated, no I/O, < 100ms each)",
+  "integration: Integration tests (2+ components, may use filesystem)",
+  "e2e: End-to-end tests (full system, runs just commands)",
+  "slow: Slow running tests",
+]
+
+[tool.vulture]
+min_confidence = 80
+paths = ["src", "tests"]
+ignore_names = ["cls", "app", "prompt", "model"]
+
+[tool.deptry]
+extend_exclude = [".venv", "venv", ".git"]
+known_first_party = ["locus"]

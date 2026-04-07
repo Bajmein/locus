@@ -1,0 +1,86 @@
+id: design
+description: >
+  A technical design document describing how a feature will be implemented.
+  Follows the spec phase and precedes task breakdown.
+
+generates:
+  path: .engine/changes/<NNN>-<slug>/design.md
+  folder_pattern: "^[0-9]{3}-[a-z0-9]+(-[a-z0-9]+)*$"
+
+frontmatter:
+  required:
+    type:
+      type: string
+      const: design
+    domain:
+      type: string
+      description: Area of the system this design covers
+    status:
+      type: string
+      enum: [draft, approved, implemented]
+      default: draft
+    author:
+      type: string
+      description: Model ID that generated the design (e.g. claude-sonnet-4-6)
+    created_at:
+      type: string
+      format: date
+      description: Creation date in YYYY-MM-DD format
+    spec:
+      type: string
+      description: Relative path to the spec that originated this design
+  optional:
+    tags:
+      type: array
+      items:
+        type: string
+      description: >
+        Semantic tags in category:value format. Valid categories: area, feature,
+        path, route, state, tool, agent-mode. Both category and value must be
+        kebab-case. Example: [area:cli, tool:ast-grep, path:src/locus/cli.py]
+
+sections:
+  - heading: "## Summary"
+    required: true
+    description: >
+      Single paragraph describing the technical approach. Focus on the "how".
+
+  - heading: "## Technical Context"
+    required: true
+    description: >
+      Table with 9 fields: Language/Version, Primary Dependencies, Storage,
+      Testing, Target Platform, Project Type, Performance Goals, Constraints,
+      Scale/Scope. Use N/A for inapplicable fields.
+
+  - heading: "## Architecture"
+    required: true
+    description: >
+      Modules involved, interactions, new abstractions. How this integrates
+      with existing code.
+
+  - heading: "## Data Model"
+    required: true
+    description: >
+      Data structures, Pydantic models, file formats, schema changes.
+      Field names, types, validation rules.
+
+  - heading: "## Key Decisions"
+    required: true
+    description: >
+      Non-obvious technical decisions. Each with: Decision, Alternatives
+      considered, Rationale.
+
+  - heading: "## Project Structure"
+    required: true
+    description: >
+      File tree showing new files (new) and modified files (modified).
+
+  - heading: "## Open Questions"
+    required: true
+    description: >
+      Unresolved technical questions. May be empty if all questions answered.
+
+instruction: >
+  When validating a design, check that all frontmatter fields are present,
+  all 7 H2 sections exist, the Technical Context table has all 9 fields,
+  and Key Decisions include alternatives and rationale for each decision.
