@@ -3,4 +3,5 @@
 Sección dedicada a la experimentación y la investigación.
 
 ---
-*Work in Progress*
+
+_Work in Progress_

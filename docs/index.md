@@ -5,4 +5,5 @@ Bienvenido a mi portafolio de arquitectura y R&D.
 Aquí encontrarás información sobre mis proyectos en las áreas de Vigilia, Forge y Laboratorio.
 
 ---
-*Work in Progress*
+
+_Work in Progress_
