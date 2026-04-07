@@ -40,51 +40,51 @@ de IA actúan como ejecutores de cada fase; los artefactos son la fuente de verd
 
 <div class="grid cards" markdown>
 
--   **Pipeline schema-driven**
+- **Pipeline schema-driven**
 
-    ---
+  ---
 
-    Cada cambio avanza a través de fases con artefactos validados
-    (`proposal.md`, `spec.md`, `design.md`, `tasks.md`). Los esquemas garantizan
-    consistencia entre proyectos y agentes.
+  Cada cambio avanza a través de fases con artefactos validados
+  (`proposal.md`, `spec.md`, `design.md`, `tasks.md`). Los esquemas garantizan
+  consistencia entre proyectos y agentes.
 
--   **Multi-agente y multi-CLI**
+- **Multi-agente y multi-CLI**
 
-    ---
+  ---
 
-    Compatible con Claude Code, Gemini CLI y GitHub Copilot como motores de
-    ejecución. El pipeline es agnóstico al agente: los comandos `/propose`,
-    `/apply`, `/verify` funcionan con cualquier cliente compatible.
+  Compatible con Claude Code, Gemini CLI y GitHub Copilot como motores de
+  ejecución. El pipeline es agnóstico al agente: los comandos `/propose`,
+  `/apply`, `/verify` funcionan con cualquier cliente compatible.
 
--   **Jerarquía de conocimiento estructurada**
+- **Jerarquía de conocimiento estructurada**
 
-    ---
+  ---
 
-    Notion como fuente oficial de especificaciones, Obsidian para contexto interno
-    y el filesystem para artefactos activos. Los agentes saben exactamente dónde
-    buscar y en qué orden.
+  Notion como fuente oficial de especificaciones, Obsidian para contexto interno
+  y el filesystem para artefactos activos. Los agentes saben exactamente dónde
+  buscar y en qué orden.
 
--   **Sin runtime propio**
+- **Sin runtime propio**
 
-    ---
+  ---
 
-    Forge no tiene un servidor ni proceso de fondo. Es pura configuración:
-    esquemas YAML, prompts Markdown y convenciones de directorio. Ligero,
-    portable y versionable en git.
+  Forge no tiene un servidor ni proceso de fondo. Es pura configuración:
+  esquemas YAML, prompts Markdown y convenciones de directorio. Ligero,
+  portable y versionable en git.
 
--   **Trazabilidad por diseño**
+- **Trazabilidad por diseño**
 
-    ---
+  ---
 
-    Cada cambio tiene su propio directorio `NNN-slug/` con historia completa.
-    El archivo consolida las especificaciones en un spec acumulado del proyecto.
+  Cada cambio tiene su propio directorio `NNN-slug/` con historia completa.
+  El archivo consolida las especificaciones en un spec acumulado del proyecto.
 
--   **Flujo rápido integrado**
+- **Flujo rápido integrado**
 
-    ---
+  ---
 
-    Los comandos `/fast-draft` y `/fast-plan` permiten pasar de idea a diseño
-    con tareas ejecutables en una sola operación, sin saltarse la validación.
+  Los comandos `/fast-draft` y `/fast-plan` permiten pasar de idea a diseño
+  con tareas ejecutables en una sola operación, sin saltarse la validación.
 
 </div>
 
@@ -108,6 +108,16 @@ de IA actúan como ejecutores de cada fase; los artefactos son la fuente de verd
     Forge está en uso activo en proyectos propios. El pipeline completo
     (propose → archive) está operativo. La integración con Notion y la
     expansión a más CLIs son áreas de mejora continua.
+
+---
+
+## Repositorio Vitrina
+
+El código fuente de Forge es privado. Para demostrar la arquitectura del pipeline,
+la topología de directorios y el entorno de desarrollo, se mantiene un repositorio
+de exhibición con documentación técnica y artefactos de referencia.
+
+[Ver repositorio vitrina en GitHub](https://github.com/Bajmein/forge-showcase){ .md-button }
 
 ---
 

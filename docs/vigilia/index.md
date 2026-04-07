@@ -41,60 +41,60 @@ se encarga del resto.
 
 <div class="grid cards" markdown>
 
--   **Detección en tiempo real**
+- **Detección en tiempo real**
 
-    ---
+  ---
 
-    Análisis continuo de video con aceleración GPU. Baja latencia desde la
-    captura hasta la decisión, diseñado para entornos donde cada segundo cuenta.
+  Análisis continuo de video con aceleración GPU. Baja latencia desde la
+  captura hasta la decisión, diseñado para entornos donde cada segundo cuenta.
 
--   **Zonas de seguridad configurables**
+- **Zonas de seguridad configurables**
 
-    ---
+  ---
 
-    Define áreas de interés con geometría arbitraria: zonas de intrusión,
-    perímetros de cruce, regiones de exclusión. Las reglas son declarativas y
-    no requieren programación.
+  Define áreas de interés con geometría arbitraria: zonas de intrusión,
+  perímetros de cruce, regiones de exclusión. Las reglas son declarativas y
+  no requieren programación.
 
--   **Sistema de alertas multi-canal**
+- **Sistema de alertas multi-canal**
 
-    ---
+  ---
 
-    Cuando se detecta un evento de seguridad, Vigilia puede responder de forma
-    coordinada: disuasión de audio, notificaciones a sistemas externos e
-    integración con plataformas de gestión de video existentes.
+  Cuando se detecta un evento de seguridad, Vigilia puede responder de forma
+  coordinada: disuasión de audio, notificaciones a sistemas externos e
+  integración con plataformas de gestión de video existentes.
 
--   **Integración con ecosistemas VMS**
+- **Integración con ecosistemas VMS**
 
-    ---
+  ---
 
-    Exporta metadatos de analítica hacia sistemas de gestión de video (VMS)
-    mediante protocolos estándar de la industria — sin lock-in a un proveedor
-    específico.
+  Exporta metadatos de analítica hacia sistemas de gestión de video (VMS)
+  mediante protocolos estándar de la industria — sin lock-in a un proveedor
+  específico.
 
--   **Acceso remoto seguro**
+- **Acceso remoto seguro**
 
-    ---
+  ---
 
-    Monitoreo en tiempo real desde cualquier ubicación con acceso cifrado de
-    extremo a extremo. Sin necesidad de exponer puertos ni depender de
-    servicios en la nube de terceros.
+  Monitoreo en tiempo real desde cualquier ubicación con acceso cifrado de
+  extremo a extremo. Sin necesidad de exponer puertos ni depender de
+  servicios en la nube de terceros.
 
--   **Interfaz de escritorio nativa**
+- **Interfaz de escritorio nativa**
 
-    ---
+  ---
 
-    Aplicación desktop de alto rendimiento con visualización de video en vivo,
-    gestión de zonas y estado del sistema — diseñada para operadores que
-    necesitan control directo y bajo consumo de recursos.
+  Aplicación desktop de alto rendimiento con visualización de video en vivo,
+  gestión de zonas y estado del sistema — diseñada para operadores que
+  necesitan control directo y bajo consumo de recursos.
 
--   **Optimización de almacenamiento basada en eventos**
+- **Optimización de almacenamiento basada en eventos**
 
-    ---
+  ---
 
-    El sistema graba con inteligencia selectiva: prioriza y persiste los
-    segmentos asociados a eventos detectados, reduciendo el volumen de
-    almacenamiento sin sacrificar la evidencia que realmente importa.
+  El sistema graba con inteligencia selectiva: prioriza y persiste los
+  segmentos asociados a eventos detectados, reduciendo el volumen de
+  almacenamiento sin sacrificar la evidencia que realmente importa.
 
 </div>
 
@@ -122,6 +122,16 @@ se encarga del resto.
     utiliza en entornos de prueba controlados. Las siguientes áreas de
     expansión incluyen modelos de alerta más granulares y mejoras en la
     experiencia de configuración de zonas.
+
+---
+
+## Repositorio Vitrina
+
+El código fuente de Vigilia es privado. Para demostrar la arquitectura y el diseño
+del sistema de forma pública, se mantiene un repositorio de exhibición con la
+documentación técnica, el diagrama del pipeline y las plantillas de configuración.
+
+[Ver repositorio vitrina en GitHub](https://github.com/Bajmein/vigilia-reforged-showcase){ .md-button }
 
 ---
 
