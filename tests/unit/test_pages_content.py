@@ -225,6 +225,13 @@ def test_forge_links_to_laboratorio(forge_page):
     )
 
 
+def test_forge_links_to_showcase(forge_page):
+    _, body = forge_page
+    assert "forge-showcase" in body, (
+        "forge/index.md must link to the forge-showcase repo"
+    )
+
+
 def test_vigilia_links_to_forge(vigilia_page):
     _, body = vigilia_page
     assert "/forge/" in body, (

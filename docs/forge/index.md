@@ -111,6 +111,16 @@ de IA actúan como ejecutores de cada fase; los artefactos son la fuente de verd
 
 ---
 
+## Repositorio Vitrina
+
+El código fuente de Forge es privado. Para demostrar la arquitectura del pipeline,
+la topología de directorios y el entorno de desarrollo, se mantiene un repositorio
+de exhibición con documentación técnica y artefactos de referencia.
+
+[Ver repositorio vitrina en GitHub](https://github.com/Bajmein/forge-showcase){ .md-button }
+
+---
+
 ## Más sobre Forge
 
 Forge es la infraestructura que impulsa el proceso de desarrollo de este
