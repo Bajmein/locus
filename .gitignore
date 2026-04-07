@@ -29,15 +29,6 @@ ENV/
 *.swp
 *.swo
 
-# Project specific
-.worktrees/
-.cache/
-monkeytype.sqlite3
-.gemini/skills.backup
-.claude/skills.backup
-.python-version
-.mise.toml.local
-
 # Temporary files
 *.log
 *.tmp
@@ -46,3 +37,31 @@ monkeytype.sqlite3
 # OS specific
 .DS_Store
 Thumbs.db
+
+# Generated site (MkDocs output)
+site/
+
+# Locus architecture (internal — not public)
+.agents/
+.claude/
+.engine/
+.gemini/
+.serena/
+.github/
+src/
+.worktrees/
+.cache/
+CLAUDE.md
+AGENTS.md
+copier.yml
+dprint.json
+llms.txt
+mise.toml
+.env.example
+.pre-commit-config.yaml
+.python-version
+.mise.toml.local
+monkeytype.sqlite3
+.gemini/skills.backup
+.claude/skills.backup
+tests/unit/test_schemas.py

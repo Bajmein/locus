@@ -1,0 +1,11 @@
+site_name: Benjamín Criado - Arquitectura & R&D
+site_author: Benjamín Criado
+site_description: Portfolio de Arquitectura y R&D
+theme:
+  name: material
+
+nav:
+  - Home: index.md
+  - Vigilia: vigilia/index.md
+  - Forge: forge/index.md
+  - Laboratorio: laboratorio/index.md

@@ -4,7 +4,7 @@ build-backend = "uv_build"
 
 [project]
 name = "locus"
-version = "0.1.0"
+version = "0.1.1"
 description = "Infrastructure for orchestrating AI agents in a structured development pipeline."
 readme = "README.md"
 requires-python = ">=3.14"
@@ -27,6 +27,9 @@ dev = [
   "vulture>=2.15",
   "dprint-py>=0.52.0.0",
   "pyyaml>=6.0.1",
+]
+docs = [
+  "mkdocs-material>=9.6.7",
 ]
 
 [tool.prek]
