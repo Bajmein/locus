@@ -230,3 +230,10 @@ def test_vigilia_links_to_forge(vigilia_page):
     assert "/forge/" in body, (
         "vigilia/index.md must link to /forge/"
     )
+
+
+def test_vigilia_links_to_showcase(vigilia_page):
+    _, body = vigilia_page
+    assert "vigilia-reforged-showcase" in body, (
+        "vigilia/index.md must link to the vigilia-reforged-showcase repo"
+    )

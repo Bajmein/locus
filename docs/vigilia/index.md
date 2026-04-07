@@ -125,6 +125,16 @@ se encarga del resto.
 
 ---
 
+## Repositorio Vitrina
+
+El código fuente de Vigilia es privado. Para demostrar la arquitectura y el diseño
+del sistema de forma pública, se mantiene un repositorio de exhibición con la
+documentación técnica, el diagrama del pipeline y las plantillas de configuración.
+
+[Ver repositorio vitrina en GitHub](https://github.com/Bajmein/vigilia-reforged-showcase){ .md-button }
+
+---
+
 ## Más sobre Vigilia
 
 El desarrollo de Vigilia sigue el pipeline de [Forge](/forge/), lo que permite
