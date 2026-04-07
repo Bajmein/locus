@@ -29,6 +29,7 @@ extra:
 nav:
   - Home: index.md
   - Vigilia: vigilia/index.md
+  - Vigilia Edge: vigilia-edge/index.md
   - Forge: forge/index.md
   - Laboratorio: laboratorio/index.md
   - CV: cv.md

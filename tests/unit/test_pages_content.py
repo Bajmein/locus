@@ -1,4 +1,4 @@
-"""Tests for the content of docs/forge/index.md and docs/vigilia/index.md.
+"""Tests for the content of portfolio pages: forge, vigilia, and vigilia-edge.
 
 Covers: SEO frontmatter (AC1, AC6), structure (AC2, AC3, AC5, AC7, AC8, AC9, AC11),
 outside-in safety (AC4, AC10), and cross-links (AC12, AC13).
@@ -36,6 +36,11 @@ def forge_page() -> tuple[dict, str]:
 @pytest.fixture
 def vigilia_page() -> tuple[dict, str]:
     return _parse_page(DOCS_ROOT / "vigilia" / "index.md")
+
+
+@pytest.fixture
+def vigilia_edge_page() -> tuple[dict, str]:
+    return _parse_page(DOCS_ROOT / "vigilia-edge" / "index.md")
 
 
 # ---------------------------------------------------------------------------
@@ -244,3 +249,80 @@ def test_vigilia_links_to_showcase(vigilia_page):
     assert "vigilia-reforged-showcase" in body, (
         "vigilia/index.md must link to the vigilia-reforged-showcase repo"
     )
+
+
+# ---------------------------------------------------------------------------
+# Phase 7: Vigilia Edge — SEO Frontmatter (AC4)
+# ---------------------------------------------------------------------------
+
+
+def test_vigilia_edge_frontmatter_title(vigilia_edge_page):
+    fm, _ = vigilia_edge_page
+    assert fm.get("title") == "Vigilia Edge — Desktop v1.0", (
+        "vigilia-edge/index.md must have title 'Vigilia Edge — Desktop v1.0'"
+    )
+
+
+def test_vigilia_edge_frontmatter_description(vigilia_edge_page):
+    fm, _ = vigilia_edge_page
+    desc = fm.get("description")
+    assert desc and len(str(desc).strip()) >= 80, (
+        "vigilia-edge/index.md must have a description of at least 80 characters"
+    )
+
+
+# ---------------------------------------------------------------------------
+# Phase 7: Vigilia Edge — Content Structure (AC4)
+# ---------------------------------------------------------------------------
+
+
+def test_vigilia_edge_has_que_hace_section(vigilia_edge_page):
+    _, body = vigilia_edge_page
+    assert "## ¿Qué hace?" in body, (
+        "vigilia-edge/index.md must contain '## ¿Qué hace?'"
+    )
+
+
+def test_vigilia_edge_has_stack_section(vigilia_edge_page):
+    _, body = vigilia_edge_page
+    assert "## Stack Técnico" in body, (
+        "vigilia-edge/index.md must contain '## Stack Técnico'"
+    )
+
+
+def test_vigilia_edge_stack_five_rows(vigilia_edge_page):
+    _, body = vigilia_edge_page
+    for tech in ("PySide6", "ONNX Runtime", "Rust", "Iceoryx", "Hydra"):
+        assert tech in body, (
+            f"vigilia-edge/index.md stack must mention '{tech}'"
+        )
+
+
+def test_vigilia_edge_has_reto_section(vigilia_edge_page):
+    _, body = vigilia_edge_page
+    assert "## El reto de arquitectura" in body, (
+        "vigilia-edge/index.md must contain '## El reto de arquitectura'"
+    )
+
+
+def test_vigilia_edge_cta_buttons(vigilia_edge_page):
+    _, body = vigilia_edge_page
+    assert ".md-button" in body, (
+        "vigilia-edge/index.md must contain at least one '.md-button' CTA"
+    )
+    assert "vigilia-edge-showcase" in body, (
+        "vigilia-edge/index.md must link to the vigilia-edge-showcase repo"
+    )
+
+
+# ---------------------------------------------------------------------------
+# Phase 7: Vigilia Edge — Outside-In Safety (AC7)
+# ---------------------------------------------------------------------------
+
+
+def test_vigilia_edge_no_proprietary_details(vigilia_edge_page):
+    _, body = vigilia_edge_page
+    for pattern, label in _PROPRIETARY_PATTERNS:
+        assert not re.search(pattern, body), (
+            f"vigilia-edge/index.md must not contain {label}"
+        )
