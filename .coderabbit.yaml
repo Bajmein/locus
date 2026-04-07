@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=[https://coderabbit.ai/integrations/schema.v2.json](https://coderabbit.ai/integrations/schema.v2.json)
+language: "es-ES"
+reviews:
+  profile: "assertive"
+  request_changes_workflow: true
+  high_level_summary: true
+  poem: false
+  review_status: true
+  auto_review:
+    enabled: true
+    drafts: false
+  path_filters:
+    - "!site/**"
+    - "!uv.lock"
+    - "!**/*.png"
+    - "!**/*.jpg"
+  tools:
+    markdownlint:
+      enabled: true
+  enable_prompt_for_ai_agents: true
+
+chat:
+  auto_reply: true
