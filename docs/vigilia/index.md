@@ -149,17 +149,17 @@ graph TB
 
 ## Stack
 
-| Componente       | Tecnología                                    |
-| ---------------- | --------------------------------------------- |
-| IPC bus          | Iceoryx2 (Rust) — zero-copy shared memory, 192-byte ABI |
+| Componente       | Tecnología                                                  |
+| ---------------- | ----------------------------------------------------------- |
+| IPC bus          | Iceoryx2 (Rust) — zero-copy shared memory, 192-byte ABI     |
 | Decodificación   | NVDEC + PTX (Rust) — hardware decode + color convert en GPU |
-| Grabación GPU    | NvEnc (Python/CUDA) — hardware encode asíncrono |
-| Core de análisis | Rust (seguridad de memoria, rendimiento determinista) |
-| Orquestación     | Python 3.13+, Pydantic v2                     |
-| Interfaz         | PySide6 (Qt nativo)                           |
-| Integraciones    | ONVIF Profile M, MQTT                         |
-| Acceso remoto    | Tailscale, WebRTC/WHEP                        |
-| Tooling          | mise, uv, ruff, dprint                        |
+| Grabación GPU    | NvEnc (Python/CUDA) — hardware encode asíncrono             |
+| Core de análisis | Rust (seguridad de memoria, rendimiento determinista)       |
+| Orquestación     | Python 3.13+, Pydantic v2                                   |
+| Interfaz         | PySide6 (Qt nativo)                                         |
+| Integraciones    | ONVIF Profile M, MQTT                                       |
+| Acceso remoto    | Tailscale, WebRTC/WHEP                                      |
+| Tooling          | mise, uv, ruff, dprint                                      |
 
 !!! note "Decisiones de diseño"
 

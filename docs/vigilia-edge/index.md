@@ -51,16 +51,16 @@ determinista cuando la red no es fiable.
 
 ## Stack Técnico
 
-| Capa           | Tecnología                                      | Rol                                                | Estado        |
-| -------------- | ----------------------------------------------- | -------------------------------------------------- | ------------- |
-| Interfaz       | PySide6 + OpenGL                                | UI nativa + renderizado GPU de video               |               |
-| Inferencia     | YOLOv11/v12 · TensorRT + ONNX Runtime GPU       | Detección con backend acelerado seleccionable      | **Expandido** |
-| Cognición      | Rust (PyO3) + nalgebra                          | Multi-tracker, Kalman, geometría computacional, SAHI | **Expandido** |
-| Captura        | VPF + NVIDIA Direct Capture                     | Captura GPU-acelerada sin round-trip a CPU         | **Nuevo**     |
-| IPC            | Shared Memory + Iceoryx + Ring Buffers          | Transporte zero-copy con bus de metadatos dual     | **Expandido** |
-| Observabilidad | Prometheus + Loguru                             | Métricas de producción + logging estructurado      | **Nuevo**     |
-| Configuración  | Hydra + Pydantic V2                             | Config jerárquica con validación de schemas        |               |
-| Respuesta      | Audio synthesis + Email/SMS                     | Sistema activo de disuasión y notificación remota  | **Nuevo**     |
+| Capa           | Tecnología                                | Rol                                                  | Estado        |
+| -------------- | ----------------------------------------- | ---------------------------------------------------- | ------------- |
+| Interfaz       | PySide6 + OpenGL                          | UI nativa + renderizado GPU de video                 |               |
+| Inferencia     | YOLOv11/v12 · TensorRT + ONNX Runtime GPU | Detección con backend acelerado seleccionable        | **Expandido** |
+| Cognición      | Rust (PyO3) + nalgebra                    | Multi-tracker, Kalman, geometría computacional, SAHI | **Expandido** |
+| Captura        | VPF + NVIDIA Direct Capture               | Captura GPU-acelerada sin round-trip a CPU           | **Nuevo**     |
+| IPC            | Shared Memory + Iceoryx + Ring Buffers    | Transporte zero-copy con bus de metadatos dual       | **Expandido** |
+| Observabilidad | Prometheus + Loguru                       | Métricas de producción + logging estructurado        | **Nuevo**     |
+| Configuración  | Hydra + Pydantic V2                       | Config jerárquica con validación de schemas          |               |
+| Respuesta      | Audio synthesis + Email/SMS               | Sistema activo de disuasión y notificación remota    | **Nuevo**     |
 
 ---
 
@@ -76,14 +76,14 @@ del GIL. El resultado: pipeline determinista de cámara a UI en producción.
 
 ### Decisiones de arquitectura pragmática
 
-| Motivación                   | Detalle                                                                                                                                                 |
-| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Paralelismo real entre decode e inferencia** | El núcleo Rust (PyO3) corre en threads nativos sin el Global Interpreter Lock — elimina el cuello de botella del GIL entre el decoder de frames y los workers de inferencia |
-| **Frames de 6 MB sin copia**                   | Los buffers de frames se asignan una sola vez en Shared Memory; Rust pasa punteros, nunca datos — elimina el overhead de serialización                                      |
-| **Latencia predecible frame-a-frame**          | Sin garbage collector ni GC pauses: la latencia de cámara a UI es determinista (~80ms a 25fps) — elimina las pausas impredecibles del runtime                               |
-| **Sin data races en el pipeline de video**     | El compilador de Rust garantiza en tiempo de compilación que no hay data races ni dangling pointers — elimina una clase entera de bugs en el hot path                        |
-| **Multi-tracker configurable** | El núcleo Rust expone tres algoritmos de tracking (BoT-SORT, ByteTrack, Hybrid-SORT) seleccionables desde `config.yaml` sin recompilar — abstracción de alto rendimiento con zero overhead de despacho desde Python |
-| **Geometría computacional sin GIL** | Las validaciones de zonas de intrusión y cruce de líneas usan cálculos IoU vectorizados en Rust con nalgebra — sin lock de intérprete en el hot path de análisis frame a frame |
+| Motivación                                     | Detalle                                                                                                                                                                                                             |
+| ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Paralelismo real entre decode e inferencia** | El núcleo Rust (PyO3) corre en threads nativos sin el Global Interpreter Lock — elimina el cuello de botella del GIL entre el decoder de frames y los workers de inferencia                                         |
+| **Frames de 6 MB sin copia**                   | Los buffers de frames se asignan una sola vez en Shared Memory; Rust pasa punteros, nunca datos — elimina el overhead de serialización                                                                              |
+| **Latencia predecible frame-a-frame**          | Sin garbage collector ni GC pauses: la latencia de cámara a UI es determinista (~80ms a 25fps) — elimina las pausas impredecibles del runtime                                                                       |
+| **Sin data races en el pipeline de video**     | El compilador de Rust garantiza en tiempo de compilación que no hay data races ni dangling pointers — elimina una clase entera de bugs en el hot path                                                               |
+| **Multi-tracker configurable**                 | El núcleo Rust expone tres algoritmos de tracking (BoT-SORT, ByteTrack, Hybrid-SORT) seleccionables desde `config.yaml` sin recompilar — abstracción de alto rendimiento con zero overhead de despacho desde Python |
+| **Geometría computacional sin GIL**            | Las validaciones de zonas de intrusión y cruce de líneas usan cálculos IoU vectorizados en Rust con nalgebra — sin lock de intérprete en el hot path de análisis frame a frame                                      |
 
 ### Sistema de respuesta activa
 

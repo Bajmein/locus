@@ -33,7 +33,7 @@ stateDiagram-v2
     archived --> [*]
 ```
 
-Cada etapa produce un artefacto validado contra un esquema YAML. Los agentes de IA actúan como ejecutores de cada fase; los artefactos son la fuente de verdad. 
+Cada etapa produce un artefacto validado contra un esquema YAML. Los agentes de IA actúan como ejecutores de cada fase; los artefactos son la fuente de verdad.
 
 Este paradigma agent-native implica que la ausencia de un runtime de Python propio no es una limitación, sino una decisión de diseño deliberada. Forge es pura orquestación de agentes sobre artefactos Markdown y YAML.
 
@@ -88,12 +88,12 @@ El pipeline de Forge está construido sobre una postura zero-trust que garantiza
 
 ## Jerarquía de Conocimiento
 
-| Tier | Sistema | Rol | Consultado cuando… |
-| --- | --- | --- | --- |
-| 1 | Notion | Fuente oficial de especificaciones | Hay requisitos de negocio o decisiones de producto |
-| 2 | Obsidian | Base de conocimiento interna (ADRs, contexto) | Se requiere contexto arquitectónico o de decisiones pasadas |
-| 3 | Filesystem | Artefactos activos del pipeline | Se está trabajando en un cambio en curso |
-| 4 | Context7 | Documentación de librerías y APIs | Se implementa código con dependencias externas |
+| Tier | Sistema    | Rol                                           | Consultado cuando…                                          |
+| ---- | ---------- | --------------------------------------------- | ----------------------------------------------------------- |
+| 1    | Notion     | Fuente oficial de especificaciones            | Hay requisitos de negocio o decisiones de producto          |
+| 2    | Obsidian   | Base de conocimiento interna (ADRs, contexto) | Se requiere contexto arquitectónico o de decisiones pasadas |
+| 3    | Filesystem | Artefactos activos del pipeline               | Se está trabajando en un cambio en curso                    |
+| 4    | Context7   | Documentación de librerías y APIs             | Se implementa código con dependencias externas              |
 
 ---
 

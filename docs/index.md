@@ -16,23 +16,23 @@ Los proyectos a continuación son la evidencia de ese enfoque.
 
 <div class="grid cards" markdown>
 
--   **[Forge](/forge/)**
+- **[Forge](/forge/)**
 
-    ---
+  ---
 
-    Cómo transformar el desarrollo ad-hoc con IA en un pipeline trazable con garantías formales.
+  Cómo transformar el desarrollo ad-hoc con IA en un pipeline trazable con garantías formales.
 
--   **[Vigilia Reforged](/vigilia/)**
+- **[Vigilia Reforged](/vigilia/)**
 
-    ---
+  ---
 
-    Detectar y responder a incidentes de seguridad antes de que escalen, sin depender de revisión humana posterior.
+  Detectar y responder a incidentes de seguridad antes de que escalen, sin depender de revisión humana posterior.
 
--   **[Vigilia Edge](/vigilia-edge/)**
+- **[Vigilia Edge](/vigilia-edge/)**
 
-    ---
+  ---
 
-    Vigilancia local con latencia predecible frame-a-frame, sin nube y sin comprometer privacidad.
+  Vigilancia local con latencia predecible frame-a-frame, sin nube y sin comprometer privacidad.
 
 </div>
 
