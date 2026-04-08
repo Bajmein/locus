@@ -16,6 +16,8 @@ Ingeniero Informático enfocado en diseño de sistemas, automatización y orques
 
 </div>
 
+Contacto directo: [kenno13@proton.me](mailto:kenno13@proton.me)
+
 ## Visualización de Documento
 
 <div style="margin-top: 2rem;">

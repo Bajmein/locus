@@ -7,3 +7,7 @@ Aquí encontrarás información sobre mis proyectos en las áreas de Vigilia, Fo
 ---
 
 _Work in Progress_
+
+## Contacto
+
+[kenno13@proton.me](mailto:kenno13@proton.me)
