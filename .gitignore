@@ -60,6 +60,13 @@ mise.toml
 .python-version
 .mise.toml.local
 monkeytype.sqlite3
+
+# Ad-hoc scripts (root-level)
+merge_spec.py
+merge_specs.py
+update_arch.py
+update_readme.py
+update_tasks.py
 .gemini/skills.backup
 .claude/skills.backup
 tests/unit/test_schemas.py
