@@ -84,46 +84,39 @@ graph TB
 
 <div class="grid cards" markdown>
 
--   **Detección en tiempo real**
-    ---
-    Análisis continuo de video con aceleración GPU. Baja latencia desde la
-    captura hasta la decisión, diseñado para entornos donde cada segundo cuenta.
+- ## **Detección en tiempo real**
+  Análisis continuo de video con aceleración GPU. Baja latencia desde la
+  captura hasta la decisión, diseñado para entornos donde cada segundo cuenta.
 
--   **Zonas de seguridad configurables**
-    ---
-    Define áreas de interés con geometría arbitraria: zonas de intrusión,
-    perímetros de cruce, regiones de exclusión. Las reglas son declarativas y
-    no requieren programación.
+- ## **Zonas de seguridad configurables**
+  Define áreas de interés con geometría arbitraria: zonas de intrusión,
+  perímetros de cruce, regiones de exclusión. Las reglas son declarativas y
+  no requieren programación.
 
--   **Sistema de alertas multi-canal**
-    ---
-    Cuando se detecta un evento de seguridad, Vigilia puede responder de forma
-    coordinada: disuasión de audio, notificaciones a sistemas externos e
-    integración con plataformas de gestión de video existentes.
+- ## **Sistema de alertas multi-canal**
+  Cuando se detecta un evento de seguridad, Vigilia puede responder de forma
+  coordinada: disuasión de audio, notificaciones a sistemas externos e
+  integración con plataformas de gestión de video existentes.
 
--   **Integración con ecosistemas VMS**
-    ---
-    Exporta metadatos de analítica hacia sistemas de gestión de video (VMS)
-    mediante protocolos estándar de la industria — sin lock-in a un proveedor
-    específico.
+- ## **Integración con ecosistemas VMS**
+  Exporta metadatos de analítica hacia sistemas de gestión de video (VMS)
+  mediante protocolos estándar de la industria — sin lock-in a un proveedor
+  específico.
 
--   **Acceso remoto seguro**
-    ---
-    Monitoreo en tiempo real desde cualquier ubicación con acceso cifrado de
-    extremo a extremo. Sin necesidad de exponer puertos ni depender de
-    servicios en la nube de terceros.
+- ## **Acceso remoto seguro**
+  Monitoreo en tiempo real desde cualquier ubicación con acceso cifrado de
+  extremo a extremo. Sin necesidad de exponer puertos ni depender de
+  servicios en la nube de terceros.
 
--   **Interfaz de escritorio nativa**
-    ---
-    Aplicación desktop de alto rendimiento con visualización de video en vivo,
-    gestión de zonas y estado del sistema — diseñada para operadores que
-    necesitan control directo y bajo consumo de recursos.
+- ## **Interfaz de escritorio nativa**
+  Aplicación desktop de alto rendimiento con visualización de video en vivo,
+  gestión de zonas y estado del sistema — diseñada para operadores que
+  necesitan control directo y bajo consumo de recursos.
 
--   **Optimización de almacenamiento basada en eventos**
-    ---
-    El sistema graba con inteligencia selectiva: prioriza y persiste los
-    segmentos asociados a eventos detectados, reduciendo el volumen de
-    almacenamiento sin sacrificar la evidencia que realmente importa.
+- ## **Optimización de almacenamiento basada en eventos**
+  El sistema graba con inteligencia selectiva: prioriza y persiste los
+  segmentos asociados a eventos detectados, reduciendo el volumen de
+  almacenamiento sin sacrificar la evidencia que realmente importa.
 
 </div>
 

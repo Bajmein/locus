@@ -8,23 +8,23 @@ Aquí encontrarás información sobre mis proyectos en las áreas de Vigilia, Fo
 
 <div class="grid cards" markdown>
 
--   **[Forge](/forge/)**
+- **[Forge](/forge/)**
 
-    ---
+  ---
 
-    Orquestador de desarrollo basado en Especificaciones (SDD) para flujos de trabajo avanzados con agentes de IA.
+  Orquestador de desarrollo basado en Especificaciones (SDD) para flujos de trabajo avanzados con agentes de IA.
 
--   **[Vigilia Reforged](/vigilia/)**
+- **[Vigilia Reforged](/vigilia/)**
 
-    ---
+  ---
 
-    Plataforma de monitoreo inteligente con análisis de video en tiempo real, zonas configurables y alertas multi-canal.
+  Plataforma de monitoreo inteligente con análisis de video en tiempo real, zonas configurables y alertas multi-canal.
 
--   **[Vigilia Edge](/vigilia-edge/)**
+- **[Vigilia Edge](/vigilia-edge/)**
 
-    ---
+  ---
 
-    Versión desktop v1.0 operativa en entornos locales, centrada en inferencia zero-copy y estabilidad de sistemas.
+  Versión desktop v1.0 operativa en entornos locales, centrada en inferencia zero-copy y estabilidad de sistemas.
 
 </div>
 

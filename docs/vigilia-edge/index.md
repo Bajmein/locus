@@ -44,12 +44,12 @@ del GIL. El resultado: pipeline determinista de cámara a UI en producción.
 
 ### Por qué Rust — Python/Rust Hybrid Architecture
 
-| Motivación | Detalle |
-| ---------- | ------- |
-| **Bypass del GIL** | El núcleo Rust (PyO3) corre en threads nativos sin el Global Interpreter Lock — paralelismo real entre el decoder de frames y los workers de inferencia |
-| **Operaciones zero-copy** | Los buffers de frames se asignan una sola vez en Shared Memory; Rust pasa punteros, nunca datos — eliminando el overhead de serialización |
-| **Rendimiento determinista** | Sin garbage collector ni GC pauses: la latencia de cámara a UI es predecible frame a frame (~80ms a 25fps) |
-| **Seguridad de memoria** | El compilador de Rust garantiza en tiempo de compilación que no hay data races ni dangling pointers en el pipeline de video |
+| Motivación                   | Detalle                                                                                                                                                 |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Bypass del GIL**           | El núcleo Rust (PyO3) corre en threads nativos sin el Global Interpreter Lock — paralelismo real entre el decoder de frames y los workers de inferencia |
+| **Operaciones zero-copy**    | Los buffers de frames se asignan una sola vez en Shared Memory; Rust pasa punteros, nunca datos — eliminando el overhead de serialización               |
+| **Rendimiento determinista** | Sin garbage collector ni GC pauses: la latencia de cámara a UI es predecible frame a frame (~80ms a 25fps)                                              |
+| **Seguridad de memoria**     | El compilador de Rust garantiza en tiempo de compilación que no hay data races ni dangling pointers en el pipeline de video                             |
 
 !!! success "v1.0 — En producción"
 
