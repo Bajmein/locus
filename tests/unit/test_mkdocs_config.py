@@ -4,13 +4,23 @@ import pytest
 import yaml
 
 
+def _safe_load_mkdocs(path: Path):
+    """Load mkdocs.yml tolerating !!python/name tags used by pymdownx."""
+    loader = yaml.SafeLoader
+    loader.add_multi_constructor(
+        "tag:yaml.org,2002:python/name:",
+        lambda ldr, tag, node: f"<python:{tag}>",
+    )
+    with open(path, encoding="utf-8") as f:
+        return yaml.load(f, Loader=loader)  # noqa: S506
+
+
 @pytest.fixture
 def mkdocs_config():
     config_path = Path("mkdocs.yml")
     if not config_path.exists():
         pytest.skip("mkdocs.yml not found")
-    with open(config_path, encoding="utf-8") as f:
-        return yaml.safe_load(f)
+    return _safe_load_mkdocs(config_path)
 
 
 @pytest.mark.unit
@@ -201,6 +211,26 @@ def test_coderabbit_path_filters(coderabbit_config):
     assert "!uv.lock" in filters
     assert "!**/*.png" in filters
     assert "!**/*.jpg" in filters
+
+
+# --- Change 014: Mermaid Superfences ---
+
+
+@pytest.fixture
+def mkdocs_raw():
+    config_path = Path("mkdocs.yml")
+    if not config_path.exists():
+        pytest.skip("mkdocs.yml not found")
+    return config_path.read_text(encoding="utf-8")
+
+
+@pytest.mark.unit
+def test_superfences_has_custom_fences(mkdocs_raw):
+    """014 [AC1] pymdownx.superfences declares custom_fences for mermaid"""
+    assert "custom_fences:" in mkdocs_raw
+    assert "name: mermaid" in mkdocs_raw
+    assert "class: mermaid" in mkdocs_raw
+    assert "pymdownx.superfences.fence_code_format" in mkdocs_raw
 
 
 # --- Phase 7: CI and Deploy Separation ---

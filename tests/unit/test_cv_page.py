@@ -79,8 +79,18 @@ def test_cv_no_redundant_download_button(cv_page):
 # --- AC4: Navigation integration ---
 
 
+def _load_mkdocs_yml(path: Path):
+    """Load mkdocs.yml tolerating !!python/name tags used by pymdownx."""
+    loader = yaml.SafeLoader
+    loader.add_multi_constructor(
+        "tag:yaml.org,2002:python/name:",
+        lambda ldr, tag, node: f"<python:{tag}>",
+    )
+    return yaml.load(path.read_text(encoding="utf-8"), Loader=loader)  # noqa: S506
+
+
 def test_cv_in_nav():
-    config = yaml.safe_load(MKDOCS_YML.read_text(encoding="utf-8"))
+    config = _load_mkdocs_yml(MKDOCS_YML)
     nav_values = [
         next(iter(entry.values()))
         for entry in config.get("nav", [])
@@ -90,7 +100,7 @@ def test_cv_in_nav():
 
 
 def test_existing_nav_entries_intact():
-    config = yaml.safe_load(MKDOCS_YML.read_text(encoding="utf-8"))
+    config = _load_mkdocs_yml(MKDOCS_YML)
     nav_values = [
         next(iter(entry.values()))
         for entry in config.get("nav", [])
