@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Normalización de identidad y sincronización de arquitectura del pipeline Vigilia Reforged (content, 011-vigilia-reforged-arch-sync).
+
+- Sincronización de la documentación pública de Vigilia Edge con la arquitectura real de cuatro capas (content, 012-vigilia-edge-arch-sync).
+- Reescritura de la página de Forge y README de showcase para establecer arquitectura industrial SDD y postura zero-trust (forge, 013-forge-industrial-narrative).
 - Refactored `README.md` for public portfolio visibility, removing internal architecture details and agentic-specific terminology.
 
 ## [0.1.2] - 2026-04-07
