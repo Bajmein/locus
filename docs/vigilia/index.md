@@ -21,8 +21,17 @@ Los sistemas de CCTV tradicionales son reactivos por diseño: almacenan video
 que alguien revisa después. Esto tiene un costo operativo alto y una tasa de
 respuesta baja. La mayoría de los incidentes no se detectan a tiempo no por
 falta de cámaras, sino por falta de capacidad para procesar lo que capturan.
+Cada minuto de retraso en la detección tiene un coste real: horas de revisión
+post-incidente, valor perdido y, en el peor caso, daños que una respuesta
+automática hubiera evitado.
 
 ## La Solución
+
+El objetivo es responder automáticamente antes de que el incidente escale — un SLA
+que los sistemas reactivos no pueden cumplir. Rust e Iceoryx son la elección
+pragmática que hace posible ese SLA: no una preferencia tecnológica, sino la
+combinación que elimina los cuellos de botella de serialización y latencia que
+impedirían la respuesta en tiempo real.
 
 Vigilia procesa video en tiempo real con aceleración por hardware, aplica
 reglas espaciales configurables y dispara respuestas automáticas ante eventos

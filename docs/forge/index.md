@@ -8,7 +8,7 @@ description: >
 
 **Arquitectura industrial de Spec-Driven Development para desarrollo autónomo con agentes de IA.**
 
-Forge resuelve un problema específico: el desarrollo con agentes de IA es potente pero caótico. Sin estructura, los cambios son difíciles de rastrear, reproducir o revisar. Forge no es un framework genérico de agentes, sino una arquitectura industrial que introduce un pipeline schema-driven con garantías formales, convirtiendo ideas en código verificado de forma sistemática.
+El flujo ad-hoc con IA tiene un coste oculto: no hay forma de reproducir qué prompt generó qué cambio, el retrabajo se acumula sin trazabilidad y la revisión se vuelve imposible a escala. Forge resuelve ese problema: el desarrollo con agentes de IA es potente pero caótico. Sin estructura, los cambios son difíciles de rastrear, reproducir o revisar. Forge no es un framework genérico de agentes, sino una arquitectura industrial que introduce un pipeline schema-driven con garantías formales, convirtiendo ideas en código verificado de forma sistemática.
 
 ---
 

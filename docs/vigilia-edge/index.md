@@ -13,6 +13,11 @@ description: >
 
 ## ¿Qué hace?
 
+El problema operativo es concreto: vigilancia local sin dependencia de nube, con latencia
+predecible frame-a-frame y sin comprometer privacidad. No enviar video a un servidor externo
+no es solo una decisión de privacidad — es también la única forma de garantizar latencia
+determinista cuando la red no es fiable.
+
 - Detecta y rastrea objetos en video en tiempo real mediante inferencia local (YOLOv11/v12)
   con backend acelerado seleccionable: TensorRT para máximo rendimiento o ONNX Runtime GPU
   como alternativa portable
@@ -69,14 +74,14 @@ La solución combina Multiprocessing (para romper el GIL), Shared Memory (para e
 Iceoryx (para metadatos de ultra-baja latencia) y un núcleo Rust que opera completamente fuera
 del GIL. El resultado: pipeline determinista de cámara a UI en producción.
 
-### Por qué Rust — Python/Rust Hybrid Architecture
+### Decisiones de arquitectura pragmática
 
 | Motivación                   | Detalle                                                                                                                                                 |
 | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Bypass del GIL**           | El núcleo Rust (PyO3) corre en threads nativos sin el Global Interpreter Lock — paralelismo real entre el decoder de frames y los workers de inferencia |
-| **Operaciones zero-copy**    | Los buffers de frames se asignan una sola vez en Shared Memory; Rust pasa punteros, nunca datos — eliminando el overhead de serialización               |
-| **Rendimiento determinista** | Sin garbage collector ni GC pauses: la latencia de cámara a UI es predecible frame a frame (~80ms a 25fps)                                              |
-| **Seguridad de memoria**     | El compilador de Rust garantiza en tiempo de compilación que no hay data races ni dangling pointers en el pipeline de video                             |
+| **Paralelismo real entre decode e inferencia** | El núcleo Rust (PyO3) corre en threads nativos sin el Global Interpreter Lock — elimina el cuello de botella del GIL entre el decoder de frames y los workers de inferencia |
+| **Frames de 6 MB sin copia**                   | Los buffers de frames se asignan una sola vez en Shared Memory; Rust pasa punteros, nunca datos — elimina el overhead de serialización                                      |
+| **Latencia predecible frame-a-frame**          | Sin garbage collector ni GC pauses: la latencia de cámara a UI es determinista (~80ms a 25fps) — elimina las pausas impredecibles del runtime                               |
+| **Sin data races en el pipeline de video**     | El compilador de Rust garantiza en tiempo de compilación que no hay data races ni dangling pointers — elimina una clase entera de bugs en el hot path                        |
 | **Multi-tracker configurable** | El núcleo Rust expone tres algoritmos de tracking (BoT-SORT, ByteTrack, Hybrid-SORT) seleccionables desde `config.yaml` sin recompilar — abstracción de alto rendimiento con zero overhead de despacho desde Python |
 | **Geometría computacional sin GIL** | Las validaciones de zonas de intrusión y cruce de líneas usan cálculos IoU vectorizados en Rust con nalgebra — sin lock de intérprete en el hot path de análisis frame a frame |
 
