@@ -28,3 +28,7 @@ Pipeline estructurado `Proponer → Especificar → Diseñar → Ejecutar → Ve
 uv sync --all-groups
 uv run mkdocs serve
 ```
+
+## Contacto
+
+[kenno13@proton.me](mailto:kenno13@proton.me)
