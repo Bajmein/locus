@@ -47,6 +47,37 @@ ecosistema sin sacrificar el rendimiento donde más importa.
 > fuera del GIL de Python, con operaciones zero-copy entre el decoder de frames
 > y el pipeline de inferencia GPU.
 
+```mermaid
+graph TB
+    subgraph Rust["⚙️ Rust Core (PyO3)"]
+        DEC["Frame Decoder"]:::rust
+        SCH["Scheduler"]:::rust
+        SHM["Shared Memory Bus"]:::rust
+    end
+
+    subgraph Python["🐍 Python Orchestration"]
+        CFG["Config (Pydantic)"]
+        RULES["Rules Engine"]
+        API["FastAPI / MQTT"]
+    end
+
+    subgraph Inference["🔬 Inference Pipeline"]
+        ONNX["ONNX Runtime GPU"]:::rust
+        ZONES["Zone Evaluator"]
+    end
+
+    CAM["📷 Camera Input"] --> DEC
+    DEC --> SHM
+    SHM --> ONNX
+    ONNX --> ZONES
+    ZONES --> RULES
+    RULES --> API
+    CFG --> SCH
+    SCH --> DEC
+
+    classDef rust fill:#f06529,stroke:#333,stroke-width:2px,color:#fff;
+```
+
 ---
 
 ## Capacidades

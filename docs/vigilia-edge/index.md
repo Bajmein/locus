@@ -51,5 +51,9 @@ del GIL. El resultado: pipeline determinista de cámara a UI en producción.
 | **Rendimiento determinista** | Sin garbage collector ni GC pauses: la latencia de cámara a UI es predecible frame a frame (~80ms a 25fps) |
 | **Seguridad de memoria** | El compilador de Rust garantiza en tiempo de compilación que no hay data races ni dangling pointers en el pipeline de video |
 
+!!! success "v1.0 — En producción"
+
+    Esta versión v1.0 ya se encuentra totalmente operativa para despliegues en estaciones de trabajo locales.
+
 [Leer architecture_overview en el showcase](https://github.com/Bajmein/vigilia-edge-showcase/blob/main/architecture_overview.md){ .md-button }
 [Ver repositorio vitrina en GitHub](https://github.com/Bajmein/vigilia-edge-showcase){ .md-button .md-button--primary }

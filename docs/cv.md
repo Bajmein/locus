@@ -7,15 +7,6 @@ description: CV profesional de Benjamín Criado, Ingeniero Informático especial
 
 Ingeniero Informático enfocado en diseño de sistemas, automatización y orquestación de flujos de trabajo.
 
-<div class="grid cards" markdown>
--   **Descarga Segura**
-
-    ---
-
-    [📥 Descargar CV en PDF](/assets/pdf/cv_benjamin_criado.pdf){ .md-button .md-button--primary }
-
-</div>
-
 Contacto directo: [kenno13@proton.me](mailto:kenno13@proton.me)
 
 ## Visualización de Documento

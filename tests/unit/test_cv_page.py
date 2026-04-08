@@ -66,20 +66,13 @@ def test_cv_pdf_prereq_exists():
     assert pdf_path.exists(), f"PDF prerequisite not found at {pdf_path}"
 
 
-# --- AC3: Download button ---
+# --- AC3: Redundant download button removed ---
 
 
-def test_cv_download_button(cv_page):
+def test_cv_no_redundant_download_button(cv_page):
     _, body = cv_page
-    assert "md-button--primary" in body and "assets/pdf/cv_benjamin_criado.pdf" in body, (
-        "cv.md must contain a primary download button pointing to local PDF"
-    )
-
-
-def test_cv_grid_card_syntax(cv_page):
-    _, body = cv_page
-    assert '<div class="grid cards" markdown>' in body, (
-        "cv.md must use grid cards syntax for the download button"
+    assert '<div class="grid cards"' not in body, (
+        "cv.md must NOT contain the redundant grid cards download button block"
     )
 
 
