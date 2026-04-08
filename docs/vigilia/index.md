@@ -1,11 +1,11 @@
 ---
-title: Vigilia
+title: Vigilia Reforged
 description: >
   Plataforma de monitoreo inteligente y proactivo con análisis de video en
   tiempo real, zonas de seguridad configurables y alertas multi-canal.
 ---
 
-# Vigilia
+# Vigilia Reforged
 
 **De la vigilancia pasiva al monitoreo inteligente y proactivo.**
 
@@ -35,17 +35,33 @@ Ingestión → Análisis en tiempo real → Evaluación de reglas → Acción
 El operador define qué importa (zonas, comportamientos, umbrales); el sistema
 se encarga del resto.
 
-### Arquitectura Híbrida Python/Rust
+### Arquitectura del Pipeline de Alta Performance
 
-El Motor de Inferencia y el Procesamiento de Tensores están escritos en
-**Rust**, elegido por sus garantías de seguridad de memoria en tiempo de
-compilación y su rendimiento determinista sin GC pauses. La capa de
-orquestación, configuración y reglas corre en Python — aprovechando su
-ecosistema sin sacrificar el rendimiento donde más importa.
+Tres crates Rust especializados gestionan la ingestión, el IPC y el control del
+pipeline. Python orquesta la lógica de negocio sin intervenir en los hot paths de GPU.
 
-> **Rust-powered core** — Memory-safe video processing que opera completamente
-> fuera del GIL de Python, con operaciones zero-copy entre el decoder de frames
-> y el pipeline de inferencia GPU.
+```
+┌─────────────────────────────────────────────────────────┐
+│  vigilia-nvdec (Rust)                                   │
+│  NVDEC hardware decode → PTX color convert → IPC publish│
+├─────────────────────────────────────────────────────────┤
+│  vigilia-ipc (Rust)                                     │
+│  Iceoryx2 IPC bus — 192-byte ABI — VRAM watchdog        │
+├─────────────────────────────────────────────────────────┤
+│  vision_core (Rust)                                     │
+│  Reactive RPC server (Iceoryx2 RPC) — command handler  │
+├─────────────────────────────────────────────────────────┤
+│  Python Layer                                           │
+│  NvEnc recording · ONVIF · MQTT · WHEP · PySide6       │
+└─────────────────────────────────────────────────────────┘
+```
+
+> **Rust-powered core** — Pipeline zero-copy con **Iceoryx2** como bus IPC shared-memory
+> (descriptor de 192 bytes, lock-free queues, sin serialización ni round-trip al broker),
+> **NVDEC** para decodificación hardware en GPU con conversión de espacio de color en-device
+> vía PTX kernels (NV12→RGB_F32, sin round-trip a CPU), y un **VRAM watchdog** que consulta
+> el estado del hardware para liberar buffers GPU de forma determinista — sin GC, sin reference
+> counting en hot paths.
 
 ```mermaid
 graph TB
@@ -126,12 +142,26 @@ graph TB
 
 | Componente       | Tecnología                                    |
 | ---------------- | --------------------------------------------- |
-| Core de análisis | Rust (alto rendimiento, seguridad de memoria) |
+| IPC bus          | Iceoryx2 (Rust) — zero-copy shared memory, 192-byte ABI |
+| Decodificación   | NVDEC + PTX (Rust) — hardware decode + color convert en GPU |
+| Grabación GPU    | NvEnc (Python/CUDA) — hardware encode asíncrono |
+| Core de análisis | Rust (seguridad de memoria, rendimiento determinista) |
 | Orquestación     | Python 3.13+, Pydantic v2                     |
 | Interfaz         | PySide6 (Qt nativo)                           |
 | Integraciones    | ONVIF Profile M, MQTT                         |
 | Acceso remoto    | Tailscale, WebRTC/WHEP                        |
 | Tooling          | mise, uv, ruff, dprint                        |
+
+!!! note "Decisiones de diseño"
+
+    - **Iceoryx2 vs MQTT para IPC interno**: MQTT agrega latencia de serialización y
+      round-trip al broker. Iceoryx2 usa shared memory con lock-free queues — los mensajes
+      entre `vigilia-nvdec` y `vision_core` no pasan por ninguna capa de red.
+    - **NVDEC vs software decode**: La decodificación software en CPU consume ciclos que
+      compiten con inferencia. NVDEC libera la CPU completamente y mantiene los frames en
+      VRAM a lo largo de todo el pipeline.
+    - **VRAM watchdog pattern**: La gestión de buffers GPU consulta el estado del hardware
+      antes de liberar memoria — garantía de seguridad sin overhead de sincronización.
 
 ---
 
