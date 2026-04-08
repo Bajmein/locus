@@ -1,30 +1,38 @@
-# Benjamín Criado - Arquitectura & R&D
+---
+title: Benjamín Criado — Software Engineer
+description: >
+  Software Engineer | Backend & Sistemas. Pragmatismo en la elección
+  de herramientas: Rust para latencia crítica, Python para orquestación,
+  SDD para automatizar el desarrollo con agentes de IA.
+---
 
-Bienvenido a mi portafolio de arquitectura y R&D.
+# Benjamín Criado — Software Engineer | Backend & Sistemas
 
-Aquí encontrarás información sobre mis proyectos en las áreas de Vigilia, Forge y Laboratorio.
+Uso la herramienta adecuada para cada problema: Rust para latencia crítica frame-a-frame, Python para orquestación y lógica de negocio, SDD para automatizar el ciclo de desarrollo con agentes de IA.
+
+Los proyectos a continuación son la evidencia de ese enfoque.
 
 ---
 
 <div class="grid cards" markdown>
 
--   **[Forge](/forge/)**
+- **[Forge](/forge/)**
 
-    ---
+  ---
 
-    Orquestador de desarrollo basado en Especificaciones (SDD) para flujos de trabajo avanzados con agentes de IA.
+  Cómo transformar el desarrollo ad-hoc con IA en un pipeline trazable con garantías formales.
 
--   **[Vigilia Reforged](/vigilia/)**
+- **[Vigilia Reforged](/vigilia/)**
 
-    ---
+  ---
 
-    Plataforma de monitoreo inteligente con análisis de video en tiempo real, zonas configurables y alertas multi-canal.
+  Detectar y responder a incidentes de seguridad antes de que escalen, sin depender de revisión humana posterior.
 
--   **[Vigilia Edge](/vigilia-edge/)**
+- **[Vigilia Edge](/vigilia-edge/)**
 
-    ---
+  ---
 
-    Versión desktop v1.0 operativa en entornos locales, centrada en inferencia zero-copy y estabilidad de sistemas.
+  Vigilancia local con latencia predecible frame-a-frame, sin nube y sin comprometer privacidad.
 
 </div>
 

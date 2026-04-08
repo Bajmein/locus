@@ -8,7 +8,7 @@ description: >
 
 **Arquitectura industrial de Spec-Driven Development para desarrollo autónomo con agentes de IA.**
 
-Forge resuelve un problema específico: el desarrollo con agentes de IA es potente pero caótico. Sin estructura, los cambios son difíciles de rastrear, reproducir o revisar. Forge no es un framework genérico de agentes, sino una arquitectura industrial que introduce un pipeline schema-driven con garantías formales, convirtiendo ideas en código verificado de forma sistemática.
+El flujo ad-hoc con IA tiene un coste oculto: no hay forma de reproducir qué prompt generó qué cambio, el retrabajo se acumula sin trazabilidad y la revisión se vuelve imposible a escala. Forge resuelve ese problema: el desarrollo con agentes de IA es potente pero caótico. Sin estructura, los cambios son difíciles de rastrear, reproducir o revisar. Forge no es un framework genérico de agentes, sino una arquitectura industrial que introduce un pipeline schema-driven con garantías formales, convirtiendo ideas en código verificado de forma sistemática.
 
 ---
 
@@ -33,7 +33,7 @@ stateDiagram-v2
     archived --> [*]
 ```
 
-Cada etapa produce un artefacto validado contra un esquema YAML. Los agentes de IA actúan como ejecutores de cada fase; los artefactos son la fuente de verdad. 
+Cada etapa produce un artefacto validado contra un esquema YAML. Los agentes de IA actúan como ejecutores de cada fase; los artefactos son la fuente de verdad.
 
 Este paradigma agent-native implica que la ausencia de un runtime de Python propio no es una limitación, sino una decisión de diseño deliberada. Forge es pura orquestación de agentes sobre artefactos Markdown y YAML.
 
@@ -88,12 +88,12 @@ El pipeline de Forge está construido sobre una postura zero-trust que garantiza
 
 ## Jerarquía de Conocimiento
 
-| Tier | Sistema | Rol | Consultado cuando… |
-| --- | --- | --- | --- |
-| 1 | Notion | Fuente oficial de especificaciones | Hay requisitos de negocio o decisiones de producto |
-| 2 | Obsidian | Base de conocimiento interna (ADRs, contexto) | Se requiere contexto arquitectónico o de decisiones pasadas |
-| 3 | Filesystem | Artefactos activos del pipeline | Se está trabajando en un cambio en curso |
-| 4 | Context7 | Documentación de librerías y APIs | Se implementa código con dependencias externas |
+| Tier | Sistema    | Rol                                           | Consultado cuando…                                          |
+| ---- | ---------- | --------------------------------------------- | ----------------------------------------------------------- |
+| 1    | Notion     | Fuente oficial de especificaciones            | Hay requisitos de negocio o decisiones de producto          |
+| 2    | Obsidian   | Base de conocimiento interna (ADRs, contexto) | Se requiere contexto arquitectónico o de decisiones pasadas |
+| 3    | Filesystem | Artefactos activos del pipeline               | Se está trabajando en un cambio en curso                    |
+| 4    | Context7   | Documentación de librerías y APIs             | Se implementa código con dependencias externas              |
 
 ---
 

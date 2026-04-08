@@ -1,11 +1,13 @@
 ---
 title: Curriculum Vitae - Benjamín Criado
-description: CV profesional de Benjamín Criado, Ingeniero Informático especializado en diseño de sistemas, automatización y orquestación de flujos de trabajo.
+description: >
+  CV profesional de Benjamín Criado — Software Engineer | Backend & Systems Architecture.
+  Pragmatic execution: la herramienta adecuada para cada problema.
 ---
 
 # Curriculum Vitae
 
-Ingeniero Informático enfocado en diseño de sistemas, automatización y orquestación de flujos de trabajo.
+Software Engineer | Backend & Systems Architecture. Selecciono la tecnología que mejor resuelve el problema concreto: Rust para latencia crítica, Python para orquestación, SDD para automatizar el desarrollo. Versatilidad de capas, pragmatismo en la ejecución.
 
 Contacto directo: [kenno13@proton.me](mailto:kenno13@proton.me)
 
