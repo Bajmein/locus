@@ -34,8 +34,9 @@ def _parse_page(path: Path) -> tuple[dict, str]:
 def test_index_frontmatter_title():
     fm, _ = _parse_page(DOCS_ROOT / "index.md")
     title = str(fm.get("title", ""))
-    assert "Software Engineer" in title, (
-        "index.md frontmatter 'title' must contain 'Software Engineer'"
+    assert "Ingeniero Informático" in title or "Desarrollo de Software" in title, (
+        "index.md frontmatter 'title' must contain 'Ingeniero Informático' or "
+        "'Desarrollo de Software'"
     )
 
 
@@ -120,8 +121,9 @@ def test_vigilia_edge_no_por_que_rust_heading():
     )
 
 
-def test_vigilia_edge_pragmatic_heading():
+def test_vigilia_edge_no_internal_architecture_table():
     _, body = _parse_page(DOCS_ROOT / "vigilia-edge" / "index.md")
-    assert "### Decisiones de arquitectura pragmática" in body, (
-        "vigilia-edge/index.md must contain '### Decisiones de arquitectura pragmática'"
+    assert "### Decisiones de arquitectura pragmática" not in body, (
+        "vigilia-edge/index.md must not expose internal architecture decisions table"
+        " (IP protection)"
     )
