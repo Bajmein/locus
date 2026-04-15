@@ -292,16 +292,16 @@ def test_vigilia_edge_has_stack_section(vigilia_edge_page):
 
 def test_vigilia_edge_stack_five_rows(vigilia_edge_page):
     _, body = vigilia_edge_page
-    for tech in ("PySide6", "ONNX Runtime", "Rust", "Iceoryx", "Hydra"):
+    for tech in ("PySide6", "ONNX Runtime", "Rust", "Hydra"):
         assert tech in body, (
             f"vigilia-edge/index.md stack must mention '{tech}'"
         )
 
 
-def test_vigilia_edge_has_reto_section(vigilia_edge_page):
+def test_vigilia_edge_no_internal_architecture_section(vigilia_edge_page):
     _, body = vigilia_edge_page
-    assert "## El reto de arquitectura" in body, (
-        "vigilia-edge/index.md must contain '## El reto de arquitectura'"
+    assert "## El reto de arquitectura" not in body, (
+        "vigilia-edge/index.md must not contain '## El reto de arquitectura' (IP protection)"
     )
 
 

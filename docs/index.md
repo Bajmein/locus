@@ -1,14 +1,14 @@
 ---
-title: Benjamín Criado — Software Engineer
+title: Benjamín Criado — Desarrollo de Software & Automatización con IA
 description: >
-  Software Engineer | Backend & Sistemas. Pragmatismo en la elección
-  de herramientas: Rust para latencia crítica, Python para orquestación,
-  SDD para automatizar el desarrollo con agentes de IA.
+  Ingeniero Informático | Desarrollo de Software y Automatización con IA.
+  Enfoque pragmático: la herramienta correcta para cada problema,
+  aprendizaje autodidacta aplicado a proyectos reales.
 ---
 
-# Benjamín Criado — Software Engineer | Backend & Sistemas
+# Benjamín Criado — Ingeniero Informático
 
-Uso la herramienta adecuada para cada problema: Rust para latencia crítica frame-a-frame, Python para orquestación y lógica de negocio, SDD para automatizar el ciclo de desarrollo con agentes de IA.
+Desarrollo software orientado a resultados: elijo la herramienta correcta para cada problema, aprendo lo que necesito para ejecutarlo bien y entrego sistemas que funcionan en producción.
 
 Los proyectos a continuación son la evidencia de ese enfoque.
 
@@ -33,7 +33,7 @@ Los proyectos a continuación son la evidencia de ese enfoque.
 
     ---
 
-    Vigilancia local con latencia predecible frame-a-frame, sin nube y sin comprometer privacidad.
+    Vigilancia local con latencia predecible, sin nube y sin comprometer privacidad.
 
 </div>
 <!-- dprint-ignore-end -->
