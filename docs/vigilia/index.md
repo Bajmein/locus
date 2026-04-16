@@ -144,8 +144,9 @@ documentación técnica, el diagrama del pipeline y las plantillas de configurac
 
 ---
 
-## Más sobre Vigilia
+---
 
-El desarrollo de Vigilia sigue el pipeline de [Forge](/forge/), lo que permite
-gestionar cambios complejos en un sistema multi-lenguaje con trazabilidad
-completa desde la idea hasta el código verificado.
+## Contacto
+
+[kenno@vigilia-security.tech](mailto:kenno@vigilia-security.tech)
+

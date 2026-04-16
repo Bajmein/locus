@@ -54,3 +54,9 @@ el sistema activa dos mecanismos de respuesta:
 
 [Leer architecture_overview en el showcase](https://github.com/Bajmein/vigilia-edge-showcase/blob/main/architecture_overview.md){ .md-button }
 [Ver repositorio vitrina en GitHub](https://github.com/Bajmein/vigilia-edge-showcase){ .md-button .md-button--primary }
+
+---
+
+## Contacto
+
+[kenno@vigilia-security.tech](mailto:kenno@vigilia-security.tech)
