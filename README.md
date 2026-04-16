@@ -6,15 +6,14 @@ Sitio personal donde documento proyectos activos, experimentos técnicos y notas
 
 ## Proyectos
 
-### Vigilia
+### Vigilia Reforged
+Sistema de videovigilancia de alto rendimiento con arquitectura híbrida Python-Rust. Utiliza decodificación NVDEC por hardware y memoria compartida (IPC) para procesamiento de video en tiempo real con latencia mínima, orquestado mediante un pipeline de desarrollo basado en IA.
 
-Sistema de vigilancia distribuida construido en **Rust** y **Python** con Computer Vision.
-Captura y análisis de video desde cámaras ONVIF, procesamiento local y conectividad mediante Tailscale.
+### Vigilia Edge
+Solución de vigilancia inteligente diseñada para entornos locales con latencia predecible. Implementa inferencia en el borde (YOLOv11/v12) y optimización mediante TensorRT para máxima eficiencia sin dependencia de nube.
 
 ### Forge
-
-Framework de orquestación para desarrollo guiado por especificaciones (**SDD**).
-Pipeline estructurado `proponer → especificar → diseñar → generar tareas → aprobar → implementar → verificar → archivar` con artefactos validados por schema YAML.
+Infraestructura de orquestación para el desarrollo guiado por especificaciones (SDD). Proporciona un pipeline estandarizado que garantiza la trazabilidad y calidad del código mediante la validación de artefactos con esquemas YAML y agentes autónomos.
 
 ## Stack
 
