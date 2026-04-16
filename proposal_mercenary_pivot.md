@@ -29,26 +29,26 @@ y SDD para automatizar el desarrollo.
 
 <div class="grid cards" markdown>
 
--   **[Forge](/forge/)**
+- **[Forge](/forge/)**
 
-    ---
+  ---
 
-    Pipeline de Spec-Driven Development que convierte ideas en código verificado.
-    Trazabilidad completa desde la propuesta hasta el archivo, con garantías formales.
+  Pipeline de Spec-Driven Development que convierte ideas en código verificado.
+  Trazabilidad completa desde la propuesta hasta el archivo, con garantías formales.
 
--   **[Vigilia Reforged](/vigilia/)**
+- **[Vigilia Reforged](/vigilia/)**
 
-    ---
+  ---
 
-    Plataforma de monitoreo que detecta, decide y actúa antes de que ocurra el
-    incidente. Respuesta automática en tiempo real sin intervención humana constante.
+  Plataforma de monitoreo que detecta, decide y actúa antes de que ocurra el
+  incidente. Respuesta automática en tiempo real sin intervención humana constante.
 
--   **[Vigilia Edge](/vigilia-edge/)**
+- **[Vigilia Edge](/vigilia-edge/)**
 
-    ---
+  ---
 
-    Vigilancia inteligente completamente local: inferencia en producción sin nube,
-    sin latencia de red, con latencia frame-a-frame predecible y determinista.
+  Vigilancia inteligente completamente local: inferencia en producción sin nube,
+  sin latencia de red, con latencia frame-a-frame predecible y determinista.
 
 </div>
 
@@ -66,6 +66,7 @@ _Work in Progress_
 ### Reemplazar SOLO la introducción (líneas 8–11 del archivo actual):
 
 **TEXTO ACTUAL:**
+
 ```markdown
 # Vigilia Reforged
 
@@ -77,6 +78,7 @@ de un incidente, Vigilia analiza, decide y actúa mientras los eventos ocurren.
 ```
 
 **REEMPLAZAR CON:**
+
 ```markdown
 # Vigilia Reforged
 
@@ -104,6 +106,7 @@ sub-frame mientras se procesan múltiples streams de cámara simultáneamente.
 ### Reemplazar SOLO la introducción (líneas 8–11 del archivo actual):
 
 **TEXTO ACTUAL:**
+
 ```markdown
 # Vigilia Edge
 
@@ -111,6 +114,7 @@ sub-frame mientras se procesan múltiples streams de cámara simultáneamente.
 ```
 
 **REEMPLAZAR CON:**
+
 ```markdown
 # Vigilia Edge
 
@@ -138,6 +142,7 @@ predecible frame a frame (~80ms a 25fps) — operativo en producción desde v1.0
 ### Reemplazar SOLO la introducción (líneas 8–11 del archivo actual):
 
 **TEXTO ACTUAL:**
+
 ```markdown
 # Forge
 
@@ -147,6 +152,7 @@ Forge resuelve un problema específico: el desarrollo con agentes de IA es poten
 ```
 
 **REEMPLAZAR CON:**
+
 ```markdown
 # Forge
 
@@ -175,21 +181,25 @@ compatible ejecutan las mismas fases con los mismos artefactos.
 ### Reemplazar párrafo introductorio y frontmatter description:
 
 **TEXTO ACTUAL (frontmatter):**
+
 ```yaml
 description: CV profesional de Benjamín Criado, Ingeniero Informático especializado en diseño de sistemas, automatización y orquestación de flujos de trabajo.
 ```
 
 **REEMPLAZAR CON:**
+
 ```yaml
 description: CV de Benjamín Criado — Software Engineer especializado en Backend y Sistemas. Arquitecturas pragmáticas, Rust para rendimiento crítico, Python para orquestación.
 ```
 
 **TEXTO ACTUAL (párrafo introductorio, línea 8):**
+
 ```markdown
 Ingeniero Informático enfocado en diseño de sistemas, automatización y orquestación de flujos de trabajo.
 ```
 
 **REEMPLAZAR CON:**
+
 ```markdown
 Software Engineer | Backend & Systems Architecture | Pragmatic Execution
 ```

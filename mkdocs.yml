@@ -31,7 +31,7 @@ extra:
     - icon: fontawesome/brands/github
       link: https://github.com/Bajmein
     - icon: fontawesome/brands/linkedin
-      link: https://linkedin.com/in/benjamin-criado
+      link: https://www.linkedin.com/in/benjamin-criado-rossa/
 
 nav:
   - Home: index.md

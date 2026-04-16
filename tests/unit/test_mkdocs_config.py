@@ -56,7 +56,7 @@ def test_social_profile_integration(mkdocs_config):
     socials = mkdocs_config.get("extra", {}).get("social", [])
     links = [s.get("link") for s in socials]
     assert "https://github.com/Bajmein" in links
-    assert "https://linkedin.com/in/benjamin-criado" in links
+    assert "https://www.linkedin.com/in/benjamin-criado-rossa/" in links
 
 
 # --- CI Workflow fixtures ---
