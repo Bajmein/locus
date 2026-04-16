@@ -38,8 +38,6 @@ Los proyectos a continuación son la evidencia de ese enfoque.
 </div>
 <!-- dprint-ignore-end -->
 
-_Work in Progress_
-
 ## Contacto
 
 [kenno13@proton.me](mailto:kenno13@proton.me)
