@@ -30,4 +30,4 @@ uv run mkdocs serve
 
 ## Contacto
 
-<span class="reverse-email">em.notorp@31onnek</span> <a class="email-link"></a>
+[kenno13@proton.me](mailto:kenno13@proton.me)
