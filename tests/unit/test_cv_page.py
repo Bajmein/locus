@@ -106,5 +106,5 @@ def test_existing_nav_entries_intact():
         for entry in config.get("nav", [])
         if isinstance(entry, dict)
     ]
-    for expected in ["index.md", "vigilia/index.md", "forge/index.md", "laboratorio/index.md"]:
+    for expected in ["index.md", "vigilia/index.md", "forge/index.md"]:
         assert expected in nav_values, f"Existing nav entry '{expected}' must remain intact"

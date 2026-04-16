@@ -17,19 +17,19 @@ Los proyectos a continuación son la evidencia de ese enfoque.
 <!-- dprint-ignore-start -->
 <div class="grid cards" markdown>
 
--   **[Forge](/forge/)**
+-   **[Forge](forge/index.md)**
 
     ---
 
     Cómo transformar el desarrollo ad-hoc con IA en un pipeline trazable con garantías formales.
 
--   **[Vigilia Reforged](/vigilia/)**
+-   **[Vigilia Reforged](vigilia/index.md)**
 
     ---
 
     Detectar y responder a incidentes de seguridad antes de que escalen, sin depender de revisión humana posterior.
 
--   **[Vigilia Edge](/vigilia-edge/)**
+-   **[Vigilia Edge](vigilia-edge/index.md)**
 
     ---
 

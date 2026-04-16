@@ -102,6 +102,4 @@ de exhibición con documentación técnica y artefactos de referencia.
 ## Más sobre Forge
 
 Forge es la infraestructura que impulsa el proceso de desarrollo de este
-mismo portafolio y de otros proyectos en el repositorio. La sección
-[Laboratorio](/laboratorio/) recoge experimentos y aprendizajes surgidos
-de su uso.
+mismo portafolio y de otros proyectos en el repositorio.
