@@ -1,6 +1,6 @@
 # Locus | Portafolio de Ingeniería
 
-**Benjamín Criado (Bajmein)** — Ingeniero Informático. Vicuña, Valle del Elqui.
+**Benjamín Criado (Bajmein)** — Ingeniero Informático.
 
 Sitio personal donde documento proyectos activos, experimentos técnicos y notas de ingeniería.
 
