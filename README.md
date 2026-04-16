@@ -14,7 +14,7 @@ Captura y análisis de video desde cámaras ONVIF, procesamiento local y conecti
 ### Forge
 
 Framework de orquestación para desarrollo guiado por especificaciones (**SDD**).
-Pipeline estructurado `Proponer → Especificar → Diseñar → Ejecutar → Verificar` con artefactos validados por schema YAML.
+Pipeline estructurado `proponer → especificar → diseñar → generar tareas → aprobar → implementar → verificar → archivar` con artefactos validados por schema YAML.
 
 ## Stack
 
@@ -31,4 +31,4 @@ uv run mkdocs serve
 
 ## Contacto
 
-[kenno13@proton.me](mailto:kenno13@proton.me)
+<span class="reverse-email">em.notorp@31onnek</span> <a class="email-link"></a>
