@@ -7,7 +7,7 @@ description: >
 
 # Curriculum Vitae
 
-Software Engineer | Backend & Systems Architecture. Selecciono la tecnología que mejor resuelve el problema concreto: Rust para latencia crítica, Python para orquestación, SDD para automatizar el desarrollo. Versatilidad de capas, pragmatismo en la ejecución.
+Ingeniero Informático | Desarrollo de Software y Automatización con IA. Selecciono la tecnología que mejor resuelve el problema concreto: Rust para latencia crítica, Python para orquestación, SDD para automatizar el desarrollo. Versatilidad de capas, pragmatismo en la ejecución.
 
 Contacto directo: [kenno13@proton.me](mailto:kenno13@proton.me)
 
