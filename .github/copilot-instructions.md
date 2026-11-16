@@ -18,7 +18,7 @@ npm run preview    # sirve dist/
 
 - `src/pages/`: una página `.astro` por URL (`index`, `vigilia`, `vigilia-edge`, `forge`, `episteme`, `cv`, `404`).
 - `src/layouts/Base.astro`: `<head>` (SEO, Open Graph, JSON-LD), cabecera y pie. `Project.astro`: páginas de proyecto.
-- `src/components/`: `Header`, `Footer`, `Mermaid` (diagramas en el cliente, solo donde se usa), `Capabilities`.
+- `src/components/`: `Header`, `Footer`, `Diagram` (marco de los diagramas SVG en línea; cada diagrama vive en `diagrams/`), `Capabilities`.
 - `src/styles/global.css`: tokens de diseño (`--bg`, `--accent`, …) y estilos base, incluida la impresión del CV.
 - `src/data/site.ts`: nombre, correo y enlaces sociales.
 - `public/`: archivos servidos tal cual (`CNAME`, `robots.txt`, `og.png`, PDF del CV).
@@ -28,7 +28,11 @@ npm run preview    # sirve dist/
 ## Diseño
 
 - Un solo tema oscuro y un solo acento (`--accent`). No añadir colores.
-- Separación con líneas finas de 1 px, sin sombras, gradientes ni bordes muy redondeados.
+- Glass sobrio: paneles `.glass` (translúcidos, borde de 1 px, `--radius-lg`) solo en cabecera, panel
+  «Ahora», tarjetas de proyecto, contacto, ficha de proyecto y diagramas. El resto se separa con líneas
+  de 1 px. Sin sombras exteriores; los únicos gradientes son el resplandor del fondo y el foco `.spot`.
+- Movimiento con CSS nativo y como mejora progresiva (`animation-timeline`, `@view-transition`); todo
+  debe verse completo con `prefers-reduced-motion`.
 - Etiquetas, fechas y stack en `--font-mono`, mayúsculas. Fuentes Geist autoalojadas (`@fontsource-variable`).
 - Sin scroll horizontal en móvil; sin menú hamburguesa.
 

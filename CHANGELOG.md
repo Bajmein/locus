@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Fondo con resplandor tenue del acento y grilla fina; paneles translúcidos («glass») en cabecera, contacto, diagramas y página 404.
+- Portada: el hero pasa a dos columnas con el panel «Ahora» a la derecha; se quita la numeración de las secciones.
+- Proyectos en tarjetas con el stack en etiquetas y un foco de luz que sigue al cursor.
+- Experiencia con riel vertical en la línea de tiempo.
+- Páginas de proyecto: estado y stack pasan a una ficha lateral fija.
+- Transiciones nativas entre páginas, animaciones de entrada al hacer scroll y línea de progreso de lectura en la cabecera; todo se desactiva con `prefers-reduced-motion`.
+- Diagramas de Vigilia, Forge y episteme redibujados como SVG en línea, con un punto que recorre el flujo principal; se retira Mermaid y su JavaScript.
+
 ## [0.2.0] - 2026-11-16
 
 ### Changed
