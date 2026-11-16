@@ -4,15 +4,15 @@ export const site = {
   jobTitle: 'Ingeniero Informático',
   location: 'La Serena, Chile',
   description:
-    'Ingeniero Informático en La Serena, Chile. Software y automatización con IA: visión por computador en tiempo real, integraciones y herramientas para agentes.',
+    'Ingeniero Informático en La Serena, Chile. Agentes de IA y automatización: flujos guiados por especificaciones, memoria para agentes y visión por computador.',
   email: 'kenno13@proton.me',
   github: 'https://github.com/Bajmein',
   linkedin: 'https://www.linkedin.com/in/benjamin-criado-rossa/',
 } as const;
 
 export const nav = [
+  { label: 'Agentes', href: '/#agentes' },
   { label: 'Proyectos', href: '/#proyectos' },
-  { label: 'Experiencia', href: '/#experiencia' },
   { label: 'CV', href: '/cv/' },
   { label: 'Contacto', href: '/#contacto' },
 ] as const;

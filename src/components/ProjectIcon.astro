@@ -1,0 +1,219 @@
+---
+interface Props {
+  slug: string;
+  size?: 'md' | 'lg';
+}
+
+const { slug, size = 'md' } = Astro.props;
+const slugs = ['episteme', 'forge', 'vigilia', 'vigilia-edge'];
+if (!slugs.includes(slug)) {
+  throw new Error(`ProjectIcon: slug desconocido «${slug}»`);
+}
+---
+
+<span class={`project-icon is-${size}`} style={`view-transition-name: icono-${slug}`} aria-hidden="true">
+  <svg
+    viewBox="0 0 256 256"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="16"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    focusable="false"
+  >
+    {slug === 'episteme' && (
+      <>
+        <path d="M64 32h96l40 40v144a8 8 0 0 1-8 8H64a8 8 0 0 1-8-8V40a8 8 0 0 1 8-8z" />
+        <path d="M160 32v40h40" />
+        <path class="i-write" pathLength="1" d="M88 120h80" />
+        <path class="i-write" pathLength="1" d="M88 152h80" />
+        <path class="i-write" pathLength="1" d="M88 184h48" />
+      </>
+    )}
+    {slug === 'forge' && (
+      <>
+        <rect x="24" y="40" width="56" height="40" rx="8" />
+        <rect x="100" y="108" width="56" height="40" rx="8" />
+        <rect x="176" y="176" width="56" height="40" rx="8" />
+        <path d="M80 60h48v48" />
+        <path d="M156 128h48v48" />
+        <circle
+          class="i-token"
+          cx="0"
+          cy="0"
+          r="12"
+          fill="currentColor"
+          stroke="none"
+          style="offset-path: path('M52 60H128V128H204V196')"
+        />
+      </>
+    )}
+    {slug === 'vigilia' && (
+      <>
+        <path d="M40 88V48a8 8 0 0 1 8-8h40" />
+        <path d="M168 40h40a8 8 0 0 1 8 8v40" />
+        <path d="M216 168v40a8 8 0 0 1-8 8h-40" />
+        <path d="M88 216H48a8 8 0 0 1-8-8v-40" />
+        <rect x="96" y="96" width="64" height="64" rx="4" />
+        <path class="i-scan" d="M64 128h128" />
+      </>
+    )}
+    {slug === 'vigilia-edge' && (
+      <>
+        <rect x="64" y="64" width="128" height="128" rx="12" />
+        <rect class="i-core" x="104" y="104" width="48" height="48" rx="4" />
+        <path d="M104 24v40M152 24v40M104 192v40M152 192v40M24 104h40M24 152h40M192 104h40M192 152h40" />
+      </>
+    )}
+  </svg>
+</span>
+
+<style>
+  .project-icon {
+    display: inline-grid;
+    place-items: center;
+    flex: none;
+    border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+    border-radius: var(--radius);
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+    color: var(--accent);
+  }
+  .is-md {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+  .is-md svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  .is-lg {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+  .is-lg svg {
+    width: 2rem;
+    height: 2rem;
+  }
+  svg {
+    max-width: none;
+    display: block;
+  }
+
+  @keyframes i-write {
+    from {
+      stroke-dashoffset: 1;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+  /* Para los casos "siempre": dibuja hasta 60 % y se mantiene. */
+  @keyframes i-write-loop {
+    0% {
+      stroke-dashoffset: 1;
+    }
+    60%,
+    100% {
+      stroke-dashoffset: 0;
+    }
+  }
+  @keyframes i-token {
+    from {
+      offset-distance: 0%;
+    }
+    to {
+      offset-distance: 100%;
+    }
+  }
+  @keyframes i-scan {
+    from {
+      transform: translateY(-56px);
+    }
+    to {
+      transform: translateY(56px);
+    }
+  }
+  @keyframes i-core {
+    from {
+      transform: scale(0.7);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .i-write {
+      stroke-dasharray: 1;
+    }
+    .i-scan,
+    .i-core {
+      transform-box: fill-box;
+    }
+    .i-core {
+      transform-origin: center;
+    }
+
+    /* Hover o foco en la tarjeta de la portada */
+    :global(.project-card:is(:hover, :focus-visible)) .i-write {
+      animation: i-write 1.2s ease-out both;
+    }
+    :global(.project-card:is(:hover, :focus-visible)) .i-write:nth-of-type(4) {
+      animation-delay: 0.15s;
+    }
+    :global(.project-card:is(:hover, :focus-visible)) .i-write:nth-of-type(5) {
+      animation-delay: 0.3s;
+    }
+    :global(.project-card:is(:hover, :focus-visible)) .i-token {
+      animation: i-token 2.4s ease-in-out infinite;
+    }
+    :global(.project-card:is(:hover, :focus-visible)) .i-scan {
+      animation: i-scan 2s ease-in-out alternate infinite;
+    }
+    :global(.project-card:is(:hover, :focus-visible)) .i-core {
+      animation: i-core 1.6s ease-in-out alternate infinite;
+    }
+
+    /* Táctil: siempre, al doble de duración */
+    @media (hover: none) {
+      .i-write {
+        animation: i-write-loop 4.8s ease-out infinite;
+      }
+      .i-write:nth-of-type(4) {
+        animation-delay: 0.3s;
+      }
+      .i-write:nth-of-type(5) {
+        animation-delay: 0.6s;
+      }
+      .i-token {
+        animation: i-token 4.8s ease-in-out infinite;
+      }
+      .i-scan {
+        animation: i-scan 4s ease-in-out alternate infinite;
+      }
+      .i-core {
+        animation: i-core 3.2s ease-in-out alternate infinite;
+      }
+    }
+
+    /* Página del proyecto: siempre, al doble de duración */
+    .is-lg .i-write {
+      animation: i-write-loop 4.8s ease-out infinite;
+    }
+    .is-lg .i-write:nth-of-type(4) {
+      animation-delay: 0.3s;
+    }
+    .is-lg .i-write:nth-of-type(5) {
+      animation-delay: 0.6s;
+    }
+    .is-lg .i-token {
+      animation: i-token 4.8s ease-in-out infinite;
+    }
+    .is-lg .i-scan {
+      animation: i-scan 4s ease-in-out alternate infinite;
+    }
+    .is-lg .i-core {
+      animation: i-core 3.2s ease-in-out alternate infinite;
+    }
+  }
+</style>

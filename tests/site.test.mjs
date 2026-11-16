@@ -174,6 +174,31 @@ test('diagramas: dos composiciones que nunca se dibujan por debajo de 1:1', () =
   assert.match(builtCss(), /@container \(width\s*<\s*640px\)/, 'el cambio de composición debe ocurrir a 640 px');
 });
 
+test('portada: agentes primero, con ícono y tono', () => {
+  const html = read('index.html');
+  const cards = [...html.matchAll(/<a[^>]*class="project-card[^"]*"[^>]*>[\s\S]*?<\/a>/g)].map((m) => m[0]);
+  const hrefs = cards.map((card) => card.match(/^<a[^>]*>/)[0].match(/href="([^"]+)"/)?.[1]);
+  assert.deepEqual(hrefs, ['/episteme/', '/forge/', '/vigilia/', '/vigilia-edge/'], 'orden de las tarjetas');
+  for (const [i, card] of cards.entries()) {
+    const slug = hrefs[i].replaceAll('/', '');
+    assert.ok(card.includes('class="project-icon'), `${hrefs[i]}: falta el ícono`);
+    assert.match(card, new RegExp(`--accent:\\s?var\\(--tone-${slug}\\)`), `${hrefs[i]}: falta su tono`);
+  }
+});
+
+test('trabajo con agentes: línea de tiempo en orden', () => {
+  const html = read('index.html');
+  const start = html.indexOf('id="agentes"');
+  assert.ok(start >= 0, 'falta id="agentes"');
+  const section = html.slice(start, html.indexOf('</section>', start));
+  assert.equal(count(section, /class="step[\s"]/g), 4, 'la línea de tiempo tiene cuatro pasos');
+  const trail = section.slice(section.indexOf('class="trail'), section.indexOf('</ol>'));
+  const names = [...trail.matchAll(/<h3[^>]*>(?:<a[^>]*>)?([^<]+)/g)].map((m) => m[1].trim());
+  assert.deepEqual(names, ['Forge', 'pulse', 'fabrik', 'episteme'], 'orden de los pasos');
+  assert.ok(section.includes('href="/forge/"'), 'falta el enlace a /forge/');
+  assert.ok(section.includes('href="/episteme/"'), 'falta el enlace a /episteme/');
+});
+
 test('tono por proyecto en su página', () => {
   for (const slug of ['vigilia', 'vigilia-edge', 'forge', 'episteme']) {
     const html = read(`${slug}/index.html`);
@@ -207,6 +232,9 @@ test('privacidad: ningún HTML ni texto filtra datos que no deben publicarse', (
     'recién egresado',
     'vigilia-security.tech',
     'Material for MkDocs',
+    'masqueuf',
+    'financiak',
+    'gpalm',
   ];
   const ipv4 = /\b\d{1,3}(\.\d{1,3}){3}\b/;
   for (const file of [...htmlFiles(), ...distFiles('.txt')]) {
