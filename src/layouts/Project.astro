@@ -12,6 +12,7 @@ interface Props {
 }
 
 const { title, description, tagline, stack, status, repoUrl } = Astro.props;
+const slug = Astro.url.pathname.replaceAll('/', '');
 ---
 
 <Base title={`${title} — Benjamín Criado`} description={description}>
@@ -21,16 +22,22 @@ const { title, description, tagline, stack, status, repoUrl } = Astro.props;
     </nav>
 
     <header class="project-head">
-      <h1>{title}</h1>
+      <h1 style={`view-transition-name: proyecto-${slug}`}>{title}</h1>
       <p class="tagline">{tagline}</p>
-      <ul class="stack label" aria-label="Stack">
-        {stack.map((item) => <li>{item}</li>)}
-      </ul>
-      <p class="status"><span class="label">Estado</span> {status}</p>
     </header>
 
-    <div class="body prose">
-      <slot />
+    <div class="project-grid">
+      <aside class="glass meta" aria-label="Ficha del proyecto">
+        <p class="label">Estado</p>
+        <p class="status">{status}</p>
+        <p class="label">Stack</p>
+        <ul class="stack label">
+          {stack.map((item) => <li>{item}</li>)}
+        </ul>
+      </aside>
+      <div class="body prose">
+        <slot />
+      </div>
     </div>
 
     <footer class="project-foot">
@@ -77,20 +84,55 @@ const { title, description, tagline, stack, status, repoUrl } = Astro.props;
     margin-bottom: 2.5rem;
   }
 
+  .project-head h1 {
+    width: fit-content;
+  }
+
   .tagline {
     font-size: clamp(1.125rem, 2.2vw, 1.3125rem);
     color: var(--muted);
     max-width: var(--w-prose);
-    margin-bottom: 1.5rem;
+    margin-bottom: 0;
+  }
+
+  .project-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 17rem;
+    gap: 2rem 3.5rem;
+    align-items: start;
+  }
+
+  .body {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .meta {
+    grid-column: 2;
+    grid-row: 1;
+    position: sticky;
+    top: 5.5rem;
+    padding: 1.25rem 1.5rem;
+  }
+
+  .meta p.label {
+    margin: 0 0 0.4rem;
+    color: var(--accent);
+  }
+
+  .status {
+    margin: 0 0 1.25rem;
+    font-size: 0.9375rem;
+    color: var(--text);
   }
 
   .stack {
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem 1.25rem;
+    flex-direction: column;
+    gap: 0.35rem;
     list-style: none;
     padding: 0;
-    margin: 0 0 1.25rem;
+    margin: 0;
     color: var(--text);
   }
 
@@ -103,15 +145,26 @@ const { title, description, tagline, stack, status, repoUrl } = Astro.props;
     color: var(--accent);
   }
 
-  .status {
-    margin: 0;
-    font-size: 0.9375rem;
-    color: var(--muted);
-  }
+  @media (max-width: 960px) {
+    .project-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
 
-  .status .label {
-    color: var(--accent);
-    margin-right: 0.5rem;
+    .body,
+    .meta {
+      grid-column: 1;
+      grid-row: auto;
+    }
+
+    .meta {
+      position: static;
+    }
+
+    .stack {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 0.4rem 1.25rem;
+    }
   }
 
   .body :global(h2) {

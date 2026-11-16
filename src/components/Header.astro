@@ -25,12 +25,48 @@ const path = Astro.url.pathname;
 
 <style>
   .site-header {
-    border-bottom: 1px solid var(--border);
-    background: color-mix(in srgb, var(--bg) 88%, transparent);
-    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--glass-border);
+    background: color-mix(in srgb, var(--bg) 68%, transparent);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    backdrop-filter: blur(16px) saturate(140%);
     position: sticky;
     top: 0;
     z-index: 10;
+    view-transition-name: site-header;
+  }
+
+  @media (prefers-reduced-transparency: reduce) {
+    .site-header {
+      background: var(--bg);
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
+  }
+
+  /* Progreso de lectura: línea de 1 px en el acento */
+  @supports (animation-timeline: scroll()) {
+    .site-header::after {
+      content: '';
+      position: absolute;
+      inset: auto 0 -1px 0;
+      height: 1px;
+      background: var(--accent);
+      /* Oculta por defecto: en páginas sin scroll la línea de tiempo queda inactiva */
+      transform: scaleX(0);
+      transform-origin: left;
+      animation: progress linear both;
+    }
+
+    /* Regla aparte: el minificador funde animation-timeline en el atajo animation y lo invalida */
+    header.site-header::after {
+      animation-timeline: scroll(root);
+    }
+  }
+
+  @keyframes progress {
+    to {
+      transform: scaleX(1);
+    }
   }
 
   .bar {

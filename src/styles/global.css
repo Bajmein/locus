@@ -12,8 +12,21 @@
   --w-prose: 68ch;
   --radius: 6px;
   --gutter: clamp(1rem, 4vw, 2rem);
+  --radius-lg: 14px;
+  --glass-bg: color-mix(in srgb, var(--surface) 62%, transparent);
+  --glass-border: color-mix(in srgb, var(--text) 9%, transparent);
+  --glass-hi: color-mix(in srgb, var(--text) 7%, transparent);
+  --glass-blur: 16px;
+  --grid-line: color-mix(in srgb, var(--text) 4%, transparent);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 
   color-scheme: dark;
+}
+
+@media (max-width: 760px) {
+  :root {
+    --glass-blur: 10px;
+  }
 }
 
 *,
@@ -40,6 +53,41 @@ body {
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   overflow-wrap: break-word;
+}
+
+/* Fondo fijo en dos capas, detrás de todo */
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Resplandor del acento: lo que el glass desenfoca */
+body::before {
+  inset: -10%;
+  background:
+    radial-gradient(60rem 36rem at 85% 0%, color-mix(in srgb, var(--accent) 15%, transparent), transparent 70%),
+    radial-gradient(48rem 32rem at 0% 100%, color-mix(in srgb, var(--accent) 7%, transparent), transparent 70%);
+  animation: drift 28s ease-in-out infinite alternate;
+}
+
+/* Grilla fina, visible solo cerca del resplandor superior */
+body::after {
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 75% 0%, #000, transparent 75%);
+  mask-image: radial-gradient(ellipse 80% 60% at 75% 0%, #000, transparent 75%);
+}
+
+@keyframes drift {
+  to {
+    transform: translate3d(-3%, 2%, 0);
+  }
 }
 
 main {
@@ -208,8 +256,12 @@ hr {
   line-height: 1.2;
   text-decoration: none;
   color: var(--text);
-  background: transparent;
-  transition: border-color 0.15s ease, color 0.15s ease, background-color 0.15s ease;
+  background: color-mix(in srgb, var(--text) 4%, transparent);
+  transition: border-color 0.15s ease, color 0.15s ease, background-color 0.15s ease, transform 0.15s ease;
+}
+
+.btn:active {
+  transform: scale(0.98);
 }
 
 .btn:hover {
@@ -271,6 +323,92 @@ td:first-child {
   white-space: nowrap;
 }
 
+/* ---------- Glass ---------- */
+
+.glass {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  box-shadow: inset 0 1px 0 var(--glass-hi);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(140%);
+  backdrop-filter: blur(var(--glass-blur)) saturate(140%);
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass {
+    background: var(--surface);
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .glass {
+    background: var(--surface);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
+/* Foco de luz que sigue al cursor (variables --mx/--my desde Base.astro) */
+.spot {
+  position: relative;
+}
+
+.spot::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(
+    22rem circle at var(--mx, 50%) var(--my, 0%),
+    color-mix(in srgb, var(--accent) 13%, transparent),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.spot:hover::before {
+  opacity: 1;
+}
+
+.spot > * {
+  position: relative;
+}
+
+/* ---------- Movimiento ---------- */
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: rise linear both;
+    }
+
+    /* Regla aparte: el minificador funde animation-timeline en el atajo animation y lo invalida */
+    [class~='reveal'] {
+      animation-timeline: view();
+      animation-range: entry 0% entry 40%;
+    }
+  }
+}
+
+/* Transición nativa entre páginas (sin JS) */
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.25s;
+}
+
 /* ---------- Accesibilidad ---------- */
 
 :focus-visible {
@@ -320,6 +458,10 @@ td:first-child {
     transition: none !important;
     animation: none !important;
   }
+
+  @view-transition {
+    navigation: none;
+  }
 }
 
 /* ---------- Impresión (CV) ---------- */
@@ -350,6 +492,11 @@ td:first-child {
     line-height: 1.45;
     background: #fff;
     color: #000;
+  }
+
+  body::before,
+  body::after {
+    display: none;
   }
 
   .site-header,
