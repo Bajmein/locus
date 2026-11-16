@@ -22,7 +22,7 @@ Infraestructura de orquestación para el desarrollo guiado por especificaciones 
 
 - **Sitio**: Astro (estático), GitHub Pages
 - **Diseño**: tema oscuro con paneles translúcidos, animaciones en CSS nativo y diagramas SVG en línea, sin librerías en el cliente
-- **Validación**: `astro check` y `node:test` (páginas, SEO, sitemap, privacidad, enlaces)
+- **Validación**: `astro check` y `node:test` (páginas, SEO, JSON-LD, sitemap, `llms.txt`, imagen social, tipografía, privacidad, enlaces)
 - **Tooling**: Node 24, npm
 
 ## Desarrollo local
