@@ -17,11 +17,11 @@ npm run preview    # sirve dist/
 ## Estructura
 
 - `src/pages/`: una página `.astro` por URL (`index`, `vigilia`, `vigilia-edge`, `forge`, `episteme`, `cv`, `404`).
-- `src/layouts/Base.astro`: `<head>` (SEO, Open Graph, JSON-LD), cabecera y pie. `Project.astro`: páginas de proyecto.
-- `src/components/`: `Header`, `Footer`, `Diagram` (marco de los diagramas SVG en línea, con una composición ancha de hasta 640 y otra angosta de hasta 280 unidades; cada diagrama vive en `diagrams/` y usa `diagrams/Node.astro`), `Capabilities`.
+- `src/layouts/Base.astro`: `<head>` (SEO, Open Graph, JSON-LD), cabecera y pie. `Project.astro`: páginas de proyecto. `Base` recibe la prop `tone` (slug del proyecto) y fija `--accent: var(--tone-<slug>)` en `<html>`.
+- `src/components/`: `Header`, `Footer`, `Diagram` (marco de los diagramas SVG en línea, con una composición ancha de hasta 640 y otra angosta de hasta 280 unidades; cada diagrama vive en `diagrams/` y usa `diagrams/Node.astro`), `Capabilities`, `ProjectIcon` (íconos SVG en línea por proyecto, props `slug` y `size`; animados al pasar el cursor por la tarjeta y estáticos con `prefers-reduced-motion`).
 - `src/styles/global.css`: tokens de diseño (`--bg`, `--accent`, …) y estilos base, incluida la impresión del CV.
 - `src/data/site.ts`: nombre, correo, enlaces sociales y metadescripciones del sitio y del CV.
-- `src/data/projects.ts`: datos de los proyectos (metadescripción, ficha y tarjeta de la portada); lo usan las páginas de proyecto, la portada y `llms.txt`.
+- `src/data/projects.ts`: datos de los proyectos (metadescripción, ficha, tarjeta de la portada, `group` y `period`; agentes primero); lo usan las páginas de proyecto, la portada y `llms.txt`.
 - `src/pages/llms.txt.ts`: genera `/llms.txt` en el build a partir de esos datos.
 - `public/`: archivos servidos tal cual (`CNAME`, `robots.txt`, `og.png`, PDF del CV).
 - `tests/site.test.mjs`: páginas, SEO (metadescripción de 50 a 160 caracteres, canonical, `noindex` de la 404, precarga de fuente), JSON-LD, sitemap, `llms.txt`, imagen social, piso de 12 px en la tipografía, privacidad y enlaces internos.
@@ -29,7 +29,7 @@ npm run preview    # sirve dist/
 
 ## Diseño
 
-- Un solo tema oscuro y un solo acento (`--accent`). No añadir colores.
+- Un solo tema oscuro. Acento ámbar (`--accent`) en el sitio; cada proyecto tiene un tono (`--tone-<slug>`) que reemplaza a `--accent` en su tarjeta y en su página. No añadir otros colores; un tono nuevo debe medir 4,5:1 o más sobre `--bg` y `--surface`.
 - Glass sobrio: paneles `.glass` (translúcidos, borde de 1 px, `--radius-lg`) solo en cabecera, panel
   «Ahora», tarjetas de proyecto, contacto, ficha de proyecto y diagramas. El resto se separa con líneas
   de 1 px. Sin sombras exteriores; los únicos gradientes son el resplandor del fondo y el foco `.spot`.

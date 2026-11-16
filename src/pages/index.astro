@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import { site } from '../data/site';
 import { projects } from '../data/projects';
 import Icon from '../components/Icon.astro';
+import ProjectIcon from '../components/ProjectIcon.astro';
 
 const now = [
   {
@@ -39,25 +40,79 @@ const experience = [
   },
 ];
 
+// Trabajo con agentes: cifras de GitHub (commits y PR fusionados) al 16-11-2026
+const trail = [
+  {
+    slug: 'forge',
+    name: 'Forge',
+    period: 'Abril — julio de 2026',
+    text: 'Pipeline guiado por especificaciones: cada cambio avanza por fases con artefactos validados por esquemas, con cualquier agente.',
+    figures: '304 commits · 38 PR',
+    href: '/forge/',
+  },
+  {
+    name: 'pulse',
+    period: 'Mayo — octubre de 2026',
+    text: 'Motor de estados servido por MCP: compuertas entre fases, revisión automática y escenarios Dado/Cuando/Entonces, para varios agentes de código.',
+    figures: '270 commits · 50 PR',
+  },
+  {
+    name: 'fabrik',
+    period: 'Octubre de 2026 — hoy',
+    text: 'Plugin de Claude Code: un orquestador con cinco subagentes acotados; los hooks impiden editar sin especificación y cada verificación es un comando.',
+    figures: '72 commits · 46 PR',
+  },
+  {
+    slug: 'episteme',
+    name: 'episteme',
+    period: 'Octubre de 2026 — hoy',
+    text: 'Memoria persistente servida por MCP: decisiones y lecciones que el agente consulta y completa en cada sesión.',
+    figures: '336 commits · 121 PR',
+    href: '/episteme/',
+  },
+];
+
+const method = [
+  {
+    title: 'Especificar antes de implementar',
+    text: 'Cada cambio parte de una especificación verificable; los agentes ejecutan y los artefactos mandan.',
+  },
+  {
+    title: 'Verificar con comandos',
+    text: 'Una tarea está lista cuando un test, el lint o el chequeo de tipos lo demuestra, no cuando el modelo lo afirma.',
+  },
+  {
+    title: 'Memoria que es del usuario',
+    text: 'Decisiones y lecciones quedan en notas Markdown locales que cualquier agente puede consultar.',
+  },
+  {
+    title: 'Planes que se ejecutan en limpio',
+    text: 'Cada plan lleva sus fuentes, sus decisiones cerradas y su verificación, para que otro agente lo ejecute sin la conversación previa.',
+  },
+];
+
 const principles = [
   {
     title: 'La herramienta correcta',
     text: 'Rust donde la latencia es crítica, Python para orquestar. La tecnología se elige por el problema.',
   },
   {
-    title: 'Especificar antes de implementar',
-    text: 'Cada cambio parte de una especificación verificable; los agentes ejecutan, los artefactos mandan.',
-  },
-  {
     title: 'Local primero',
     text: 'Sistemas que corren en el equipo del usuario, sin depender de la nube ni exponer sus datos.',
+  },
+  {
+    title: 'Las personas deciden',
+    text: 'Los agentes proponen y ejecutan; las decisiones de producto y el merge los toma una persona.',
   },
 ];
 
 const tech = [
+  [
+    'Agentes de IA',
+    'Claude Code, Codex CLI, Gemini CLI, GitHub Copilot; MCP, hooks, skills y subagentes; desarrollo guiado por especificaciones',
+  ],
   ['Lenguajes', 'Python, Rust, JavaScript'],
   ['Visión por computador', 'OpenCV, YOLO, TensorRT, CUDA / NVDEC'],
-  ['IA aplicada', 'Agentes, Model Context Protocol (MCP), desarrollo guiado por especificaciones'],
   ['Web', 'WordPress, REST API, HTML y CSS'],
   ['Infraestructura', 'Linux, AWS, Azure'],
 ];
@@ -66,15 +121,15 @@ const tech = [
 <Base title="Benjamín Criado — Ingeniero Informático" description={site.description}>
   <section class="container hero" aria-labelledby="hero-title">
     <div class="hero-main">
-      <p class="label">Ingeniero Informático · La Serena, Chile</p>
+      <p class="label">Ingeniero Informático · Agentes de IA y automatización · La Serena, Chile</p>
       <h1 id="hero-title">Benjamín Criado</h1>
       <p class="lead">
-        Desarrollo software y automatización con inteligencia artificial. Construyo sistemas de visión por
-        computador en tiempo real, integraciones y herramientas para trabajar con agentes, pensados para
-        funcionar en producción.
+        Diseño flujos de trabajo con agentes de IA y automatizo procesos: desarrollo guiado por
+        especificaciones, memoria persistente para agentes e integraciones entre sistemas. También construyo
+        visión por computador en tiempo real, pensada para producción.
       </p>
       <div class="actions">
-        <a class="btn btn-primary" href="#proyectos">Ver proyectos</a>
+        <a class="btn btn-primary" href="#agentes">Trabajo con agentes</a>
         <a class="btn" href="/cv/">Currículum</a>
       </div>
     </div>
@@ -93,21 +148,64 @@ const tech = [
     </aside>
   </section>
 
+  <section class="container section" id="agentes" aria-labelledby="agentes-title">
+    <div class="section-head">
+      <p class="label">Trabajo con agentes</p>
+      <h2 id="agentes-title">De la especificación a la memoria</h2>
+    </div>
+    <p class="intro muted">
+      Desde abril de 2026 construyo las herramientas con que trabajo con agentes de código. Cada una resolvió lo
+      que la anterior dejaba abierto.
+    </p>
+    <ol class="trail">
+      {
+        trail.map((t) => (
+          <li class="step reveal" style={t.slug ? `--accent: var(--tone-${t.slug})` : undefined}>
+            <span class="dot" aria-hidden="true" />
+            <span class="label">{t.period}</span>
+            <h3>{t.href ? <a href={t.href}>{t.name}</a> : t.name}</h3>
+            <p>{t.text}</p>
+            <span class="label figures">{t.figures}</span>
+          </li>
+        ))
+      }
+    </ol>
+    <p class="label muted source">Cifras de GitHub al 16 de noviembre de 2026.</p>
+    <ul class="method">
+      {
+        method.map((m) => (
+          <li class="reveal">
+            <h3>{m.title}</h3>
+            <p>{m.text}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
   <section class="container section" id="proyectos" aria-labelledby="proyectos-title">
     <div class="section-head">
-      <h2 id="proyectos-title">Proyectos</h2>
+      <p class="label">Proyectos</p>
+      <h2 id="proyectos-title">Herramientas para agentes y visión por computador</h2>
     </div>
     <ol class="projects">
       {
         projects.map((p) => (
-          <li>
-            <a class="project-card glass spot reveal" href={`/${p.slug}/`}>
+          <li class:list={['card-item', `is-${p.group}`]}>
+            <a
+              class="project-card glass spot reveal"
+              href={`/${p.slug}/`}
+              style={`--accent: var(--tone-${p.slug})`}
+            >
               <span class="card-top">
-                <span class="project-name" style={`view-transition-name: proyecto-${p.slug}`}>
-                  {p.title}
-                </span>
+                <ProjectIcon slug={p.slug} />
                 <span class="arrow" aria-hidden="true">→</span>
               </span>
+              <span class="label kind">{p.group === 'agentes' ? 'Agentes de IA' : 'Visión por computador'}</span>
+              <span class="project-name" style={`view-transition-name: proyecto-${p.slug}`}>
+                {p.title}
+              </span>
+              <span class="label period">{p.period}</span>
               <span class="project-text">{p.card.text}</span>
               <span class="chips">
                 {p.card.stack.map((s) => (
@@ -121,9 +219,10 @@ const tech = [
     </ol>
   </section>
 
-  <section class="container section" id="experiencia" aria-labelledby="experiencia-title">
+  <section class="container section lazy" id="experiencia" aria-labelledby="experiencia-title">
     <div class="section-head">
-      <h2 id="experiencia-title">Experiencia</h2>
+      <p class="label">Experiencia</p>
+      <h2 id="experiencia-title">Trayectoria</h2>
     </div>
     <ol class="timeline">
       {
@@ -143,9 +242,10 @@ const tech = [
     <p class="more"><a href="/cv/">Ver currículum completo →</a></p>
   </section>
 
-  <section class="container section" aria-labelledby="enfoque">
+  <section class="container section lazy" aria-labelledby="enfoque">
     <div class="section-head">
-      <h2 id="enfoque">Enfoque</h2>
+      <p class="label">Enfoque</p>
+      <h2 id="enfoque">Cómo decido</h2>
     </div>
     <div class="principles">
       {
@@ -159,9 +259,10 @@ const tech = [
     </div>
   </section>
 
-  <section class="container section" aria-labelledby="tecnologias">
+  <section class="container section lazy" aria-labelledby="tecnologias">
     <div class="section-head">
-      <h2 id="tecnologias">Tecnologías</h2>
+      <p class="label">Tecnologías</p>
+      <h2 id="tecnologias">Con qué trabajo</h2>
     </div>
     <div class="table-wrap">
       <table>
@@ -180,9 +281,10 @@ const tech = [
     </div>
   </section>
 
-  <section class="container section contact" id="contacto" aria-labelledby="contacto-title">
+  <section class="container section contact lazy" id="contacto" aria-labelledby="contacto-title">
     <div class="section-head">
-      <h2 id="contacto-title">Contacto</h2>
+      <p class="label">Contacto</p>
+      <h2 id="contacto-title">Conversemos</h2>
     </div>
     <div class="glass spot contact-panel">
       <div>
@@ -308,14 +410,9 @@ const tech = [
     gap: 1rem;
   }
 
-  .projects li {
+  .card-item {
+    grid-column: span 6;
     margin: 0;
-    grid-column: span 5;
-  }
-
-  .projects li:nth-child(4n + 1),
-  .projects li:nth-child(4n) {
-    grid-column: span 7;
   }
 
   .project-card {
@@ -327,20 +424,52 @@ const tech = [
     padding: 1.5rem 1.75rem;
     text-decoration: none;
     color: var(--text);
-    transition: border-color 0.25s ease;
+    transition:
+      transform 0.3s var(--ease-out),
+      border-color 0.25s ease;
   }
 
   .project-card:hover,
   .project-card:focus-visible {
     color: var(--text);
     border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+    transform: translateY(-3px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .project-card:hover,
+    .project-card:focus-visible {
+      transform: none;
+    }
+  }
+
+  .is-agentes .project-card {
+    min-height: 17rem;
+  }
+
+  .is-agentes .project-name {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+  }
+
+  .is-vision .project-card {
+    min-height: 0;
   }
 
   .card-top {
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
+    align-items: center;
     gap: 1rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .kind {
+    color: var(--accent);
+    margin-bottom: -0.5rem;
+  }
+
+  .period {
+    margin-top: -0.5rem;
   }
 
   .project-name {
@@ -379,6 +508,144 @@ const tech = [
   .project-card:focus-visible .arrow {
     color: var(--accent);
     transform: translateX(0.25rem);
+  }
+
+  /* Trabajo con agentes */
+  .intro {
+    max-width: var(--w-prose);
+    margin-bottom: 2.5rem;
+  }
+
+  .trail {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.25rem;
+  }
+
+  /* Riel y riel de progreso, a la altura del centro de los puntos */
+  .trail::before,
+  .trail::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0.45rem;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .trail::after {
+    background: var(--accent);
+    transform-origin: left;
+  }
+
+  .step {
+    position: relative;
+    margin: 0;
+    padding-top: 2rem;
+  }
+
+  .dot {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 0.9rem;
+    height: 0.9rem;
+    border-radius: 50%;
+    background: var(--accent);
+    transition: transform 0.2s ease;
+  }
+
+  .step:not([style]) .dot {
+    background: var(--bg);
+    border: 2px solid var(--muted);
+  }
+
+  .step:hover .dot {
+    transform: scale(1.25);
+  }
+
+  .step h3 {
+    margin: 0.35rem 0 0.5rem;
+    font-size: 1.25rem;
+  }
+
+  .step h3 a {
+    color: var(--accent);
+    text-decoration-color: color-mix(in srgb, var(--accent) 40%, transparent);
+  }
+
+  .step p {
+    color: var(--muted);
+    font-size: 0.9375rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .figures {
+    color: var(--text);
+  }
+
+  .source {
+    margin-bottom: 3rem;
+  }
+
+  @keyframes fill {
+    from {
+      transform: scaleX(0);
+    }
+  }
+
+  @keyframes fill-y {
+    from {
+      transform: scaleY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      .trail::after {
+        animation: fill linear both;
+      }
+
+      /* Regla aparte: el minificador funde animation-timeline en el atajo animation y lo invalida */
+      [class~='trail']::after {
+        animation-timeline: view();
+        animation-range: entry 20% cover 50%;
+      }
+    }
+  }
+
+  .method {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .method li {
+    margin: 0;
+    padding: 1.5rem 1.75rem 0.5rem 0;
+  }
+
+  .method li:nth-child(even) {
+    padding-left: 1.75rem;
+    border-left: 1px solid var(--border);
+  }
+
+  .method li:nth-child(n + 3) {
+    border-top: 1px solid var(--border);
+  }
+
+  .method p {
+    color: var(--muted);
+    font-size: 0.9688rem;
   }
 
   /* Experiencia: riel vertical */
@@ -535,14 +802,55 @@ const tech = [
   }
 
   @media (max-width: 760px) {
-    .projects li,
-    .projects li:nth-child(4n + 1),
-    .projects li:nth-child(4n) {
+    .card-item {
       grid-column: 1 / -1;
     }
 
-    .project-card {
+    .project-card,
+    .is-agentes .project-card {
       min-height: 0;
+    }
+
+    .trail {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1.75rem;
+    }
+
+    .trail::before,
+    .trail::after {
+      left: 0.45rem;
+      right: auto;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      height: auto;
+    }
+
+    .trail::after {
+      transform-origin: top;
+      animation-name: fill-y;
+    }
+
+    .step {
+      padding: 0 0 0 2rem;
+    }
+
+    .dot {
+      top: 0.3rem;
+    }
+
+    .method {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .method li,
+    .method li:nth-child(even) {
+      padding: 1.25rem 0 0.25rem;
+      border-left: 0;
+    }
+
+    .method li + li {
+      border-top: 1px solid var(--border);
     }
 
     .principles {

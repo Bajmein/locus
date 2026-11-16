@@ -1,6 +1,7 @@
 ---
 import Base from './Base.astro';
 import { site } from '../data/site';
+import ProjectIcon from '../components/ProjectIcon.astro';
 
 interface Props {
   title: string;
@@ -24,14 +25,17 @@ const schema = {
 };
 ---
 
-<Base title={`${title} — Benjamín Criado`} description={description} schema={schema}>
+<Base title={`${title} — Benjamín Criado`} description={description} schema={schema} tone={slug}>
   <article class="container project">
     <nav class="crumbs" aria-label="Migas">
       <a href="/#proyectos" class="label">← Proyectos</a>
     </nav>
 
     <header class="project-head">
-      <h1 style={`view-transition-name: proyecto-${slug}`}>{title}</h1>
+      <div class="head-row">
+        <ProjectIcon slug={slug} size="lg" />
+        <h1 style={`view-transition-name: proyecto-${slug}`}>{title}</h1>
+      </div>
       <p class="tagline">{tagline}</p>
     </header>
 
@@ -93,8 +97,16 @@ const schema = {
     margin-bottom: 2.5rem;
   }
 
+  .head-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.5em;
+  }
+
   .project-head h1 {
     width: fit-content;
+    margin: 0;
   }
 
   .tagline {
@@ -195,6 +207,8 @@ const schema = {
     margin-top: 4rem;
     padding-top: 2.5rem;
     border-top: 1px solid var(--border);
+    content-visibility: auto;
+    contain-intrinsic-size: auto 14rem;
   }
 
   .project-foot p:not(.label) {
