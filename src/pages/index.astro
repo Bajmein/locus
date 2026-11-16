@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import { site } from '../data/site';
+import Icon from '../components/Icon.astro';
 
 const now = [
   {
@@ -212,11 +213,11 @@ const tech = [
     <div class="glass spot contact-panel">
       <div>
         <p class="muted">Disponible para conversar sobre proyectos y colaboraciones.</p>
-        <a class="mail" href={`mailto:${site.email}`}>{site.email}</a>
+        <a class="mail" href={`mailto:${site.email}`}><Icon name="mail" />{site.email}</a>
       </div>
       <ul class="social">
-        <li><a href={site.github} rel="me">GitHub</a></li>
-        <li><a href={site.linkedin} rel="me">LinkedIn</a></li>
+        <li><a href={site.github} rel="me"><Icon name="github" />GitHub</a></li>
+        <li><a href={site.linkedin} rel="me"><Icon name="linkedin" />LinkedIn</a></li>
       </ul>
     </div>
   </section>
@@ -511,7 +512,9 @@ const tech = [
   }
 
   .mail {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
     font-size: clamp(1.125rem, 2.5vw, 1.375rem);
     font-weight: 500;
     letter-spacing: -0.01em;
@@ -542,6 +545,12 @@ const tech = [
 
   .social li {
     margin: 0;
+  }
+
+  .social a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
   }
 
   @media (max-width: 900px) {

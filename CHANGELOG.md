@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Íconos de línea (Phosphor Icons) para correo, GitHub y LinkedIn en el contacto y el pie, como SVG en `src/assets/icons/` que heredan el color del enlace.
+
 ### Changed
 
 - Fondo con resplandor tenue del acento y grilla fina; paneles translúcidos («glass») en cabecera, contacto, diagramas y página 404.
