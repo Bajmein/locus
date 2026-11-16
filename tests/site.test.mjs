@@ -48,7 +48,8 @@ test('cada página tiene title, description, canonical y Open Graph', () => {
     const description = meta(html, 'name', 'description');
     assert.ok(description && description.length >= 50, `${url}: meta description de 50+ caracteres`);
     const canonical = html.match(/<link rel="canonical" href="([^"]+)"/)?.[1];
-    assert.ok(canonical?.startsWith(`${SITE}/`), `${url}: canonical`);
+    if (url === '/404') assert.match(html, /noindex/, `${url}: noindex`);
+    else assert.ok(canonical?.startsWith(`${SITE}/`), `${url}: canonical`);
     assert.ok(meta(html, 'property', 'og:title'), `${url}: og:title`);
     assert.ok(meta(html, 'property', 'og:image'), `${url}: og:image`);
   }
