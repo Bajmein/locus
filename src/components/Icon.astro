@@ -1,0 +1,18 @@
+---
+// Íconos de línea de Phosphor Icons (vía IconScout, licencia libre para uso comercial), en src/assets/icons/.
+// Astro los incrusta como SVG en línea; el trazo usa currentColor y hereda el color del enlace.
+// Son decorativos: el texto del enlace da el nombre accesible.
+import github from '../assets/icons/github.svg';
+import linkedin from '../assets/icons/linkedin.svg';
+import mail from '../assets/icons/mail.svg';
+
+const icons = { github, linkedin, mail };
+
+interface Props {
+  name: keyof typeof icons;
+}
+
+const Svg = icons[Astro.props.name];
+---
+
+<Svg width="1.125em" height="1.125em" aria-hidden="true" focusable="false" />

@@ -20,9 +20,11 @@ npm run preview    # sirve dist/
 - `src/layouts/Base.astro`: `<head>` (SEO, Open Graph, JSON-LD), cabecera y pie. `Project.astro`: páginas de proyecto.
 - `src/components/`: `Header`, `Footer`, `Diagram` (marco de los diagramas SVG en línea; cada diagrama vive en `diagrams/`), `Capabilities`.
 - `src/styles/global.css`: tokens de diseño (`--bg`, `--accent`, …) y estilos base, incluida la impresión del CV.
-- `src/data/site.ts`: nombre, correo y enlaces sociales.
+- `src/data/site.ts`: nombre, correo, enlaces sociales y metadescripciones del sitio y del CV.
+- `src/data/projects.ts`: datos de los proyectos (metadescripción, ficha y tarjeta de la portada); lo usan las páginas de proyecto, la portada y `llms.txt`.
+- `src/pages/llms.txt.ts`: genera `/llms.txt` en el build a partir de esos datos.
 - `public/`: archivos servidos tal cual (`CNAME`, `robots.txt`, `og.png`, PDF del CV).
-- `tests/site.test.mjs`: páginas, SEO, sitemap, privacidad y enlaces internos.
+- `tests/site.test.mjs`: páginas, SEO (metadescripción de 50 a 160 caracteres, canonical, `noindex` de la 404, precarga de fuente), JSON-LD, sitemap, `llms.txt`, imagen social, piso de 12 px en la tipografía, privacidad y enlaces internos.
 - `tools/og.html`: fuente de `public/og.png` (no se despliega).
 
 ## Diseño

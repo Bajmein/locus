@@ -1,5 +1,6 @@
 ---
 import Project from '../layouts/Project.astro';
+import { getProject } from '../data/projects';
 
 const stack = [
   ['Interfaz', 'PySide6 + OpenGL', 'UI nativa y renderizado GPU de video'],
@@ -10,15 +11,16 @@ const stack = [
   ['Configuración', 'Hydra + Pydantic V2', 'Configuración jerárquica con validación de esquemas'],
   ['Respuesta', 'Síntesis de audio + Email/SMS', 'Disuasión activa y notificación remota'],
 ];
+const p = getProject('vigilia-edge');
 ---
 
 <Project
-  title="Vigilia Edge"
-  description="Vigilia Edge: vigilancia inteligente de escritorio con inferencia local, núcleo en Rust, interfaz PySide6 y pipeline de video de alto rendimiento."
-  tagline="Sistema de vigilancia inteligente que corre completamente en local: sin nube y sin latencia de red."
-  stack={['YOLO', 'TensorRT', 'Rust', 'PySide6']}
-  status="v1.0 — operativa en estaciones de trabajo locales"
-  repoUrl="https://github.com/Bajmein/vigilia-edge-showcase"
+  title={p.title}
+  description={p.description}
+  tagline={p.tagline}
+  stack={p.stack}
+  status={p.status}
+  repoUrl={p.repoUrl}
 >
   <h2>Qué hace</h2>
   <p>Vigilancia local sin dependencia de la nube, con latencia predecible y sin comprometer la privacidad.</p>

@@ -13,9 +13,18 @@ interface Props {
 
 const { title, description, tagline, stack, status, repoUrl } = Astro.props;
 const slug = Astro.url.pathname.replaceAll('/', '');
+
+const schema = {
+  '@type': 'SoftwareSourceCode',
+  name: title,
+  description,
+  url: new URL(Astro.url.pathname, Astro.site).href,
+  keywords: stack.join(', '),
+  ...(repoUrl ? { sameAs: repoUrl } : {}),
+};
 ---
 
-<Base title={`${title} — Benjamín Criado`} description={description}>
+<Base title={`${title} — Benjamín Criado`} description={description} schema={schema}>
   <article class="container project">
     <nav class="crumbs" aria-label="Migas">
       <a href="/#proyectos" class="label">← Proyectos</a>

@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Íconos de línea (Phosphor Icons) para correo, GitHub y LinkedIn en el contacto y el pie, como SVG en `src/assets/icons/` que heredan el color del enlace.
+- `llms.txt` generado en el build desde los mismos datos que el SEO de cada página (`src/pages/llms.txt.ts`).
+- Precarga de la fuente del titular (Geist, subconjunto latino).
+- JSON-LD con `@graph`: `Person`, `WebSite` y `SoftwareSourceCode` en las páginas de proyecto.
+- Tests de metadescripciones (50 a 160 caracteres), canonical, `noindex` de la 404, imagen social, JSON-LD, `llms.txt` y piso de 12 px en la tipografía.
+
 ### Changed
 
 - Fondo con resplandor tenue del acento y grilla fina; paneles translúcidos («glass») en cabecera, contacto, diagramas y página 404.
@@ -16,6 +24,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Páginas de proyecto: estado y stack pasan a una ficha lateral fija.
 - Transiciones nativas entre páginas, animaciones de entrada al hacer scroll y línea de progreso de lectura en la cabecera; todo se desactiva con `prefers-reduced-motion`.
 - Diagramas de Vigilia, Forge y episteme redibujados como SVG en línea, con un punto que recorre el flujo principal; se retira Mermaid y su JavaScript.
+- Imagen social con el contenido en una columna cuadrada centrada, legible en el recorte 1:1 de las miniaturas.
+- La página 404 lleva `noindex, follow` y no declara canonical ni `og:url`.
+- Etiquetas de stack de las tarjetas de proyecto a 12 px.
+- Metadescripciones del sitio y de Forge acortadas a 160 caracteres o menos; los datos de los proyectos pasan a `src/data/projects.ts`.
 
 ## [0.2.0] - 2026-11-16
 

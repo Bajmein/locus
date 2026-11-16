@@ -1,3 +1,11 @@
+/*
+ * Contraste medido (WCAG AA, mínimo 4,5:1 para texto normal):
+ *   --text sobre --bg       15,85:1
+ *   --muted sobre --bg       6,27:1
+ *   --muted sobre --surface  5,89:1
+ *   --accent sobre --bg      9,02:1
+ * Tipografía: ningún texto bajo 12 px (0.75rem).
+ */
 :root {
   --bg: #0b0d10;
   --surface: #12151a;
