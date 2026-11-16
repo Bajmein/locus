@@ -1,0 +1,92 @@
+---
+import Project from '../layouts/Project.astro';
+import Mermaid from '../components/Mermaid.astro';
+import Capabilities from '../components/Capabilities.astro';
+
+const diagram = `graph LR
+  A["Agente y hooks"] -->|MCP| E["episteme"]
+  E --> V["Vault Markdown"]
+  E --> I["Índice de búsqueda"]
+  O["Obsidian"] --> V`;
+
+const capabilities = [
+  {
+    title: 'Recuerda',
+    text: 'Guarda decisiones, lecciones, errores y preferencias como notas ordenadas por proyecto.',
+  },
+  {
+    title: 'Encuentra',
+    text: 'Busca en todo el vault, en español, sin distinguir mayúsculas ni tildes.',
+  },
+  {
+    title: 'Avisa a tiempo',
+    text: 'Antes de editar un archivo muestra las normas que le aplican.',
+  },
+  {
+    title: 'Retoma',
+    text: 'Guarda en qué iba el trabajo antes de que la conversación se compacte y lo recupera después.',
+  },
+  {
+    title: 'Cuida el orden',
+    text: 'Detecta duplicados, memorias vencidas y enlaces rotos; rechaza guardar contraseñas y tokens.',
+  },
+];
+
+const stack = [
+  ['Servidor', 'Python 3.14+, MCP SDK'],
+  ['Búsqueda', 'SQLite FTS5'],
+  ['Almacenamiento', 'Markdown compatible con Obsidian'],
+  ['Tooling', 'uv, ruff, pytest'],
+];
+---
+
+<Project
+  title="episteme"
+  description="episteme: memoria y documentación persistente para agentes de IA, servida por MCP desde un vault de notas Markdown que el usuario controla."
+  tagline="Documentación y memoria de proyectos para agentes, servida por MCP desde un vault Markdown."
+  stack={['Python', 'MCP', 'SQLite FTS5', 'Markdown']}
+  status="En uso diario — v0.11 (noviembre de 2026). Linux, macOS y Windows. Código privado."
+>
+  <h2>El Problema</h2>
+  <p>
+    Un agente de código empieza cada sesión sin recordar la anterior. Las decisiones, las lecciones y el
+    contexto del proyecto se pierden o hay que volver a explicarlos.
+  </p>
+
+  <h2>La Solución</h2>
+  <p>
+    episteme le da al agente una memoria que dura: una carpeta de notas Markdown, el vault, donde quedan las
+    decisiones, las lecciones y la documentación de cada proyecto. El agente la consulta y la completa
+    mientras trabaja. Las notas son archivos de texto del usuario: se abren con Obsidian o con cualquier
+    editor y no dependen de ningún servicio externo.
+  </p>
+
+  <h2>Cómo funciona</h2>
+  <Mermaid code={diagram} label="El agente y sus hooks llaman a episteme por MCP; episteme escribe en el vault Markdown y mantiene un índice de búsqueda; Obsidian abre el mismo vault" />
+  <ol>
+    <li>
+      El agente usa las herramientas de episteme cuando las necesita y los hooks las llaman solos en momentos
+      fijos de la sesión.
+    </li>
+    <li>
+      episteme corre en la máquina del usuario y es la única puerta al vault: valida lo que se guarda y
+      mantiene un índice para buscar rápido.
+    </li>
+    <li>El vault es una carpeta de notas Markdown que el usuario puede leer y editar.</li>
+  </ol>
+
+  <h2>Capacidades</h2>
+  <Capabilities items={capabilities} />
+
+  <h2>Stack</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th scope="col">Componente</th><th scope="col">Tecnología</th></tr>
+      </thead>
+      <tbody>
+        {stack.map(([k, v]) => <tr><td>{k}</td><td>{v}</td></tr>)}
+      </tbody>
+    </table>
+  </div>
+</Project>
