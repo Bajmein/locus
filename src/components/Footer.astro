@@ -1,0 +1,56 @@
+---
+import { site } from '../data/site';
+---
+
+<footer class="site-footer">
+  <div class="container foot">
+    <p class="label">© 2026 {site.name}</p>
+    <ul>
+      <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
+      <li><a href={site.github} rel="me">GitHub</a></li>
+      <li><a href={site.linkedin} rel="me">LinkedIn</a></li>
+    </ul>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--border);
+    padding-block: 2rem;
+  }
+
+  .foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem 2rem;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 0.9375rem;
+  }
+
+  li + li {
+    margin: 0;
+  }
+
+  a {
+    color: var(--muted);
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: var(--accent);
+  }
+</style>
