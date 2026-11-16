@@ -1,0 +1,90 @@
+---
+import { nav } from '../data/site';
+
+const path = Astro.url.pathname;
+---
+
+<header class="site-header">
+  <div class="container bar">
+    <a class="brand" href="/" aria-label="Benjamín Criado, inicio">bc<span>_</span></a>
+    <nav aria-label="Principal">
+      <ul>
+        {
+          nav.map((item) => (
+            <li>
+              <a href={item.href} aria-current={item.href === path ? 'page' : undefined}>
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    border-bottom: 1px solid var(--border);
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(8px);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    height: 3.75rem;
+  }
+
+  .brand {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 1.0625rem;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .brand span {
+    color: var(--accent);
+  }
+
+  ul {
+    display: flex;
+    gap: clamp(0.85rem, 3vw, 2rem);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  li + li {
+    margin: 0;
+  }
+
+  nav a {
+    font-size: 0.9375rem;
+    color: var(--muted);
+    text-decoration: none;
+  }
+
+  nav a:hover,
+  nav a[aria-current='page'] {
+    color: var(--text);
+  }
+
+  nav a[aria-current='page'] {
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+    text-underline-offset: 0.45em;
+  }
+
+  @media (max-width: 400px) {
+    nav a {
+      font-size: 0.875rem;
+    }
+  }
+</style>

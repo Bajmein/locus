@@ -1,0 +1,491 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+
+const now = [
+  {
+    label: 'Trabajo',
+    text: 'Encargado de TI en un grupo de empresas: sitios web, integraciones, automatización de procesos y agentes de IA.',
+  },
+  {
+    label: 'Herramientas',
+    text: 'Desarrollo episteme, memoria persistente para agentes de IA, y fabrik, un flujo de desarrollo guiado por especificaciones.',
+  },
+  {
+    label: 'Producto',
+    text: 'Tercera versión de Vigilia, mi sistema de análisis de video en tiempo real.',
+  },
+];
+
+const projects = [
+  {
+    n: '01',
+    name: 'Vigilia Reforged',
+    href: '/vigilia/',
+    text: 'Análisis de video en tiempo real que detecta y responde a incidentes mientras ocurren.',
+    stack: 'Rust · Python · NVDEC',
+  },
+  {
+    n: '02',
+    name: 'Vigilia Edge',
+    href: '/vigilia-edge/',
+    text: 'Vigilancia inteligente de escritorio con inferencia local, sin nube.',
+    stack: 'YOLO · TensorRT · PySide6',
+  },
+  {
+    n: '03',
+    name: 'episteme',
+    href: '/episteme/',
+    text: 'Memoria y documentación persistente para agentes de IA, servida por MCP.',
+    stack: 'Python · MCP · SQLite FTS5',
+  },
+  {
+    n: '04',
+    name: 'Forge',
+    href: '/forge/',
+    text: 'Pipeline de desarrollo guiado por especificaciones para agentes de código.',
+    stack: 'SDD · YAML · Python',
+  },
+];
+
+const experience = [
+  {
+    date: '2026 — hoy',
+    role: 'Encargado de TI',
+    org: 'Grupo de empresas (remoto)',
+    text: 'Responsable del área de tecnología: desarrollo y mantención de los sitios web, integraciones entre sistemas, automatización de procesos y agentes de IA.',
+  },
+  {
+    date: '2026',
+    role: 'Práctica profesional',
+    org: 'Desarrollo web y automatización',
+  },
+  {
+    date: '2021 — 2025',
+    role: 'Ingeniería en Informática',
+    org: 'INACAP',
+    text: 'Proyecto de título: Vigilia.',
+  },
+];
+
+const principles = [
+  {
+    title: 'La herramienta correcta',
+    text: 'Rust donde la latencia es crítica, Python para orquestar. La tecnología se elige por el problema.',
+  },
+  {
+    title: 'Especificar antes de implementar',
+    text: 'Cada cambio parte de una especificación verificable; los agentes ejecutan, los artefactos mandan.',
+  },
+  {
+    title: 'Local primero',
+    text: 'Sistemas que corren en el equipo del usuario, sin depender de la nube ni exponer sus datos.',
+  },
+];
+
+const tech = [
+  ['Lenguajes', 'Python, Rust, JavaScript'],
+  ['Visión por computador', 'OpenCV, YOLO, TensorRT, CUDA / NVDEC'],
+  ['IA aplicada', 'Agentes, Model Context Protocol (MCP), desarrollo guiado por especificaciones'],
+  ['Web', 'WordPress, REST API, HTML y CSS'],
+  ['Infraestructura', 'Linux, AWS, Azure'],
+];
+---
+
+<Base title="Benjamín Criado — Ingeniero Informático" description={site.description}>
+  <section class="container hero" aria-labelledby="hero-title">
+    <p class="label">Ingeniero Informático · La Serena, Chile</p>
+    <h1 id="hero-title">Benjamín Criado</h1>
+    <p class="lead">
+      Desarrollo software y automatización con inteligencia artificial. Construyo sistemas de visión por
+      computador en tiempo real, integraciones y herramientas para trabajar con agentes, pensados para
+      funcionar en producción.
+    </p>
+    <div class="actions">
+      <a class="btn btn-primary" href="#proyectos">Ver proyectos</a>
+      <a class="btn" href="/cv/">Currículum</a>
+    </div>
+  </section>
+
+  <section class="container section" aria-labelledby="ahora">
+    <div class="section-head">
+      <span class="label">00</span>
+      <h2 id="ahora">Ahora</h2>
+    </div>
+    <dl class="now">
+      {
+        now.map((item) => (
+          <div class="now-row">
+            <dt class="label">{item.label}</dt>
+            <dd>{item.text}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </section>
+
+  <section class="container section" id="proyectos" aria-labelledby="proyectos-title">
+    <div class="section-head">
+      <span class="label">01</span>
+      <h2 id="proyectos-title">Proyectos</h2>
+    </div>
+    <ol class="projects">
+      {
+        projects.map((p) => (
+          <li>
+            <a class="project-row" href={p.href}>
+              <span class="label num">{p.n}</span>
+              <span class="project-main">
+                <span class="project-name">{p.name}</span>
+                <span class="project-text">{p.text}</span>
+              </span>
+              <span class="label project-stack">{p.stack}</span>
+              <span class="arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <section class="container section" id="experiencia" aria-labelledby="experiencia-title">
+    <div class="section-head">
+      <span class="label">02</span>
+      <h2 id="experiencia-title">Experiencia</h2>
+    </div>
+    <ol class="timeline">
+      {
+        experience.map((e) => (
+          <li class="tl-row">
+            <span class="label tl-date">{e.date}</span>
+            <div>
+              <h3>
+                {e.role} <span class="muted">· {e.org}</span>
+              </h3>
+              {e.text && <p>{e.text}</p>}
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+    <p class="more"><a href="/cv/">Ver currículum completo →</a></p>
+  </section>
+
+  <section class="container section" aria-labelledby="enfoque">
+    <div class="section-head">
+      <span class="label">03</span>
+      <h2 id="enfoque">Enfoque</h2>
+    </div>
+    <div class="principles">
+      {
+        principles.map((p) => (
+          <div class="principle">
+            <h3>{p.title}</h3>
+            <p>{p.text}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="container section" aria-labelledby="tecnologias">
+    <div class="section-head">
+      <span class="label">04</span>
+      <h2 id="tecnologias">Tecnologías</h2>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <caption class="sr-only">Tecnologías por área</caption>
+        <tbody>
+          {
+            tech.map(([area, items]) => (
+              <tr>
+                <th scope="row">{area}</th>
+                <td>{items}</td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="container section contact" id="contacto" aria-labelledby="contacto-title">
+    <div class="section-head">
+      <span class="label">05</span>
+      <h2 id="contacto-title">Contacto</h2>
+    </div>
+    <p class="muted">Disponible para conversar sobre proyectos y colaboraciones.</p>
+    <a class="mail" href={`mailto:${site.email}`}>{site.email}</a>
+    <ul class="social">
+      <li><a href={site.github} rel="me">GitHub</a></li>
+      <li><a href={site.linkedin} rel="me">LinkedIn</a></li>
+    </ul>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    padding-block: clamp(4rem, 12vw, 8rem) clamp(3.5rem, 9vw, 6rem);
+  }
+
+  .hero .label {
+    margin-bottom: 1.25rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    margin-bottom: 1.5rem;
+  }
+
+  .lead {
+    max-width: 40rem;
+    font-size: clamp(1.125rem, 2vw, 1.25rem);
+    color: var(--muted);
+    margin-bottom: 2.25rem;
+  }
+
+  /* Ahora */
+  .now {
+    margin: 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .now-row {
+    display: grid;
+    grid-template-columns: 11rem minmax(0, 1fr);
+    gap: 1rem 2rem;
+    padding-block: 1.1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .now dt {
+    padding-top: 0.2rem;
+  }
+
+  .now dd {
+    margin: 0;
+    max-width: var(--w-prose);
+  }
+
+  /* Proyectos */
+  .projects {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .projects li {
+    margin: 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .project-row {
+    display: grid;
+    grid-template-columns: 3rem minmax(0, 1fr) auto 1.5rem;
+    align-items: baseline;
+    gap: 0.5rem 1.5rem;
+    padding-block: 1.5rem;
+    text-decoration: none;
+    color: var(--text);
+  }
+
+  .project-row:hover {
+    color: var(--text);
+  }
+
+  .project-main {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .project-name {
+    font-size: clamp(1.25rem, 2.5vw, 1.625rem);
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    transition: color 0.2s ease, transform 0.2s ease;
+  }
+
+  .project-text {
+    color: var(--muted);
+    font-size: 0.9688rem;
+  }
+
+  .project-stack {
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .arrow {
+    color: var(--muted);
+    transition: color 0.2s ease, transform 0.2s ease;
+  }
+
+  .project-row:hover .project-name,
+  .project-row:focus-visible .project-name {
+    color: var(--accent);
+    transform: translateX(0.5rem);
+  }
+
+  .project-row:hover .arrow,
+  .project-row:focus-visible .arrow {
+    color: var(--accent);
+    transform: translateX(0.25rem);
+  }
+
+  .project-row:hover .num {
+    color: var(--accent);
+  }
+
+  /* Experiencia */
+  .timeline {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .tl-row {
+    display: grid;
+    grid-template-columns: 11rem minmax(0, 1fr);
+    gap: 0.5rem 2rem;
+    margin: 0;
+    padding-block: 1.25rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .tl-date {
+    padding-top: 0.15rem;
+  }
+
+  .tl-row h3 {
+    margin: 0;
+    font-size: 1.0625rem;
+  }
+
+  .tl-row h3 .muted {
+    font-weight: 400;
+  }
+
+  .tl-row p {
+    margin: 0.4rem 0 0;
+    color: var(--muted);
+    max-width: var(--w-prose);
+  }
+
+  .more a {
+    text-decoration: none;
+    color: var(--accent);
+  }
+
+  .more a:hover {
+    text-decoration: underline;
+  }
+
+  /* Enfoque */
+  .principles {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-top: 1px solid var(--border);
+  }
+
+  .principle {
+    padding: 1.5rem 1.75rem 0.5rem 0;
+  }
+
+  .principle + .principle {
+    padding-left: 1.75rem;
+    border-left: 1px solid var(--border);
+  }
+
+  .principle p {
+    color: var(--muted);
+    font-size: 0.9688rem;
+  }
+
+  /* Tecnologías */
+  th[scope='row'] {
+    width: 14rem;
+    padding-top: 0.95rem;
+  }
+
+  td {
+    color: var(--text);
+    white-space: normal;
+  }
+
+  /* Contacto */
+  .contact .muted {
+    margin-bottom: 0.75rem;
+  }
+
+  .mail {
+    display: inline-block;
+    font-size: clamp(1.5rem, 4.5vw, 2.75rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+    margin-bottom: 1.5rem;
+  }
+
+  .social {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .social li {
+    margin: 0;
+  }
+
+  @media (max-width: 760px) {
+    .project-row {
+      grid-template-columns: 2.25rem minmax(0, 1fr) 1.25rem;
+    }
+
+    .project-stack {
+      grid-column: 2;
+      grid-row: 2;
+      text-align: left;
+      white-space: normal;
+    }
+
+    .arrow {
+      grid-column: 3;
+      grid-row: 1;
+    }
+
+    .principles {
+      grid-template-columns: 1fr;
+    }
+
+    .principle,
+    .principle + .principle {
+      padding: 1.25rem 0 0.25rem;
+      border-left: 0;
+    }
+
+    .principle + .principle {
+      border-top: 1px solid var(--border);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .now-row,
+    .tl-row {
+      grid-template-columns: 1fr;
+      gap: 0.35rem;
+    }
+
+    th[scope='row'] {
+      width: 9rem;
+    }
+  }
+</style>

@@ -1,0 +1,130 @@
+---
+import Project from '../layouts/Project.astro';
+import Mermaid from '../components/Mermaid.astro';
+import Capabilities from '../components/Capabilities.astro';
+
+const diagram = `graph TB
+    subgraph Rust["Rust Core (PyO3)"]
+        DEC["Frame Decoder"]:::rust
+        SCH["Scheduler"]:::rust
+        SHM["Shared Memory Bus"]:::rust
+    end
+
+    subgraph Python["Python Orchestration"]
+        CFG["Config (Pydantic)"]
+        RULES["Rules Engine"]
+        API["FastAPI / MQTT"]
+    end
+
+    subgraph Inference["Inference Pipeline"]
+        ONNX["ONNX Runtime GPU"]:::rust
+        ZONES["Zone Evaluator"]
+    end
+
+    CAM["Camera Input"] --> DEC
+    DEC --> SHM
+    SHM --> ONNX
+    ONNX --> ZONES
+    ZONES --> RULES
+    RULES --> API
+    CFG --> SCH
+    SCH --> DEC
+
+    classDef rust fill:#e8a33d,stroke:#e8a33d,color:#0b0d10;`;
+
+const capabilities = [
+  {
+    title: 'Detección en tiempo real',
+    text: 'Análisis continuo de video con aceleración GPU. Baja latencia desde la captura hasta la decisión, diseñado para entornos donde cada segundo cuenta.',
+  },
+  {
+    title: 'Zonas de seguridad configurables',
+    text: 'Define áreas de interés con geometría arbitraria: zonas de intrusión, perímetros de cruce, regiones de exclusión. Las reglas son declarativas y no requieren programación.',
+  },
+  {
+    title: 'Sistema de alertas multicanal',
+    text: 'Cuando se detecta un evento de seguridad, Vigilia puede responder de forma coordinada: disuasión de audio, notificaciones a sistemas externos e integración con plataformas de gestión de video existentes.',
+  },
+  {
+    title: 'Integración con ecosistemas VMS',
+    text: 'Exporta metadatos de analítica hacia sistemas de gestión de video (VMS) mediante protocolos estándar de la industria, sin dependencia de un proveedor específico.',
+  },
+  {
+    title: 'Acceso remoto seguro',
+    text: 'Monitoreo en tiempo real desde cualquier ubicación con acceso cifrado de extremo a extremo. Sin necesidad de exponer puertos ni depender de servicios en la nube de terceros.',
+  },
+  {
+    title: 'Interfaz de escritorio nativa',
+    text: 'Aplicación de escritorio de alto rendimiento con visualización de video en vivo, gestión de zonas y estado del sistema.',
+  },
+  {
+    title: 'Almacenamiento basado en eventos',
+    text: 'El sistema graba con inteligencia selectiva: prioriza y persiste los segmentos asociados a eventos detectados, reduciendo el volumen de almacenamiento sin sacrificar la evidencia que importa.',
+  },
+];
+
+const stack = [
+  ['Core de análisis', 'Rust (rendimiento determinista)'],
+  ['Orquestación', 'Python 3.13+, Pydantic v2'],
+  ['Inferencia GPU', 'ONNX Runtime GPU, NVDEC'],
+  ['Interfaz', 'PySide6 (Qt nativo)'],
+  ['Integraciones', 'ONVIF Profile M, MQTT'],
+  ['Acceso remoto', 'Tailscale, WebRTC/WHEP'],
+  ['Tooling', 'mise, uv, ruff, dprint'],
+];
+---
+
+<Project
+  title="Vigilia Reforged"
+  description="Vigilia Reforged: plataforma de monitoreo inteligente con análisis de video en tiempo real, zonas de seguridad configurables y alertas multicanal."
+  tagline="De la vigilancia pasiva al monitoreo inteligente y proactivo."
+  stack={['Rust', 'Python', 'ONNX Runtime', 'NVDEC', 'PySide6']}
+  status="Versión de titulación — v0.8.1"
+  repoUrl="https://github.com/Bajmein/vigilia-reforged-showcase"
+>
+  <p>
+    Vigilia es una plataforma de seguridad que transforma flujos de video en inteligencia operativa en tiempo
+    real. En lugar de grabar para revisar después de un incidente, Vigilia analiza, decide y actúa mientras
+    los eventos ocurren.
+  </p>
+
+  <h2>El Problema</h2>
+  <p>
+    Los sistemas de CCTV tradicionales son reactivos por diseño: almacenan video que alguien revisa después.
+    Esto tiene un costo operativo alto y una tasa de respuesta baja. La mayoría de los incidentes no se
+    detectan a tiempo no por falta de cámaras, sino por falta de capacidad para procesar lo que capturan.
+  </p>
+
+  <h2>La Solución</h2>
+  <p>
+    El objetivo es responder automáticamente antes de que el incidente escale. Vigilia procesa video en
+    tiempo real con aceleración por hardware, aplica reglas espaciales configurables y dispara respuestas
+    automáticas ante eventos relevantes, sin intervención humana constante.
+  </p>
+  <pre class="flow"><code>Ingestión → Análisis en tiempo real → Evaluación de reglas → Acción</code></pre>
+  <p>El operador define qué importa (zonas, comportamientos, umbrales); el sistema se encarga del resto.</p>
+  <Mermaid code={diagram} label="Arquitectura de Vigilia: núcleo en Rust, orquestación en Python y pipeline de inferencia" />
+  <p>Vigilia se construyó con <a href="/forge/">Forge</a>, mi pipeline de desarrollo guiado por especificaciones.</p>
+
+  <h2>Capacidades</h2>
+  <Capabilities items={capabilities} />
+
+  <h2>Stack</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th scope="col">Componente</th><th scope="col">Tecnología</th></tr>
+      </thead>
+      <tbody>
+        {stack.map(([k, v]) => <tr><td>{k}</td><td>{v}</td></tr>)}
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Estado del Proyecto</h2>
+  <p>
+    <strong>Versión de titulación — v0.8.1.</strong> Vigilia fue mi proyecto de título. Esta versión quedó
+    cerrada con el pipeline de análisis, las integraciones VMS y el acceso remoto operativos en entornos de
+    prueba. El desarrollo continúa en una tercera versión.
+  </p>
+</Project>

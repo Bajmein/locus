@@ -1,0 +1,146 @@
+---
+import Base from './Base.astro';
+import { site } from '../data/site';
+
+interface Props {
+  title: string;
+  description: string;
+  tagline: string;
+  stack: string[];
+  status: string;
+  repoUrl?: string;
+}
+
+const { title, description, tagline, stack, status, repoUrl } = Astro.props;
+---
+
+<Base title={`${title} — Benjamín Criado`} description={description}>
+  <article class="container project">
+    <nav class="crumbs" aria-label="Migas">
+      <a href="/#proyectos" class="label">← Proyectos</a>
+    </nav>
+
+    <header class="project-head">
+      <h1>{title}</h1>
+      <p class="tagline">{tagline}</p>
+      <ul class="stack label" aria-label="Stack">
+        {stack.map((item) => <li>{item}</li>)}
+      </ul>
+      <p class="status"><span class="label">Estado</span> {status}</p>
+    </header>
+
+    <div class="body prose">
+      <slot />
+    </div>
+
+    <footer class="project-foot">
+      {
+        repoUrl && (
+          <div>
+            <p class="label">Código</p>
+            <p>El código fuente es privado. El repositorio vitrina muestra la arquitectura y la documentación técnica.</p>
+            <a class="btn btn-primary" href={repoUrl}>
+              Ver repositorio vitrina
+            </a>
+          </div>
+        )
+      }
+      <div>
+        <p class="label">Contacto</p>
+        <p>¿Preguntas sobre este proyecto? Escríbeme.</p>
+        <a class="btn" href={`mailto:${site.email}`}>{site.email}</a>
+      </div>
+    </footer>
+  </article>
+</Base>
+
+<style>
+  .project {
+    padding-block: 2.5rem 4rem;
+  }
+
+  .crumbs {
+    margin-bottom: 2.5rem;
+  }
+
+  .crumbs a {
+    text-decoration: none;
+  }
+
+  .crumbs a:hover {
+    color: var(--accent);
+  }
+
+  .project-head {
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 2.5rem;
+  }
+
+  .tagline {
+    font-size: clamp(1.125rem, 2.2vw, 1.3125rem);
+    color: var(--muted);
+    max-width: var(--w-prose);
+    margin-bottom: 1.5rem;
+  }
+
+  .stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1.25rem;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.25rem;
+    color: var(--text);
+  }
+
+  .stack li {
+    margin: 0;
+  }
+
+  .stack li::before {
+    content: '/ ';
+    color: var(--accent);
+  }
+
+  .status {
+    margin: 0;
+    font-size: 0.9375rem;
+    color: var(--muted);
+  }
+
+  .status .label {
+    color: var(--accent);
+    margin-right: 0.5rem;
+  }
+
+  .body :global(h2) {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .body :global(h2:first-child) {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
+  }
+
+  .project-foot {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    gap: 2rem 3rem;
+    margin-top: 4rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .project-foot p:not(.label) {
+    color: var(--muted);
+    font-size: 0.9375rem;
+  }
+
+  .project-foot .label {
+    margin-bottom: 0.5rem;
+  }
+</style>

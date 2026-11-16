@@ -1,20 +1,7 @@
-# Python-generated files
-__pycache__/
-*.py[oc]
-build/
+# Node / Astro
+node_modules/
 dist/
-wheels/
-*.egg-info
-.pytest_cache/
-.ruff_cache/
-.mypy_cache/
-.coverage
-htmlcov/
-
-# Virtual environments
-.venv
-venv/
-ENV/
+.astro/
 
 # Environment secrets
 .env
@@ -37,9 +24,6 @@ ENV/
 # OS specific
 .DS_Store
 Thumbs.db
-
-# Generated site (MkDocs output)
-site/
 
 # Locus architecture (internal — not public)
 .agents/
