@@ -1,36 +1,68 @@
 ---
+/*
+ * Marco de los diagramas. Cada diagrama trae dos composiciones del mismo contenido, en SVG en línea
+ * (así conserva el punto animado y los tokens de color):
+ * - `wide`: hasta 640 unidades de ancho; se muestra cuando la figura mide 640 px o más.
+ * - `narrow`: vertical, hasta 280 unidades; para móviles y columnas angostas.
+ * Ninguna se dibuja por debajo de 1:1 (`min-width` = ancho del viewBox), así que el texto de 12 unidades
+ * mide al menos 12 px reales. Si la figura es más angosta que la composición, se desplaza dentro de ella.
+ */
+export const WIDE_MAX = 640;
+export const NARROW_MAX = 280;
+
+interface Layout {
+  width: number;
+  height: number;
+}
+
 interface Props {
   /** Prefijo de los id del SVG; único por página */
   id: string;
   title: string;
   desc: string;
-  width: number;
-  height: number;
+  wide: Layout;
+  narrow: Layout;
 }
 
-const { id, title, desc, width, height } = Astro.props;
+const { id, title, desc, wide, narrow } = Astro.props;
+if (wide.width > WIDE_MAX || narrow.width > NARROW_MAX) {
+  throw new Error(`Diagrama ${id}: la composición ancha admite ${WIDE_MAX} y la angosta ${NARROW_MAX} de ancho`);
+}
+
+const layouts = [
+  { key: 'wide', ...wide },
+  { key: 'narrow', ...narrow },
+] as const;
 ---
 
 <figure class="diagram glass reveal">
+  <!-- Marcadores compartidos: un SVG sin tamaño, no oculto con display, para que las flechas los encuentren -->
+  <svg class="defs" width="0" height="0" aria-hidden="true" focusable="false">
+    <defs>
+      <marker id="dg-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+        <polygon class="d-head" points="0 0, 8 3, 0 6"></polygon>
+      </marker>
+      <marker id="dg-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+        <polygon class="d-head is-accent" points="0 0, 8 3, 0 6"></polygon>
+      </marker>
+    </defs>
+  </svg>
   <div class="scroll">
-    <svg
-      viewBox={`0 0 ${width} ${height}`}
-      role="img"
-      aria-labelledby={`${id}-title ${id}-desc`}
-      style={`min-width: ${Math.round(width * 0.8)}px`}
-    >
-      <title id={`${id}-title`}>{title}</title>
-      <desc id={`${id}-desc`}>{desc}</desc>
-      <defs>
-        <marker id="dg-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
-          <polygon class="d-head" points="0 0, 8 3, 0 6"></polygon>
-        </marker>
-        <marker id="dg-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
-          <polygon class="d-head is-accent" points="0 0, 8 3, 0 6"></polygon>
-        </marker>
-      </defs>
-      <slot />
-    </svg>
+    {
+      layouts.map((l) => (
+        <svg
+          class={`layout is-${l.key}`}
+          viewBox={`0 0 ${l.width} ${l.height}`}
+          role="img"
+          aria-labelledby={`${id}-${l.key}-title ${id}-${l.key}-desc`}
+          style={`--w: ${l.width}px`}
+        >
+          <title id={`${id}-${l.key}-title`}>{title}</title>
+          <desc id={`${id}-${l.key}-desc`}>{desc}</desc>
+          {l.key === 'wide' ? <slot name="wide" /> : <slot name="narrow" />}
+        </svg>
+      ))
+    }
   </div>
 </figure>
 
@@ -40,15 +72,42 @@ const { id, title, desc, width, height } = Astro.props;
     padding: 1.25rem;
   }
 
-  /* El SVG no baja de un ancho legible: en móvil se desplaza dentro de la figura, no la página */
-  .scroll {
-    overflow-x: auto;
+  .defs {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
   }
 
-  svg {
+  /* Contenedor de consulta: la composición se elige por el ancho de la figura, no de la ventana */
+  .scroll {
+    overflow-x: auto;
+    container-type: inline-size;
+  }
+
+  /* Nunca por debajo de 1:1 (texto de 12 unidades = 12 px); crece a lo sumo un 15 % */
+  .layout {
     display: block;
     width: 100%;
+    min-width: var(--w);
+    max-width: calc(var(--w) * 1.15);
     height: auto;
+    margin-inline: auto;
+  }
+
+  .layout.is-narrow {
+    display: none;
+  }
+
+  /* 640 = WIDE_MAX */
+  @container (width < 640px) {
+    .layout.is-wide {
+      display: none;
+    }
+
+    .layout.is-narrow {
+      display: block;
+    }
   }
 
   /* Las piezas llegan por <slot>, así que sus clases son globales bajo .diagram */
@@ -59,8 +118,8 @@ const { id, title, desc, width, height } = Astro.props;
   }
 
   .diagram :global(.d-eyebrow) {
-    font: 400 9px var(--font-mono);
-    letter-spacing: 0.12em;
+    font: 400 12px var(--font-mono);
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     fill: var(--muted);
   }
@@ -107,20 +166,19 @@ const { id, title, desc, width, height } = Astro.props;
   }
 
   .diagram :global(.d-name) {
-    font: 600 13px var(--font-sans);
+    font: 600 14px var(--font-sans);
     fill: var(--text);
     text-anchor: middle;
   }
 
   .diagram :global(.d-sub) {
-    font: 400 10px var(--font-mono);
+    font: 400 12px var(--font-mono);
     fill: var(--muted);
     text-anchor: middle;
   }
 
   .diagram :global(.d-cmd) {
-    font: 400 10px var(--font-mono);
-    letter-spacing: 0.04em;
+    font: 400 12px var(--font-mono);
     fill: var(--muted);
   }
 

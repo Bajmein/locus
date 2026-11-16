@@ -1,15 +1,23 @@
 ---
 import Diagram from '../Diagram.astro';
+import Node from './Node.astro';
 
-const W = 136;
-const H = 52;
+// Ancha: agente → episteme → (vault, índice) ← Obsidian
+const wide = [
+  { x: 6, y: 60, w: 120, name: 'Agente y hooks', sub: 'cliente MCP' },
+  { x: 166, y: 60, w: 112, name: 'episteme', sub: 'servidor MCP', focal: true },
+  { x: 318, y: 8, w: 128, name: 'Vault Markdown', sub: 'notas .md' },
+  { x: 318, y: 112, w: 128, name: 'Índice', sub: 'SQLite FTS5' },
+  { x: 490, y: 8, w: 144, name: 'Obsidian', sub: 'o cualquier editor' },
+];
 
-const nodes = [
-  { x: 24, y: 82, name: 'Agente y hooks', sub: 'cliente MCP' },
-  { x: 220, y: 82, name: 'episteme', sub: 'servidor MCP', focal: true },
-  { x: 408, y: 32, name: 'Vault Markdown', sub: 'notas .md' },
-  { x: 408, y: 132, name: 'Índice', sub: 'SQLite FTS5' },
-  { x: 584, y: 32, name: 'Obsidian', sub: 'o cualquier editor' },
+// Angosta: de arriba abajo; episteme se abre en vault e índice, y Obsidian abre el vault desde abajo
+const narrow = [
+  { x: 72, y: 4, w: 136, name: 'Agente y hooks', sub: 'cliente MCP' },
+  { x: 72, y: 104, w: 136, name: 'episteme', sub: 'servidor MCP', focal: true },
+  { x: 8, y: 208, w: 144, name: 'Vault Markdown', sub: 'notas .md' },
+  { x: 160, y: 208, w: 112, name: 'Índice', sub: 'SQLite FTS5' },
+  { x: 8, y: 312, w: 144, name: 'Obsidian', sub: 'o cualquier editor' },
 ];
 ---
 
@@ -17,33 +25,42 @@ const nodes = [
   id="episteme"
   title="Cómo funciona episteme"
   desc="El agente y sus hooks llaman a episteme por MCP; episteme escribe en el vault Markdown y mantiene un índice de búsqueda; Obsidian abre el mismo vault."
-  width={744}
-  height={216}
+  wide={{ width: 640, height: 176 }}
+  narrow={{ width: 280, height: 376 }}
 >
-  <line class="d-line is-accent" x1="160" y1="108" x2="220" y2="108"></line>
-  <text class="d-cmd" x="190" y="98" text-anchor="middle">MCP</text>
-  <path class="d-line" d="M356 100 H374 Q382 100 382 92 V66 Q382 58 390 58 H408"></path>
-  <path class="d-line" d="M356 116 H374 Q382 116 382 124 V150 Q382 158 390 158 H408"></path>
-  <line class="d-line" x1="584" y1="58" x2="544" y2="58"></line>
-  <text class="d-cmd" x="564" y="48" text-anchor="middle">ABRE</text>
+  <Fragment slot="wide">
+    <line class="d-line is-accent" x1="126" y1="88" x2="166" y2="88"></line>
+    <text class="d-cmd" x="146" y="80" text-anchor="middle">MCP</text>
+    <path class="d-line" d="M278 80 H290 Q298 80 298 72 V44 Q298 36 306 36 H318"></path>
+    <path class="d-line" d="M278 96 H290 Q298 96 298 104 V132 Q298 140 306 140 H318"></path>
+    <line class="d-line" x1="490" y1="36" x2="446" y2="36"></line>
+    <text class="d-cmd" x="468" y="28" text-anchor="middle">ABRE</text>
 
-  <circle
-    class="d-token"
-    r="3.5"
-    aria-hidden="true"
-    style="offset-path: path('M92 108 H300 V100 H374 Q382 100 382 92 V66 Q382 58 390 58 H476'); --d-dur: 5s"></circle>
+    <circle
+      class="d-token"
+      r="4"
+      aria-hidden="true"
+      style="offset-path: path('M66 88 H222 V80 H290 Q298 80 298 72 V44 Q298 36 306 36 H382'); --d-dur: 5s"
+    ></circle>
 
-  {
-    nodes.map((n) => (
-      <g>
-        <rect class:list={['d-node', { 'is-focal': n.focal }]} x={n.x} y={n.y} width={W} height={H} rx="6" />
-        <text class="d-name" x={n.x + W / 2} y={n.y + 23}>
-          {n.name}
-        </text>
-        <text class="d-sub" x={n.x + W / 2} y={n.y + 39}>
-          {n.sub}
-        </text>
-      </g>
-    ))
-  }
+    {wide.map((n) => <Node {...n} />)}
+  </Fragment>
+
+  <Fragment slot="narrow">
+    <line class="d-line is-accent" x1="140" y1="60" x2="140" y2="104"></line>
+    <text class="d-cmd" x="150" y="86">MCP</text>
+    <path class="d-line" d="M140 160 V176 Q140 184 132 184 H88 Q80 184 80 192 V208"></path>
+    <path class="d-line" d="M140 160 V176 Q140 184 148 184 H208 Q216 184 216 192 V208"></path>
+    <line class="d-line" x1="80" y1="312" x2="80" y2="264"></line>
+    <text class="d-cmd" x="90" y="292">ABRE</text>
+
+    <circle
+      class="d-token"
+      r="4"
+      aria-hidden="true"
+      style="offset-path: path('M140 32 V176 Q140 184 132 184 H88 Q80 184 80 192 V236'); --d-dur: 5s"
+    ></circle>
+
+    {narrow.map((n) => <Node {...n} />)}
+  </Fragment>
 </Diagram>
