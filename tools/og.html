@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Imagen social</title>
+    <!-- Generar: google-chrome --headless=new --hide-scrollbars --window-size=1200,630 --screenshot=public/og.png tools/og.html -->
+    <style>
+      @font-face {
+        font-family: 'Geist';
+        src: url('../node_modules/@fontsource-variable/geist/files/geist-latin-wght-normal.woff2') format('woff2');
+        font-weight: 100 900;
+      }
+      @font-face {
+        font-family: 'Geist Mono';
+        src: url('../node_modules/@fontsource-variable/geist-mono/files/geist-mono-latin-wght-normal.woff2') format('woff2');
+        font-weight: 100 900;
+      }
+      html, body {
+        margin: 0;
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+        background: #0b0d10;
+        color: #e6e8eb;
+        font-family: 'Geist', system-ui, sans-serif;
+      }
+      .card {
+        box-sizing: border-box;
+        width: 1200px;
+        height: 630px;
+        padding: 80px 88px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        border-left: 6px solid #e8a33d;
+      }
+      .mark {
+        font-family: 'Geist Mono', monospace;
+        font-weight: 600;
+        font-size: 44px;
+        color: #e6e8eb;
+      }
+      .mark span { color: #e8a33d; }
+      h1 {
+        margin: 0 0 22px;
+        font-size: 92px;
+        font-weight: 600;
+        letter-spacing: -0.025em;
+        line-height: 1;
+      }
+      p {
+        margin: 0;
+        font-size: 34px;
+        color: #8b939e;
+      }
+      .foot {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 28px;
+        border-top: 1px solid #1f242c;
+        font-family: 'Geist Mono', monospace;
+        font-size: 24px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #8b939e;
+      }
+      .foot b { color: #e8a33d; font-weight: 500; }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <div class="mark">bc<span>_</span></div>
+      <div>
+        <h1>Benjamín Criado</h1>
+        <p>Ingeniero Informático · Software y automatización con IA</p>
+      </div>
+      <div class="foot"><b>benjamincriado.dev</b><span>La Serena, Chile</span></div>
+    </div>
+  </body>
+</html>
