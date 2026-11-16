@@ -1,15 +1,7 @@
 ---
 import Project from '../layouts/Project.astro';
-import Mermaid from '../components/Mermaid.astro';
+import ForgeDiagram from '../components/diagrams/ForgeDiagram.astro';
 import Capabilities from '../components/Capabilities.astro';
-
-const diagram = `stateDiagram-v2
-    [*] --> draft : /propose
-    draft --> proposed : /approve
-    proposed --> approved : confirmación
-    approved --> implemented : /apply
-    implemented --> archived : /verify + /archive
-    archived --> [*]`;
 
 const capabilities = [
   {
@@ -65,7 +57,7 @@ const stack = [
 
   <h2>El Ciclo de Vida</h2>
   <p>Forge define un ciclo de vida explícito para cada cambio de software:</p>
-  <Mermaid code={diagram} label="Ciclo de vida de un cambio en Forge: draft, proposed, approved, implemented y archived" />
+  <ForgeDiagram />
   <p>
     Cada etapa produce un artefacto validado contra un esquema YAML. Los agentes de IA ejecutan cada fase;
     los artefactos son la fuente de verdad.

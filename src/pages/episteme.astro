@@ -1,13 +1,7 @@
 ---
 import Project from '../layouts/Project.astro';
-import Mermaid from '../components/Mermaid.astro';
+import EpistemeDiagram from '../components/diagrams/EpistemeDiagram.astro';
 import Capabilities from '../components/Capabilities.astro';
-
-const diagram = `graph LR
-  A["Agente y hooks"] -->|MCP| E["episteme"]
-  E --> V["Vault Markdown"]
-  E --> I["Índice de búsqueda"]
-  O["Obsidian"] --> V`;
 
 const capabilities = [
   {
@@ -62,7 +56,7 @@ const stack = [
   </p>
 
   <h2>Cómo funciona</h2>
-  <Mermaid code={diagram} label="El agente y sus hooks llaman a episteme por MCP; episteme escribe en el vault Markdown y mantiene un índice de búsqueda; Obsidian abre el mismo vault" />
+  <EpistemeDiagram />
   <ol>
     <li>
       El agente usa las herramientas de episteme cuando las necesita y los hooks las llaman solos en momentos

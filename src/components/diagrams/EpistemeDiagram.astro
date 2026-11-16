@@ -1,0 +1,49 @@
+---
+import Diagram from '../Diagram.astro';
+
+const W = 136;
+const H = 52;
+
+const nodes = [
+  { x: 24, y: 82, name: 'Agente y hooks', sub: 'cliente MCP' },
+  { x: 220, y: 82, name: 'episteme', sub: 'servidor MCP', focal: true },
+  { x: 408, y: 32, name: 'Vault Markdown', sub: 'notas .md' },
+  { x: 408, y: 132, name: 'Índice', sub: 'SQLite FTS5' },
+  { x: 584, y: 32, name: 'Obsidian', sub: 'o cualquier editor' },
+];
+---
+
+<Diagram
+  id="episteme"
+  title="Cómo funciona episteme"
+  desc="El agente y sus hooks llaman a episteme por MCP; episteme escribe en el vault Markdown y mantiene un índice de búsqueda; Obsidian abre el mismo vault."
+  width={744}
+  height={216}
+>
+  <line class="d-line is-accent" x1="160" y1="108" x2="220" y2="108"></line>
+  <text class="d-cmd" x="190" y="98" text-anchor="middle">MCP</text>
+  <path class="d-line" d="M356 100 H374 Q382 100 382 92 V66 Q382 58 390 58 H408"></path>
+  <path class="d-line" d="M356 116 H374 Q382 116 382 124 V150 Q382 158 390 158 H408"></path>
+  <line class="d-line" x1="584" y1="58" x2="544" y2="58"></line>
+  <text class="d-cmd" x="564" y="48" text-anchor="middle">ABRE</text>
+
+  <circle
+    class="d-token"
+    r="3.5"
+    aria-hidden="true"
+    style="offset-path: path('M92 108 H300 V100 H374 Q382 100 382 92 V66 Q382 58 390 58 H476'); --d-dur: 5s"></circle>
+
+  {
+    nodes.map((n) => (
+      <g>
+        <rect class:list={['d-node', { 'is-focal': n.focal }]} x={n.x} y={n.y} width={W} height={H} rx="6" />
+        <text class="d-name" x={n.x + W / 2} y={n.y + 23}>
+          {n.name}
+        </text>
+        <text class="d-sub" x={n.x + W / 2} y={n.y + 39}>
+          {n.sub}
+        </text>
+      </g>
+    ))
+  }
+</Diagram>

@@ -10,6 +10,4 @@ export default defineConfig({
   // Compresión sin pérdida; la regla JSX de Astro 7 borraría espacios entre elementos en línea.
   compressHTML: true,
   integrations: [sitemap()],
-  // Mermaid se carga con import() dinámico y solo en páginas con diagramas; sus chunks grandes son esperados.
-  vite: { build: { chunkSizeWarningLimit: 2000 } },
 });

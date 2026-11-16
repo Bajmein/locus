@@ -1,0 +1,64 @@
+---
+import Diagram from '../Diagram.astro';
+
+const W = 112;
+const H = 40;
+
+// Escalera: cada estado baja un peldaño; `via` es lo que dispara el paso al siguiente
+const states = [
+  { name: 'draft', via: '/approve' },
+  { name: 'proposed', via: 'confirmación' },
+  { name: 'approved', via: '/apply' },
+  { name: 'implemented', via: '/verify + /archive' },
+  { name: 'archived', via: null },
+].map((s, i) => ({ ...s, x: 24 + i * 128, y: 64 + i * 52 }));
+---
+
+<Diagram
+  id="forge"
+  title="Ciclo de vida de un cambio en Forge"
+  desc="Un cambio nace con /propose en estado draft, pasa a proposed con /approve, a approved con la confirmación, a implemented con /apply y termina en archived con /verify y /archive."
+  width={680}
+  height={376}
+>
+  <line class="d-line" x1="80" y1="30" x2="80" y2="64"></line>
+  <text class="d-cmd" x="94" y="50">/propose</text>
+
+  {
+    states
+      .filter((s) => s.via)
+      .map((s) => (
+        <>
+          <path
+            class="d-line"
+            d={`M${s.x + W} ${s.y + 20} H${s.x + 176} Q${s.x + 184} ${s.y + 20} ${s.x + 184} ${s.y + 28} V${s.y + 52}`}
+          />
+          <text class="d-cmd" x={s.x + W + 8} y={s.y + 11}>
+            {s.via}
+          </text>
+        </>
+      ))
+  }
+
+  <line class="d-line" x1="592" y1="312" x2="592" y2="342"></line>
+
+  <circle
+    class="d-token"
+    r="3.5"
+    aria-hidden="true"
+    style="offset-path: path('M80 30 V84 H208 V136 H336 V188 H464 V240 H592 V342'); --d-dur: 8s"></circle>
+
+  <circle class="d-dot" cx="80" cy="24" r="6"></circle>
+  {
+    states.map((s) => (
+      <g>
+        <rect class:list={['d-node', { 'is-focal': !s.via }]} x={s.x} y={s.y} width={W} height={H} rx="8" />
+        <text class="d-name" x={s.x + W / 2} y={s.y + 25}>
+          {s.name}
+        </text>
+      </g>
+    ))
+  }
+  <circle class="d-ring" cx="592" cy="350" r="8"></circle>
+  <circle class="d-dot" cx="592" cy="350" r="4.5"></circle>
+</Diagram>

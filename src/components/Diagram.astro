@@ -1,0 +1,180 @@
+---
+interface Props {
+  /** Prefijo de los id del SVG; único por página */
+  id: string;
+  title: string;
+  desc: string;
+  width: number;
+  height: number;
+}
+
+const { id, title, desc, width, height } = Astro.props;
+---
+
+<figure class="diagram glass reveal">
+  <div class="scroll">
+    <svg
+      viewBox={`0 0 ${width} ${height}`}
+      role="img"
+      aria-labelledby={`${id}-title ${id}-desc`}
+      style={`min-width: ${Math.round(width * 0.8)}px`}
+    >
+      <title id={`${id}-title`}>{title}</title>
+      <desc id={`${id}-desc`}>{desc}</desc>
+      <defs>
+        <marker id="dg-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+          <polygon class="d-head" points="0 0, 8 3, 0 6"></polygon>
+        </marker>
+        <marker id="dg-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+          <polygon class="d-head is-accent" points="0 0, 8 3, 0 6"></polygon>
+        </marker>
+      </defs>
+      <slot />
+    </svg>
+  </div>
+</figure>
+
+<style>
+  .diagram {
+    margin: 2rem 0;
+    padding: 1.25rem;
+  }
+
+  /* El SVG no baja de un ancho legible: en móvil se desplaza dentro de la figura, no la página */
+  .scroll {
+    overflow-x: auto;
+  }
+
+  svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  /* Las piezas llegan por <slot>, así que sus clases son globales bajo .diagram */
+  .diagram :global(.d-zone) {
+    fill: color-mix(in srgb, var(--text) 2%, transparent);
+    stroke: color-mix(in srgb, var(--text) 10%, transparent);
+    stroke-width: 1;
+  }
+
+  .diagram :global(.d-eyebrow) {
+    font: 400 9px var(--font-mono);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    fill: var(--muted);
+  }
+
+  .diagram :global(.d-line) {
+    fill: none;
+    stroke: var(--muted);
+    stroke-width: 1.2;
+    marker-end: url('#dg-arrow');
+  }
+
+  .diagram :global(.d-line.is-accent) {
+    stroke: var(--accent);
+    marker-end: url('#dg-arrow-accent');
+  }
+
+  .diagram :global(.d-line.is-plain) {
+    marker-end: none;
+  }
+
+  .diagram :global(.d-head) {
+    fill: var(--muted);
+  }
+
+  .diagram :global(.d-head.is-accent) {
+    fill: var(--accent);
+  }
+
+  /* Relleno opaco: tapa las líneas y el punto de flujo que pasan por detrás */
+  .diagram :global(.d-node) {
+    fill: var(--surface);
+    stroke: color-mix(in srgb, var(--text) 20%, var(--surface));
+    stroke-width: 1;
+    transition: stroke 0.2s ease;
+  }
+
+  .diagram :global(.d-node.is-focal) {
+    fill: color-mix(in srgb, var(--accent) 12%, var(--surface));
+    stroke: var(--accent);
+  }
+
+  .diagram :global(g:hover > .d-node) {
+    stroke: var(--accent);
+  }
+
+  .diagram :global(.d-name) {
+    font: 600 13px var(--font-sans);
+    fill: var(--text);
+    text-anchor: middle;
+  }
+
+  .diagram :global(.d-sub) {
+    font: 400 10px var(--font-mono);
+    fill: var(--muted);
+    text-anchor: middle;
+  }
+
+  .diagram :global(.d-cmd) {
+    font: 400 10px var(--font-mono);
+    letter-spacing: 0.04em;
+    fill: var(--muted);
+  }
+
+  .diagram :global(.d-rule) {
+    stroke: color-mix(in srgb, var(--text) 10%, transparent);
+    stroke-width: 1;
+  }
+
+  .diagram :global(.d-dot) {
+    fill: var(--text);
+  }
+
+  .diagram :global(.d-ring) {
+    fill: none;
+    stroke: var(--text);
+    stroke-width: 1.2;
+  }
+
+  /* Punto de flujo: decorativo, solo con soporte y sin preferencia de movimiento reducido */
+  .diagram :global(.d-token) {
+    display: none;
+    fill: var(--accent);
+    offset-rotate: 0deg;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (offset-path: path('M0 0')) {
+      .diagram :global(.d-token) {
+        display: inline;
+        animation: d-flow var(--d-dur, 6s) linear infinite;
+      }
+    }
+  }
+
+  @keyframes d-flow {
+    0% {
+      offset-distance: 0%;
+      opacity: 0;
+    }
+
+    5%,
+    95% {
+      opacity: 1;
+    }
+
+    100% {
+      offset-distance: 100%;
+      opacity: 0;
+    }
+  }
+
+  @media print {
+    .diagram :global(.d-token) {
+      display: none;
+    }
+  }
+</style>

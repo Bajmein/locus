@@ -1,36 +1,7 @@
 ---
 import Project from '../layouts/Project.astro';
-import Mermaid from '../components/Mermaid.astro';
+import VigiliaDiagram from '../components/diagrams/VigiliaDiagram.astro';
 import Capabilities from '../components/Capabilities.astro';
-
-const diagram = `graph TB
-    subgraph Rust["Rust Core (PyO3)"]
-        DEC["Frame Decoder"]:::rust
-        SCH["Scheduler"]:::rust
-        SHM["Shared Memory Bus"]:::rust
-    end
-
-    subgraph Python["Python Orchestration"]
-        CFG["Config (Pydantic)"]
-        RULES["Rules Engine"]
-        API["FastAPI / MQTT"]
-    end
-
-    subgraph Inference["Inference Pipeline"]
-        ONNX["ONNX Runtime GPU"]:::rust
-        ZONES["Zone Evaluator"]
-    end
-
-    CAM["Camera Input"] --> DEC
-    DEC --> SHM
-    SHM --> ONNX
-    ONNX --> ZONES
-    ZONES --> RULES
-    RULES --> API
-    CFG --> SCH
-    SCH --> DEC
-
-    classDef rust fill:#e8a33d,stroke:#e8a33d,color:#0b0d10;`;
 
 const capabilities = [
   {
@@ -103,7 +74,7 @@ const stack = [
   </p>
   <pre class="flow"><code>Ingestión → Análisis en tiempo real → Evaluación de reglas → Acción</code></pre>
   <p>El operador define qué importa (zonas, comportamientos, umbrales); el sistema se encarga del resto.</p>
-  <Mermaid code={diagram} label="Arquitectura de Vigilia: núcleo en Rust, orquestación en Python y pipeline de inferencia" />
+  <VigiliaDiagram />
   <p>Vigilia se construyó con <a href="/forge/">Forge</a>, mi pipeline de desarrollo guiado por especificaciones.</p>
 
   <h2>Capacidades</h2>
