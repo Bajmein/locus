@@ -22,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Acciones de GitHub en Node 24: `actions/checkout` v7, `actions/setup-node` v7, `actions/upload-pages-artifact` v5 y `actions/deploy-pages` v5. TypeScript se queda en 6, porque `@astrojs/check` aún no acepta la 7.
 - Proyectos ordenados con los de agentes primero (episteme, Forge, Vigilia, Vigilia Edge), con tarjetas más altas y los campos `group` y `period` en `src/data/projects.ts`.
 - Hero, navegación («Agentes» reemplaza a «Experiencia» para que la cabecera quepa en 360 px) y metadescripción del sitio actualizados; títulos de sección con antetítulo y barra de acento animada con el scroll; transición entre páginas más suave.
 - Versión de episteme actualizada a v0.13.
