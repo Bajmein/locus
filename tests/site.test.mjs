@@ -29,6 +29,15 @@ function distFiles(ext, dir = DIST) {
 }
 const htmlFiles = () => distFiles('.html');
 
+// Todo el CSS del build: hojas de dist/_astro y los <style> incrustados en cada página
+const builtCss = () =>
+  [
+    ...distFiles('.css').map((file) => readFileSync(file, 'utf8')),
+    ...htmlFiles().flatMap((file) =>
+      [...readFileSync(file, 'utf8').matchAll(/<style[^>]*>([\s\S]*?)<\/style>/g)].map((m) => m[1]),
+    ),
+  ].join('\n');
+
 function meta(html, attr, value) {
   const re = new RegExp(`<meta[^>]*${attr}="${value}"[^>]*content="([^"]*)"`, 'i');
   return html.match(re)?.[1];
@@ -132,16 +141,8 @@ test('llms.txt enlaza las páginas del sitio con sus descripciones', () => {
 });
 
 test('tipografía: ningún texto bajo 12 px', () => {
-  const css = [
-    ...distFiles('.css').map((file) => readFileSync(file, 'utf8')),
-    ...htmlFiles().flatMap((file) =>
-      [...readFileSync(file, 'utf8').matchAll(/<style[^>]*>([^<]*)<\/style>/g)].map((m) => m[1]),
-    ),
-  ].join('\n');
   let checked = 0;
-  for (const [, selector, body] of css.matchAll(/([^{}]+)\{([^{}]*)\}/g)) {
-    // Texto de los diagramas SVG, en unidades del viewBox: pendiente de redibujo
-    if (selector.includes('.d-')) continue;
+  for (const [, selector, body] of builtCss().matchAll(/([^{}]+)\{([^{}]*)\}/g)) {
     for (const declaration of body.split(';')) {
       if (!/^\s*font(-size)?\s*:/.test(declaration)) continue;
       // Solo rem y px; pt (impresión del CV), em y vw no se evalúan
@@ -153,6 +154,24 @@ test('tipografía: ningún texto bajo 12 px', () => {
     }
   }
   assert.ok(checked > 0, 'no se evaluó ningún tamaño de letra');
+});
+
+test('diagramas: dos composiciones que nunca se dibujan por debajo de 1:1', () => {
+  const limits = { wide: 640, narrow: 280 };
+  for (const file of ['vigilia/index.html', 'forge/index.html', 'episteme/index.html']) {
+    const html = read(file);
+    const layouts = [...html.matchAll(/<svg class="layout is-(wide|narrow)"[^>]*>/g)];
+    assert.deepEqual(layouts.map((m) => m[1]), ['wide', 'narrow'], `${file}: composiciones ancha y angosta`);
+    for (const [tag, key] of layouts) {
+      const width = Number(tag.match(/viewBox="0 0 (\d+) \d+"/)?.[1]);
+      assert.ok(width > 0 && width <= limits[key], `${file}: la composición ${key} mide ${width}`);
+      // El texto de 12 unidades mide 12 px solo si el SVG no baja de su ancho: min-width: var(--w)
+      assert.match(tag, new RegExp(`style="--w: ?${width}px"`), `${file}: --w de la composición ${key}`);
+    }
+    assert.match(html, /<circle class="d-token"[^>]*offset-path/, `${file}: falta el punto animado`);
+  }
+  assert.match(builtCss(), /\.layout[^{]*\{[^}]*min-width:\s*var\(--w\)/, 'la composición debe fijar min-width: var(--w)');
+  assert.match(builtCss(), /@container \(width\s*<\s*640px\)/, 'el cambio de composición debe ocurrir a 640 px');
 });
 
 test('CNAME y robots.txt', () => {

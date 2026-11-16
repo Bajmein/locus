@@ -28,6 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - La página 404 lleva `noindex, follow` y no declara canonical ni `og:url`.
 - Etiquetas de stack de las tarjetas de proyecto a 12 px.
 - Metadescripciones del sitio y de Forge acortadas a 160 caracteres o menos; los datos de los proyectos pasan a `src/data/projects.ts`.
+- Diagramas de Vigilia, Forge y episteme redibujados con texto de 12 px reales como mínimo: cada uno trae una composición ancha y otra vertical para móvil, elegida con una container query, sin desplazamiento horizontal y conservando el punto animado.
 
 ## [0.2.0] - 2026-11-16
 
