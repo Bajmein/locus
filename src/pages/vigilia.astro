@@ -1,5 +1,6 @@
 ---
 import Project from '../layouts/Project.astro';
+import { getProject } from '../data/projects';
 import VigiliaDiagram from '../components/diagrams/VigiliaDiagram.astro';
 import Capabilities from '../components/Capabilities.astro';
 
@@ -43,15 +44,16 @@ const stack = [
   ['Acceso remoto', 'Tailscale, WebRTC/WHEP'],
   ['Tooling', 'mise, uv, ruff, dprint'],
 ];
+const p = getProject('vigilia');
 ---
 
 <Project
-  title="Vigilia Reforged"
-  description="Vigilia Reforged: plataforma de monitoreo inteligente con análisis de video en tiempo real, zonas de seguridad configurables y alertas multicanal."
-  tagline="De la vigilancia pasiva al monitoreo inteligente y proactivo."
-  stack={['Rust', 'Python', 'ONNX Runtime', 'NVDEC', 'PySide6']}
-  status="Versión de titulación — v0.8.1"
-  repoUrl="https://github.com/Bajmein/vigilia-reforged-showcase"
+  title={p.title}
+  description={p.description}
+  tagline={p.tagline}
+  stack={p.stack}
+  status={p.status}
+  repoUrl={p.repoUrl}
 >
   <p>
     Vigilia es una plataforma de seguridad que transforma flujos de video en inteligencia operativa en tiempo

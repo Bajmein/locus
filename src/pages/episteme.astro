@@ -1,5 +1,6 @@
 ---
 import Project from '../layouts/Project.astro';
+import { getProject } from '../data/projects';
 import EpistemeDiagram from '../components/diagrams/EpistemeDiagram.astro';
 import Capabilities from '../components/Capabilities.astro';
 
@@ -32,14 +33,16 @@ const stack = [
   ['Almacenamiento', 'Markdown compatible con Obsidian'],
   ['Tooling', 'uv, ruff, pytest'],
 ];
+const p = getProject('episteme');
 ---
 
 <Project
-  title="episteme"
-  description="episteme: memoria y documentación persistente para agentes de IA, servida por MCP desde un vault de notas Markdown que el usuario controla."
-  tagline="Documentación y memoria de proyectos para agentes, servida por MCP desde un vault Markdown."
-  stack={['Python', 'MCP', 'SQLite FTS5', 'Markdown']}
-  status="En uso diario — v0.11 (noviembre de 2026). Linux, macOS y Windows. Código privado."
+  title={p.title}
+  description={p.description}
+  tagline={p.tagline}
+  stack={p.stack}
+  status={p.status}
+  repoUrl={p.repoUrl}
 >
   <h2>El Problema</h2>
   <p>

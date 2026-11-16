@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import { site } from '../data/site';
+import { projects } from '../data/projects';
 import Icon from '../components/Icon.astro';
 
 const now = [
@@ -15,33 +16,6 @@ const now = [
   {
     label: 'Producto',
     text: 'Tercera versión de Vigilia, mi sistema de análisis de video en tiempo real.',
-  },
-];
-
-const projects = [
-  {
-    name: 'Vigilia Reforged',
-    href: '/vigilia/',
-    text: 'Análisis de video en tiempo real que detecta y responde a incidentes mientras ocurren.',
-    stack: ['Rust', 'Python', 'NVDEC'],
-  },
-  {
-    name: 'Vigilia Edge',
-    href: '/vigilia-edge/',
-    text: 'Vigilancia inteligente de escritorio con inferencia local, sin nube.',
-    stack: ['YOLO', 'TensorRT', 'PySide6'],
-  },
-  {
-    name: 'episteme',
-    href: '/episteme/',
-    text: 'Memoria y documentación persistente para agentes de IA, servida por MCP.',
-    stack: ['Python', 'MCP', 'SQLite FTS5'],
-  },
-  {
-    name: 'Forge',
-    href: '/forge/',
-    text: 'Pipeline de desarrollo guiado por especificaciones para agentes de código.',
-    stack: ['SDD', 'YAML', 'Python'],
   },
 ];
 
@@ -127,16 +101,16 @@ const tech = [
       {
         projects.map((p) => (
           <li>
-            <a class="project-card glass spot reveal" href={p.href}>
+            <a class="project-card glass spot reveal" href={`/${p.slug}/`}>
               <span class="card-top">
-                <span class="project-name" style={`view-transition-name: proyecto-${p.href.replaceAll('/', '')}`}>
-                  {p.name}
+                <span class="project-name" style={`view-transition-name: proyecto-${p.slug}`}>
+                  {p.title}
                 </span>
                 <span class="arrow" aria-hidden="true">→</span>
               </span>
-              <span class="project-text">{p.text}</span>
+              <span class="project-text">{p.card.text}</span>
               <span class="chips">
-                {p.stack.map((s) => (
+                {p.card.stack.map((s) => (
                   <span class="label chip">{s}</span>
                 ))}
               </span>

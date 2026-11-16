@@ -1,5 +1,6 @@
 ---
 import Project from '../layouts/Project.astro';
+import { getProject } from '../data/projects';
 import ForgeDiagram from '../components/diagrams/ForgeDiagram.astro';
 import Capabilities from '../components/Capabilities.astro';
 
@@ -32,15 +33,16 @@ const stack = [
   ['Validación', 'pytest, bandit, ty, vulture'],
   ['MCP', 'context7, github, serena, obsidian'],
 ];
+const p = getProject('forge');
 ---
 
 <Project
-  title="Forge"
-  description="Forge: herramienta de desarrollo guiado por especificaciones para agentes de IA, con un pipeline de artefactos validados que convierte ideas en código verificado."
-  tagline="Herramienta personal de desarrollo guiado por especificaciones (SDD) para trabajar con agentes de IA."
-  stack={['SDD', 'YAML', 'Markdown', 'Python']}
-  status="Ciclo cerrado — v0.1.0"
-  repoUrl="https://github.com/Bajmein/forge-showcase"
+  title={p.title}
+  description={p.description}
+  tagline={p.tagline}
+  stack={p.stack}
+  status={p.status}
+  repoUrl={p.repoUrl}
 >
   <h2>El Problema</h2>
   <p>

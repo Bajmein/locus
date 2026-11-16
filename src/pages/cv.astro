@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import { site } from '../data/site';
+import { site, cv } from '../data/site';
 
 const pdf = '/assets/pdf/cv_benjamin_criado.pdf';
 
@@ -45,10 +45,7 @@ const stack = [
 ];
 ---
 
-<Base
-  title="Currículum — Benjamín Criado"
-  description="Currículum de Benjamín Criado, Ingeniero Informático en La Serena, Chile: experiencia, proyectos, stack técnico, formación e idiomas."
->
+<Base title={cv.title} description={cv.description}>
   <article class="container cv">
     <header class="cv-head">
       <div>
