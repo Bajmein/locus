@@ -1,62 +1,42 @@
 # Locus - Copilot Instructions
 
-Locus es el sitio web portafolio personal, construido con **MkDocs Material**. El proyecto se enfoca en la creación de contenido estático y su validación mediante tests de UX/SEO.
+Locus es el portafolio de Benjamín Criado (https://benjamincriado.dev): un sitio estático hecho con
+**Astro**, desplegado en GitHub Pages.
 
-## Build, Test, and Lint
-
-Todas las tareas se gestionan a través de `mise` (configurado en `mise.toml`):
+## Comandos
 
 ```bash
-# Setup
-mise install                    # Instala herramientas (python 3.14, uv, ruff, dprint)
-mise run install                # Instala dependencias del sitio (mkdocs-material, etc.)
-
-# Desarrollo local
-mise run serve                  # Lanza el servidor de desarrollo local con live-reload
-mise run build                  # Genera los archivos estáticos (strict mode)
-
-# Calidad y Validación
-mise run test                   # Ejecuta tests de UX/SEO con pytest
-mise run lint                   # Ejecuta ruff y dprint
-mise run check                  # Ejecuta todo: lint + test + build
+npm install        # dependencias (Node 24)
+npm run dev        # servidor de desarrollo en http://localhost:4321
+npm run check      # astro check (tipos)
+npm run build      # genera dist/
+npm test           # node:test sobre dist/ (requiere build previo)
+npm run preview    # sirve dist/
 ```
 
-## Arquitectura
+## Estructura
 
-- **Motor Estático**: MkDocs con el tema Material.
-- **Contenido**: Markdown enriquecido con extensiones de Material (tabs, cards, grids).
-- **Validación**: Pytest para verificar que la configuración (`mkdocs.yml`) cumpla con los estándares de SEO y UX.
-- **CI/CD**: GitHub Actions para validación de PRs y despliegue automático a GitHub Pages.
+- `src/pages/`: una página `.astro` por URL (`index`, `vigilia`, `vigilia-edge`, `forge`, `episteme`, `cv`, `404`).
+- `src/layouts/Base.astro`: `<head>` (SEO, Open Graph, JSON-LD), cabecera y pie. `Project.astro`: páginas de proyecto.
+- `src/components/`: `Header`, `Footer`, `Mermaid` (diagramas en el cliente, solo donde se usa), `Capabilities`.
+- `src/styles/global.css`: tokens de diseño (`--bg`, `--accent`, …) y estilos base, incluida la impresión del CV.
+- `src/data/site.ts`: nombre, correo y enlaces sociales.
+- `public/`: archivos servidos tal cual (`CNAME`, `robots.txt`, `og.png`, PDF del CV).
+- `tests/site.test.mjs`: páginas, SEO, sitemap, privacidad y enlaces internos.
+- `tools/og.html`: fuente de `public/og.png` (no se despliega).
 
-## Convenciones de Contenido
+## Diseño
 
-### Estructura de Documentos
+- Un solo tema oscuro y un solo acento (`--accent`). No añadir colores.
+- Separación con líneas finas de 1 px, sin sombras, gradientes ni bordes muy redondeados.
+- Etiquetas, fechas y stack en `--font-mono`, mayúsculas. Fuentes Geist autoalojadas (`@fontsource-variable`).
+- Sin scroll horizontal en móvil; sin menú hamburguesa.
 
-Cada página Markdown (`.md`) debe incluir frontmatter YAML para SEO:
+## Reglas de contenido
 
-```yaml
----
-title: Mi Proyecto Genial
-description: Una descripción breve para los resultados de búsqueda.
----
-
-# Título de la Página
-...
-```
-
-### Rutas y Assets
-
-- **Imágenes**: Siempre guardarlas en `docs/assets/`.
-- **Navegación**: Se define únicamente en `mkdocs.yml`. No añadir archivos sin actualizar el menú.
-
-### Estilo
-
-- Usar **Admonitions** para notas y avisos.
-- Usar **Content Blocks** para secciones reutilizables.
-- Mantener un tono profesional pero personal.
-
-## Librerías principales
-
-- `mkdocs`: Generador de sitio estático.
-- `mkdocs-material`: Tema y extensiones visuales.
-- `pyyaml`: Validación de configuración YAML en tests.
+- Solo español (`lang="es"`), tono serio: sin emojis ni exclamaciones.
+- El cargo actual se describe como «Encargado de TI en un grupo de empresas», sin nombrar la empresa ni a personas.
+- No publicar el teléfono. No escribir «estudiante», «egresado» ni «junior».
+- No inventar cifras, clientes ni fechas.
+- El CV en PDF (`public/assets/pdf/cv_benjamin_criado.pdf`) se genera desde `/cv/` con Chrome headless
+  (`--print-to-pdf`); debe caber en dos páginas.
