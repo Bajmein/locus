@@ -1,0 +1,385 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+
+const pdf = '/assets/pdf/cv_benjamin_criado.pdf';
+
+const projects = [
+  {
+    name: 'Vigilia',
+    meta: 'Proyecto de título · Visión por computador en tiempo real · Rust y Python',
+    href: '/vigilia/',
+    items: [
+      'Procesamiento de video cuadro a cuadro en Rust con decodificación por hardware (NVDEC), para tiempos de respuesta críticos en hardware local.',
+      'Arquitectura de monitoreo autónomo sin dependencia de la nube: zonas de seguridad configurables, alertas multicanal e integración con sistemas VMS.',
+      'Capa de comunicación por memoria compartida entre el núcleo en Rust y la orquestación en Python.',
+    ],
+  },
+  {
+    name: 'Forge',
+    meta: 'Desarrollo guiado por especificaciones (SDD) para agentes de IA',
+    href: '/forge/',
+    items: [
+      'Pipeline con estados estrictos (propuesta, especificación, diseño, tareas, implementación, verificación y archivo) y artefactos validados contra esquemas YAML.',
+      'Agnóstico al agente: compatible con Claude Code, Gemini CLI y GitHub Copilot.',
+      'Validaciones locales deterministas (Ruff, Pytest) y revisión humana antes de cada cambio.',
+    ],
+  },
+  {
+    name: 'episteme',
+    meta: 'Memoria persistente para agentes de IA · Python, MCP, SQLite FTS5',
+    href: '/episteme/',
+    items: [
+      'Servidor MCP local que guarda decisiones, lecciones y documentación de proyectos en un vault Markdown compatible con Obsidian.',
+      'Búsqueda de texto completo en español con SQLite FTS5 y avisos de normas antes de editar cada archivo.',
+      'Mantención automática: detecta duplicados, memorias vencidas y enlaces rotos; rechaza guardar credenciales.',
+    ],
+  },
+];
+
+const stack = [
+  ['Lenguajes', 'Python (Pydantic v2, Typer, Hydra), Rust (sistemas de tiempo real), SQL (PostgreSQL), JavaScript.'],
+  ['IA y orquestación', 'Agentes de IA, Model Context Protocol (MCP), ingeniería de contexto, gestión de artefactos y estados de pipeline.'],
+  ['Arquitectura y calidad', 'Spec-Driven Development (SDD), Test-Driven Development (TDD), arquitectura hexagonal, Domain-Driven Design (DDD).'],
+  ['Infraestructura', 'Linux (Fedora), Docker, CI/CD (GitHub Actions), Edge AI, AWS, Azure.'],
+];
+---
+
+<Base
+  title="Currículum — Benjamín Criado"
+  description="Currículum de Benjamín Criado, Ingeniero Informático en La Serena, Chile: experiencia, proyectos, stack técnico, formación e idiomas."
+>
+  <article class="container cv">
+    <header class="cv-head">
+      <div>
+        <p class="label">Currículum</p>
+        <h1>{site.fullName}</h1>
+        <p class="role">Ingeniero Informático · Desarrollo de software y automatización con IA</p>
+        <ul class="contact">
+          <li>{site.location}</li>
+          <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
+          <li><a href={site.github}>github.com/Bajmein</a></li>
+          <li><a href={site.linkedin}>linkedin.com/in/benjamin-criado-rossa</a></li>
+        </ul>
+      </div>
+      <a class="btn btn-primary no-print" href={pdf} download>Descargar PDF</a>
+    </header>
+
+    <section class="cv-section">
+      <h2 class="label">Perfil</h2>
+      <div>
+        <p>
+          Ingeniero Informático enfocado en desarrollo de software y automatización con IA. Trabajo con la
+          herramienta adecuada para cada problema: Rust para latencia crítica y Python para orquestación.
+          Diseño flujos de trabajo con agentes de IA apoyados en especificaciones formales. Tres años de
+          residencia y trabajo en el extranjero respaldan mi autonomía y un inglés avanzado.
+        </p>
+      </div>
+    </section>
+
+    <section class="cv-section">
+      <h2 class="label">Experiencia</h2>
+      <div>
+        <div class="entry">
+          <div class="entry-head">
+            <h3>Encargado de TI <span class="muted">· Grupo de empresas, remoto</span></h3>
+            <span class="label">oct. 2026 – presente</span>
+          </div>
+          <p>Responsable del área de tecnología, con dependencia de gerencia general.</p>
+          <ul>
+            <li>Desarrollo y mantención de los sitios web corporativos.</li>
+            <li>Integraciones entre sistemas y automatización de procesos.</li>
+            <li>Diseño e implementación de agentes de IA.</li>
+            <li>Gestión de requerimientos, proveedores y reportes de avance.</li>
+          </ul>
+        </div>
+        <div class="entry">
+          <div class="entry-head">
+            <h3>Práctica profesional <span class="muted">· Desarrollo web y automatización</span></h3>
+            <span class="label">jul. 2026 – sep. 2026</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cv-section">
+      <h2 class="label">Proyectos</h2>
+      <div>
+        {
+          projects.map((p) => (
+            <div class="entry">
+              <div class="entry-head">
+                <h3><a href={p.href}>{p.name}</a></h3>
+              </div>
+              <p class="muted meta">{p.meta}</p>
+              <ul>
+                {p.items.map((i) => <li>{i}</li>)}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="cv-section">
+      <h2 class="label">Stack técnico</h2>
+      <dl class="stack">
+        {
+          stack.map(([k, v]) => (
+            <div>
+              <dt>{k}</dt>
+              <dd>{v}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </section>
+
+    <section class="cv-section">
+      <h2 class="label">Formación</h2>
+      <div>
+        <div class="entry">
+          <div class="entry-head">
+            <h3>Ingeniería en Informática <span class="muted">· INACAP</span></h3>
+            <span class="label">2021 – 2025</span>
+          </div>
+          <ul>
+            <li>Titulado.</li>
+            <li>Destacado en proyectos de I+E+TT y feria Go Innova.</li>
+            <li>Destacado en programación y cloud (AWS).</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="cv-section">
+      <h2 class="label">Experiencia internacional</h2>
+      <div>
+        <div class="entry">
+          <div class="entry-head">
+            <h3>Residencia y trabajo en el extranjero</h3>
+            <span class="label">2016 – 2019</span>
+          </div>
+          <ul>
+            <li>Nueva Zelanda y Australia (visas Working Holiday).</li>
+            <li>Estancias en Singapur y Malasia.</li>
+            <li>Residencia en Europa: Alemania, Italia, Finlandia y Estonia.</li>
+            <li>Ciudadanía italiana: autorización de trabajo en la Unión Europea.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="cv-section">
+      <h2 class="label">Idiomas</h2>
+      <dl class="stack">
+        <div><dt>Español</dt><dd>Nativo</dd></div>
+        <div><dt>Inglés</dt><dd>Avanzado</dd></div>
+      </dl>
+    </section>
+  </article>
+</Base>
+
+<style>
+  .cv {
+    max-width: calc(52rem + 2 * var(--gutter));
+    padding-block: 3rem 4.5rem;
+  }
+
+  .cv-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding-bottom: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .cv-head .label {
+    margin-bottom: 0.75rem;
+  }
+
+  .cv-head h1 {
+    font-size: clamp(1.875rem, 4.5vw, 2.5rem);
+    margin-bottom: 0.4rem;
+  }
+
+  .role {
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+
+  .contact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.25rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.9375rem;
+    color: var(--muted);
+  }
+
+  .contact li {
+    margin: 0;
+  }
+
+  .contact a {
+    color: var(--muted);
+  }
+
+  .contact a:hover {
+    color: var(--accent);
+  }
+
+  .cv-section {
+    display: grid;
+    grid-template-columns: 11rem minmax(0, 1fr);
+    gap: 0.75rem 2rem;
+    padding-block: 1.75rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .cv-section > h2 {
+    margin: 0;
+    padding-top: 0.2rem;
+    color: var(--accent);
+  }
+
+  .entry + .entry {
+    margin-top: 1.5rem;
+  }
+
+  .entry-head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.25rem 1rem;
+  }
+
+  .entry h3 {
+    margin: 0;
+    font-size: 1.0625rem;
+  }
+
+  .entry h3 .muted {
+    font-weight: 400;
+  }
+
+  .entry h3 a {
+    text-decoration: none;
+  }
+
+  .entry p {
+    margin: 0.4rem 0 0.5rem;
+  }
+
+  .entry .meta {
+    font-size: 0.9375rem;
+  }
+
+  .entry ul {
+    margin: 0.5rem 0 0;
+    color: var(--text);
+  }
+
+  .entry li {
+    font-size: 0.9688rem;
+  }
+
+  .stack {
+    margin: 0;
+  }
+
+  .stack > div {
+    display: grid;
+    grid-template-columns: 11rem minmax(0, 1fr);
+    gap: 0.25rem 1.5rem;
+    padding-block: 0.35rem;
+  }
+
+  .stack dt {
+    font-weight: 600;
+  }
+
+  .stack dd {
+    margin: 0;
+    color: var(--muted);
+  }
+
+  @media (max-width: 640px) {
+    .cv-section,
+    .stack > div {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media print {
+    .cv {
+      max-width: none;
+      padding: 0;
+    }
+
+    .cv-head {
+      padding-bottom: 0.6rem;
+    }
+
+    .cv-head .label {
+      display: none;
+    }
+
+    .contact {
+      font-size: 9.5pt;
+    }
+
+    .cv-head h1 {
+      font-size: 20pt;
+      color: #000;
+    }
+
+    .role,
+    .contact,
+    .contact a,
+    .stack dd,
+    .muted {
+      color: #333;
+    }
+
+    .cv-section {
+      grid-template-columns: 8.5rem minmax(0, 1fr);
+      gap: 0.25rem 1.25rem;
+      padding-block: 0.65rem;
+      border-top: 1px solid #ccc;
+      break-inside: avoid;
+    }
+
+    .cv-section > h2 {
+      color: #000;
+      font-weight: 600;
+    }
+
+    .entry + .entry {
+      margin-top: 0.6rem;
+    }
+
+    .entry h3 {
+      font-size: 10.5pt;
+    }
+
+    .entry li,
+    .entry .meta {
+      font-size: 9.5pt;
+    }
+
+    .entry li + li {
+      margin-top: 0.1em;
+    }
+
+    .stack > div {
+      grid-template-columns: 9.5rem minmax(0, 1fr);
+      padding-block: 0.1rem;
+    }
+  }
+</style>
