@@ -1,0 +1,66 @@
+---
+import Project from '../layouts/Project.astro';
+
+const stack = [
+  ['Interfaz', 'PySide6 + OpenGL', 'UI nativa y renderizado GPU de video'],
+  ['Inferencia', 'YOLOv11/v12 · TensorRT + ONNX Runtime GPU', 'Detección con backend acelerado seleccionable'],
+  ['Cognición', 'Rust (PyO3) + nalgebra', 'Multi-tracker, Kalman, geometría computacional'],
+  ['Captura', 'VPF + NVIDIA Direct Capture', 'Captura acelerada por GPU'],
+  ['Observabilidad', 'Prometheus + Loguru', 'Métricas de producción y logging estructurado'],
+  ['Configuración', 'Hydra + Pydantic V2', 'Configuración jerárquica con validación de esquemas'],
+  ['Respuesta', 'Síntesis de audio + Email/SMS', 'Disuasión activa y notificación remota'],
+];
+---
+
+<Project
+  title="Vigilia Edge"
+  description="Vigilia Edge: vigilancia inteligente de escritorio con inferencia local, núcleo en Rust, interfaz PySide6 y pipeline de video de alto rendimiento."
+  tagline="Sistema de vigilancia inteligente que corre completamente en local: sin nube y sin latencia de red."
+  stack={['YOLO', 'TensorRT', 'Rust', 'PySide6']}
+  status="v1.0 — operativa en estaciones de trabajo locales"
+  repoUrl="https://github.com/Bajmein/vigilia-edge-showcase"
+>
+  <h2>Qué hace</h2>
+  <p>Vigilancia local sin dependencia de la nube, con latencia predecible y sin comprometer la privacidad.</p>
+  <ul>
+    <li>
+      Detecta y rastrea objetos en video en tiempo real mediante inferencia local (YOLOv11/v12), con backend
+      acelerado seleccionable: TensorRT para máximo rendimiento u ONNX Runtime GPU como alternativa portable.
+    </li>
+    <li>Renderiza las detecciones sobre el video en una interfaz nativa de escritorio PySide6 (Qt 6).</li>
+    <li>Mueve los cuadros de la cámara a la pantalla con baja latencia mediante un pipeline de alto rendimiento.</li>
+    <li>Gestiona todo el procesamiento a través de un núcleo en Rust compilado como extensión nativa.</li>
+  </ul>
+
+  <h2>Stack Técnico</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th scope="col">Capa</th><th scope="col">Tecnología</th><th scope="col">Rol</th></tr>
+      </thead>
+      <tbody>
+        {stack.map(([k, t, r]) => <tr><td>{k}</td><td>{t}</td><td>{r}</td></tr>)}
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Sistema de respuesta activa</h2>
+  <p>
+    Vigilia Edge no es un visualizador pasivo. Cuando el motor de reglas confirma una amenaza, el sistema
+    activa dos mecanismos de respuesta:
+  </p>
+  <ul>
+    <li>
+      <strong>Audio disuasorio</strong>: síntesis y reproducción de alarmas sonoras para disuadir al intruso en
+      el momento de la detección.
+    </li>
+    <li>
+      <strong>Notificaciones remotas</strong>: integración con Email y SMS para alertar al operador desde
+      cualquier ubicación cuando la amenaza se confirma.
+    </li>
+  </ul>
+  <p>
+    La arquitectura completa está descrita en el
+    <a href="https://github.com/Bajmein/vigilia-edge-showcase/blob/main/architecture_overview.md">architecture_overview del repositorio vitrina</a>.
+  </p>
+</Project>
