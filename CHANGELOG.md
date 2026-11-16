@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Sección «Trabajo con agentes» (`/#agentes`) en la portada: línea de tiempo Forge, pulse, fabrik y episteme, y cuatro principios de método.
+- Íconos SVG en línea por proyecto (`ProjectIcon.astro`), animados por partes al pasar el cursor por la tarjeta y siempre en la página del proyecto; estáticos con `prefers-reduced-motion`.
+- Tono por proyecto (`--tone-forge`, `--tone-episteme`, `--tone-vigilia`, `--tone-vigilia-edge`): reemplaza al acento en la tarjeta y en la página de cada proyecto.
+- Carga diferida de las secciones bajo el pliegue con `content-visibility: auto`.
+- Tests del orden y el tono de las tarjetas, de la línea de tiempo de agentes y del tono por página; la prueba de privacidad cubre más cadenas prohibidas.
 - Íconos de línea (Phosphor Icons) para correo, GitHub y LinkedIn en el contacto y el pie, como SVG en `src/assets/icons/` que heredan el color del enlace.
 - `llms.txt` generado en el build desde los mismos datos que el SEO de cada página (`src/pages/llms.txt.ts`).
 - Precarga de la fuente del titular (Geist, subconjunto latino).
@@ -17,6 +22,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Proyectos ordenados con los de agentes primero (episteme, Forge, Vigilia, Vigilia Edge), con tarjetas más altas y los campos `group` y `period` en `src/data/projects.ts`.
+- Hero, navegación («Agentes» reemplaza a «Experiencia» para que la cabecera quepa en 360 px) y metadescripción del sitio actualizados; títulos de sección con antetítulo y barra de acento animada con el scroll; transición entre páginas más suave.
+- Versión de episteme actualizada a v0.13.
 - Fondo con resplandor tenue del acento y grilla fina; paneles translúcidos («glass») en cabecera, contacto, diagramas y página 404.
 - Portada: el hero pasa a dos columnas con el panel «Ahora» a la derecha; se quita la numeración de las secciones.
 - Proyectos en tarjetas con el stack en etiquetas y un foco de luz que sigue al cursor.
