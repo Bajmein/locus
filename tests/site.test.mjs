@@ -174,6 +174,25 @@ test('diagramas: dos composiciones que nunca se dibujan por debajo de 1:1', () =
   assert.match(builtCss(), /@container \(width\s*<\s*640px\)/, 'el cambio de composición debe ocurrir a 640 px');
 });
 
+test('tono por proyecto en su página', () => {
+  for (const slug of ['vigilia', 'vigilia-edge', 'forge', 'episteme']) {
+    const html = read(`${slug}/index.html`);
+    assert.match(
+      html,
+      new RegExp(`<html lang="es"[^>]*style="--accent:\\s?var\\(--tone-${slug}\\)"`),
+      `/${slug}/: tono en <html>`,
+    );
+  }
+  for (const file of ['index.html', 'cv/index.html', '404.html']) {
+    const tag = read(file).match(/<html[^>]*>/)[0];
+    assert.ok(!tag.includes('--tone-'), `${file}: no debe fijar un tono`);
+  }
+  const css = builtCss();
+  for (const slug of ['forge', 'episteme', 'vigilia', 'vigilia-edge']) {
+    assert.match(css, new RegExp(`--tone-${slug}:\\s*#`), `falta --tone-${slug}`);
+  }
+});
+
 test('CNAME y robots.txt', () => {
   assert.equal(read('CNAME').trim(), 'benjamincriado.dev');
   assert.match(read('robots.txt'), /Sitemap: https:\/\/benjamincriado\.dev\/sitemap-index\.xml/);

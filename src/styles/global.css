@@ -4,6 +4,11 @@
  *   --muted sobre --bg       6,27:1
  *   --muted sobre --surface  5,89:1
  *   --accent sobre --bg      9,02:1
+ * Tonos por proyecto (sobre --bg / sobre --surface; --accent-ink sobre el tono también pasa):
+ *   --tone-forge        #e8a33d  9,02:1 / 8,48:1
+ *   --tone-episteme     #b49cf2  8,32:1 / 7,82:1
+ *   --tone-vigilia      #5fc896  9,44:1 / 8,88:1
+ *   --tone-vigilia-edge #6fb0ee  8,45:1 / 7,95:1
  * Tipografía: ningún texto bajo 12 px (0.75rem).
  */
 :root {
@@ -14,6 +19,11 @@
   --muted: #8b939e;
   --accent: #e8a33d;
   --accent-ink: #0b0d10;
+  /* Tono por proyecto: en su página reemplaza a --accent (Base.astro, prop tone) */
+  --tone-forge: #e8a33d;
+  --tone-episteme: #b49cf2;
+  --tone-vigilia: #5fc896;
+  --tone-vigilia-edge: #6fb0ee;
   --font-sans: 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
   --font-mono: 'Geist Mono Variable', ui-monospace, monospace;
   --w-page: 1080px;
@@ -284,8 +294,9 @@ hr {
 }
 
 .btn-primary:hover {
-  background: #f0b45a;
-  border-color: #f0b45a;
+  /* Más claro que el acento o el tono de la página */
+  background: color-mix(in srgb, var(--accent) 82%, #fff);
+  border-color: color-mix(in srgb, var(--accent) 82%, #fff);
   color: var(--accent-ink);
 }
 
