@@ -199,6 +199,17 @@ test('trabajo con agentes: línea de tiempo en orden', () => {
   assert.ok(section.includes('href="/episteme/"'), 'falta el enlace a /episteme/');
 });
 
+test('portada: método en #agentes y sin sección Enfoque', () => {
+  const html = read('index.html');
+  const start = html.indexOf('id="agentes"');
+  assert.ok(start >= 0, 'falta id="agentes"');
+  const section = html.slice(start, html.indexOf('</section>', start));
+  const method = section.slice(section.indexOf('class="method'), section.indexOf('</ul>', section.indexOf('class="method')));
+  assert.equal(count(method, /<li/g), 6, 'el método tiene seis ítems');
+  assert.ok(!html.includes('Cómo decido'), 'sobra «Cómo decido»');
+  assert.ok(!html.includes('id="enfoque"'), 'sobra la sección #enfoque');
+});
+
 test('tono por proyecto en su página', () => {
   for (const slug of ['vigilia', 'vigilia-edge', 'forge', 'episteme']) {
     const html = read(`${slug}/index.html`);

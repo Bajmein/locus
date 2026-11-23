@@ -89,20 +89,13 @@ const method = [
     title: 'Planes que se ejecutan en limpio',
     text: 'Cada plan lleva sus fuentes, sus decisiones cerradas y su verificación, para que otro agente lo ejecute sin la conversación previa.',
   },
-];
-
-const principles = [
-  {
-    title: 'La herramienta correcta',
-    text: 'Rust donde la latencia es crítica, Python para orquestar. La tecnología se elige por el problema.',
-  },
-  {
-    title: 'Local primero',
-    text: 'Sistemas que corren en el equipo del usuario, sin depender de la nube ni exponer sus datos.',
-  },
   {
     title: 'Las personas deciden',
     text: 'Los agentes proponen y ejecutan; las decisiones de producto y el merge los toma una persona.',
+  },
+  {
+    title: 'La herramienta correcta',
+    text: 'Rust donde la latencia es crítica, Python para orquestar. La tecnología se elige por el problema.',
   },
 ];
 
@@ -240,23 +233,6 @@ const tech = [
       }
     </ol>
     <p class="more"><a href="/cv/">Ver currículum completo →</a></p>
-  </section>
-
-  <section class="container section lazy" aria-labelledby="enfoque">
-    <div class="section-head">
-      <p class="label">Enfoque</p>
-      <h2 id="enfoque">Cómo decido</h2>
-    </div>
-    <div class="principles">
-      {
-        principles.map((p) => (
-          <div class="principle">
-            <h3>{p.title}</h3>
-            <p>{p.text}</p>
-          </div>
-        ))
-      }
-    </div>
   </section>
 
   <section class="container section lazy" aria-labelledby="tecnologias">
@@ -547,6 +523,8 @@ const tech = [
     position: relative;
     margin: 0;
     padding-top: 2rem;
+    display: flex;
+    flex-direction: column;
   }
 
   .dot {
@@ -587,6 +565,7 @@ const tech = [
   }
 
   .figures {
+    margin-top: auto;
     color: var(--text);
   }
 
@@ -622,25 +601,21 @@ const tech = [
 
   .method {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     list-style: none;
     padding: 0;
     margin: 0;
-    border-top: 1px solid var(--border);
   }
 
   .method li {
     margin: 0;
     padding: 1.5rem 1.75rem 0.5rem 0;
+    border-top: 1px solid var(--border);
   }
 
-  .method li:nth-child(even) {
+  .method li:not(:nth-child(3n + 1)) {
     padding-left: 1.75rem;
     border-left: 1px solid var(--border);
-  }
-
-  .method li:nth-child(n + 3) {
-    border-top: 1px solid var(--border);
   }
 
   .method p {
@@ -713,27 +688,6 @@ const tech = [
 
   .more a:hover {
     text-decoration: underline;
-  }
-
-  /* Enfoque */
-  .principles {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    border-top: 1px solid var(--border);
-  }
-
-  .principle {
-    padding: 1.5rem 1.75rem 0.5rem 0;
-  }
-
-  .principle + .principle {
-    padding-left: 1.75rem;
-    border-left: 1px solid var(--border);
-  }
-
-  .principle p {
-    color: var(--muted);
-    font-size: 0.9688rem;
   }
 
   /* Tecnologías */
@@ -844,27 +798,9 @@ const tech = [
     }
 
     .method li,
-    .method li:nth-child(even) {
+    .method li:not(:nth-child(3n + 1)) {
       padding: 1.25rem 0 0.25rem;
       border-left: 0;
-    }
-
-    .method li + li {
-      border-top: 1px solid var(--border);
-    }
-
-    .principles {
-      grid-template-columns: 1fr;
-    }
-
-    .principle,
-    .principle + .principle {
-      padding: 1.25rem 0 0.25rem;
-      border-left: 0;
-    }
-
-    .principle + .principle {
-      border-top: 1px solid var(--border);
     }
   }
 
