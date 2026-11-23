@@ -267,10 +267,11 @@ const tech = [
         <p class="muted">Disponible para conversar sobre proyectos y colaboraciones.</p>
         <a class="mail" href={`mailto:${site.email}`}><Icon name="mail" />{site.email}</a>
       </div>
-      <ul class="social">
-        <li><a href={site.github} rel="me"><Icon name="github" />GitHub</a></li>
-        <li><a href={site.linkedin} rel="me"><Icon name="linkedin" />LinkedIn</a></li>
-      </ul>
+      <div class="contact-actions">
+        <button type="button" class="btn copy" data-copy={site.email} hidden>Copiar correo</button>
+        <a class="btn" href="/assets/pdf/cv_benjamin_criado.pdf" download>Descargar CV (PDF)</a>
+        <span class="label copy-status" role="status" aria-live="polite"></span>
+      </div>
     </div>
   </section>
 </Base>
@@ -758,22 +759,24 @@ const tech = [
     margin-bottom: 0;
   }
 
-  .social {
+  .contact-actions {
     display: flex;
-    gap: 1.5rem;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .social li {
-    margin: 0;
-  }
-
-  .social a {
-    display: inline-flex;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 0.5em;
+    gap: 0.75rem 1rem;
+  }
+
+  .copy {
+    font-family: inherit;
+    cursor: pointer;
+  }
+
+  .copy[hidden] {
+    display: none;
+  }
+
+  .copy-status {
+    min-height: 1em;
   }
 
   @media (max-width: 900px) {
@@ -847,3 +850,24 @@ const tech = [
     }
   }
 </style>
+
+<script>
+  const button = document.querySelector<HTMLButtonElement>('#contacto [data-copy]');
+  const status = document.querySelector<HTMLElement>('#contacto .copy-status');
+  if (button && status && navigator.clipboard) {
+    let timer: number | undefined;
+    button.hidden = false;
+    button.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(button.dataset.copy ?? '');
+        status.textContent = 'Copiado';
+      } catch {
+        status.textContent = 'No se pudo copiar';
+      }
+      window.clearTimeout(timer);
+      timer = window.setTimeout(() => {
+        status.textContent = '';
+      }, 2000);
+    });
+  }
+</script>
