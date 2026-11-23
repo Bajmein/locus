@@ -11,8 +11,8 @@ export const site = {
 } as const;
 
 export const nav = [
-  { label: 'Agentes', href: '/#agentes' },
   { label: 'Proyectos', href: '/#proyectos' },
+  { label: 'Método', href: '/#agentes' },
   { label: 'CV', href: '/cv/' },
   { label: 'Contacto', href: '/#contacto' },
 ] as const;

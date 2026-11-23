@@ -12,8 +12,8 @@ export interface Project {
   group: 'agentes' | 'vision';
   /** Período de trabajo, para la tarjeta */
   period: string;
-  /** Tarjeta de la portada */
-  card: { text: string; stack: string[] };
+  /** Tarjeta de la portada; context aclara la línea de tiempo cuando hace falta (Vigilia) */
+  card: { text: string; stack: string[]; context?: string };
 }
 
 // Orden de la portada: agentes primero
@@ -63,6 +63,7 @@ export const projects: Project[] = [
     card: {
       text: 'Análisis de video en tiempo real que detecta y responde a incidentes mientras ocurren.',
       stack: ['Rust', 'Python', 'NVDEC'],
+      context: 'Segunda generación de Vigilia, 2026',
     },
   },
   {
@@ -79,6 +80,7 @@ export const projects: Project[] = [
     card: {
       text: 'Vigilancia inteligente de escritorio con inferencia local, sin nube.',
       stack: ['YOLO', 'TensorRT', 'PySide6'],
+      context: 'Primera generación de Vigilia, 2025',
     },
   },
 ];
