@@ -2,6 +2,7 @@
 import Base from './Base.astro';
 import { site } from '../data/site';
 import ProjectIcon from '../components/ProjectIcon.astro';
+import { projects } from '../data/projects';
 
 interface Props {
   title: string;
@@ -14,6 +15,9 @@ interface Props {
 
 const { title, description, tagline, stack, status, repoUrl } = Astro.props;
 const slug = Astro.url.pathname.replaceAll('/', '');
+const index = projects.findIndex((p) => p.slug === slug);
+const next = projects[(index + 1) % projects.length];
+const period = projects[index]?.period;
 
 const schema = {
   '@type': 'SoftwareSourceCode',
@@ -43,10 +47,8 @@ const schema = {
       <aside class="glass meta" aria-label="Ficha del proyecto">
         <p class="label">Estado</p>
         <p class="status">{status}</p>
-        <p class="label">Stack</p>
-        <ul class="stack label">
-          {stack.map((item) => <li>{item}</li>)}
-        </ul>
+        <p class="label">Período</p>
+        <p class="status">{period}</p>
       </aside>
       <div class="body prose">
         <slot />
@@ -71,6 +73,24 @@ const schema = {
         <a class="btn" href={`mailto:${site.email}`}>{site.email}</a>
       </div>
     </footer>
+
+    <nav class="next" aria-label="Proyecto siguiente">
+      <a
+        class="project-card next-link glass spot"
+        href={`/${next.slug}/`}
+        style={`--accent: var(--tone-${next.slug})`}
+      >
+        <span class="label">Siguiente proyecto</span>
+        <span class="next-main">
+          <ProjectIcon slug={next.slug} />
+          <span class="next-text">
+            <span class="next-title">{next.title}</span>
+            <span class="next-desc">{next.card.text}</span>
+          </span>
+          <span class="arrow" aria-hidden="true">→</span>
+        </span>
+      </a>
+    </nav>
   </article>
 </Base>
 
@@ -147,25 +167,6 @@ const schema = {
     color: var(--text);
   }
 
-  .stack {
-    display: flex;
-    flex-direction: column;
-    gap: 0.35rem;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    color: var(--text);
-  }
-
-  .stack li {
-    margin: 0;
-  }
-
-  .stack li::before {
-    content: '/ ';
-    color: var(--accent);
-  }
-
   @media (max-width: 960px) {
     .project-grid {
       grid-template-columns: minmax(0, 1fr);
@@ -179,12 +180,6 @@ const schema = {
 
     .meta {
       position: static;
-    }
-
-    .stack {
-      flex-direction: row;
-      flex-wrap: wrap;
-      gap: 0.4rem 1.25rem;
     }
   }
 
@@ -218,5 +213,74 @@ const schema = {
 
   .project-foot .label {
     margin-bottom: 0.5rem;
+  }
+
+  .next {
+    margin-top: 3rem;
+    content-visibility: auto;
+    contain-intrinsic-size: auto 9rem;
+  }
+
+  .next-link {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1.25rem 1.5rem;
+    text-decoration: none;
+    color: var(--text);
+    transition: border-color 0.25s ease;
+  }
+
+  .next-link:hover,
+  .next-link:focus-visible {
+    border-color: var(--accent);
+  }
+
+  .next-link .label {
+    color: var(--accent);
+  }
+
+  .next-main {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .next-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    min-width: 0;
+    flex: 1;
+  }
+
+  .next-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+
+  .next-desc {
+    color: var(--muted);
+    font-size: 0.9375rem;
+  }
+
+  .next-link .arrow {
+    color: var(--muted);
+    transition:
+      color 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .next-link:hover .arrow,
+  .next-link:focus-visible .arrow {
+    color: var(--accent);
+    transform: translateX(0.25rem);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .next-link:hover .arrow,
+    .next-link:focus-visible .arrow {
+      transform: none;
+    }
   }
 </style>

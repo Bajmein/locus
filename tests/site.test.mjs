@@ -218,6 +218,22 @@ test('tono por proyecto en su página', () => {
   }
 });
 
+test('página de proyecto: enlaza al proyecto siguiente', () => {
+  const pares = [
+    ['episteme', 'forge'],
+    ['forge', 'vigilia'],
+    ['vigilia', 'vigilia-edge'],
+    ['vigilia-edge', 'episteme'],
+  ];
+  for (const [slug, siguiente] of pares) {
+    const html = read(`${slug}/index.html`);
+    const inicio = html.indexOf('aria-label="Proyecto siguiente"');
+    assert.ok(inicio >= 0, `/${slug}/: falta el nav del proyecto siguiente`);
+    const nav = html.slice(inicio, html.indexOf('</nav>', inicio));
+    assert.ok(nav.includes(`href="/${siguiente}/"`), `/${slug}/: debe enlazar a /${siguiente}/`);
+  }
+});
+
 test('CNAME y robots.txt', () => {
   assert.equal(read('CNAME').trim(), 'benjamincriado.dev');
   assert.match(read('robots.txt'), /Sitemap: https:\/\/benjamincriado\.dev\/sitemap-index\.xml/);
