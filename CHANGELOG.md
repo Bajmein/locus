@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Páginas de proyecto: tarjeta «Siguiente proyecto» al final, en orden cíclico y con el tono e ícono del proyecto siguiente.
+- Contacto: botón «Copiar correo» (solo con JavaScript y portapapeles disponibles, con aviso accesible) y enlace para descargar el CV en PDF.
+- Tests del enlace al proyecto siguiente, la sección activa y el logo de la cabecera, el método de `#agentes`, el contacto y los títulos en español.
+
+### Changed
+
+- Portada: la sección «Cómo decido» se integra en el método de `#agentes`, que pasa a seis ítems en tres columnas; las cifras de la línea de tiempo quedan alineadas al pie.
+- Hero con jerarquía en dos párrafos (titular en el color del texto y bajada atenuada); tarjetas de proyecto con íconos más grandes, «Ver proyecto» en lugar de la flecha sola y más aire en las de agentes.
+- Páginas de proyecto: la ficha lateral muestra el período en vez de repetir el stack.
+- Contacto sin los enlaces a GitHub y LinkedIn, que ya están en el pie.
+
+### Fixed
+
+- Cabecera: enlaces con 44 px de alto como objetivo táctil, «Proyectos» marcado como sección activa en las páginas de proyecto y logo con nombre accesible que incluye su texto visible.
+- Títulos de las páginas de proyecto con mayúsculas en español («El problema», «La solución», «El ciclo de vida», «Estado del proyecto», «Stack técnico»).
+
 ## [0.3.0] - 2026-11-16
 
 ### Added
