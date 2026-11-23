@@ -174,6 +174,16 @@ test('diagramas: dos composiciones que nunca se dibujan por debajo de 1:1', () =
   assert.match(builtCss(), /@container \(width\s*<\s*640px\)/, 'el cambio de composición debe ocurrir a 640 px');
 });
 
+test('títulos en español: sin mayúsculas al estilo inglés', () => {
+  const english = ['El Problema', 'La Solución', 'El Ciclo de Vida', 'Estado del Proyecto', 'Stack Técnico'];
+  for (const file of htmlFiles()) {
+    const html = readFileSync(file, 'utf8');
+    for (const title of english) {
+      assert.ok(!html.includes(title), `${file} contiene «${title}»`);
+    }
+  }
+});
+
 test('portada: agentes primero, con ícono y tono', () => {
   const html = read('index.html');
   const cards = [...html.matchAll(/<a[^>]*class="project-card[^"]*"[^>]*>[\s\S]*?<\/a>/g)].map((m) => m[0]);
