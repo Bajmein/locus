@@ -25,7 +25,7 @@ Solución de vigilancia inteligente diseñada para entornos locales con latencia
 ## Stack
 
 - **Sitio**: Astro (estático), GitHub Pages
-- **Diseño**: tema oscuro con paneles translúcidos, un tono por proyecto, íconos y animaciones en CSS nativo y diagramas SVG en línea, sin librerías en el cliente
+- **Diseño**: tema oscuro «Vigilia nocturna» ([DESIGN.md](DESIGN.md)), Archivo y Geist Mono, un tono por proyecto, íconos y animaciones en CSS nativo y diagramas SVG en línea, sin librerías en el cliente
 - **Validación**: `astro check` y `node:test` (páginas, SEO, JSON-LD, sitemap, `llms.txt`, imagen social, tipografía, orden y tono de los proyectos, privacidad, enlaces)
 - **Tooling**: Node 24, npm
 

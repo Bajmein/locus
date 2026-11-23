@@ -1,17 +1,19 @@
 ---
 interface Props {
   slug: string;
-  size?: 'md' | 'lg';
+  /** xl: marca de agua de la tarjeta de la portada (decorativa, sin view-transition) */
+  size?: 'md' | 'lg' | 'xl';
 }
 
 const { slug, size = 'md' } = Astro.props;
+const transition = size === 'xl' ? undefined : `view-transition-name: icono-${slug}`;
 const slugs = ['episteme', 'forge', 'vigilia', 'vigilia-edge'];
 if (!slugs.includes(slug)) {
   throw new Error(`ProjectIcon: slug desconocido «${slug}»`);
 }
 ---
 
-<span class={`project-icon is-${size}`} style={`view-transition-name: icono-${slug}`} aria-hidden="true">
+<span class={`project-icon is-${size}`} style={transition} aria-hidden="true">
   <svg
     viewBox="0 0 256 256"
     fill="none"
@@ -93,6 +95,14 @@ if (!slugs.includes(slug)) {
   .is-lg svg {
     width: 2rem;
     height: 2rem;
+  }
+  .is-xl {
+    border: 0;
+    background: none;
+  }
+  .is-xl svg {
+    width: 100%;
+    height: 100%;
   }
   svg {
     max-width: none;

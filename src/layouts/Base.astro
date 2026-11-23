@@ -1,8 +1,8 @@
 ---
-import '@fontsource-variable/geist';
+import '@fontsource-variable/archivo/wdth.css';
 import '@fontsource-variable/geist-mono';
 import '../styles/global.css';
-import geistLatin from '@fontsource-variable/geist/files/geist-latin-wght-normal.woff2?url';
+import archivoLatin from '@fontsource-variable/archivo/files/archivo-latin-wdth-normal.woff2?url';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { site } from '../data/site';
@@ -60,13 +60,13 @@ const jsonLd = {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="preload" as="font" type="font/woff2" href={geistLatin} crossorigin="anonymous" />
+    <link rel="preload" as="font" type="font/woff2" href={archivoLatin} crossorigin="anonymous" />
     <title>{title}</title>
     <meta name="description" content={description} />
     {noindex ? <meta name="robots" content="noindex, follow" /> : <link rel="canonical" href={canonical} />}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="sitemap" href="/sitemap-index.xml" />
-    <meta name="theme-color" content="#0b0d10" />
+    <meta name="theme-color" content="#0c1220" />
     <meta name="author" content={site.name} />
 
     <meta property="og:type" content="website" />

@@ -1,36 +1,36 @@
 /*
+ * Dirección «Vigilia nocturna» (ver DESIGN.md): cielo de noche de La Serena, una lámpara ámbar.
  * Contraste medido (WCAG AA, mínimo 4,5:1 para texto normal):
- *   --text sobre --bg       15,85:1
- *   --muted sobre --bg       6,27:1
- *   --muted sobre --surface  5,89:1
- *   --accent sobre --bg      9,02:1
- * Tonos por proyecto (sobre --bg / sobre --surface; --accent-ink sobre el tono también pasa):
- *   --tone-forge        #e8a33d  9,02:1 / 8,48:1
- *   --tone-episteme     #b49cf2  8,32:1 / 7,82:1
- *   --tone-vigilia      #5fc896  9,44:1 / 8,88:1
- *   --tone-vigilia-edge #6fb0ee  8,45:1 / 7,95:1
+ *   --text sobre --bg       15,94:1   sobre --surface 14,67:1
+ *   --muted sobre --bg       7,71:1   sobre --surface  7,09:1
+ *   --accent sobre --bg      9,30:1   --accent-ink sobre --accent 9,30:1
+ * Tonos por proyecto (sobre --bg / sobre --surface):
+ *   --tone-forge        #e8a33d  8,67:1 / 7,98:1
+ *   --tone-episteme     #b49cf2  7,99:1 / 7,35:1
+ *   --tone-vigilia      #5fc896  9,07:1 / 8,35:1
+ *   --tone-vigilia-edge #6fb0ee  8,12:1 / 7,47:1
  * Tipografía: ningún texto bajo 12 px (0.75rem).
  */
 :root {
-  --bg: #0b0d10;
-  --surface: #12151a;
-  --border: #1f242c;
-  --text: #e6e8eb;
-  --muted: #8b939e;
-  --accent: #e8a33d;
-  --accent-ink: #0b0d10;
+  --bg: #0c1220;
+  --surface: #131b2c;
+  --border: #26324b;
+  --text: #eaedf3;
+  --muted: #9ba7bd;
+  --accent: #f0a93b;
+  --accent-ink: #0c1220;
   /* Tono por proyecto: en su página reemplaza a --accent (Base.astro, prop tone) */
   --tone-forge: #e8a33d;
   --tone-episteme: #b49cf2;
   --tone-vigilia: #5fc896;
   --tone-vigilia-edge: #6fb0ee;
-  --font-sans: 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Archivo Variable', ui-sans-serif, system-ui, sans-serif;
   --font-mono: 'Geist Mono Variable', ui-monospace, monospace;
-  --w-page: 1080px;
+  --w-page: 1200px;
   --w-prose: 68ch;
   --radius: 6px;
   --gutter: clamp(1rem, 4vw, 2rem);
-  --radius-lg: 14px;
+  --radius-lg: 10px;
   --glass-bg: color-mix(in srgb, var(--surface) 62%, transparent);
   --glass-border: color-mix(in srgb, var(--text) 9%, transparent);
   --glass-hi: color-mix(in srgb, var(--text) 7%, transparent);
@@ -83,29 +83,16 @@ body::after {
   pointer-events: none;
 }
 
-/* Resplandor del acento: lo que el glass desenfoca */
+/* Lámpara: un único resplandor ámbar arriba a la derecha, más grano fino para que el fondo no sea plano */
 body::before {
-  inset: -10%;
   background:
-    radial-gradient(60rem 36rem at 85% 0%, color-mix(in srgb, var(--accent) 15%, transparent), transparent 70%),
-    radial-gradient(48rem 32rem at 0% 100%, color-mix(in srgb, var(--accent) 7%, transparent), transparent 70%);
-  animation: drift 28s ease-in-out infinite alternate;
+    radial-gradient(56rem 34rem at 88% -8%, color-mix(in srgb, var(--accent) 13%, transparent), transparent 70%),
+    radial-gradient(40rem 28rem at -10% 40%, color-mix(in srgb, var(--tone-vigilia-edge) 6%, transparent), transparent 70%);
 }
 
-/* Grilla fina, visible solo cerca del resplandor superior */
 body::after {
-  background-image:
-    linear-gradient(var(--grid-line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
-  background-size: 56px 56px;
-  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 75% 0%, #000, transparent 75%);
-  mask-image: radial-gradient(ellipse 80% 60% at 75% 0%, #000, transparent 75%);
-}
-
-@keyframes drift {
-  to {
-    transform: translate3d(-3%, 2%, 0);
-  }
+  opacity: 0.07;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 main {
@@ -131,8 +118,10 @@ h4 {
 }
 
 h1 {
-  font-size: clamp(2.25rem, 5vw, 3.25rem);
-  letter-spacing: -0.02em;
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  font-weight: 700;
+  font-stretch: 112%;
+  letter-spacing: -0.025em;
 }
 
 h2 {
@@ -212,13 +201,20 @@ hr {
 }
 
 /* Etiquetas, numeración, fechas y stack */
+/* Rótulos en tipo de oración, sin mayúsculas forzadas */
 .label {
-  font-family: var(--font-mono);
-  font-size: 0.8125rem;
-  font-weight: 400;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  font-size: 0.875rem;
+  font-weight: 500;
+  font-stretch: 100%;
+  letter-spacing: 0;
   color: var(--muted);
+}
+
+/* Cifras, código y consola */
+.mono {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  letter-spacing: 0;
 }
 
 .muted {
@@ -255,18 +251,11 @@ hr {
 
 .section-head h2 {
   margin: 0;
-  font-size: clamp(1.75rem, 3.6vw, 2.5rem);
-  letter-spacing: -0.025em;
-}
-
-/* Barra del acento bajo el título; crece al entrar en pantalla */
-.section-head::after {
-  content: '';
-  width: 3rem;
-  height: 2px;
-  border-radius: 1px;
-  background: var(--accent);
-  transform-origin: left;
+  font-size: clamp(2rem, 4.2vw, 3.25rem);
+  font-stretch: 118%;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
 }
 
 /* Carga diferida: el navegador no pinta las secciones bajo el pliegue hasta acercarse */
@@ -286,11 +275,11 @@ hr {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.7rem 1.15rem;
+  padding: 0.85rem 1.35rem;
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  font-size: 0.9375rem;
-  font-weight: 500;
+  font-size: 1rem;
+  font-weight: 600;
   line-height: 1.2;
   text-decoration: none;
   color: var(--text);
@@ -349,11 +338,8 @@ td {
 }
 
 th {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  font-weight: 400;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  font-size: 0.875rem;
+  font-weight: 500;
   color: var(--muted);
 }
 
@@ -364,27 +350,12 @@ td:first-child {
 
 /* ---------- Glass ---------- */
 
+/* Panel: superficie sólida con borde de 1 px (sin desenfoque: el texto siempre se lee) */
 .glass {
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   box-shadow: inset 0 1px 0 var(--glass-hi);
-  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(140%);
-  backdrop-filter: blur(var(--glass-blur)) saturate(140%);
-}
-
-@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  .glass {
-    background: var(--surface);
-  }
-}
-
-@media (prefers-reduced-transparency: reduce) {
-  .glass {
-    background: var(--surface);
-    -webkit-backdrop-filter: none;
-    backdrop-filter: none;
-  }
 }
 
 /* Foco de luz que sigue al cursor (variables --mx/--my desde Base.astro) */
@@ -434,15 +405,6 @@ td:first-child {
     [class~='reveal'] {
       animation-timeline: view();
       animation-range: entry 0% entry 40%;
-    }
-
-    .section-head::after {
-      animation: grow linear both;
-    }
-
-    [class~='section-head']::after {
-      animation-timeline: view();
-      animation-range: entry 0% entry 60%;
     }
   }
 }

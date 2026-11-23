@@ -24,18 +24,18 @@ npm run preview    # sirve dist/
 - `src/data/projects.ts`: datos de los proyectos (metadescripción, ficha, tarjeta de la portada, `group` y `period`; agentes primero); lo usan las páginas de proyecto, la portada y `llms.txt`.
 - `src/pages/llms.txt.ts`: genera `/llms.txt` en el build a partir de esos datos.
 - `public/`: archivos servidos tal cual (`CNAME`, `robots.txt`, `og.png`, PDF del CV).
+- `DESIGN.md`: dirección visual y tokens.
 - `tests/site.test.mjs`: páginas, SEO (metadescripción de 50 a 160 caracteres, canonical, `noindex` de la 404, precarga de fuente), JSON-LD, sitemap, `llms.txt`, imagen social, piso de 12 px en la tipografía, privacidad y enlaces internos.
 - `tools/og.html`: fuente de `public/og.png` (no se despliega).
 
 ## Diseño
 
-- Un solo tema oscuro. Acento ámbar (`--accent`) en el sitio; cada proyecto tiene un tono (`--tone-<slug>`) que reemplaza a `--accent` en su tarjeta y en su página. No añadir otros colores; un tono nuevo debe medir 4,5:1 o más sobre `--bg` y `--surface`.
-- Glass sobrio: paneles `.glass` (translúcidos, borde de 1 px, `--radius-lg`) solo en cabecera, panel
-  «Ahora», tarjetas de proyecto, contacto, ficha de proyecto y diagramas. El resto se separa con líneas
-  de 1 px. Sin sombras exteriores; los únicos gradientes son el resplandor del fondo y el foco `.spot`.
-- Movimiento con CSS nativo y como mejora progresiva (`animation-timeline`, `@view-transition`); todo
-  debe verse completo con `prefers-reduced-motion`.
-- Etiquetas, fechas y stack en `--font-mono`, mayúsculas. Fuentes Geist autoalojadas (`@fontsource-variable`).
+La dirección completa (tokens, tipografía, componentes y movimiento) está en `DESIGN.md`.
+
+- Un solo tema oscuro («Vigilia nocturna»). Acento ámbar (`--accent`) en el sitio; cada proyecto tiene un tono (`--tone-<slug>`) que reemplaza a `--accent` en su tarjeta y en su página. No añadir otros colores; un tono nuevo debe medir 4,5:1 o más sobre `--bg` y `--surface`.
+- Paneles sólidos (`.glass`: `--surface`, borde de 1 px, `--radius-lg`, sin desenfoque). La cabecera es opaca. El resto se separa con líneas de 1 px. Sin sombras exteriores.
+- Movimiento con CSS nativo y como mejora progresiva (`animation-timeline`, `@view-transition`): una sola secuencia de carga en el hero; el resto responde al scroll o al cursor. Todo debe verse completo con `prefers-reduced-motion`.
+- Tipografía: Archivo Variable (ancho 112–118 % en display y títulos) y Geist Mono solo para cifras, stack y código, autoalojadas (`@fontsource-variable`). Rótulos en tipo de oración, sin mayúsculas forzadas.
 - Sin scroll horizontal en móvil; sin menú hamburguesa.
 
 ## Reglas de contenido
