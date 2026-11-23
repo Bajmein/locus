@@ -116,10 +116,10 @@ const tech = [
     <div class="hero-main">
       <p class="label">Ingeniero Informático · Agentes de IA y automatización · La Serena, Chile</p>
       <h1 id="hero-title">Benjamín Criado</h1>
-      <p class="lead">
-        Diseño flujos de trabajo con agentes de IA y automatizo procesos: desarrollo guiado por
-        especificaciones, memoria persistente para agentes e integraciones entre sistemas. También construyo
-        visión por computador en tiempo real, pensada para producción.
+      <p class="lead">Diseño flujos de trabajo con agentes de IA y automatizo procesos.</p>
+      <p class="lead-sub">
+        Desarrollo guiado por especificaciones, memoria persistente para agentes e integraciones entre
+        sistemas. También construyo visión por computador en tiempo real, pensada para producción.
       </p>
       <div class="actions">
         <a class="btn btn-primary" href="#agentes">Trabajo con agentes</a>
@@ -192,7 +192,7 @@ const tech = [
             >
               <span class="card-top">
                 <ProjectIcon slug={p.slug} />
-                <span class="arrow" aria-hidden="true">→</span>
+                <span class="go label" aria-hidden="true">Ver proyecto <span class="go-arrow">→</span></span>
               </span>
               <span class="label kind">{p.group === 'agentes' ? 'Agentes de IA' : 'Visión por computador'}</span>
               <span class="project-name" style={`view-transition-name: proyecto-${p.slug}`}>
@@ -299,6 +299,13 @@ const tech = [
   .lead {
     max-width: 40rem;
     font-size: clamp(1.125rem, 2vw, 1.25rem);
+    color: var(--text);
+    margin-bottom: 0.75rem;
+  }
+
+  .lead-sub {
+    max-width: 36rem;
+    font-size: clamp(1rem, 1.6vw, 1.0625rem);
     color: var(--muted);
     margin-bottom: 2.25rem;
   }
@@ -371,8 +378,12 @@ const tech = [
       animation-delay: 0.24s;
     }
 
+    .hero-main > :nth-child(5) {
+      animation-delay: 0.32s;
+    }
+
     .now-panel {
-      animation-delay: 0.36s;
+      animation-delay: 0.4s;
     }
   }
 
@@ -421,6 +432,7 @@ const tech = [
 
   .is-agentes .project-card {
     min-height: 17rem;
+    padding: 1.75rem 2rem;
   }
 
   .is-agentes .project-name {
@@ -475,15 +487,31 @@ const tech = [
     font-size: 0.75rem;
   }
 
-  .arrow {
+  .go {
     color: var(--muted);
-    transition: color 0.2s ease, transform 0.2s ease;
+    transition: color 0.2s ease;
   }
 
-  .project-card:hover .arrow,
-  .project-card:focus-visible .arrow {
+  .go-arrow {
+    display: inline-block;
+    transition: transform 0.2s ease;
+  }
+
+  .project-card:hover .go,
+  .project-card:focus-visible .go {
     color: var(--accent);
+  }
+
+  .project-card:hover .go-arrow,
+  .project-card:focus-visible .go-arrow {
     transform: translateX(0.25rem);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .project-card:hover .go-arrow,
+    .project-card:focus-visible .go-arrow {
+      transform: none;
+    }
   }
 
   /* Trabajo con agentes */
