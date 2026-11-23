@@ -270,3 +270,13 @@ test('enlaces a vitrinas y enlaces internos válidos', () => {
 test('existe el PDF del CV', () => {
   assert.ok(existsSync(join(DIST, 'assets/pdf/cv_benjamin_criado.pdf')));
 });
+
+test('portada: contacto con copiar correo y CV, sin redes repetidas', () => {
+  const html = read('index.html');
+  const start = html.indexOf('id="contacto"');
+  assert.ok(start > -1, 'falta la sección de contacto');
+  const section = html.slice(start, html.indexOf('</section>', start));
+  assert.ok(section.includes('data-copy="'), 'falta el botón de copiar correo');
+  assert.ok(section.includes('cv_benjamin_criado.pdf'), 'falta el enlace al CV');
+  assert.ok(!section.includes('class="social"'), 'las redes se repiten en el contacto');
+});
