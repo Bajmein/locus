@@ -276,7 +276,9 @@ test('portada: contacto con copiar correo y CV, sin redes repetidas', () => {
   const start = html.indexOf('id="contacto"');
   assert.ok(start > -1, 'falta la sección de contacto');
   const section = html.slice(start, html.indexOf('</section>', start));
-  assert.ok(section.includes('data-copy="'), 'falta el botón de copiar correo');
-  assert.ok(section.includes('cv_benjamin_criado.pdf'), 'falta el enlace al CV');
+  assert.match(section, /data-copy="[^"@]+@[^"]+"/, 'falta el botón de copiar con el correo');
+  assert.match(section, /<button[^>]*\bhidden\b/, 'el botón debe partir oculto');
+  assert.match(section, /href="\/assets\/pdf\/cv_benjamin_criado\.pdf"/, 'falta el enlace al CV');
   assert.ok(!section.includes('class="social"'), 'las redes se repiten en el contacto');
+  assert.ok(html.includes('rel="me"'), 'las redes deben seguir en el pie');
 });
