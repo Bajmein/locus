@@ -262,6 +262,21 @@ test('privacidad: ningún HTML ni texto filtra datos que no deben publicarse', (
   }
 });
 
+test('cabecera: sección activa y logo con nombre accesible', () => {
+  assert.match(
+    read('episteme/index.html'),
+    /<a href="\/#proyectos"[^>]*aria-current="true"/,
+    'en una página de proyecto «Proyectos» queda activo',
+  );
+  assert.doesNotMatch(read('index.html'), /aria-current="true"/);
+  assert.match(read('cv/index.html'), /aria-current="page"/);
+  for (const rel of Object.values(pages)) {
+    const brand = read(rel).match(/<a class="brand"[^>]*>/)?.[0];
+    assert.ok(brand, `${rel}: falta el logo`);
+    assert.doesNotMatch(brand, /aria-label/, `${rel}: el logo no usa aria-label`);
+  }
+});
+
 test('enlaces a vitrinas y enlaces internos válidos', () => {
   const showcases = {
     'vigilia/index.html': 'vigilia-reforged-showcase',
