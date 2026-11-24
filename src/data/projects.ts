@@ -1,3 +1,5 @@
+import { getStep } from './trail';
+
 export interface Project {
   slug: string;
   title: string;
@@ -41,7 +43,7 @@ export const projects: Project[] = [
     card: {
       text: 'Los agentes de código recuerdan decisiones y lecciones entre sesiones, en notas Markdown del usuario.',
       stack: ['Python', 'MCP', 'SQLite FTS5'],
-      proof: 'Código abierto · en uso diario · 390 commits',
+      proof: `Código abierto · en uso diario · ${getStep('episteme').commits} commits`,
     },
   },
   {
@@ -58,7 +60,7 @@ export const projects: Project[] = [
     card: {
       text: 'Un motor que no deja al agente saltarse fases: cada cambio avanza solo con su especificación, su diseño aprobado y sus pruebas.',
       stack: ['Python', 'FastMCP', 'Pydantic'],
-      proof: '244 tests · ocho fases con compuertas',
+      proof: '244 pruebas · ocho fases con compuertas',
     },
   },
   {

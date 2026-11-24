@@ -11,7 +11,7 @@ export const GET: APIRoute = ({ site: base }) => {
     return text.charAt(0).toUpperCase() + text.slice(1);
   };
   const lines = [
-    `# ${site.name}: ${site.jobTitle}`,
+    `# ${site.name}: ${site.jobTitle.toLowerCase()}`,
     '',
     `> ${site.description}`,
     '',

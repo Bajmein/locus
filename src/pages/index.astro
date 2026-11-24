@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import { site } from '../data/site';
 import { projects } from '../data/projects';
+import { trail, totalCommits, totalPrs, figuresDate } from '../data/trail';
 import Icon from '../components/Icon.astro';
 import ProjectIcon from '../components/ProjectIcon.astro';
 
@@ -29,7 +30,7 @@ const areas = [
     title: 'Software en Python',
     text: 'Mi lenguaje principal: servicios, API, CLI y aplicaciones de escritorio con Pydantic, FastAPI, Typer y PySide6, con pruebas en pytest y análisis estático con Ruff. Uso Rust cuando la latencia es crítica.',
     evidence: [
-      { label: 'pulse: 244 tests', href: '/pulse/' },
+      { label: 'pulse: 244 pruebas', href: '/pulse/' },
       { label: 'Vigilia Edge: núcleo en Rust', href: '/vigilia-edge/' },
     ],
   },
@@ -37,7 +38,7 @@ const areas = [
     title: 'Automatización e integraciones',
     text: 'Automatizo procesos manuales con integraciones por API y webhooks, CI/CD en GitHub Actions y servicios en AWS y Azure sobre Linux y Docker.',
     evidence: [
-      { label: 'Este sitio: tests en cada PR y despliegue automático', href: 'https://github.com/Bajmein/locus' },
+      { label: 'Este sitio: pruebas en cada PR y despliegue automático', href: 'https://github.com/Bajmein/locus' },
     ],
   },
 ];
@@ -54,44 +55,6 @@ const experience = [
     role: 'Ingeniería en Informática',
     org: 'INACAP',
     text: 'Titulado. Proyecto de título: Vigilia Reforged.',
-  },
-];
-
-// Trabajo con agentes: cifras de GitHub (commits y PR fusionados) al 24-11-2026. episteme suma los PR del repo
-// anterior (Bajmein/episteme-archive, 124) y los del público (Bajmein/episteme, 52); sus commits son los del público,
-// que conserva la historia
-const trail = [
-  {
-    name: 'Forge',
-    period: 'Abril – julio de 2026',
-    text: 'Pipeline guiado por especificaciones: cada cambio avanza por fases con artefactos validados por esquemas, compatible con cualquier agente.',
-    commits: 304,
-    prs: 38,
-  },
-  {
-    slug: 'pulse',
-    name: 'pulse',
-    period: 'Mayo – julio de 2026',
-    text: 'Motor de estados servido por MCP: compuertas entre fases, revisión automática y escenarios Dado/Cuando/Entonces, para varios agentes de código.',
-    commits: 270,
-    prs: 50,
-    href: '/pulse/',
-  },
-  {
-    name: 'fabrik',
-    period: 'Octubre de 2026 – actualidad',
-    text: 'Plugin de Claude Code: un orquestador con cinco subagentes acotados; los hooks impiden editar sin especificación y cada verificación se ejecuta como un comando.',
-    commits: 72,
-    prs: 46,
-  },
-  {
-    slug: 'episteme',
-    name: 'episteme',
-    period: 'Octubre de 2026 – actualidad',
-    text: 'Memoria persistente servida por MCP: decisiones y lecciones que el agente consulta y completa en cada sesión.',
-    commits: 390,
-    prs: 176,
-    href: '/episteme/',
   },
 ];
 
@@ -132,8 +95,6 @@ const tech = [
   ['IA aplicada', 'Claude Code, Codex CLI, Gemini CLI, GitHub Copilot; MCP, hooks, skills y subagentes'],
   ['Visión por computador', 'OpenCV, YOLO, TensorRT, CUDA / NVDEC'],
 ];
-const totalCommits = trail.reduce((n, t) => n + t.commits, 0);
-const totalPrs = trail.reduce((n, t) => n + t.prs, 0);
 
 // Ciclo de un cambio (consola del hero): el método de fabrik y episteme, sin cifras inventadas
 const cycle = [
@@ -148,7 +109,7 @@ const cycle = [
 const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as const;
 ---
 
-<Base title="Benjamín Criado — Ingeniero informático: Python y agentes de IA" description={site.description}>
+<Base title="Benjamín Criado — ingeniero informático: Python y agentes de IA" description={site.description}>
   <section class="container hero" aria-labelledby="hero-title">
     <div class="hero-main">
       <p class="label eyebrow">Ingeniero informático · Python y agentes de IA · La Serena, Chile</p>
@@ -324,7 +285,7 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
         }
       </ol>
     </div>
-    <p class="label source">Cifras de GitHub al 24 de noviembre de 2026.</p>
+    <p class="label source">Cifras de GitHub al {figuresDate}.</p>
     <h3 class="method-title">Método</h3>
     <ul class="method">
       {

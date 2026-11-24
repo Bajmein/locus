@@ -1,6 +1,6 @@
 # Locus | Portafolio de Ingeniería
 
-**Benjamín Criado (Bajmein)** — Ingeniero informático: software en Python y agentes de IA, automatización e integraciones.
+**Benjamín Criado (Bajmein)** — ingeniero informático: software en Python y agentes de IA, automatización e integraciones.
 
 Código fuente de [benjamincriado.dev](https://benjamincriado.dev): qué hago, proyectos, trabajo con agentes de IA, experiencia y currículum.
 
