@@ -4,12 +4,9 @@ import { site } from '../data/site';
 import { projects } from '../data/projects';
 import Icon from '../components/Icon.astro';
 import ProjectIcon from '../components/ProjectIcon.astro';
+import Capabilities from '../components/Capabilities.astro';
 
 const now = [
-  {
-    label: 'Trabajo',
-    text: 'Encargado de TI en un grupo de empresas: sitios web, integraciones, automatización de procesos y agentes de IA.',
-  },
   {
     label: 'Herramientas',
     text: 'Desarrollo episteme, memoria persistente para agentes de IA, y fabrik, un flujo de desarrollo guiado por especificaciones.',
@@ -20,12 +17,46 @@ const now = [
   },
 ];
 
+const areas = [
+  {
+    title: 'Desarrollo de software en Python',
+    text: 'Mi dominio más fuerte. Servicios, APIs, CLI y aplicaciones de escritorio con Pydantic, FastAPI, Typer y PySide6, probados con pytest y Ruff. Para la web y los sistemas de tiempo real sumo JavaScript, TypeScript y Rust.',
+  },
+  {
+    title: 'Nube y automatización',
+    text: 'Procesos que dejan de ser manuales: integraciones por API, flujos automáticos, CI/CD con GitHub Actions y servicios en AWS y Azure sobre Linux y Docker.',
+  },
+  {
+    title: 'IA aplicada',
+    text: 'Agentes de IA para atención y operación, herramientas propias para trabajar con agentes de código y visión por computador en tiempo real.',
+  },
+];
+
+const work = [
+  {
+    title: 'Sitios y plataformas web',
+    text: 'Desarrollo y mantención de los sitios corporativos: dominios, hosting, certificados, rendimiento, seguridad y medición de conversiones.',
+  },
+  {
+    title: 'Datos e integraciones',
+    text: 'Bases de datos de clientes y prospectos con permisos y respaldos; integraciones por API entre sitios, formularios, CRM y WhatsApp Business.',
+  },
+  {
+    title: 'IA y automatización',
+    text: 'Agentes de IA para atención de clientes y automatización de las comunicaciones y del seguimiento de prospectos.',
+  },
+  {
+    title: 'Gestión del área',
+    text: 'Solicitudes por tickets, prioridades acordadas con gerencia, reportes de avance, proveedores y costos, accesos, estándares técnicos, documentación y soporte.',
+  },
+];
+
 const experience = [
   {
     date: '2026 — hoy',
     role: 'Encargado de TI',
     org: 'Grupo de empresas (remoto)',
-    text: 'Responsable del área de tecnología: desarrollo y mantención de los sitios web, integraciones entre sistemas, automatización de procesos y agentes de IA.',
+    text: 'Responsable del área de tecnología, con dependencia de gerencia general: sitios web, datos e integraciones, automatización, agentes de IA y soporte.',
   },
   {
     date: '2026',
@@ -104,26 +135,26 @@ const method = [
 ];
 
 const tech = [
-  [
-    'Agentes de IA',
-    'Claude Code, Codex CLI, Gemini CLI, GitHub Copilot; MCP, hooks, skills y subagentes; desarrollo guiado por especificaciones',
-  ],
-  ['Lenguajes', 'Python, Rust, JavaScript'],
+  ['Python', 'Pydantic v2, FastAPI, Typer, Hydra, PySide6, OpenCV; pytest, Ruff y uv'],
+  ['Otros lenguajes', 'Rust, JavaScript y TypeScript, SQL'],
+  ['Web', 'WordPress y su REST API, Astro, HTML y CSS'],
+  ['Nube e infraestructura', 'AWS, Azure, Linux, Docker y GitHub Actions'],
+  ['Datos', 'SQL (PostgreSQL), SQLite FTS5'],
+  ['Integraciones', 'WhatsApp Business API, CRM, formularios y webhooks'],
+  ['IA aplicada', 'Claude Code, Codex CLI, Gemini CLI, GitHub Copilot; MCP, hooks, skills y subagentes'],
   ['Visión por computador', 'OpenCV, YOLO, TensorRT, CUDA / NVDEC'],
-  ['Web', 'WordPress, REST API, HTML y CSS'],
-  ['Infraestructura', 'Linux, AWS, Azure'],
 ];
 const totalCommits = trail.reduce((n, t) => n + t.commits, 0);
 const totalPrs = trail.reduce((n, t) => n + t.prs, 0);
 
-// Ciclo de un cambio (consola del hero): el método de fabrik y episteme, sin cifras inventadas
+// Ciclo de un requerimiento (consola del hero): bloque K del cargo, sin cifras
 const cycle = [
-  { verb: 'especificar', text: 'Especificación verificable', state: 'ok' },
-  { verb: 'planificar', text: 'Fuentes y decisiones cerradas', state: 'ok' },
-  { verb: 'implementar', text: 'Subagentes con tareas acotadas', state: 'ok' },
-  { verb: 'verificar', text: 'Tests, lint y tipos en verde', state: 'ok' },
-  { verb: 'recordar', text: 'Decisión guardada en episteme', state: 'ok' },
-  { verb: 'fusionar', text: 'Lo decide una persona', state: 'espera' },
+  { verb: 'recibir', text: 'Solicitud por ticket', state: 'ok' },
+  { verb: 'priorizar', text: 'Acordado con gerencia', state: 'ok' },
+  { verb: 'estimar', text: 'Tiempos, costos y riesgos', state: 'ok' },
+  { verb: 'implementar', text: 'Especificación y tests', state: 'ok' },
+  { verb: 'documentar', text: 'Configuración y decisiones', state: 'ok' },
+  { verb: 'entregar', text: 'Lo aprueba gerencia', state: 'espera' },
 ];
 
 const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as const;
@@ -132,7 +163,7 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
 <Base title="Benjamín Criado — Ingeniero Informático" description={site.description}>
   <section class="container hero" aria-labelledby="hero-title">
     <div class="hero-main">
-      <p class="label eyebrow">Ingeniero informático · Agentes de IA y automatización · La Serena, Chile</p>
+      <p class="label eyebrow">Ingeniero informático · Encargado de TI · La Serena, Chile</p>
       <div class="target">
         <h1 id="hero-title" class="name"><span>Benjamín</span> <span>Criado</span></h1>
         <span class="bbox" aria-hidden="true">
@@ -140,10 +171,11 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
           <b class="mono">persona 0,99</b>
         </span>
       </div>
-      <p class="lead">Diseño flujos de trabajo con agentes de IA y automatizo procesos.</p>
+      <p class="lead">Desarrollo software, automatizo procesos e integro IA en el trabajo de una empresa.</p>
       <p class="lead-sub">
-        Desarrollo guiado por especificaciones, memoria persistente para agentes e integraciones entre
-        sistemas. También construyo visión por computador en tiempo real, pensada para producción.
+        Mi lenguaje principal es Python. Estoy a cargo del área de TI de un grupo de empresas: sitios web, datos,
+        integraciones, agentes de IA y soporte. Por mi cuenta construyo herramientas para trabajar con agentes y
+        visión por computador en tiempo real.
       </p>
       <div class="actions">
         <a class="btn btn-primary" href="#proyectos">Ver proyectos</a>
@@ -153,8 +185,8 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
 
     <figure class="console glass" aria-labelledby="ciclo">
       <figcaption id="ciclo">
-        <span>Ciclo de un cambio</span>
-        <span class="mono muted">fabrik + episteme</span>
+        <span>Ciclo de un requerimiento</span>
+        <span class="mono muted">área de TI</span>
       </figcaption>
       <ol class="log mono">
         {
@@ -187,15 +219,49 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
     </div>
   </section>
 
+  <section class="container section" id="areas" aria-labelledby="areas-title">
+    <div class="section-head split">
+      <div>
+        <p class="label">Fortalezas</p>
+        <h2 id="areas-title">Qué hago</h2>
+      </div>
+      <p class="muted">Tres áreas en las que trabajo a diario, en la empresa y en mis proyectos.</p>
+    </div>
+    <ul class="method">
+      {
+        areas.map((a) => (
+          <li class="reveal">
+            <h3>{a.title}</h3>
+            <p>{a.text}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="container section" id="ti" aria-labelledby="ti-title">
+    <div class="section-head split">
+      <div>
+        <p class="label">Trabajo actual</p>
+        <h2 id="ti-title">A cargo del área de TI</h2>
+      </div>
+      <p class="muted">
+        En un grupo de empresas, con dependencia de gerencia general y teletrabajo desde La Serena. Las demás áreas
+        son clientes internos y piden por tickets.
+      </p>
+    </div>
+    <Capabilities items={work} />
+  </section>
+
   <section class="container section" id="proyectos" aria-labelledby="proyectos-title">
     <div class="section-head split">
       <div>
-        <p class="label">Agentes de IA y visión por computador</p>
+        <p class="label">Proyectos personales</p>
         <h2 id="proyectos-title">Proyectos</h2>
       </div>
       <p class="muted">
-        Herramientas para trabajar con agentes de IA y sistemas de visión por computador que corren en tiempo
-        real.
+        Software que diseño y mantengo por mi cuenta: herramientas para trabajar con agentes de IA y visión por
+        computador en tiempo real.
       </p>
     </div>
     <ol class="projects">
@@ -233,7 +299,7 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
   <section class="container section" id="agentes" aria-labelledby="agentes-title">
     <div class="section-head split">
       <div>
-        <p class="label">Trabajo con agentes</p>
+        <p class="label">Especialidad</p>
         <h2 id="agentes-title">De la especificación a la memoria</h2>
       </div>
       <p class="muted">
@@ -1073,6 +1139,7 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
     border-left: 1px solid var(--border);
   }
 
+  .method h3,
   .method h4 {
     margin-bottom: 0.5rem;
     font-size: 1.0625rem;
