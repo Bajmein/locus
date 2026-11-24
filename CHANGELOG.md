@@ -29,6 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Hero con jerarquía en dos párrafos (titular en el color del texto y bajada atenuada); tarjetas de proyecto con íconos más grandes, «Ver proyecto» en lugar de la flecha sola y más aire en las de agentes.
 - Páginas de proyecto: la ficha lateral muestra el período en vez de repetir el stack.
 - Contacto sin los enlaces a GitHub y LinkedIn, que ya están en el pie.
+- README: proyectos con enlace a su página y a su vitrina, descripciones alineadas con el sitio, validación y CI/CD al día.
 
 ### Fixed
 
