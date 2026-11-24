@@ -424,6 +424,103 @@ td:first-child {
   position: relative;
 }
 
+/* ---------- Caja de detección ---------- */
+
+/* La firma del sitio: un título como objeto detectado (portada, proyectos y 404) */
+.target {
+  position: relative;
+  display: inline-block;
+}
+
+/* Caja de detección: cuatro esquinas y la etiqueta de clase con su confianza */
+.bbox {
+  position: absolute;
+  inset: -1rem -1.25rem -1.1rem -1.25rem;
+  border: 1px solid color-mix(in srgb, var(--accent) 22%, transparent);
+  pointer-events: none;
+}
+
+.bbox i {
+  position: absolute;
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 2px solid var(--accent);
+}
+
+.bbox i:nth-child(1) {
+  top: -1px;
+  left: -1px;
+  border-width: 2px 0 0 2px;
+}
+
+.bbox i:nth-child(2) {
+  top: -1px;
+  right: -1px;
+  border-width: 2px 2px 0 0;
+}
+
+.bbox i:nth-child(3) {
+  bottom: -1px;
+  right: -1px;
+  border-width: 0 2px 2px 0;
+}
+
+.bbox i:nth-child(4) {
+  bottom: -1px;
+  left: -1px;
+  border-width: 0 0 2px 2px;
+}
+
+.bbox b {
+  position: absolute;
+  left: -1px;
+  bottom: 100%;
+  padding: 0.15rem 0.5rem;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Sin detección (404): contorno discontinuo y etiqueta en gris */
+.bbox.is-miss {
+  border: 1px dashed color-mix(in srgb, var(--muted) 45%, transparent);
+}
+
+.bbox.is-miss i {
+  border-color: var(--muted);
+}
+
+.bbox.is-miss b {
+  background: var(--muted);
+  color: var(--bg);
+}
+
+@keyframes lock {
+  from {
+    opacity: 0;
+    transform: scale(1.12);
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+}
+
+/* La caja se fija sobre el título al cargar, y luego aparece su etiqueta */
+@media (prefers-reduced-motion: no-preference) {
+  .bbox {
+    animation: lock 0.55s 1s var(--ease-out) both;
+  }
+
+  .bbox b {
+    animation: fade 0.3s 1.45s ease-out both;
+  }
+}
+
 /* ---------- Movimiento ---------- */
 
 @keyframes rise {

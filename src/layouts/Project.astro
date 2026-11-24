@@ -18,6 +18,10 @@ const slug = Astro.url.pathname.replaceAll('/', '');
 const index = projects.findIndex((p) => p.slug === slug);
 const next = projects[(index + 1) % projects.length];
 const period = projects[index]?.period;
+const group = projects[index]?.group ?? 'agentes';
+// Rótulo sobre el título (como en la tarjeta) y clase que detecta la caja (en minúsculas, como «persona 0,99»)
+const groupLabel = { agentes: 'Agentes de IA', vision: 'Visión por computador' }[group];
+const detected = { agentes: 'agentes de IA', vision: 'visión por computador' }[group];
 
 const schema = {
   '@type': 'SoftwareSourceCode',
@@ -36,9 +40,16 @@ const schema = {
     </nav>
 
     <header class="project-head">
+      <p class="label group">{groupLabel}</p>
       <div class="head-row">
         <ProjectIcon slug={slug} size="lg" />
-        <h1 style={`view-transition-name: proyecto-${slug}`}>{title}</h1>
+        <div class="target">
+          <h1 style={`view-transition-name: proyecto-${slug}`}>{title}</h1>
+          <span class="bbox" aria-hidden="true">
+            <i></i><i></i><i></i><i></i>
+            <b class="mono">{detected}</b>
+          </span>
+        </div>
       </div>
       <p class="tagline">{tagline}</p>
     </header>
@@ -117,16 +128,36 @@ const schema = {
     margin-bottom: 2.5rem;
   }
 
+  /* Deja sitio a la etiqueta de la caja de detección, que va sobre el título */
+  .group {
+    margin-bottom: 2.75rem;
+    color: var(--accent);
+  }
+
+  /* El hueco cubre el margen de la caja (1,25rem) a la izquierda del título */
   .head-row {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    margin-bottom: 0.5em;
+    gap: 2.25rem;
+    margin-bottom: 2rem;
+  }
+
+  .head-row .target {
+    min-width: 0;
   }
 
   .project-head h1 {
     width: fit-content;
     margin: 0;
+  }
+
+  /* En la página del proyecto la caja se fija antes que en la portada, que espera al nombre */
+  .project-head .bbox {
+    animation-delay: 0.3s;
+  }
+
+  .project-head .bbox b {
+    animation-delay: 0.75s;
   }
 
   .tagline {
@@ -187,6 +218,35 @@ const schema = {
     margin-top: 3rem;
     padding-top: 2rem;
     border-top: 1px solid var(--border);
+    font-family: var(--font-display);
+    font-stretch: 112%;
+    font-weight: 700;
+  }
+
+  /* La misma barra del acento (aquí, el tono del proyecto) que los títulos de sección */
+  .body :global(h2)::after {
+    content: '';
+    display: block;
+    width: 3rem;
+    height: 2px;
+    margin-top: 0.9rem;
+    border-radius: 1px;
+    background: var(--accent);
+    transform-origin: left;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      .body :global(h2)::after {
+        animation: grow linear both;
+      }
+
+      /* Regla aparte: el minificador funde animation-timeline en el atajo animation y lo invalida */
+      div.body :global(h2)::after {
+        animation-timeline: view();
+        animation-range: entry 0% entry 60%;
+      }
+    }
   }
 
   .body :global(h2:first-child) {
@@ -255,8 +315,10 @@ const schema = {
   }
 
   .next-title {
-    font-size: 1.25rem;
-    font-weight: 600;
+    font-family: var(--font-display);
+    font-size: 1.375rem;
+    font-weight: 700;
+    font-stretch: 112%;
   }
 
   .next-desc {
