@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-11-24
+
 ### Added
 
 - Identidad: el sobrenombre Kenno y el usuario de GitHub Bajmein, visibles en el pie de todas las páginas, en `alternateName` (con `givenName`, `familyName` y `description`) del nodo `Person` y en una línea de `llms.txt`; `/cv/` se declara como `ProfilePage` de la persona. Con sus pruebas, y las de la página de episteme (gráfico, instalación y afirmaciones vetadas).
@@ -29,6 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- El PDF del CV se regenera con las tres herramientas y sus totales; `DESIGN.md` documenta el gráfico de barras y el pie con los alias.
 - episteme se presenta como una memoria de proyecto curada que comparten Claude Code y Gemini: metadescripción, tagline, tarjeta, indicador de búsqueda, texto del riel, «El problema», «La solución», seis capacidades y README.
 - Portada y sistema visual: tira «Ahora» equilibrada en dos columnas con divisor; disponibilidad en pastillas `.facts`, métricas destacadas en el hero y pasos de la consola numerados en una sola línea en móvil; `#areas` transformada en tres tarjetas `.glass` con ícono, índice y chips de evidencia; tarjetas de proyecto con resplandor tonal en reposo, pie en una sola fila e insignia + vista previa del grafo en `episteme`; contacto dividido en dos tarjetas por audiencia.
 - Activos de marca (`public/og.png`, `tools/og.html` y `public/favicon.svg`) rediseñados bajo la dirección «Vigilia nocturna» (`#0c1220`, Archivo Variable, grilla de sensor y caja `persona 0,99`).
