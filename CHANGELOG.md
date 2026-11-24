@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Test de privacidad que impide publicar procesos internos de la empresa.
 - Portada: secciones «Qué hago» (tres fortalezas) y «A cargo del área de TI» (el trabajo actual, sin nombrar la empresa), con su test.
 - Caja de detección en el título de cada página de proyecto (con la clase de su grupo y un rótulo encima) y, sin detección, en la 404.
 - Contacto: «Conversemos» cierra con el cursor del logo y entra con un barrido ligado al scroll.
@@ -19,8 +20,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- El trabajo actual se describe en términos generales, sin procesos internos ni datos comerciales de la empresa; la consola del hero vuelve al ciclo de un cambio.
 - Perfil general de Encargado de TI en el hero, la metadescripción, el JSON-LD (`knowsAbout`) y el CV, con Python como lenguaje principal.
-- La consola del hero muestra el ciclo de un requerimiento del área de TI.
 - `#agentes` pasa a rotularse «Especialidad» y sale del menú, que ahora dice «Qué hago»; los proyectos se presentan como personales.
 - Tecnologías de la portada y del CV reagrupadas (Python, otros lenguajes, web, nube, datos, integraciones, IA aplicada y visión).
 - PDF del CV regenerado; viñetas de proyectos más cortas para que siga en dos páginas.

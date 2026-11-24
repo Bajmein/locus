@@ -22,11 +22,11 @@ npm run preview    # sirve dist/
 - `src/styles/global.css`: tokens de diseño (`--bg`, `--accent`, …) y estilos base, incluida la impresión del CV.
 - `src/data/site.ts`: nombre, correo, enlaces sociales y metadescripciones del sitio y del CV.
 - `src/data/projects.ts`: datos de los proyectos (metadescripción, ficha, tarjeta de la portada, `group` y `period`; agentes primero); lo usan las páginas de proyecto, la portada y `llms.txt`.
-- Portada (`src/pages/index.astro`), en orden: hero (consola «Ciclo de un requerimiento»), «Ahora», «Qué hago» (`#areas`, lista `.method`), «A cargo del área de TI» (`#ti`, `Capabilities`), «Proyectos», «Especialidad» (`#agentes`), trayectoria y tecnologías, contacto. La navegación dice «Qué hago» para `/#areas`; `#agentes` no va en el menú.
+- Portada (`src/pages/index.astro`), en orden: hero (consola «Ciclo de un cambio»), «Ahora», «Qué hago» (`#areas`, lista `.method`), «A cargo del área de TI» (`#ti`, `Capabilities`), «Proyectos», «Especialidad» (`#agentes`), trayectoria y tecnologías, contacto. La navegación dice «Qué hago» para `/#areas`; `#agentes` no va en el menú.
 - `src/pages/llms.txt.ts`: genera `/llms.txt` en el build a partir de esos datos.
 - `public/`: archivos servidos tal cual (`CNAME`, `robots.txt`, `og.png`, PDF del CV).
 - `DESIGN.md`: dirección visual y tokens.
-- `tests/site.test.mjs`: páginas, SEO (metadescripción de 50 a 160 caracteres, canonical, `noindex` de la 404, precarga de fuente), JSON-LD, sitemap, `llms.txt`, imagen social, piso de 12 px en la tipografía, privacidad, enlaces internos y portada (antetítulos de cada sección; `#areas` con tres áreas, `#ti` con cuatro funciones, en ese orden antes de `#proyectos`, y la cabecera con `/#areas`).
+- `tests/site.test.mjs`: páginas, SEO (metadescripción de 50 a 160 caracteres, canonical, `noindex` de la 404, precarga de fuente), JSON-LD, sitemap, `llms.txt`, imagen social, piso de 12 px en la tipografía, privacidad (datos vetados y procesos internos de la empresa), enlaces internos y portada (antetítulos de cada sección; `#areas` con tres áreas, `#ti` con cuatro funciones, en ese orden antes de `#proyectos`, y la cabecera con `/#areas`).
 - `tools/og.html`: fuente de `public/og.png` (no se despliega).
 
 ## Diseño
@@ -46,5 +46,6 @@ La dirección completa (tokens, tipografía, componentes y movimiento) está en 
 - El cargo actual se describe como «Encargado de TI en un grupo de empresas», sin nombrar la empresa ni a personas.
 - No publicar el teléfono. No escribir «estudiante», «egresado» ni «junior».
 - No inventar cifras, clientes ni fechas.
+- No describir procesos internos de la empresa (tickets, gerencia, aprobaciones, clientes ni prospectos): el cargo se cuenta en términos generales.
 - El CV en PDF (`public/assets/pdf/cv_benjamin_criado.pdf`) se genera desde `/cv/` con Chrome headless
   (`--print-to-pdf`); debe caber en dos páginas.
