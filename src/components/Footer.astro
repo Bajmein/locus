@@ -5,10 +5,10 @@ import Icon from './Icon.astro';
 
 <footer class="site-footer">
   <div class="container foot">
-    <p class="label">© 2026 {site.name}</p>
+    <p class="label">© 2026 {site.alias}</p>
     <ul>
       <li><a href={`mailto:${site.email}`}><Icon name="mail" />{site.email}</a></li>
-      <li><a href={site.github} rel="me"><Icon name="github" />GitHub</a></li>
+      <li><a href={site.github} rel="me"><Icon name="github" />GitHub · {site.handle}</a></li>
       <li><a href={site.linkedin} rel="me"><Icon name="linkedin" />LinkedIn</a></li>
     </ul>
   </div>

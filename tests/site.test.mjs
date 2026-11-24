@@ -202,10 +202,10 @@ test('trabajo con agentes: línea de tiempo en orden', () => {
   const start = html.indexOf('id="agentes"');
   assert.ok(start >= 0, 'falta id="agentes"');
   const section = html.slice(start, html.indexOf('</section>', start));
-  assert.equal(count(section, /class="step[\s"]/g), 4, 'la línea de tiempo tiene cuatro pasos');
+  assert.equal(count(section, /class="step[\s"]/g), 3, 'la línea de tiempo tiene tres pasos');
   const trail = section.slice(section.indexOf('class="trail'), section.indexOf('</ol>'));
   const names = [...trail.matchAll(/<h3[^>]*>(?:<a[^>]*>)?([^<]+)/g)].map((m) => m[1].trim());
-  assert.deepEqual(names, ['Forge', 'pulse', 'fabrik', 'episteme'], 'orden de los pasos');
+  assert.deepEqual(names, ['pulse', 'fabrik', 'episteme'], 'orden de los pasos');
   assert.ok(section.includes('href="/pulse/"'), 'falta el enlace a /pulse/');
   assert.ok(!section.includes('href="/forge/"'), 'Forge ya no tiene página');
   assert.ok(section.includes('href="/episteme/"'), 'falta el enlace a /episteme/');
@@ -421,6 +421,46 @@ test('caja de detección en portada, proyectos y 404', () => {
   assert.ok(!toggle.includes('aria-label'), 'episteme: el botón de pausa se nombra con su texto visible, sin aria-label');
   const home = read('index.html');
   const agentes = home.slice(home.indexOf('id="agentes"'), home.indexOf('id="experiencia"'));
-  assert.equal((agentes.match(/class="label nopage"/g) ?? []).length, 4, '#agentes: cada paso lleva su estado');
+  assert.equal((agentes.match(/class="label nopage"/g) ?? []).length, 3, '#agentes: cada paso lleva su estado');
   assert.ok(!read('index.html').includes('Tests, lint'), 'consola del hero: usar «Pruebas» en vez de «Tests»');
+});
+
+const jsonLd = (file) =>
+  JSON.parse(read(file).match(/<script type="application\/ld\+json">([^<]+)<\/script>/)?.[1] ?? '{"@graph":[]}')['@graph'];
+
+test('identidad: la autoría firma como Kenno (Bajmein en GitHub), sin el nombre completo', () => {
+  for (const [url, file] of Object.entries(allPages)) {
+    const person = jsonLd(file).find((node) => node['@type'] === 'Person');
+    assert.ok(person, `${url}: JSON-LD sin Person`);
+    assert.equal(person.name, 'Kenno', `${url}: el Person debe llamarse Kenno`);
+    assert.ok(person.alternateName?.includes('Bajmein'), `${url}: alternateName sin Bajmein`);
+    assert.ok(!JSON.stringify(person).includes('Rossa'), `${url}: el Person no lleva el apellido materno`);
+    const html = read(file);
+    const footer = html.slice(html.indexOf('class="site-footer'), html.lastIndexOf('</footer>')).replace(/<[^>]+>/g, '');
+    assert.ok(footer.includes('© 2026 Kenno'), `${url}: el pie no firma «© 2026 Kenno»`);
+    assert.ok(footer.includes('Bajmein'), `${url}: el pie no muestra «Bajmein»`);
+  }
+  const llms = read('llms.txt');
+  assert.ok(llms.includes('Kenno') && llms.includes('Bajmein'), 'llms.txt sin los alias');
+  assert.ok(!llms.includes('Rossa'), 'llms.txt no lleva el nombre completo');
+});
+
+test('CV: ProfilePage cuya entidad principal es la persona', () => {
+  const profile = jsonLd('cv/index.html').find((node) => node['@type'] === 'ProfilePage');
+  assert.ok(profile, '/cv/: JSON-LD sin ProfilePage');
+  assert.ok(profile.mainEntity?.['@id']?.endsWith('#persona'), '/cv/: mainEntity no apunta a #persona');
+});
+
+test('episteme: medición de embeddings, instalación y sin afirmaciones vetadas', () => {
+  const html = read('episteme/index.html');
+  const bars = html.slice(html.indexOf('class="bars'), html.indexOf('</table>', html.indexOf('class="bars')));
+  assert.ok(html.includes('class="bars'), 'episteme: falta el gráfico de barras');
+  assert.equal(count(bars, /<th scope="row"/g), 3, 'episteme: el gráfico tiene tres filas');
+  assert.ok(html.includes('scripts/measure_semantic.py'), 'episteme: falta el enlace a measure_semantic.py');
+  assert.ok(html.includes('claude plugin marketplace add Bajmein/episteme'), 'episteme: falta el comando de instalación');
+  const caps = html.slice(html.indexOf('class="caps'), html.indexOf('</dl>', html.indexOf('class="caps')));
+  assert.equal(count(caps, /<dt\b/g), 6, 'episteme: seis capacidades');
+  for (const banned of ['no salen de la máquina', 'Codex', 'Copilot', '<!--']) {
+    assert.ok(!html.includes(banned), `episteme: no debe contener «${banned}»`);
+  }
 });

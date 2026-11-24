@@ -65,7 +65,16 @@ const stack = [
 ];
 ---
 
-<Base title={cv.title} description={cv.description}>
+<Base
+  title={cv.title}
+  description={cv.description}
+  schema={{
+    '@type': 'ProfilePage',
+    '@id': new URL('/cv/#perfil', Astro.site).href,
+    url: new URL('/cv/', Astro.site).href,
+    mainEntity: { '@id': new URL('/#persona', Astro.site).href },
+  }}
+>
   <article class="container cv">
     <header class="cv-head">
       <div>
@@ -86,8 +95,8 @@ const stack = [
       <h2 class="label">Perfil</h2>
       <div>
         <p>
-          Ingeniero informático especializado en Python y agentes de IA. Desde abril de 2026 he desarrollado cuatro
-          herramientas propias para trabajar con agentes de código (Forge, pulse, fabrik y episteme), con {totalCommits} commits y
+          Ingeniero informático especializado en Python y agentes de IA. Desde mayo de 2026 he desarrollado tres
+          herramientas propias para trabajar con agentes de código (pulse, fabrik y episteme), con {totalCommits} commits y
           {totalPrs} pull requests fusionados en total. Actualmente soy responsable del área de TI de un grupo de empresas:
           sitios y plataformas web, integraciones por API, nube y automatización. Elijo la tecnología según el
           problema: Rust para la latencia crítica y Python para la orquestación. Tres años de residencia y trabajo en

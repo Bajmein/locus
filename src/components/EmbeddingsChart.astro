@@ -1,0 +1,182 @@
+---
+/**
+ * Gráfico de barras horizontales de la medición de embeddings de episteme. Es una tabla semántica: cada fila lleva
+ * su rótulo, la barra (decorativa, `aria-hidden`) y la cifra con su porcentaje, así que se lee igual sin la barra.
+ * La fila `strong` va en el acento (el tono de la página); las demás, en gris. Los roles ARIA explícitos mantienen la
+ * semántica de tabla cuando, en móvil, las filas pasan a rejilla.
+ */
+interface Row {
+  label: string;
+  value: number;
+  strong?: boolean;
+}
+
+interface Props {
+  date: string;
+  total: number;
+  rows: Row[];
+}
+
+const { date, total, rows } = Astro.props;
+const share = (v: number) => (v / total) * 100;
+---
+
+<figure class="chart glass">
+  <table class="bars" role="table">
+    <caption>
+      {total} consultas reales sobre 523 memorias; bge-m3 en Ollama, solo CPU, {date}
+    </caption>
+    <colgroup>
+      <col class="col-label" />
+      <col />
+      <col class="col-value" />
+    </colgroup>
+    <thead class="sr-only" role="rowgroup">
+      <tr role="row">
+        <th scope="col" role="columnheader">Resultado</th>
+        <th scope="col" role="columnheader">Proporción</th>
+        <th scope="col" role="columnheader">Consultas</th>
+      </tr>
+    </thead>
+    <tbody role="rowgroup">
+      {
+        rows.map((r) => (
+          <tr role="row" class:list={{ 'is-strong': r.strong }}>
+            <th scope="row" role="rowheader">{r.label}</th>
+            <td class="bar-cell" role="cell">
+              <span class="bar" style={`--v: ${share(r.value).toFixed(1)}%`} aria-hidden="true" />
+            </td>
+            <td class="mono value" role="cell">
+              {r.value} ({Math.round(share(r.value))} %)
+            </td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</figure>
+
+<style>
+  .chart {
+    margin: 1.5rem 0 2rem;
+    padding: 1rem 1.25rem 0.5rem;
+  }
+
+  .bars {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  .bars caption {
+    caption-side: top;
+    text-align: left;
+    padding-bottom: 0.75rem;
+    color: var(--muted);
+    font-size: 0.8125rem;
+  }
+
+  .bars th,
+  .bars td {
+    vertical-align: middle;
+    padding: 0.7rem 0.75rem 0.7rem 0;
+    border-bottom: 1px solid var(--glass-border);
+  }
+
+  .bars tr:last-child > * {
+    border-bottom: 0;
+  }
+
+  /* Con table-layout: fixed, el ancho de las columnas sale del colgroup */
+  .col-label {
+    width: 34%;
+  }
+
+  .col-value {
+    width: 5.5rem;
+  }
+
+  .bars th[scope='row'] {
+    color: var(--muted);
+    font-size: 0.875rem;
+    font-weight: 400;
+    white-space: normal;
+  }
+
+  .bars .value {
+    padding-right: 0;
+    text-align: right;
+    white-space: nowrap;
+    color: var(--muted);
+    font-size: 0.8125rem;
+  }
+
+  /* Barra anclada a la izquierda, con el extremo de datos redondeado y un mínimo visible para las cifras chicas */
+  .bar {
+    display: block;
+    width: max(var(--v), 4px);
+    height: 0.75rem;
+    border-radius: 0 4px 4px 0;
+    background: color-mix(in srgb, var(--muted) 45%, transparent);
+  }
+
+  .is-strong th[scope='row'],
+  .is-strong .value {
+    color: var(--text);
+  }
+
+  .is-strong .bar {
+    background: var(--accent);
+  }
+
+  /* En móvil, el rótulo ocupa su propia línea y la barra y la cifra van debajo */
+  @media (max-width: 36rem) {
+    .chart {
+      padding-inline: 0.85rem;
+    }
+
+    .bars,
+    .bars tbody {
+      display: block;
+    }
+
+    .bars colgroup {
+      display: none;
+    }
+
+    .bars caption {
+      display: block;
+    }
+
+    .bars tbody tr {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      column-gap: 0.75rem;
+      padding: 0.65rem 0;
+      border-bottom: 1px solid var(--glass-border);
+    }
+
+    .bars tbody tr:last-child {
+      border-bottom: 0;
+    }
+
+    .bars tbody th[scope='row'] {
+      grid-column: 1 / -1;
+      padding: 0 0 0.4rem;
+      border: 0;
+    }
+
+    .bars tbody td {
+      padding: 0;
+      border: 0;
+    }
+  }
+
+  @media print {
+    .bar {
+      border: 1px solid var(--text);
+    }
+  }
+</style>

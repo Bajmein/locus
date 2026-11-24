@@ -10,17 +10,17 @@ Python y agentes de IA al frente. La portada muestra tres áreas («En qué pued
 
 ## Especialidad: trabajo con agentes
 
-Desde abril de 2026 construyo las herramientas con que trabajo con agentes de código: Forge, pulse, fabrik y episteme. Cada una resolvió lo que la anterior dejaba abierto, del pipeline guiado por especificaciones a la memoria persistente. Las cuatro y el método están en [benjamincriado.dev/#agentes](https://benjamincriado.dev/#agentes).
+Desde mayo de 2026 construyo las herramientas con que trabajo con agentes de código: pulse, fabrik y episteme. Cada una resolvió lo que la anterior dejaba abierto, del motor de fases con compuertas a la memoria compartida entre agentes. Las tres y el método están en [benjamincriado.dev/#agentes](https://benjamincriado.dev/#agentes).
 
 ## Proyectos
 
 Agentes de IA primero y visión por computador después, en el mismo orden que la portada.
 
 ### [episteme](https://benjamincriado.dev/episteme/)
-Memoria y documentación persistentes para agentes de IA, servidas por MCP desde un vault de notas Markdown que el usuario controla. En uso diario desde octubre de 2026; código abierto con licencia MIT en [Bajmein/episteme](https://github.com/Bajmein/episteme).
+Una memoria de proyecto curada que comparten tus agentes de IA (Claude Code y Gemini), servida por MCP desde notas Markdown locales. En uso diario desde octubre de 2026; código abierto con licencia MIT en [Bajmein/episteme](https://github.com/Bajmein/episteme).
 
 ### [pulse](https://benjamincriado.dev/pulse/)
-Motor en Python que lleva cada cambio de software por ocho fases con compuertas verificables y lo expone a los agentes de IA por MCP (FastMCP, Pydantic v2, arquitectura hexagonal). Ciclo cerrado (mayo a julio de 2026); sucedió a Forge. Vitrina: [pulse-showcase](https://github.com/Bajmein/pulse-showcase).
+Motor en Python que lleva cada cambio de software por ocho fases con compuertas verificables y lo expone a los agentes de IA por MCP (FastMCP, Pydantic v2, arquitectura hexagonal). Ciclo cerrado (mayo a julio de 2026). Vitrina: [pulse-showcase](https://github.com/Bajmein/pulse-showcase).
 
 ### [Vigilia Reforged](https://benjamincriado.dev/vigilia/)
 Segunda generación de Vigilia (2025) y proyecto de título: monitoreo con análisis de video en tiempo real, arquitectura híbrida Python-Rust, decodificación NVDEC por hardware, zonas de seguridad configurables y alertas multicanal. Vitrina: [vigilia-reforged-showcase](https://github.com/Bajmein/vigilia-reforged-showcase).

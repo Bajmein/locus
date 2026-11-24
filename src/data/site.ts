@@ -1,6 +1,12 @@
 export const site = {
   name: 'Benjamín Criado',
   fullName: 'Benjamín Ignacio Criado Rossa',
+  /** Nombre con que firmo la autoría: pie, JSON-LD (`Person.name`) y llms.txt. El hero y el CV usan `name`/`fullName` */
+  alias: 'Kenno',
+  /** Usuario de GitHub */
+  handle: 'Bajmein',
+  /** Otras formas del nombre del autor, para el JSON-LD (`alternateName`) */
+  alternateNames: ['Bajmein'],
   jobTitle: 'Ingeniero informático',
   location: 'La Serena, Chile',
   description:

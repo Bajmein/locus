@@ -4,6 +4,7 @@ import { getProject } from '../data/projects';
 import { epistemePrs, figuresDate, getStep } from '../data/trail';
 import EpistemeDiagram from '../components/diagrams/EpistemeDiagram.astro';
 import Capabilities from '../components/Capabilities.astro';
+import EmbeddingsChart from '../components/EmbeddingsChart.astro';
 import { getImage, Image } from 'astro:assets';
 import grafoVault from '../assets/images/episteme/grafo-vault.png';
 import grafoPoster from '../assets/images/episteme/grafo-poster.png';
@@ -13,25 +14,35 @@ const poster = await getImage({ src: grafoPoster, format: 'webp', width: 960 });
 
 const capabilities = [
   {
-    title: 'Memoria por proyecto',
-    text: 'Guarda decisiones, lecciones, errores y preferencias como notas ordenadas por proyecto.',
-  },
-  {
-    title: 'Búsqueda en español',
-    text: 'Busca por texto completo en todo el vault, sin distinguir mayúsculas ni tildes.',
+    title: 'Memoria compartida entre agentes',
+    text: 'Claude Code y Gemini consultan y amplían la misma memoria del proyecto: lo que decide uno, el otro lo sabe en la sesión siguiente.',
   },
   {
     title: 'Normas antes de editar',
-    text: 'Antes de editar un archivo, muestra las normas que le aplican.',
+    text: 'Antes de editar un archivo, el agente ve las normas que le aplican y, después, lo que ya se sabe de él.',
   },
   {
-    title: 'Continuidad entre sesiones',
-    text: 'Guarda el estado del trabajo antes de que la conversación se compacte y lo recupera después.',
+    title: 'Memoria curada',
+    text: 'Cada memoria tiene tipo, prioridad y vencimiento; la mantención propone unir duplicados, resolver contradicciones y archivar lo vencido, y se rechaza guardar contraseñas y tokens.',
   },
   {
-    title: 'Control de calidad del vault',
-    text: 'Detecta duplicados, memorias vencidas y enlaces rotos; rechaza guardar contraseñas y tokens.',
+    title: 'Continuidad del trabajo',
+    text: 'El estado del trabajo sobrevive a /compact y a /clear: se guarda al compactar y se recupera al seguir.',
   },
+  {
+    title: 'Local y legible',
+    text: 'Notas Markdown en tu equipo que se abren con Obsidian; el índice SQLite es una caché que se reconstruye sola. episteme no usa servicios en la nube.',
+  },
+  {
+    title: 'Código abierto',
+    text: 'Licencia MIT: el código y la documentación están en GitHub.',
+  },
+];
+
+const embeddings = [
+  { label: 'Sin resultados nuevos', value: 48 },
+  { label: 'Solo resultados débiles (similitud <\u00a00,65)', value: 96 },
+  { label: 'Un acierto nuevo claro (≥\u00a00,65)', value: 3, strong: true },
 ];
 
 const stack = [
@@ -54,16 +65,18 @@ const step = getStep('episteme');
 >
   <h2>El problema</h2>
   <p>
-    Un agente de código empieza cada sesión sin recordar la anterior. Las decisiones, las lecciones y el
-    contexto del proyecto se pierden o hay que volver a explicarlos.
+    Un agente de código empieza cada sesión sin recordar la anterior, y cada agente guarda lo suyo por separado: lo
+    que se decide con uno, el otro no lo sabe. Las decisiones, las lecciones y el contexto del proyecto se pierden o
+    hay que volver a explicarlos.
   </p>
 
   <h2>La solución</h2>
   <p>
-    episteme le da al agente una memoria que dura: una carpeta de notas Markdown, el vault, donde quedan las
-    decisiones, las lecciones y la documentación de cada proyecto. El agente la consulta y la completa
-    mientras trabaja. Las notas son archivos de texto del usuario: se abren con Obsidian o con cualquier
-    editor y no dependen de ningún servicio externo.
+    episteme da a tus agentes una sola memoria de proyecto, curada: una carpeta de notas Markdown, el vault, con las
+    decisiones, las lecciones, las normas y la documentación de cada proyecto. Claude Code la usa completa, con hooks
+    que la consultan en momentos fijos de la sesión; Gemini, con agy, usa las mismas herramientas, sin automatismos.
+    Lo que decide Claude lo sabe Gemini en la sesión siguiente. Las notas son archivos del usuario: se abren con
+    Obsidian o con cualquier editor, y episteme no usa servicios en la nube.
   </p>
 
   <h2>Cómo funciona</h2>
@@ -160,6 +173,38 @@ const step = getStep('episteme');
   <h2>Capacidades</h2>
   <Capabilities items={capabilities} />
 
+  <h2>Búsqueda por palabras, no por embeddings</h2>
+  <p>
+    episteme busca por palabras clave (SQLite FTS5, sin distinguir mayúsculas ni tildes), no por embeddings. Es una
+    decisión medida: el 15 de noviembre de 2026 comparé la búsqueda con los vecinos semánticos de bge-m3 sobre 147
+    consultas reales de mi vault, con 523 memorias.
+  </p>
+  <EmbeddingsChart date="15 de noviembre de 2026" total={147} rows={embeddings} />
+  <p>
+    Solo 3 consultas ganaron un resultado nuevo que de verdad respondía; el resto no ganó nada o sumó resultados sin
+    relación. A cambio, cada consulta tardaba 1,47 s en CPU, vectorizar el vault tomaba 10 minutos y episteme pasaba a
+    depender de Ollama. El método está en
+    <a href="https://github.com/Bajmein/episteme/blob/main/scripts/measure_semantic.py">measure_semantic.py</a> y las
+    cifras, en la
+    <a href="https://github.com/Bajmein/episteme/blob/main/docs/desarrollo.md#resultado-15-11-2026"
+      >documentación del repositorio</a
+    >.
+  </p>
+
+  <h2>Instalación</h2>
+  <p>
+    Requiere uv y git, y funciona en Linux, macOS y Windows. El plugin se instala una vez por máquina, desde el
+    marketplace del repositorio:
+  </p>
+  <pre><code>claude plugin marketplace add Bajmein/episteme
+claude plugin install episteme@episteme</code></pre>
+  <p>
+    Después, en cada proyecto, <code>/episteme:setup</code> registra el servidor, configura los hooks y los permisos
+    y añade la regla al CLAUDE.md; antes de escribir, muestra los cambios para que los apruebes. También se puede
+    registrar a mano con <code>claude mcp add</code>, fijado a una versión. Con Gemini, <code>/episteme:agy</code>
+    activa agy en el proyecto.
+  </p>
+
   <h2>Stack</h2>
   <div class="table-wrap">
     <table>
@@ -171,6 +216,13 @@ const step = getStep('episteme');
       </tbody>
     </table>
   </div>
+
+  <h2>Por qué lo construí</h2>
+  <p>
+    Lo empecé porque la herramienta de memoria que usaba fallaba a menudo y limitaba funciones a su versión de pago.
+    Diseñé episteme con dos reglas: las notas nunca dependen de que el índice funcione, y la documentación es parte
+    del producto.
+  </p>
 
   <h2>Estado del proyecto</h2>
   <p>

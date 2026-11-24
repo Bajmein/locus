@@ -74,7 +74,8 @@ Escala: 13 · 14 · 15,5 · 17 · 20–24 (lead) · 28–44 (tarjetas) · 32–5
 - **Paneles glass** (`.glass`): superficie al 78 %, borde de 1 px, desenfoque de 16 px (10 en móvil);
   sólidos (`--surface`) sin `backdrop-filter` o con `prefers-reduced-transparency`. Los usan la
   consola, «Ahora», las tres tarjetas de «Qué hago», los indicadores clave, la ficha y «Siguiente
-  proyecto» de cada proyecto, la matriz de capas de Vigilia Edge, el contacto, los diagramas y la 404.
+  proyecto» de cada proyecto, la matriz de capas de Vigilia Edge, el contacto, los diagramas, el gráfico de
+  barras de episteme y la 404.
 - **Cabecera**: glass sobre `--bg` al 85 % (opaca con transparencia reducida), borde inferior de 1 px,
   sección activa actualizada al hacer scroll en la portada y línea de progreso de lectura en el acento.
 - **Título de sección**: antetítulo `.label` en el acento, título en display y una barra del acento de
@@ -105,6 +106,12 @@ Escala: 13 · 14 · 15,5 · 17 · 20–24 (lead) · 28–44 (tarjetas) · 32–5
   de pausa en el grafo de `episteme` (cada panel es una `figure` con su pie; la barra queda oculta sin JS
   y entonces se ven las dos vistas), y matriz «Límite → Capa» en `Vigilia Edge` (lista ordenada sin viñetas).
   En la banda, la cifra va arriba en el tono y la descripción debajo en `--muted`.
+- **Gráfico de barras** (`EmbeddingsChart.astro`, en `/episteme/`): una tabla semántica (`table.bars`) dentro de
+  una `figure.glass`, con pie visible en `caption`; cada fila lleva el rótulo, una barra horizontal anclada a la
+  izquierda (12 px de alto, extremo redondeado de 4 px, ancho proporcional al total y un mínimo de 4 px) y la cifra
+  mono con su porcentaje. Una sola barra destacada en el acento (el tono de la página); las demás en `--muted` al
+  45 %. Sin animación ni leyenda: el rótulo de cada fila nombra la barra.
+- **Pie**: la autoría como Kenno (`© 2026 Kenno`) y el enlace de GitHub con el usuario (`GitHub · Bajmein`).
 - **Contacto**: dos tarjetas `.glass` en paralelo (`Proyectos e integraciones` con correo y copia;
   `Equipos y contratación` con acceso al CV web y descarga en PDF).
 - **Riel** del trabajo con agentes: subgrid para alinear período, nombre, texto, cifras y el estado de
