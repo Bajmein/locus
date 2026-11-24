@@ -12,6 +12,8 @@ export interface TrailStep {
   commits: number;
   prs: number;
   href?: string;
+  /** Estado breve cuando el hito no enlaza a página propia */
+  note?: string;
 }
 
 /** Fecha de las cifras, tal como se cita en el sitio */
@@ -27,15 +29,16 @@ export const trail: TrailStep[] = [
   {
     name: 'Forge',
     period: 'Abril – julio de 2026',
-    text: 'Pipeline guiado por especificaciones: cada cambio avanza por fases con artefactos validados por esquemas, compatible con cualquier agente.',
+    text: 'Punto de partida: pipeline por fases con artefactos validados por esquemas. Demostró el método, pero dependía de que el agente respetara las convenciones.',
     commits: 304,
     prs: 38,
+    note: 'Ciclo cerrado',
   },
   {
     slug: 'pulse',
     name: 'pulse',
     period: 'Mayo – julio de 2026',
-    text: 'Motor de estados servido por MCP: compuertas entre fases, revisión automática y escenarios Dado/Cuando/Entonces, para varios agentes de código.',
+    text: 'Llevó esas convenciones a un motor MCP: compuertas estrictas entre ocho fases y revisión automática para que ningún agente pudiera saltarse un paso.',
     commits: 270,
     prs: 50,
     href: '/pulse/',
@@ -43,15 +46,16 @@ export const trail: TrailStep[] = [
   {
     name: 'fabrik',
     period: 'Octubre de 2026 – actualidad',
-    text: 'Plugin de Claude Code: un orquestador con cinco subagentes acotados; los hooks impiden editar sin especificación y cada verificación se ejecuta como un comando.',
+    text: 'Destiló esa disciplina sin servidor intermedio: cinco subagentes acotados y hooks en Claude Code que bloquean ediciones sin especificación.',
     commits: 72,
     prs: 46,
+    note: 'En uso diario',
   },
   {
     slug: 'episteme',
     name: 'episteme',
     period: 'Octubre de 2026 – actualidad',
-    text: 'Memoria persistente servida por MCP: decisiones y lecciones que el agente consulta y completa en cada sesión.',
+    text: 'Resolvió lo que seguía faltando entre cambios: memoria persistente y normas por archivo servidas por MCP desde notas Markdown locales.',
     commits: 390,
     prs: epistemePrs.before + epistemePrs.public,
     href: '/episteme/',

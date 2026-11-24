@@ -54,7 +54,7 @@ export const projects: Project[] = [
     ],
     period: 'Octubre de 2026 – actualidad',
     card: {
-      text: 'Los agentes de código recuerdan decisiones y lecciones entre sesiones, en notas Markdown del usuario.',
+      text: 'Memoria persistente y búsqueda de texto completo por MCP para que los agentes conserven decisiones, normas y contexto entre sesiones.',
       stack: ['Python', 'MCP', 'SQLite FTS5'],
       proof: `Código abierto · en uso diario · ${getStep('episteme').commits} commits`,
     },
@@ -103,7 +103,7 @@ export const projects: Project[] = [
       text: 'Análisis de video en tiempo real que detecta y responde a incidentes mientras ocurren.',
       stack: ['Rust', 'Python', 'NVDEC'],
       context: 'Segunda generación de Vigilia, 2025',
-      proof: 'Proyecto de título · decodificación por GPU en Rust',
+      proof: 'Proyecto de título · 0 copias en CPU (NVDEC + Iceoryx2)',
     },
   },
   {

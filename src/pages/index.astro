@@ -13,11 +13,11 @@ const epistemeThumb = await getImage({ src: grafoPoster, format: 'webp', width: 
 const now = [
   {
     label: 'En foco',
-    text: 'Fuera de mi jornada laboral desarrollo episteme: memoria persistente para agentes de IA, servida por MCP, que uso a diario.',
+    text: 'episteme (v0.21, MIT): servidor MCP de memoria y documentación persistente sobre Markdown y SQLite FTS5, en uso diario.',
   },
   {
     label: 'En uso',
-    text: 'fabrik, mi flujo de desarrollo guiado por especificaciones para Claude Code.',
+    text: 'fabrik: orquestación guiada por especificaciones con subagentes acotados y verificación por comandos en Claude Code.',
   },
 ];
 
@@ -25,7 +25,7 @@ const areas = [
   {
     icon: 'terminal' as const,
     title: 'Agentes de IA con método',
-    text: 'Flujos con agentes de código (Claude Code, Codex CLI) que parten de una especificación, se verifican con comandos y guardan lo aprendido. También integro agentes en los procesos de una empresa.',
+    text: 'Flujos con agentes de código (Claude Code, Codex CLI) que parten de una especificación, se verifican con comandos y conservan decisiones entre sesiones, tanto en ingeniería como en procesos de negocio.',
     evidence: [
       { label: 'pulse', href: '/pulse/' },
       { label: 'episteme', href: '/episteme/' },
@@ -45,7 +45,8 @@ const areas = [
     title: 'Automatización e integraciones',
     text: 'Automatizo procesos manuales con integraciones por API y webhooks, CI/CD en GitHub Actions y servicios en AWS y Azure sobre Linux y Docker.',
     evidence: [
-      { label: 'Este sitio: pruebas en cada PR y despliegue automático', href: 'https://github.com/Bajmein/locus' },
+      { label: 'Vigilia: eventos ONVIF y MQTT', href: '/vigilia/' },
+      { label: 'Este sitio: CI/CD en cada PR', href: 'https://github.com/Bajmein/locus' },
     ],
   },
 ];
@@ -108,7 +109,7 @@ const cycle = [
   { verb: 'especificar', text: 'Especificación verificable', state: 'ok' },
   { verb: 'planificar', text: 'Fuentes y decisiones cerradas', state: 'ok' },
   { verb: 'implementar', text: 'Subagentes con tareas acotadas', state: 'ok' },
-  { verb: 'verificar', text: 'Tests, lint y tipos en verde', state: 'ok' },
+  { verb: 'verificar', text: 'Pruebas, lint y tipos en verde', state: 'ok' },
   { verb: 'recordar', text: 'Decisión guardada en episteme', state: 'ok' },
   { verb: 'fusionar', text: 'Lo decide una persona', state: 'espera' },
 ];
@@ -128,12 +129,12 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
         </span>
       </div>
       <p class="lead">
-        Desarrollo software en Python e integro agentes de IA con un método verificable: especificación previa,
-        verificación automatizada y memoria entre sesiones.
+        Construyo software en Python y sistemas con agentes de IA pensados para producción: contratos tipados,
+        verificación automatizada y memoria persistente.
       </p>
       <p class="lead-sub">
-        Actualmente soy responsable del área de TI de un grupo de empresas: sitios web, integraciones y automatización.
-        En paralelo, desarrollo mis propias herramientas para trabajar con agentes de código.
+        Lidero el área de TI de un grupo de empresas —plataformas web, integraciones y automatización— y diseño
+        servidores MCP y herramientas abiertas para ingeniería asistida por agentes.
       </p>
       <ul class="facts mono" aria-label="Disponibilidad">
         <li>Trabajo remoto</li>
@@ -199,7 +200,8 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
         <h2 id="areas-title">En qué puedo aportar</h2>
       </div>
       <p class="muted">
-        Tres áreas en las que puedo aportar a un equipo o a un proyecto, cada una respaldada por trabajo público.
+        Tres frentes para integrarme a un equipo de ingeniería o ejecutar un proyecto de principio a fin, respaldados
+        por software verificable.
       </p>
     </div>
     <ul class="areas-grid">
@@ -235,9 +237,8 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
         <h2 id="proyectos-title">Proyectos</h2>
       </div>
       <p class="muted">
-        Software que diseño y mantengo de forma independiente. Cada página expone el problema, las decisiones técnicas
-        y el estado del proyecto. El código de episteme es abierto; el de los otros tres es privado, y cada uno tiene un
-        repositorio vitrina público.
+        Sistemas diseñados y mantenidos de principio a fin: problema real, decisiones de arquitectura y resultados
+        medidos. Código abierto en episteme y vitrinas técnicas en el resto.
       </p>
     </div>
     <ol class="projects">
@@ -312,7 +313,7 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
               <span class="mono figures">
                 {t.commits} commits, {t.prs} PR
               </span>
-              {!t.href && <span class="label nopage">Sin página propia</span>}
+              {t.note && <span class="label nopage">{t.note}</span>}
             </li>
           ))
         }
