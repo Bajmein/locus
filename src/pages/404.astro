@@ -10,7 +10,13 @@ import Base from '../layouts/Base.astro';
   <section class="container notfound">
     <div class="glass notfound-panel">
       <p class="label">Error 404</p>
-      <h1>Esta página no existe.</h1>
+      <div class="target">
+        <h1>Esta página no existe.</h1>
+        <span class="bbox is-miss" aria-hidden="true">
+          <i></i><i></i><i></i><i></i>
+          <b class="mono">sin detección</b>
+        </span>
+      </div>
       <p class="muted">Puede que la dirección haya cambiado. Los proyectos y el currículum están en el inicio.</p>
       <a class="btn btn-primary" href="/">Volver al inicio</a>
     </div>
@@ -29,7 +35,30 @@ import Base from '../layouts/Base.astro';
 
   .notfound .label {
     color: var(--accent);
-    margin-bottom: 1rem;
+    margin-bottom: 3.25rem;
+  }
+
+  /* Margen para la caja, que sobresale 1,25rem a cada lado del título */
+  .notfound .target {
+    margin: 0 1.25rem 2.25rem;
+  }
+
+  @media (max-width: 760px) {
+    .notfound .target {
+      margin-inline: 0.75rem;
+    }
+  }
+
+  .notfound h1 {
+    margin: 0;
+  }
+
+  .notfound .bbox {
+    animation-delay: 0.3s;
+  }
+
+  .notfound .bbox b {
+    animation-delay: 0.75s;
   }
 
   .notfound .muted {

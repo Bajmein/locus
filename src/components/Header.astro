@@ -38,12 +38,28 @@ function actual(href: string) {
 <style>
   .site-header {
     border-bottom: 1px solid var(--border);
-    /* Opaca: el contenido no se transparenta bajo la barra al hacer scroll */
-    background: var(--bg);
+    /* Glass al 85 %: el contenido apenas se insinúa bajo la barra al hacer scroll */
+    background: color-mix(in srgb, var(--bg) 85%, transparent);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    backdrop-filter: blur(16px) saturate(140%);
     position: sticky;
     top: 0;
     z-index: 10;
     view-transition-name: site-header;
+  }
+
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .site-header {
+      background: var(--bg);
+    }
+  }
+
+  @media (prefers-reduced-transparency: reduce) {
+    .site-header {
+      background: var(--bg);
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
   }
 
   /* Progreso de lectura: línea de 1 px en el acento */

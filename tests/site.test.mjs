@@ -334,3 +334,21 @@ test('portada: contacto con copiar correo y CV, sin redes repetidas', () => {
   assert.ok(!section.includes('class="social"'), 'las redes se repiten en el contacto');
   assert.ok(html.includes('rel="me"'), 'las redes deben seguir en el pie');
 });
+
+test('portada: antetítulos en las secciones', () => {
+  const html = read('index.html');
+  for (const id of ['proyectos', 'agentes', 'experiencia', 'contacto']) {
+    const start = html.indexOf(`id="${id}"`);
+    assert.ok(start > -1, `falta la sección #${id}`);
+    const head = html.slice(start, html.indexOf('<h2', start));
+    assert.ok(head.includes('class="label'), `#${id}: falta el antetítulo antes del h2`);
+  }
+});
+
+test('caja de detección en portada, proyectos y 404', () => {
+  const files = ['index.html', 'vigilia/index.html', 'vigilia-edge/index.html', 'forge/index.html', 'episteme/index.html', '404.html'];
+  for (const file of files) {
+    assert.ok(read(file).includes('class="bbox'), `${file}: falta la caja de detección`);
+  }
+  assert.match(read('404.html'), /class="bbox[^"]*\bis-miss\b/, '404: la caja debe ser .is-miss');
+});

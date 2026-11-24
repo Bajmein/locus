@@ -33,9 +33,10 @@ npm run preview    # sirve dist/
 La dirección completa (tokens, tipografía, componentes y movimiento) está en `DESIGN.md`.
 
 - Un solo tema oscuro («Vigilia nocturna»). Acento ámbar (`--accent`) en el sitio; cada proyecto tiene un tono (`--tone-<slug>`) que reemplaza a `--accent` en su tarjeta y en su página. No añadir otros colores; un tono nuevo debe medir 4,5:1 o más sobre `--bg` y `--surface`.
-- Paneles sólidos (`.glass`: `--surface`, borde de 1 px, `--radius-lg`, sin desenfoque). La cabecera es opaca. El resto se separa con líneas de 1 px. Sin sombras exteriores.
-- Movimiento con CSS nativo y como mejora progresiva (`animation-timeline`, `@view-transition`): una sola secuencia de carga en el hero; el resto responde al scroll o al cursor. Todo debe verse completo con `prefers-reduced-motion`.
-- Tipografía: Archivo Variable (ancho 112–118 % en display y títulos) y Geist Mono solo para cifras, stack y código, autoalojadas (`@fontsource-variable`). Rótulos en tipo de oración, sin mayúsculas forzadas.
+- Paneles glass (`.glass`: superficie al 78 %, borde de 1 px, `--radius-lg`, desenfoque) con respaldo sólido sin `backdrop-filter` o con `prefers-reduced-transparency`; la cabecera, glass al 85 %. Las tarjetas de proyecto siguen sólidas. El resto se separa con líneas de 1 px. Sin sombras exteriores. Grilla fina solo en el hero.
+- Movimiento con CSS nativo y como mejora progresiva (`animation-timeline`, `@view-transition`): una sola secuencia de carga en el hero (y la caja de detección en proyectos y 404); el resto responde al scroll o al cursor. Todo debe verse completo con `prefers-reduced-motion`.
+- Tipografía: Archivo Variable (`--font-display`, ancho 112–118 %) solo en display y títulos; Geist Variable en texto e interfaz; Geist Mono en rótulos (`.label`, mayúsculas, 13 px) y en cifras, stack y código. Autoalojadas (`@fontsource-variable`); solo se precarga Archivo.
+- Títulos de sección con antetítulo `.label` y barra del acento debajo. La caja de detección (`.target` + `.bbox`, variante `.is-miss`) está en `global.css` y marca el hero, los títulos de proyecto y la 404.
 - Sin scroll horizontal en móvil; sin menú hamburguesa.
 
 ## Reglas de contenido

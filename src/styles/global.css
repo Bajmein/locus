@@ -24,14 +24,17 @@
   --tone-episteme: #b49cf2;
   --tone-vigilia: #5fc896;
   --tone-vigilia-edge: #6fb0ee;
-  --font-sans: 'Archivo Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
+  /* Titulares: Archivo ancha (112–118 %); el texto y la interfaz van en Geist */
+  --font-display: 'Archivo Variable', 'Geist Variable', ui-sans-serif, sans-serif;
   --font-mono: 'Geist Mono Variable', ui-monospace, monospace;
   --w-page: 1200px;
-  --w-prose: 68ch;
+  /* En rem, no en ch: la columna no depende de la fuente y los diagramas caben en su composición ancha */
+  --w-prose: 46rem;
   --radius: 6px;
   --gutter: clamp(1rem, 4vw, 2rem);
   --radius-lg: 10px;
-  --glass-bg: color-mix(in srgb, var(--surface) 62%, transparent);
+  --glass-bg: color-mix(in srgb, var(--surface) 78%, transparent);
   --glass-border: color-mix(in srgb, var(--text) 9%, transparent);
   --glass-hi: color-mix(in srgb, var(--text) 7%, transparent);
   --glass-blur: 16px;
@@ -117,6 +120,11 @@ h4 {
   letter-spacing: -0.015em;
 }
 
+h1,
+h2 {
+  font-family: var(--font-display);
+}
+
 h1 {
   font-size: clamp(2.25rem, 5vw, 3.5rem);
   font-weight: 700;
@@ -200,13 +208,13 @@ hr {
   color: var(--accent-ink);
 }
 
-/* Etiquetas, numeración, fechas y stack */
-/* Rótulos en tipo de oración, sin mayúsculas forzadas */
+/* Rótulos, antetítulos y fechas: la voz técnica, mono en mayúsculas (el HTML va en tipo de oración) */
 .label {
-  font-size: 0.875rem;
-  font-weight: 500;
-  font-stretch: 100%;
-  letter-spacing: 0;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
   color: var(--muted);
 }
 
@@ -251,6 +259,7 @@ hr {
 
 .section-head h2 {
   margin: 0;
+  font-family: var(--font-display);
   font-size: clamp(2rem, 4.2vw, 3.25rem);
   font-stretch: 118%;
   font-weight: 700;
@@ -267,6 +276,19 @@ hr {
 .section-head .label {
   margin: 0;
   color: var(--accent);
+}
+
+/* Barra del acento bajo el título; crece al entrar en pantalla. Va en el h2 y no en .section-head,
+   que en la portada es una grilla (.split) y haría del ::after una celda */
+.section-head h2::after {
+  content: '';
+  display: block;
+  width: 3rem;
+  height: 2px;
+  margin-top: 0.9rem;
+  border-radius: 1px;
+  background: var(--accent);
+  transform-origin: left;
 }
 
 /* ---------- Botones ---------- */
@@ -350,12 +372,28 @@ td:first-child {
 
 /* ---------- Glass ---------- */
 
-/* Panel: superficie sólida con borde de 1 px (sin desenfoque: el texto siempre se lee) */
+/* Panel translúcido: superficie al 78 % y desenfoque; sólido sin backdrop-filter o con transparencia reducida */
 .glass {
-  background: var(--surface);
-  border: 1px solid var(--border);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
   border-radius: var(--radius-lg);
   box-shadow: inset 0 1px 0 var(--glass-hi);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(140%);
+  backdrop-filter: blur(var(--glass-blur)) saturate(140%);
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass {
+    background: var(--surface);
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .glass {
+    background: var(--surface);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
 }
 
 /* Foco de luz que sigue al cursor (variables --mx/--my desde Base.astro) */
@@ -386,6 +424,110 @@ td:first-child {
   position: relative;
 }
 
+/* ---------- Caja de detección ---------- */
+
+/* La firma del sitio: un título como objeto detectado (portada, proyectos y 404) */
+.target {
+  position: relative;
+  display: inline-block;
+}
+
+/* Caja de detección: cuatro esquinas y la etiqueta de clase con su confianza */
+.bbox {
+  position: absolute;
+  inset: -1rem -1.25rem -1.1rem -1.25rem;
+  border: 1px solid color-mix(in srgb, var(--accent) 22%, transparent);
+  pointer-events: none;
+}
+
+.bbox i {
+  position: absolute;
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 2px solid var(--accent);
+}
+
+.bbox i:nth-child(1) {
+  top: -1px;
+  left: -1px;
+  border-width: 2px 0 0 2px;
+}
+
+.bbox i:nth-child(2) {
+  top: -1px;
+  right: -1px;
+  border-width: 2px 2px 0 0;
+}
+
+.bbox i:nth-child(3) {
+  bottom: -1px;
+  right: -1px;
+  border-width: 0 2px 2px 0;
+}
+
+.bbox i:nth-child(4) {
+  bottom: -1px;
+  left: -1px;
+  border-width: 0 0 2px 2px;
+}
+
+.bbox b {
+  position: absolute;
+  left: -1px;
+  bottom: 100%;
+  padding: 0.15rem 0.5rem;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Pantallas angostas: la caja sobresale menos, para no salirse del gutter */
+@media (max-width: 760px) {
+  .bbox {
+    inset: -0.6rem -0.75rem -0.7rem -0.75rem;
+  }
+}
+
+/* Sin detección (404): contorno discontinuo y etiqueta en gris */
+.bbox.is-miss {
+  border: 1px dashed color-mix(in srgb, var(--muted) 45%, transparent);
+}
+
+.bbox.is-miss i {
+  border-color: var(--muted);
+}
+
+.bbox.is-miss b {
+  background: var(--muted);
+  color: var(--bg);
+}
+
+@keyframes lock {
+  from {
+    opacity: 0;
+    transform: scale(1.12);
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+}
+
+/* La caja se fija sobre el título al cargar, y luego aparece su etiqueta */
+@media (prefers-reduced-motion: no-preference) {
+  .bbox {
+    animation: lock 0.55s 1s var(--ease-out) both;
+  }
+
+  .bbox b {
+    animation: fade 0.3s 1.45s ease-out both;
+  }
+}
+
 /* ---------- Movimiento ---------- */
 
 @keyframes rise {
@@ -405,6 +547,15 @@ td:first-child {
     [class~='reveal'] {
       animation-timeline: view();
       animation-range: entry 0% entry 40%;
+    }
+
+    .section-head h2::after {
+      animation: grow linear both;
+    }
+
+    [class~='section-head'] h2::after {
+      animation-timeline: view();
+      animation-range: entry 0% entry 60%;
     }
   }
 }

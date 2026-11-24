@@ -12,7 +12,7 @@ export const site = {
 
 export const nav = [
   { label: 'Proyectos', href: '/#proyectos' },
-  { label: 'Método', href: '/#agentes' },
+  { label: 'Agentes', href: '/#agentes' },
   { label: 'CV', href: '/cv/' },
   { label: 'Contacto', href: '/#contacto' },
 ] as const;
