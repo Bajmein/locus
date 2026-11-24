@@ -380,12 +380,27 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
 
   .eyebrow {
     margin-bottom: 3.5rem;
+    text-wrap: balance;
     font-weight: 500;
     color: var(--muted);
   }
 
   .target {
     margin-bottom: 2.25rem;
+  }
+
+  .name {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(3.5rem, 7.6vw, 7rem);
+    font-weight: 800;
+    font-stretch: 112%;
+    letter-spacing: -0.035em;
+    line-height: 0.92;
+  }
+
+  .name span {
+    display: block;
   }
 
   .lead {
@@ -1310,13 +1325,9 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
       padding: 0 0 0 2rem;
     }
 
-    /* Caja de detección dentro del gutter */
+    /* Caja de detección dentro del gutter (su margen en móvil está en global.css) */
     .target {
       margin-left: 0.75rem;
-    }
-
-    .bbox {
-      inset: -0.6rem -0.75rem -0.7rem -0.75rem;
     }
 
     .dot {

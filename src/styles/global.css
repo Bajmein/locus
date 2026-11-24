@@ -483,6 +483,13 @@ td:first-child {
   white-space: nowrap;
 }
 
+/* Pantallas angostas: la caja sobresale menos, para no salirse del gutter */
+@media (max-width: 760px) {
+  .bbox {
+    inset: -0.6rem -0.75rem -0.7rem -0.75rem;
+  }
+}
+
 /* Sin detección (404): contorno discontinuo y etiqueta en gris */
 .bbox.is-miss {
   border: 1px dashed color-mix(in srgb, var(--muted) 45%, transparent);

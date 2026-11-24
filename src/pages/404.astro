@@ -35,12 +35,18 @@ import Base from '../layouts/Base.astro';
 
   .notfound .label {
     color: var(--accent);
-    margin-bottom: 2.75rem;
+    margin-bottom: 3.25rem;
   }
 
   /* Margen para la caja, que sobresale 1,25rem a cada lado del título */
   .notfound .target {
     margin: 0 1.25rem 2.25rem;
+  }
+
+  @media (max-width: 760px) {
+    .notfound .target {
+      margin-inline: 0.75rem;
+    }
   }
 
   .notfound h1 {
