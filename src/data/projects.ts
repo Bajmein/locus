@@ -39,8 +39,8 @@ export const projects: Project[] = [
     slug: 'episteme',
     title: 'episteme',
     description:
-      'episteme: memoria y documentación persistentes para agentes de IA, servidas por MCP desde un vault de notas Markdown que el usuario controla.',
-    tagline: 'Documentación y memoria de proyectos para agentes, servida por MCP desde un vault Markdown.',
+      'episteme: una memoria de proyecto curada que comparten tus agentes de IA (Claude Code y Gemini), servida por MCP desde notas Markdown locales.',
+    tagline: 'Una sola memoria de proyecto, curada, que comparten tus agentes: lo que decide Claude lo sabe Gemini en la sesión siguiente.',
     status: 'En uso diario — v0.21 (noviembre de 2026). Linux, macOS y Windows. Código abierto con licencia MIT.',
     stack: ['Python', 'MCP', 'SQLite FTS5', 'Markdown'],
     sourceUrl: 'https://github.com/Bajmein/episteme',
@@ -50,13 +50,13 @@ export const projects: Project[] = [
     metrics: [
       { value: `${getStep('episteme').commits} commits`, label: 'Desarrollo activo desde oct. 2026' },
       { value: `${getStep('episteme').prs} PR`, label: 'Fusionados en la historia del proyecto' },
-      { value: 'SQLite FTS5', label: 'Búsqueda local, sin distinguir tildes y sin nube' },
+      { value: 'SQLite FTS5', label: 'Búsqueda por palabras, sin embeddings ni nube' },
     ],
     period: 'Octubre de 2026 – actualidad',
     card: {
-      text: 'Memoria persistente y búsqueda de texto completo por MCP para que los agentes conserven decisiones, normas y contexto entre sesiones.',
+      text: 'Una memoria de proyecto curada que comparten Claude Code y Gemini: decisiones, normas y estado del trabajo entre sesiones, en Markdown local.',
       stack: ['Python', 'MCP', 'SQLite FTS5'],
-      proof: `Código abierto · en uso diario · ${getStep('episteme').commits} commits`,
+      proof: `Código abierto · Claude Code y Gemini · ${getStep('episteme').commits} commits`,
     },
   },
   {

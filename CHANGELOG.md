@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Página de episteme: secciones «Búsqueda por palabras, no por embeddings», con el gráfico de barras de la medición del 15-11-2026 (`EmbeddingsChart.astro`, tabla semántica), «Instalación» y «Por qué lo construí».
 - Páginas de proyecto: banda superior de tres indicadores clave verificables (`.metrics.glass`), enlace directo al repositorio vitrina en la ficha lateral `.meta` y matriz visual «Límite → Capa» en `Vigilia Edge`.
 - Página de episteme: selector por pestañas («Evolución» / «Vista fija») e indicador interactivo de reproducción/pausa dentro de un único marco `.graph.glass`.
 - Cabecera: resaltado dinámico de la sección visible al recorrer la portada (`IntersectionObserver` con `aria-current="location"`).
@@ -27,6 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- episteme se presenta como una memoria de proyecto curada que comparten Claude Code y Gemini: metadescripción, tagline, tarjeta, indicador de búsqueda, texto del riel, «El problema», «La solución», seis capacidades y README.
 - Portada y sistema visual: tira «Ahora» equilibrada en dos columnas con divisor; disponibilidad en pastillas `.facts`, métricas destacadas en el hero y pasos de la consola numerados en una sola línea en móvil; `#areas` transformada en tres tarjetas `.glass` con ícono, índice y chips de evidencia; tarjetas de proyecto con resplandor tonal en reposo, pie en una sola fila e insignia + vista previa del grafo en `episteme`; contacto dividido en dos tarjetas por audiencia.
 - Activos de marca (`public/og.png`, `tools/og.html` y `public/favicon.svg`) rediseñados bajo la dirección «Vigilia nocturna» (`#0c1220`, Archivo Variable, grilla de sensor y caja `persona 0,99`).
 - Páginas de proyecto: etiquetas técnicas propias en `.bbox` (`mcp · memoria local`, `fsm · 8 fases`, `gpu · tiempo real`, `edge · < 80 ms`) para no repetir el antetítulo del grupo, e inicio unificado en `Vigilia Reforged` y `Vigilia Edge` sin párrafos duplicados.

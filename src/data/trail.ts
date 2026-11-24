@@ -48,7 +48,7 @@ export const trail: TrailStep[] = [
     slug: 'episteme',
     name: 'episteme',
     period: 'Octubre de 2026 – actualidad',
-    text: 'Resolvió lo que seguía faltando entre cambios: memoria persistente y normas por archivo servidas por MCP desde notas Markdown locales.',
+    text: 'Resolvió lo que seguía faltando entre cambios: una memoria curada, con normas por archivo, que comparten Claude Code y Gemini desde notas Markdown locales.',
     commits: 390,
     prs: epistemePrs.before + epistemePrs.public,
     href: '/episteme/',
