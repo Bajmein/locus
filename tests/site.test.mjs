@@ -310,7 +310,7 @@ test('cabecera: sección activa y logo con nombre accesible', () => {
   }
 });
 
-test('enlaces a vitrinas y enlaces internos válidos', () => {
+test('enlaces a vitrinas, al código de episteme y enlaces internos válidos', () => {
   const showcases = {
     'vigilia/index.html': 'vigilia-reforged-showcase',
     'vigilia-edge/index.html': 'vigilia-edge-showcase',
@@ -319,6 +319,11 @@ test('enlaces a vitrinas y enlaces internos válidos', () => {
   for (const [file, repo] of Object.entries(showcases)) {
     assert.ok(read(file).includes(`https://github.com/Bajmein/${repo}`), `${file} no enlaza ${repo}`);
   }
+  // episteme es de código abierto: enlaza su repositorio en la ficha y lo declara en el JSON-LD
+  const episteme = read('episteme/index.html');
+  assert.ok(episteme.includes('class="repo mono'), 'episteme sin enlace a su repositorio en la ficha');
+  assert.ok(episteme.includes('"codeRepository":"https://github.com/Bajmein/episteme"'), 'episteme sin codeRepository');
+  assert.ok(!episteme.includes('Código privado'), 'episteme dice que su código es privado');
 
   for (const file of htmlFiles()) {
     const html = readFileSync(file, 'utf8');

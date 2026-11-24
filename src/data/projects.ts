@@ -1,3 +1,5 @@
+import { getStep } from './trail';
+
 export interface Project {
   slug: string;
   title: string;
@@ -7,7 +9,10 @@ export interface Project {
   status: string;
   /** Stack completo, para la ficha de la página */
   stack: string[];
+  /** Repositorio vitrina: documentación pública de un proyecto de código privado */
   repoUrl?: string;
+  /** Repositorio con el código fuente, cuando el proyecto es de código abierto */
+  sourceUrl?: string;
   /** Grupo de la portada: agentes de IA o visión por computador */
   group: 'agentes' | 'vision';
   /** Período de trabajo, para la tarjeta */
@@ -28,16 +33,17 @@ export const projects: Project[] = [
     slug: 'episteme',
     title: 'episteme',
     description:
-      'episteme: memoria y documentación persistente para agentes de IA, servida por MCP desde un vault de notas Markdown que el usuario controla.',
+      'episteme: memoria y documentación persistentes para agentes de IA, servidas por MCP desde un vault de notas Markdown que el usuario controla.',
     tagline: 'Documentación y memoria de proyectos para agentes, servida por MCP desde un vault Markdown.',
-    status: 'En uso diario — v0.13 (noviembre de 2026). Linux, macOS y Windows. Código privado.',
+    status: 'En uso diario — v0.21 (noviembre de 2026). Linux, macOS y Windows. Código abierto con licencia MIT.',
     stack: ['Python', 'MCP', 'SQLite FTS5', 'Markdown'],
+    sourceUrl: 'https://github.com/Bajmein/episteme',
     group: 'agentes',
-    period: 'Octubre de 2026 — hoy',
+    period: 'Octubre de 2026 – actualidad',
     card: {
       text: 'Los agentes de código recuerdan decisiones y lecciones entre sesiones, en notas Markdown del usuario.',
       stack: ['Python', 'MCP', 'SQLite FTS5'],
-      proof: 'En uso diario · v0.13 · 336 commits',
+      proof: `Código abierto · en uso diario · ${getStep('episteme').commits} commits`,
     },
   },
   {
@@ -50,28 +56,28 @@ export const projects: Project[] = [
     stack: ['Python', 'FastMCP', 'Pydantic', 'SQLite', 'Docker'],
     repoUrl: 'https://github.com/Bajmein/pulse-showcase',
     group: 'agentes',
-    period: 'Mayo — julio de 2026',
+    period: 'Mayo – julio de 2026',
     card: {
       text: 'Un motor que no deja al agente saltarse fases: cada cambio avanza solo con su especificación, su diseño aprobado y sus pruebas.',
       stack: ['Python', 'FastMCP', 'Pydantic'],
-      proof: '244 tests · ocho fases con compuertas',
+      proof: '244 pruebas · ocho fases con compuertas',
     },
   },
   {
     slug: 'vigilia',
     title: 'Vigilia Reforged',
     description:
-      'Vigilia Reforged: plataforma de monitoreo inteligente con análisis de video en tiempo real, zonas de seguridad configurables y alertas multicanal.',
-    tagline: 'De la vigilancia pasiva al monitoreo inteligente y proactivo.',
+      'Vigilia Reforged: plataforma de monitoreo con análisis de video en tiempo real, zonas de seguridad configurables y alertas multicanal.',
+    tagline: 'Análisis de video en tiempo real con respuesta automática a los eventos.',
     status: 'Versión de titulación — v0.8.1',
     stack: ['Rust', 'Python', 'ONNX Runtime', 'NVDEC', 'PySide6'],
     repoUrl: 'https://github.com/Bajmein/vigilia-reforged-showcase',
     group: 'vision',
-    period: '2026',
+    period: '2025',
     card: {
       text: 'Análisis de video en tiempo real que detecta y responde a incidentes mientras ocurren.',
       stack: ['Rust', 'Python', 'NVDEC'],
-      context: 'Segunda generación de Vigilia, 2026',
+      context: 'Segunda generación de Vigilia, 2025',
       proof: 'Proyecto de título · decodificación por GPU en Rust',
     },
   },
@@ -79,8 +85,8 @@ export const projects: Project[] = [
     slug: 'vigilia-edge',
     title: 'Vigilia Edge',
     description:
-      'Vigilia Edge: vigilancia inteligente de escritorio con inferencia local, núcleo en Rust, interfaz PySide6 y pipeline de video de alto rendimiento.',
-    tagline: 'Sistema de vigilancia inteligente que corre completamente en local: sin nube y sin latencia de red.',
+      'Vigilia Edge: videovigilancia local en un PC de escritorio, con inferencia por GPU, núcleo en Rust y unos 80 ms de la cámara a la pantalla.',
+    tagline: 'Videovigilancia que se ejecuta por completo en el equipo local, sin nube ni latencia de red.',
     status: 'v1.1.0 — operativa en estaciones de trabajo locales',
     stack: ['YOLO', 'TensorRT', 'Rust', 'PySide6'],
     repoUrl: 'https://github.com/Bajmein/vigilia-edge-showcase',

@@ -22,7 +22,8 @@ npm run preview    # sirve dist/
 - Imágenes en `src/assets/images/<proyecto>/`, con `<Image>` de `astro:assets` (WebP en varios anchos, `widths` y `sizes`) y texto alternativo; hoy solo el grafo del vault en `episteme.astro` (figura `.graph.glass` con `figcaption`).
 - `src/styles/global.css`: tokens de diseño (`--bg`, `--accent`, …) y estilos base, incluida la impresión del CV.
 - `src/data/site.ts`: nombre, correo, enlaces sociales y metadescripciones del sitio y del CV.
-- `src/data/projects.ts`: datos de los proyectos (metadescripción, ficha, tarjeta de la portada con su prueba `card.proof`, `group` y `period`; agentes primero); lo usan las páginas de proyecto, la portada y `llms.txt`.
+- `src/data/projects.ts`: datos de los proyectos (metadescripción, ficha, repositorio vitrina `repoUrl` o de código abierto `sourceUrl`, tarjeta de la portada con su prueba `card.proof`, `group` y `period`; agentes primero); lo usan las páginas de proyecto, la portada y `llms.txt`.
+- `src/data/trail.ts`: línea de tiempo de `#agentes` con las cifras de GitHub de las cuatro herramientas (`trail`, `totalCommits`, `totalPrs`, `figuresDate`); fuente única de esas cifras para la portada, el CV, la página de episteme y su tarjeta.
 - Portada (`src/pages/index.astro`), en orden: hero (disponibilidad en `.facts`, cifra del trabajo con agentes en `.proof` y consola «Ciclo de un cambio»), «Ahora», «En qué puedo aportar» (`#areas`, lista `.method` con `.evidence`), «Proyectos» (cada tarjeta con su prueba), «Cómo trabajo con agentes de IA» (`#agentes`), trayectoria y tecnologías, contacto para dos audiencias (equipos que contratan y empresas con un proyecto). La navegación dice «Qué hago» para `/#areas`; `#agentes` no va en el menú.
 - `src/pages/llms.txt.ts`: genera `/llms.txt` en el build a partir de esos datos.
 - `public/`: archivos servidos tal cual (`CNAME`, `robots.txt`, `og.png`, PDF del CV).
@@ -47,6 +48,12 @@ La dirección completa (tokens, tipografía, componentes y movimiento) está en 
 - El cargo actual se describe como «Encargado de TI en un grupo de empresas», sin nombrar la empresa ni a personas.
 - No publicar el teléfono. No escribir «estudiante», «egresado» ni «junior».
 - No inventar cifras, clientes ni fechas.
+- Registro profesional y tuteo («Escríbeme», «Si buscas»): sin giros coloquiales («por mi cuenta», «pongo a
+  trabajar»), anglicismos con equivalente («corre» por «se ejecuta», «Email», «hosting», «APIs») ni adjetivos sin
+  respaldo («inteligente», «de alto rendimiento», «proactivo»).
+- «Ingeniero informático» con minúscula salvo al inicio (también tras raya o dos puntos). «Pruebas», no «tests», en el texto visible. Rangos de fecha con semirraya y «actualidad»
+  («oct. 2026 – actualidad», «2021–2025»). El proyecto de título, Vigilia Reforged, es de 2025.
 - No describir procesos internos de la empresa (tickets, gerencia, aprobaciones, clientes ni prospectos): el cargo se cuenta en términos generales.
 - El CV en PDF (`public/assets/pdf/cv_benjamin_criado.pdf`) se genera desde `/cv/` con Chrome headless
-  (`--print-to-pdf`); debe caber en dos páginas.
+  (`--print-to-pdf`); debe caber en dos páginas. En impresión, una sección con varias entradas puede seguir en la
+  página siguiente, pero ninguna entrada se parte.

@@ -11,11 +11,11 @@ const capabilities = [
   },
   {
     title: 'Zonas de seguridad configurables',
-    text: 'Define áreas de interés con geometría arbitraria: zonas de intrusión, perímetros de cruce, regiones de exclusión. Las reglas son declarativas y no requieren programación.',
+    text: 'Áreas de interés con geometría arbitraria: zonas de intrusión, perímetros de cruce y regiones de exclusión. Las reglas son declarativas y no requieren programación.',
   },
   {
     title: 'Sistema de alertas multicanal',
-    text: 'Cuando se detecta un evento de seguridad, Vigilia puede responder de forma coordinada: disuasión de audio, notificaciones a sistemas externos e integración con plataformas de gestión de video existentes.',
+    text: 'Ante un evento de seguridad, Vigilia puede activar disuasión por audio, enviar notificaciones a sistemas externos e integrarse con las plataformas de gestión de video existentes.',
   },
   {
     title: 'Integración con ecosistemas VMS',
@@ -27,11 +27,11 @@ const capabilities = [
   },
   {
     title: 'Interfaz de escritorio nativa',
-    text: 'Aplicación de escritorio de alto rendimiento con visualización de video en vivo, gestión de zonas y estado del sistema.',
+    text: 'Aplicación de escritorio en PySide6 con video en vivo, gestión de zonas y estado del sistema.',
   },
   {
     title: 'Almacenamiento basado en eventos',
-    text: 'El sistema graba con inteligencia selectiva: prioriza y persiste los segmentos asociados a eventos detectados, reduciendo el volumen de almacenamiento sin sacrificar la evidencia que importa.',
+    text: 'Prioriza y conserva los segmentos asociados a eventos detectados, lo que reduce el volumen de almacenamiento sin perder evidencia.',
   },
 ];
 
@@ -73,12 +73,11 @@ const p = getProject('vigilia');
     automáticas ante eventos relevantes, sin intervención humana constante.
   </p>
   <pre class="flow"><code>Ingestión → Análisis en tiempo real → Evaluación de reglas → Acción</code></pre>
-  <p>El operador define qué importa (zonas, comportamientos, umbrales); el sistema se encarga del resto.</p>
-  <VigiliaDiagram />
   <p>
-    Vigilia se construyó con Forge, mi primer pipeline de desarrollo guiado por especificaciones, antecesor de
-    <a href="/pulse/">pulse</a>.
+    El operador define las zonas, los comportamientos y los umbrales; el sistema evalúa cada evento según esas reglas
+    y responde.
   </p>
+  <VigiliaDiagram />
 
   <h2>Decisiones técnicas</h2>
   <ul>
@@ -117,6 +116,7 @@ const p = getProject('vigilia');
   <p>
     <strong>Versión de titulación — v0.8.1.</strong> Vigilia fue mi proyecto de título. Esta versión quedó
     cerrada con el pipeline de análisis, las integraciones VMS y el acceso remoto operativos en entornos de
-    prueba. El desarrollo continúa en una tercera versión.
+    prueba. Después de la titulación, el desarrollo siguió con Forge, mi primer pipeline de desarrollo guiado por
+    especificaciones y antecesor de <a href="/pulse/">pulse</a>, y hoy continúa en una tercera versión.
   </p>
 </Project>

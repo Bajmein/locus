@@ -11,11 +11,11 @@ const capabilities = [
   },
   {
     title: 'Contratos tipados',
-    text: 'Cada herramienta recibe un modelo de Pydantic. Su esquema llega al agente como JSON Schema y los errores de validación vuelven para que se corrija.',
+    text: 'Cada herramienta recibe un modelo de Pydantic. Su esquema llega al agente como JSON Schema, y los errores de validación vuelven al agente para que corrija la llamada.',
   },
   {
     title: 'Revisión automática al cerrar',
-    text: 'Cerrar un cambio corre ruff, bandit, vulture, deptry, pytest y ty; solo si todo pasa sube la versión y hace el commit de release.',
+    text: 'Al cerrar un cambio se ejecutan ruff, bandit, vulture, deptry, pytest y ty; solo si todo pasa, el motor sube la versión y crea el commit correspondiente.',
   },
   {
     title: 'Escritura vigilada',
@@ -92,7 +92,7 @@ const p = getProject('pulse');
   <h2>Estado del proyecto</h2>
   <p>
     <strong>Ciclo cerrado — v0.13.6.</strong> pulse sucedió a Forge: el pipeline de convenciones pasó a ser un
-    motor que las hace cumplir. La versión final tiene 244 tests en verde, incluidos tests basados en
+    motor que las hace cumplir. La versión final tiene 244 pruebas en verde, incluidas algunas basadas en
     propiedades del dominio. Su disciplina continúa en fabrik, la herramienta que uso hoy.
   </p>
 </Project>

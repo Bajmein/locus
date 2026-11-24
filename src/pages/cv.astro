@@ -1,49 +1,67 @@
 ---
 import Base from '../layouts/Base.astro';
 import { site, cv } from '../data/site';
+import { getStep, totalCommits, totalPrs } from '../data/trail';
+
+const episteme = getStep('episteme');
 
 const pdf = '/assets/pdf/cv_benjamin_criado.pdf';
 
 const projects = [
   {
     name: 'episteme',
+    period: 'oct. 2026 – actualidad',
     meta: 'Memoria persistente para agentes de IA · Python, MCP, SQLite FTS5',
     href: '/episteme/',
+    source: 'https://github.com/Bajmein/episteme',
     items: [
       'Servidor MCP local que guarda decisiones, lecciones y documentación de proyectos en un vault Markdown compatible con Obsidian.',
       'Búsqueda de texto completo en español con SQLite FTS5 y avisos de normas antes de editar cada archivo.',
-      'Detecta duplicados y enlaces rotos; rechaza credenciales.',
+      `Detecta duplicados y enlaces rotos y rechaza credenciales. En uso diario (v0.21): ${episteme.commits} commits y ${episteme.prs} pull requests fusionados.`,
     ],
   },
   {
     name: 'pulse',
+    period: 'may.–jul. 2026',
     meta: 'Motor de desarrollo guiado por especificaciones (SDD) · Python, FastMCP, Pydantic',
     href: '/pulse/',
     items: [
       'Máquina de estados de ocho fases con compuertas declarativas y aprobación humana del diseño antes de implementar.',
       'Arquitectura hexagonal con contratos en Pydantic v2; un servidor MCP para Claude Code, Codex CLI y otros agentes.',
-      'Revisión automática al cerrar (ruff, bandit, pytest, ty) y 244 tests, incluidos tests basados en propiedades.',
+      'Revisión automática al cerrar (ruff, bandit, pytest y ty) y 244 pruebas, incluidas algunas basadas en propiedades.',
     ],
   },
   {
-    name: 'Vigilia',
+    name: 'Vigilia Reforged',
+    period: '2025',
     meta: 'Proyecto de título · Visión por computador en tiempo real · Rust y Python',
     href: '/vigilia/',
     items: [
-      'Procesamiento de video cuadro a cuadro en Rust con decodificación por hardware (NVDEC), para tiempos de respuesta críticos en hardware local.',
-      'Arquitectura de monitoreo autónomo sin dependencia de la nube: zonas de seguridad configurables, alertas multicanal e integración con sistemas VMS.',
-      'Memoria compartida entre el núcleo en Rust y Python.',
+      'Decodificación de video en la GPU con un módulo en Rust (NVDEC), sin pasar los cuadros por la CPU, para tiempos de respuesta críticos en equipos locales.',
+      'Monitoreo autónomo sin dependencia de la nube: zonas de seguridad configurables, alertas multicanal e integración con sistemas VMS (ONVIF Profile M, MQTT).',
+      'Comunicación sin copias entre el núcleo en Rust y la orquestación en Python mediante memoria compartida (Iceoryx2).',
+    ],
+  },
+  {
+    name: 'Vigilia Edge',
+    period: '2025',
+    meta: 'Primera generación de Vigilia · Visión por computador en escritorio · Python, Rust, TensorRT',
+    href: '/vigilia-edge/',
+    items: [
+      'Detección y seguimiento de objetos en tiempo real en un PC de escritorio, sin nube, con YOLO sobre TensorRT y ONNX Runtime en GPU.',
+      'Procesos separados, memoria compartida y un núcleo en Rust (PyO3) que evitan el cuello de botella del GIL: menos de dos cuadros (≈ 80 ms) de la cámara a la pantalla.',
     ],
   },
 ];
 
 const stack = [
   ['Python', 'Lenguaje principal: Pydantic v2, FastAPI, Typer, Hydra, PySide6, OpenCV; pytest, Ruff y uv.'],
-  ['Otros lenguajes', 'Rust (sistemas de tiempo real), JavaScript y TypeScript, SQL (PostgreSQL).'],
-  ['Web e integraciones', 'WordPress y su REST API, Astro, HTML y CSS; WhatsApp Business API, CRM y webhooks.'],
-  ['Nube e infraestructura', 'AWS, Azure, Linux (Fedora), Docker, CI/CD (GitHub Actions), Edge AI.'],
-  ['IA aplicada', 'Agentes de IA, Model Context Protocol (MCP), ingeniería de contexto, visión por computador (YOLO, TensorRT).'],
-  ['Arquitectura y calidad', 'Spec-Driven Development (SDD), Test-Driven Development (TDD), arquitectura hexagonal, Domain-Driven Design (DDD).'],
+  ['Otros lenguajes', 'Rust (sistemas de tiempo real), JavaScript y TypeScript, SQL (PostgreSQL y SQLite).'],
+  ['Web e integraciones', 'WordPress y su REST API, Astro, HTML y CSS; WhatsApp Business API, CRM, formularios y webhooks.'],
+  ['Nube e infraestructura', 'AWS, Azure, Linux (Fedora), Docker y CI/CD con GitHub Actions.'],
+  ['IA aplicada', 'Claude Code, Codex CLI, Gemini CLI y GitHub Copilot; Model Context Protocol (MCP), hooks, skills, subagentes e ingeniería de contexto.'],
+  ['Visión por computador', 'OpenCV, YOLO, TensorRT, ONNX Runtime, CUDA y NVDEC.'],
+  ['Arquitectura y calidad', 'Desarrollo guiado por especificaciones (SDD), por pruebas (TDD) y por el dominio (DDD); arquitectura hexagonal.'],
 ];
 ---
 
@@ -53,7 +71,7 @@ const stack = [
       <div>
         <p class="label">Currículum</p>
         <h1>{site.fullName}</h1>
-        <p class="role">Ingeniero Informático · Python y agentes de IA</p>
+        <p class="role">Ingeniero informático · Python y agentes de IA</p>
         <ul class="contact">
           <li>{site.location}</li>
           <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
@@ -68,12 +86,12 @@ const stack = [
       <h2 class="label">Perfil</h2>
       <div>
         <p>
-          Ingeniero Informático especializado en Python y agentes de IA. Desde abril de 2026 construyo herramientas
-          propias para trabajar con agentes de código, con 982 commits y 255 pull requests fusionados entre las
-          cuatro. Hoy estoy a cargo del área de TI de un grupo de empresas: sitios y aplicaciones web, integraciones
-          por API, nube y automatización. Elijo la tecnología por el problema, de Rust para latencia crítica a Python
-          para orquestar. Tres años de residencia y trabajo en el extranjero respaldan mi autonomía y un inglés
-          avanzado.
+          Ingeniero informático especializado en Python y agentes de IA. Desde abril de 2026 he desarrollado cuatro
+          herramientas propias para trabajar con agentes de código (Forge, pulse, fabrik y episteme), con {totalCommits} commits y
+          {totalPrs} pull requests fusionados en total. Actualmente soy responsable del área de TI de un grupo de empresas:
+          sitios y plataformas web, integraciones por API, nube y automatización. Elijo la tecnología según el
+          problema: Rust para la latencia crítica y Python para la orquestación. Tres años de residencia y trabajo en
+          el extranjero avalan mi autonomía y mi inglés avanzado.
         </p>
       </div>
     </section>
@@ -84,23 +102,23 @@ const stack = [
         <div class="entry">
           <div class="entry-head">
             <h3>Encargado de TI <span class="muted">· Grupo de empresas, remoto</span></h3>
-            <span class="label">oct. 2026 – presente</span>
+            <span class="label">oct. 2026 – actualidad</span>
           </div>
           <p>Responsable del área de tecnología.</p>
           <ul>
             <li>
-              Desarrollo y mantención de los sitios web corporativos: dominios, hosting, certificados, rendimiento y
-              seguridad.
+              Desarrollo y mantenimiento de los sitios y plataformas web corporativos: dominios, alojamiento,
+              certificados, rendimiento y seguridad.
             </li>
             <li>Bases de datos e integraciones por API entre sitios y sistemas.</li>
-            <li>Agentes de IA y automatización de procesos.</li>
+            <li>Implementación de agentes de IA y automatización de procesos.</li>
             <li>Soporte técnico, estándares de desarrollo y documentación.</li>
           </ul>
         </div>
         <div class="entry">
           <div class="entry-head">
             <h3>Práctica profesional <span class="muted">· Desarrollo web y automatización</span></h3>
-            <span class="label">jul. 2026 – sep. 2026</span>
+            <span class="label">jul.–sep. 2026</span>
           </div>
         </div>
       </div>
@@ -114,8 +132,17 @@ const stack = [
             <div class="entry">
               <div class="entry-head">
                 <h3><a href={p.href}>{p.name}</a></h3>
+                <span class="label">{p.period}</span>
               </div>
-              <p class="muted meta">{p.meta}</p>
+              <p class="muted meta">
+                {p.meta}
+                {p.source && (
+                  <>
+                    {' · Código abierto: '}
+                    <a href={p.source}>{p.source.replace('https://', '')}</a>
+                  </>
+                )}
+              </p>
               <ul>
                 {p.items.map((i) => <li>{i}</li>)}
               </ul>
@@ -145,12 +172,12 @@ const stack = [
         <div class="entry">
           <div class="entry-head">
             <h3>Ingeniería en Informática <span class="muted">· INACAP</span></h3>
-            <span class="label">2021 – 2025</span>
+            <span class="label">2021–2025</span>
           </div>
           <ul>
-            <li>Titulado.</li>
-            <li>Destacado en proyectos de I+E+TT y feria Go Innova.</li>
-            <li>Destacado en programación y cloud (AWS).</li>
+            <li>Titulado. Proyecto de título: Vigilia Reforged.</li>
+            <li>Destacado en proyectos de innovación y emprendimiento, y en la feria Go Innova.</li>
+            <li>Destacado en programación y computación en la nube (AWS).</li>
             <li>Certificación PCEP – Certified Entry-Level Python Programmer (Python Institute, 2023).</li>
           </ul>
         </div>
@@ -163,7 +190,7 @@ const stack = [
         <div class="entry">
           <div class="entry-head">
             <h3>Residencia y trabajo en el extranjero</h3>
-            <span class="label">2016 – 2019</span>
+            <span class="label">2016–2019</span>
           </div>
           <ul>
             <li>Nueva Zelanda y Australia (visas Working Holiday).</li>
@@ -357,6 +384,16 @@ const stack = [
       gap: 0.25rem 1.25rem;
       padding-block: 0.65rem;
       border-top: 1px solid #ccc;
+      break-inside: avoid;
+    }
+
+    /* Una sección con varias entradas (Experiencia, Proyectos) puede seguir en la página siguiente, pero nunca
+       parte una entrada */
+    .cv-section:has(.entry + .entry) {
+      break-inside: auto;
+    }
+
+    .entry {
       break-inside: avoid;
     }
 

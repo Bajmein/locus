@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Página de episteme: su repositorio de código abierto (`Bajmein/episteme`, licencia MIT) en la ficha, con el ícono de GitHub, y como `codeRepository` en el JSON-LD; también en `llms.txt`, en el CV y en su test. Los textos que decían que su código era privado se corrigen.
 - Página de episteme: sección «El vault en uso» con la vista de grafo del vault (imagen optimizada a WebP con `astro:assets`).
 - Página de pulse (`/pulse/`), el motor de estados en Python que sucedió a Forge, con diagrama de sus ocho fases, ícono y tono propios, y enlace a su vitrina `pulse-showcase`.
 - Test de privacidad que impide publicar procesos internos de la empresa.
@@ -22,6 +23,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Redacción de todo el sitio en registro profesional, con tuteo: sin giros coloquiales, anglicismos evitables ni frases de folleto; «ingeniero informático» en minúscula, rangos de fecha con semirraya y «actualidad», y las capacidades de episteme nombradas como sustantivos.
+- Vigilia Reforged, el proyecto de título, se fecha en 2025; su página cuenta que el desarrollo siguió con Forge después de la titulación (Forge es de 2026).
+- Cifras del trabajo con agentes al 24 de noviembre de 2026: episteme en v0.21, con 390 commits y 176 pull requests (124 del repositorio anterior y 52 del público); 1036 commits y 310 pull requests entre las cuatro herramientas. Las cifras y la línea de tiempo de `#agentes` pasan a `src/data/trail.ts`, la fuente única de la portada, el CV, la página de episteme y su tarjeta.
+- «pruebas» en lugar de «tests» en los textos del sitio y del CV, y «ingeniero informático» en minúscula también tras raya o dos puntos (título de la portada, `og:image:alt` y `llms.txt`).
+- CV alineado con la portada: el perfil nombra las cuatro herramientas, cada proyecto lleva su período, suma Vigilia Edge, el stack separa visión por computador y la formación cita el proyecto de título. Las secciones con varias entradas pueden seguir en la página siguiente para que el PDF quede en dos páginas.
 - Posicionamiento Python y agentes de IA en el hero, el título de la portada, la metadescripción, el JSON-LD (`knowsAbout`) y la imagen social, para dos audiencias: equipos que contratan y empresas con un proyecto. El hero suma la disponibilidad (trabajo remoto, inglés avanzado, autorización de trabajo en la UE) y la cifra del trabajo con agentes.
 - «Qué hago» (`#areas`) pasa a «En qué puedo aportar»: agentes de IA con método, software en Python y automatización e integraciones, cada una con su evidencia enlazada. El menú sigue el orden de la página.
 - Tarjetas de proyecto con una prueba breve y verificable; textos de las tarjetas centrados en lo que logra cada proyecto.
