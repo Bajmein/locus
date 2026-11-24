@@ -1,12 +1,12 @@
 # Locus | Portafolio de Ingeniería
 
-**Benjamín Criado (Bajmein)** — Ingeniero Informático y Encargado de TI. Desarrollo de software, nube, automatización e IA aplicada.
+**Benjamín Criado (Bajmein)** — Ingeniero Informático: software en Python y agentes de IA, automatización e integraciones.
 
-Código fuente de [benjamincriado.dev](https://benjamincriado.dev): qué hago, trabajo actual, proyectos, especialidad en agentes de IA, experiencia y currículum.
+Código fuente de [benjamincriado.dev](https://benjamincriado.dev): qué hago, proyectos, trabajo con agentes de IA, experiencia y currículum.
 
-## Qué hago y trabajo actual
+## Qué hago
 
-La portada parte por tres fortalezas («Qué hago»: desarrollo de software en Python, nube y automatización, e IA aplicada) y por el trabajo actual («A cargo del área de TI» de un grupo de empresas: sitios web, datos e integraciones, IA y automatización, y soporte), sin nombrar la empresa.
+Python y agentes de IA al frente. La portada muestra tres áreas («En qué puedo aportar»: agentes de IA con método, software en Python, y automatización e integraciones), cada una con la evidencia pública que la respalda. El cargo actual, Encargado de TI en un grupo de empresas, va en la trayectoria como experiencia, sin nombrar la empresa.
 
 ## Especialidad: trabajo con agentes
 

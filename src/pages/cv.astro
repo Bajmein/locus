@@ -6,13 +6,13 @@ const pdf = '/assets/pdf/cv_benjamin_criado.pdf';
 
 const projects = [
   {
-    name: 'Vigilia',
-    meta: 'Proyecto de título · Visión por computador en tiempo real · Rust y Python',
-    href: '/vigilia/',
+    name: 'episteme',
+    meta: 'Memoria persistente para agentes de IA · Python, MCP, SQLite FTS5',
+    href: '/episteme/',
     items: [
-      'Procesamiento de video cuadro a cuadro en Rust con decodificación por hardware (NVDEC), para tiempos de respuesta críticos en hardware local.',
-      'Arquitectura de monitoreo autónomo sin dependencia de la nube: zonas de seguridad configurables, alertas multicanal e integración con sistemas VMS.',
-      'Memoria compartida entre el núcleo en Rust y Python.',
+      'Servidor MCP local que guarda decisiones, lecciones y documentación de proyectos en un vault Markdown compatible con Obsidian.',
+      'Búsqueda de texto completo en español con SQLite FTS5 y avisos de normas antes de editar cada archivo.',
+      'Detecta duplicados y enlaces rotos; rechaza credenciales.',
     ],
   },
   {
@@ -26,13 +26,13 @@ const projects = [
     ],
   },
   {
-    name: 'episteme',
-    meta: 'Memoria persistente para agentes de IA · Python, MCP, SQLite FTS5',
-    href: '/episteme/',
+    name: 'Vigilia',
+    meta: 'Proyecto de título · Visión por computador en tiempo real · Rust y Python',
+    href: '/vigilia/',
     items: [
-      'Servidor MCP local que guarda decisiones, lecciones y documentación de proyectos en un vault Markdown compatible con Obsidian.',
-      'Búsqueda de texto completo en español con SQLite FTS5 y avisos de normas antes de editar cada archivo.',
-      'Detecta duplicados y enlaces rotos; rechaza credenciales.',
+      'Procesamiento de video cuadro a cuadro en Rust con decodificación por hardware (NVDEC), para tiempos de respuesta críticos en hardware local.',
+      'Arquitectura de monitoreo autónomo sin dependencia de la nube: zonas de seguridad configurables, alertas multicanal e integración con sistemas VMS.',
+      'Memoria compartida entre el núcleo en Rust y Python.',
     ],
   },
 ];
@@ -53,7 +53,7 @@ const stack = [
       <div>
         <p class="label">Currículum</p>
         <h1>{site.fullName}</h1>
-        <p class="role">Ingeniero Informático · Encargado de TI</p>
+        <p class="role">Ingeniero Informático · Python y agentes de IA</p>
         <ul class="contact">
           <li>{site.location}</li>
           <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
@@ -68,11 +68,12 @@ const stack = [
       <h2 class="label">Perfil</h2>
       <div>
         <p>
-          Ingeniero Informático a cargo del área de TI de un grupo de empresas. Desarrollo software, automatizo
-          procesos e integro IA: sitios y aplicaciones web, integraciones por API, nube y agentes de IA. Python es
-          mi lenguaje principal y conozco a fondo su ecosistema. Elijo la tecnología por el problema, de Rust para
-          latencia crítica a Python para orquestar. Tres años de residencia y trabajo en el extranjero respaldan mi
-          autonomía y un inglés avanzado.
+          Ingeniero Informático especializado en Python y agentes de IA. Desde abril de 2026 construyo herramientas
+          propias para trabajar con agentes de código, con 982 commits y 255 pull requests fusionados entre las
+          cuatro. Hoy estoy a cargo del área de TI de un grupo de empresas: sitios y aplicaciones web, integraciones
+          por API, nube y automatización. Elijo la tecnología por el problema, de Rust para latencia crítica a Python
+          para orquestar. Tres años de residencia y trabajo en el extranjero respaldan mi autonomía y un inglés
+          avanzado.
         </p>
       </div>
     </section>
@@ -150,6 +151,7 @@ const stack = [
             <li>Titulado.</li>
             <li>Destacado en proyectos de I+E+TT y feria Go Innova.</li>
             <li>Destacado en programación y cloud (AWS).</li>
+            <li>Certificación PCEP – Certified Entry-Level Python Programmer (Python Institute, 2023).</li>
           </ul>
         </div>
       </div>
