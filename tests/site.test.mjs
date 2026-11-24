@@ -337,12 +337,32 @@ test('portada: contacto con copiar correo y CV, sin redes repetidas', () => {
 
 test('portada: antetítulos en las secciones', () => {
   const html = read('index.html');
-  for (const id of ['proyectos', 'agentes', 'experiencia', 'contacto']) {
+  for (const id of ['areas', 'ti', 'proyectos', 'agentes', 'experiencia', 'contacto']) {
     const start = html.indexOf(`id="${id}"`);
     assert.ok(start > -1, `falta la sección #${id}`);
     const head = html.slice(start, html.indexOf('<h2', start));
     assert.ok(head.includes('class="label'), `#${id}: falta el antetítulo antes del h2`);
   }
+});
+
+test('portada: fortalezas y trabajo actual', () => {
+  const html = read('index.html');
+  const section = (id) => {
+    const start = html.indexOf(`id="${id}"`);
+    assert.ok(start > -1, `falta la sección #${id}`);
+    return html.slice(start, html.indexOf('</section>', start));
+  };
+  const areas = section('areas');
+  assert.ok(areas.includes('class="method'), '#areas debe usar la lista method');
+  assert.equal(areas.match(/<li/g)?.length, 3, '#areas debe tener tres áreas');
+  const ti = section('ti');
+  assert.ok(ti.includes('class="caps'), '#ti debe usar Capabilities');
+  assert.equal(ti.match(/class="cap"/g)?.length, 4, '#ti debe tener cuatro funciones');
+  const pos = (id) => html.indexOf(`id="${id}"`);
+  assert.ok(pos('areas') < pos('ti') && pos('ti') < pos('proyectos'), 'orden: #areas, #ti, #proyectos');
+  const header = html.slice(html.indexOf('<header'), html.indexOf('</header>'));
+  assert.ok(header.includes('href="/#areas"'), 'la cabecera debe enlazar a #areas');
+  assert.ok(!header.includes('href="/#agentes"'), '#agentes ya no va en la cabecera');
 });
 
 test('caja de detección en portada, proyectos y 404', () => {
