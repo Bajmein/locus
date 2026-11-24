@@ -15,6 +15,8 @@ export interface Project {
   sourceUrl?: string;
   /** Grupo de la portada: agentes de IA o visión por computador */
   group: 'agentes' | 'vision';
+  /** Etiqueta técnica de la caja de detección en la cabecera de su página */
+  detected: string;
   /** Período de trabajo, para la tarjeta */
   period: string;
   /** Tarjeta de la portada; context aclara la línea de tiempo cuando hace falta (Vigilia) */
@@ -39,6 +41,7 @@ export const projects: Project[] = [
     stack: ['Python', 'MCP', 'SQLite FTS5', 'Markdown'],
     sourceUrl: 'https://github.com/Bajmein/episteme',
     group: 'agentes',
+    detected: 'mcp · memoria local',
     period: 'Octubre de 2026 – actualidad',
     card: {
       text: 'Los agentes de código recuerdan decisiones y lecciones entre sesiones, en notas Markdown del usuario.',
@@ -56,6 +59,7 @@ export const projects: Project[] = [
     stack: ['Python', 'FastMCP', 'Pydantic', 'SQLite', 'Docker'],
     repoUrl: 'https://github.com/Bajmein/pulse-showcase',
     group: 'agentes',
+    detected: 'fsm · 8 fases',
     period: 'Mayo – julio de 2026',
     card: {
       text: 'Un motor que no deja al agente saltarse fases: cada cambio avanza solo con su especificación, su diseño aprobado y sus pruebas.',
@@ -73,6 +77,7 @@ export const projects: Project[] = [
     stack: ['Rust', 'Python', 'ONNX Runtime', 'NVDEC', 'PySide6'],
     repoUrl: 'https://github.com/Bajmein/vigilia-reforged-showcase',
     group: 'vision',
+    detected: 'gpu · tiempo real',
     period: '2025',
     card: {
       text: 'Análisis de video en tiempo real que detecta y responde a incidentes mientras ocurren.',
@@ -91,6 +96,7 @@ export const projects: Project[] = [
     stack: ['YOLO', 'TensorRT', 'Rust', 'PySide6'],
     repoUrl: 'https://github.com/Bajmein/vigilia-edge-showcase',
     group: 'vision',
+    detected: 'edge · < 80 ms',
     period: '2025',
     card: {
       text: 'Detección y seguimiento de objetos en tiempo real en un PC de escritorio, sin nube.',

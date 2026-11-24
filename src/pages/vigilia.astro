@@ -55,11 +55,6 @@ const p = getProject('vigilia');
   status={p.status}
   repoUrl={p.repoUrl}
 >
-  <p>
-    Vigilia es una plataforma de monitoreo que analiza video en tiempo real y responde a los eventos mientras
-    ocurren, en lugar de grabar para revisar después.
-  </p>
-
   <h2>El problema</h2>
   <p>
     Un sistema de CCTV tradicional graba para que alguien revise después. Con varias cámaras, nadie alcanza a
@@ -70,12 +65,8 @@ const p = getProject('vigilia');
   <p>
     El objetivo es responder automáticamente antes de que el incidente escale. Vigilia procesa video en
     tiempo real con aceleración por hardware, aplica reglas espaciales configurables y dispara respuestas
-    automáticas ante eventos relevantes, sin intervención humana constante.
-  </p>
-  <pre class="flow"><code>Ingestión → Análisis en tiempo real → Evaluación de reglas → Acción</code></pre>
-  <p>
-    El operador define las zonas, los comportamientos y los umbrales; el sistema evalúa cada evento según esas reglas
-    y responde.
+    automáticas ante eventos relevantes, sin intervención humana constante. El operador define las zonas, los
+    comportamientos y los umbrales; el sistema evalúa cada evento según esas reglas y ejecuta la acción.
   </p>
   <VigiliaDiagram />
 

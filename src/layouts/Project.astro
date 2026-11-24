@@ -22,9 +22,10 @@ const period = projects[index]?.period;
 const group = projects[index]?.group ?? 'agentes';
 // Código abierto: enlace al repositorio en la ficha, con el ícono de GitHub
 const source = projects[index]?.sourceUrl;
-// Rótulo sobre el título (como en la tarjeta) y clase que detecta la caja (en minúsculas, como «persona 0,99»)
+// Rótulo sobre el título (como en la tarjeta) y firma técnica que detecta la caja
 const groupLabel = { agentes: 'Agentes de IA', vision: 'Visión por computador' }[group];
-const detected = { agentes: 'agentes de IA', vision: 'visión por computador' }[group];
+const detected =
+  projects[index]?.detected ?? { agentes: 'agentes de IA', vision: 'visión por computador' }[group];
 
 const schema = {
   '@type': 'SoftwareSourceCode',
