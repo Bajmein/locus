@@ -4,7 +4,8 @@ import { getProject } from '../data/projects';
 import { epistemePrs, figuresDate, getStep } from '../data/trail';
 import EpistemeDiagram from '../components/diagrams/EpistemeDiagram.astro';
 import Capabilities from '../components/Capabilities.astro';
-import { getImage } from 'astro:assets';
+import { getImage, Image } from 'astro:assets';
+import grafoVault from '../assets/images/episteme/grafo-vault.png';
 import grafoPoster from '../assets/images/episteme/grafo-poster.png';
 
 // Póster del video: su último cuadro (el vault completo), en WebP
@@ -103,6 +104,16 @@ const step = getStep('episteme');
       grupos de notas y los puntos más grandes son los más enlazados.
     </figcaption>
   </figure>
+  <figure class="graph glass">
+    <Image
+      src={grafoVault}
+      alt="Vista de grafo del vault: puntos agrupados en varios núcleos de colores, unidos por líneas finas."
+      widths={[640, 960, 1345]}
+      sizes="(min-width: 48rem) 46rem, 100vw"
+      loading="lazy"
+    />
+    <figcaption>El mismo grafo en una vista fija, sin la animación: los grupos de notas quedan a la vista.</figcaption>
+  </figure>
 
   <h2>Capacidades</h2>
   <Capabilities items={capabilities} />
@@ -133,12 +144,15 @@ const step = getStep('episteme');
     margin: 2rem 0;
     padding: 0.75rem;
   }
-  .graph video {
+  .graph video,
+  .graph img {
     display: block;
     width: 100%;
     height: auto;
     border-radius: var(--radius);
     background: var(--bg);
+  }
+  .graph video {
     cursor: pointer;
   }
   .graph figcaption {
