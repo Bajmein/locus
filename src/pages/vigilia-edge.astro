@@ -11,7 +11,7 @@ const layers = [
   {
     limit: 'Hilo principal de Qt ocupado por la interfaz',
     layer: 'Procesos separados',
-    detail: 'Inferencia, seguimiento y renderizado en multiprocessing independientes, sin congelar la ventana.',
+    detail: 'Inferencia, seguimiento y renderizado en procesos independientes (multiprocessing), sin congelar la ventana.',
   },
   {
     limit: 'Locks de Python al pasar cajas y marcas de tiempo',
@@ -47,18 +47,19 @@ const p = getProject('vigilia-edge');
 >
   <h2>El problema</h2>
   <p>
-    Procesar video en tiempo real con Python choca con tres límites. A 25 cuadros por segundo hay 40 ms por cuadro,
+    Procesar video en tiempo real con Python choca con cuatro límites. A 25 cuadros por segundo hay 40 ms por cuadro,
     y cada copia de un cuadro Full HD (unos 6 MB) gasta parte de ese presupuesto. PySide6 exige dibujar en el hilo
-    principal de Qt, así que la inferencia no puede correr ahí. Y el GIL de CPython impide el paralelismo real entre
+    principal de Qt, así que la inferencia no puede ejecutarse ahí. Pasar los metadatos (cajas, puntajes y marcas de
+    tiempo) entre procesos con locks de Python agrega esperas. Y el GIL de CPython impide el paralelismo real entre
     hilos.
   </p>
 
   <h2>La solución</h2>
-  <p>Cuatro decisiones de arquitectura, cada una diseñada para eliminar uno de esos cuellos de botella:</p>
-  <div class="layers glass reveal" role="region" aria-label="Límites y capas de arquitectura">
+  <p>Cuatro capas, cada una contra uno de esos límites:</p>
+  <ol class="layers glass reveal" aria-label="Límites y capas de arquitectura">
     {
       layers.map((item, i) => (
-        <div class="layer-row">
+        <li class="layer-row">
           <div class="layer-limit">
             <span class="label">Límite 0{i + 1}</span>
             <p>{item.limit}</p>
@@ -68,10 +69,10 @@ const p = getProject('vigilia-edge');
             <p class="layer-title mono">{item.layer}</p>
             <p>{item.detail}</p>
           </div>
-        </div>
+        </li>
       ))
     }
-  </div>
+  </ol>
 
   <h2>Resultado</h2>
   <p>
@@ -124,10 +125,12 @@ const p = getProject('vigilia-edge');
   .layers {
     margin: 1.75rem 0 2.25rem;
     padding: 0.5rem 1.25rem;
+    list-style: none;
   }
 
   .layer-row {
     display: grid;
+    margin: 0;
     grid-template-columns: minmax(0, 0.9fr) auto minmax(0, 1.1fr);
     gap: 0.75rem 1.25rem;
     align-items: center;
