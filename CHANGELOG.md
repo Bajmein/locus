@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Página de episteme: su repositorio de código abierto (`Bajmein/episteme`, licencia MIT) en la ficha, con el ícono de GitHub, y como `codeRepository` en el JSON-LD; también en `llms.txt`, en el CV y en su test. Los textos que decían que su código era privado se corrigen.
 - Página de episteme: sección «El vault en uso» con la vista de grafo del vault (imagen optimizada a WebP con `astro:assets`).
 - Página de pulse (`/pulse/`), el motor de estados en Python que sucedió a Forge, con diagrama de sus ocho fases, ícono y tono propios, y enlace a su vitrina `pulse-showcase`.
 - Test de privacidad que impide publicar procesos internos de la empresa.

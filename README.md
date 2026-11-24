@@ -17,7 +17,7 @@ Desde abril de 2026 construyo las herramientas con que trabajo con agentes de c�
 Agentes de IA primero y visión por computador después, en el mismo orden que la portada.
 
 ### [episteme](https://benjamincriado.dev/episteme/)
-Memoria y documentación persistentes para agentes de IA, servidas por MCP desde un vault de notas Markdown que el usuario controla. En uso diario desde octubre de 2026; código privado.
+Memoria y documentación persistentes para agentes de IA, servidas por MCP desde un vault de notas Markdown que el usuario controla. En uso diario desde octubre de 2026; código abierto con licencia MIT en [Bajmein/episteme](https://github.com/Bajmein/episteme).
 
 ### [pulse](https://benjamincriado.dev/pulse/)
 Motor en Python que lleva cada cambio de software por ocho fases con compuertas verificables y lo expone a los agentes de IA por MCP (FastMCP, Pydantic v2, arquitectura hexagonal). Ciclo cerrado (mayo a julio de 2026); sucedió a Forge. Vitrina: [pulse-showcase](https://github.com/Bajmein/pulse-showcase).

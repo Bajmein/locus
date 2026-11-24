@@ -10,6 +10,7 @@ const projects = [
     period: 'oct. 2026 – actualidad',
     meta: 'Memoria persistente para agentes de IA · Python, MCP, SQLite FTS5',
     href: '/episteme/',
+    source: 'https://github.com/Bajmein/episteme',
     items: [
       'Servidor MCP local que guarda decisiones, lecciones y documentación de proyectos en un vault Markdown compatible con Obsidian.',
       'Búsqueda de texto completo en español con SQLite FTS5 y avisos de normas antes de editar cada archivo.',
@@ -130,7 +131,15 @@ const stack = [
                 <h3><a href={p.href}>{p.name}</a></h3>
                 <span class="label">{p.period}</span>
               </div>
-              <p class="muted meta">{p.meta}</p>
+              <p class="muted meta">
+                {p.meta}
+                {p.source && (
+                  <>
+                    {' · Código abierto: '}
+                    <a href={p.source}>{p.source.replace('https://', '')}</a>
+                  </>
+                )}
+              </p>
               <ul>
                 {p.items.map((i) => <li>{i}</li>)}
               </ul>

@@ -28,6 +28,7 @@ export const GET: APIRoute = ({ site: base }) => {
     '',
     `- [Sitemap](${url('/sitemap-index.xml')})`,
     `- [Currículum en PDF](${url('/assets/pdf/cv_benjamin_criado.pdf')})`,
+    ...projects.filter((p) => p.sourceUrl).map((p) => `- [Código fuente de ${p.title}](${p.sourceUrl})`),
     ...projects.filter((p) => p.repoUrl).map((p) => `- [Repositorio vitrina de ${p.title}](${p.repoUrl})`),
     `- [GitHub](${site.github})`,
     `- [LinkedIn](${site.linkedin})`,

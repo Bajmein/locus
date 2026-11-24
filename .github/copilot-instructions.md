@@ -22,7 +22,7 @@ npm run preview    # sirve dist/
 - Imágenes en `src/assets/images/<proyecto>/`, con `<Image>` de `astro:assets` (WebP en varios anchos, `widths` y `sizes`) y texto alternativo; hoy solo el grafo del vault en `episteme.astro` (figura `.graph.glass` con `figcaption`).
 - `src/styles/global.css`: tokens de diseño (`--bg`, `--accent`, …) y estilos base, incluida la impresión del CV.
 - `src/data/site.ts`: nombre, correo, enlaces sociales y metadescripciones del sitio y del CV.
-- `src/data/projects.ts`: datos de los proyectos (metadescripción, ficha, tarjeta de la portada con su prueba `card.proof`, `group` y `period`; agentes primero); lo usan las páginas de proyecto, la portada y `llms.txt`.
+- `src/data/projects.ts`: datos de los proyectos (metadescripción, ficha, repositorio vitrina `repoUrl` o de código abierto `sourceUrl`, tarjeta de la portada con su prueba `card.proof`, `group` y `period`; agentes primero); lo usan las páginas de proyecto, la portada y `llms.txt`.
 - Portada (`src/pages/index.astro`), en orden: hero (disponibilidad en `.facts`, cifra del trabajo con agentes en `.proof` y consola «Ciclo de un cambio»), «Ahora», «En qué puedo aportar» (`#areas`, lista `.method` con `.evidence`), «Proyectos» (cada tarjeta con su prueba), «Cómo trabajo con agentes de IA» (`#agentes`), trayectoria y tecnologías, contacto para dos audiencias (equipos que contratan y empresas con un proyecto). La navegación dice «Qué hago» para `/#areas`; `#agentes` no va en el menú.
 - `src/pages/llms.txt.ts`: genera `/llms.txt` en el build a partir de esos datos.
 - `public/`: archivos servidos tal cual (`CNAME`, `robots.txt`, `og.png`, PDF del CV).

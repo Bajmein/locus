@@ -2,6 +2,7 @@
 import Base from './Base.astro';
 import { site } from '../data/site';
 import ProjectIcon from '../components/ProjectIcon.astro';
+import Icon from '../components/Icon.astro';
 import { projects } from '../data/projects';
 
 interface Props {
@@ -19,6 +20,8 @@ const index = projects.findIndex((p) => p.slug === slug);
 const next = projects[(index + 1) % projects.length];
 const period = projects[index]?.period;
 const group = projects[index]?.group ?? 'agentes';
+// Código abierto: enlace al repositorio en la ficha, con el ícono de GitHub
+const source = projects[index]?.sourceUrl;
 // Rótulo sobre el título (como en la tarjeta) y clase que detecta la caja (en minúsculas, como «persona 0,99»)
 const groupLabel = { agentes: 'Agentes de IA', vision: 'Visión por computador' }[group];
 const detected = { agentes: 'agentes de IA', vision: 'visión por computador' }[group];
@@ -30,6 +33,7 @@ const schema = {
   url: new URL(Astro.url.pathname, Astro.site).href,
   keywords: stack.join(', '),
   ...(repoUrl ? { sameAs: repoUrl } : {}),
+  ...(source ? { codeRepository: source } : {}),
 };
 ---
 
@@ -60,6 +64,19 @@ const schema = {
         <p class="status">{status}</p>
         <p class="label">Período</p>
         <p class="status">{period}</p>
+        {
+          source && (
+            <>
+              <p class="label">Código</p>
+              <p class="status">
+                <a class="repo mono" href={source}>
+                  <Icon name="github" />
+                  {source.replace('https://github.com/', '')}
+                </a>
+              </p>
+            </>
+          )
+        }
       </aside>
       <div class="body prose">
         <slot />
@@ -208,6 +225,19 @@ const schema = {
     margin: 0 0 1.25rem;
     font-size: 0.9375rem;
     color: var(--text);
+  }
+
+  .repo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    font-size: 0.875rem;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .repo:hover {
+    color: var(--accent);
   }
 
   @media (max-width: 960px) {
