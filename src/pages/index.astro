@@ -201,7 +201,7 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
     <ol class="projects">
       {
         projects.map((p) => (
-          <li class:list={['card-item', `is-${p.group}`]}>
+          <li class:list={['card-item', 'reveal', `is-${p.group}`]}>
             <a class="project-card spot" href={`/${p.slug}/`} style={`--accent: var(--tone-${p.slug})`}>
               <span class="card-top">
                 <ProjectIcon slug={p.slug} />
@@ -217,7 +217,9 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
                   <span class="mono chip">{s}</span>
                 ))}
               </span>
-              <span class="go" aria-hidden="true">Ver proyecto</span>
+              <span class="go" aria-hidden="true">
+                Ver proyecto <span class="go-arrow">→</span>
+              </span>
               <span class="mark">
                 <ProjectIcon slug={p.slug} size="xl" />
               </span>
@@ -245,7 +247,7 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
       <ol class="trail">
         {
           trail.map((t) => (
-            <li class="step" style={t.slug ? `--accent: var(--tone-${t.slug})` : undefined}>
+            <li class="step reveal" style={t.slug ? `--accent: var(--tone-${t.slug})` : undefined}>
               <span class="dot" aria-hidden="true" />
               <span class="label">{t.period}</span>
               <h3>{t.href ? <a href={t.href}>{t.name}</a> : t.name}</h3>
@@ -264,7 +266,7 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
     <ul class="method">
       {
         method.map((m) => (
-          <li>
+          <li class="reveal">
             <h4>{m.title}</h4>
             <p>{m.text}</p>
           </li>
@@ -317,7 +319,9 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
   <section class="container section contact lazy" id="contacto" aria-labelledby="contacto-title">
     <div class="section-head contact-head">
       <p class="label">Contacto</p>
-      <h2 id="contacto-title" class="contact-title">Conversemos</h2>
+      <h2 id="contacto-title" class="contact-title">
+        Conversemos<span class="cursor" aria-hidden="true">_</span>
+      </h2>
     </div>
     <div class="contact-row">
       <div>
@@ -474,6 +478,7 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
 
   .console figcaption {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: baseline;
     gap: 1rem;
@@ -481,6 +486,10 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
     margin-bottom: 0.5rem;
     border-bottom: 1px solid var(--border);
     font-weight: 600;
+  }
+
+  .console figcaption .mono {
+    white-space: nowrap;
   }
 
   .log {
@@ -788,7 +797,9 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
     border-radius: var(--radius-lg);
     text-decoration: none;
     color: var(--text);
-    transition: border-color 0.25s ease;
+    transition:
+      transform 0.3s var(--ease-out),
+      border-color 0.25s ease;
   }
 
   .is-agentes .project-card {
@@ -811,6 +822,14 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
   .project-card:focus-visible {
     color: var(--text);
     border-color: color-mix(in srgb, var(--accent) 50%, transparent);
+    transform: translateY(-3px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .project-card:hover,
+    .project-card:focus-visible {
+      transform: none;
+    }
   }
 
   .project-card:hover::after,
@@ -884,22 +903,39 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
     text-decoration-color: var(--accent);
   }
 
-  /* Marca de agua: el ícono del proyecto en grande; se anima al pasar el cursor */
+  .go-arrow {
+    display: inline-block;
+    transition: transform 0.2s ease;
+  }
+
+  .project-card:hover .go-arrow,
+  .project-card:focus-visible .go-arrow {
+    transform: translateX(0.25rem);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .project-card:hover .go-arrow,
+    .project-card:focus-visible .go-arrow {
+      transform: none;
+    }
+  }
+
+  /* Marca de agua: el ícono del proyecto en grande, en la esquina y tenue para no tapar el texto */
   .mark {
     position: absolute;
-    right: -2.5rem;
-    bottom: -2.5rem;
-    width: 15rem;
-    height: 15rem;
+    right: -2rem;
+    bottom: -2rem;
+    width: 12rem;
+    height: 12rem;
     color: var(--accent);
-    opacity: 0.07;
+    opacity: 0.06;
     transition: opacity 0.4s ease;
     pointer-events: none;
   }
 
   .is-agentes .mark {
-    width: 18rem;
-    height: 18rem;
+    width: 15rem;
+    height: 15rem;
   }
 
   .mark :global(.project-icon) {
@@ -909,7 +945,14 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
 
   .project-card:hover .mark,
   .project-card:focus-visible .mark {
-    opacity: 0.22;
+    opacity: 0.14;
+  }
+
+  /* El texto deja libre la esquina de la marca de agua */
+  @media (min-width: 761px) {
+    .project-text {
+      max-width: min(30rem, 72%);
+    }
   }
 
   /* ---------- Trabajo con agentes ---------- */
@@ -1037,6 +1080,12 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
   @keyframes fill {
     from {
       transform: scaleX(0);
+    }
+  }
+
+  @keyframes fill-y {
+    from {
+      transform: scaleY(0);
     }
   }
 
@@ -1201,14 +1250,42 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
   }
 
   /* ---------- Contacto: cierra con el mismo tipo que abre ---------- */
+  .contact-head {
+    margin-bottom: 2.5rem;
+  }
+
   .contact-title {
-    margin: 0 0 2.5rem;
+    margin: 0;
     font-size: clamp(3rem, 8vw, 7rem);
     font-weight: 800;
     font-family: var(--font-display);
     font-stretch: 112%;
     letter-spacing: -0.035em;
     line-height: 0.95;
+  }
+
+  /* Cierra con el cursor del logo (bc_) en vez de la barra de sección */
+  .contact-title::after {
+    display: none;
+  }
+
+  .contact-title .cursor {
+    color: var(--accent);
+  }
+
+  /* Entra con el mismo barrido del nombre, ligado al scroll */
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      .contact-title {
+        animation: wipe linear both;
+      }
+
+      /* Regla aparte: el minificador funde animation-timeline en el atajo animation y lo invalida */
+      [class~='contact-title'] {
+        animation-timeline: view();
+        animation-range: entry 10% cover 35%;
+      }
+    }
   }
 
   .contact-row {
@@ -1302,14 +1379,32 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
       height: auto;
     }
 
-    .trail::after,
+    /* Relleno vertical del riel: baja con el scroll */
+    .trail::after {
+      transform-origin: top;
+      animation-name: fill-y;
+    }
+
     .token {
       animation: none;
       display: none;
     }
 
+    /* Una columna: sin subgrid, para que no queden huecos entre período, nombre, texto y cifras */
     .step {
-      padding: 0 0 1.75rem 2rem;
+      display: flex;
+      flex-direction: column;
+      grid-row: auto;
+      padding: 0 0 0 2rem;
+    }
+
+    /* Caja de detección dentro del gutter */
+    .target {
+      margin-left: 0.75rem;
+    }
+
+    .bbox {
+      inset: -0.6rem -0.75rem -0.7rem -0.75rem;
     }
 
     .dot {
