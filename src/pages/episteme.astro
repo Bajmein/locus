@@ -8,23 +8,23 @@ import grafo from '../assets/images/episteme/grafo-vault.png';
 
 const capabilities = [
   {
-    title: 'Recuerda',
+    title: 'Memoria por proyecto',
     text: 'Guarda decisiones, lecciones, errores y preferencias como notas ordenadas por proyecto.',
   },
   {
-    title: 'Encuentra',
-    text: 'Busca en todo el vault, en español, sin distinguir mayúsculas ni tildes.',
+    title: 'Búsqueda en español',
+    text: 'Busca por texto completo en todo el vault, sin distinguir mayúsculas ni tildes.',
   },
   {
-    title: 'Avisa a tiempo',
-    text: 'Antes de editar un archivo muestra las normas que le aplican.',
+    title: 'Normas antes de editar',
+    text: 'Antes de editar un archivo, muestra las normas que le aplican.',
   },
   {
-    title: 'Retoma',
-    text: 'Guarda en qué iba el trabajo antes de que la conversación se compacte y lo recupera después.',
+    title: 'Continuidad entre sesiones',
+    text: 'Guarda el estado del trabajo antes de que la conversación se compacte y lo recupera después.',
   },
   {
-    title: 'Cuida el orden',
+    title: 'Control de calidad del vault',
     text: 'Detecta duplicados, memorias vencidas y enlaces rotos; rechaza guardar contraseñas y tokens.',
   },
 ];
@@ -64,11 +64,11 @@ const p = getProject('episteme');
   <EpistemeDiagram />
   <ol>
     <li>
-      El agente usa las herramientas de episteme cuando las necesita y los hooks las llaman solos en momentos
-      fijos de la sesión.
+      El agente usa las herramientas de episteme cuando las necesita, y los hooks las invocan automáticamente en
+      momentos definidos de la sesión.
     </li>
     <li>
-      episteme corre en la máquina del usuario y es la única puerta al vault: valida lo que se guarda y
+      episteme se ejecuta en la máquina del usuario y es la única puerta al vault: valida lo que se guarda y
       mantiene un índice para buscar rápido.
     </li>
     <li>El vault es una carpeta de notas Markdown que el usuario puede leer y editar.</li>

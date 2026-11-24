@@ -7,9 +7,9 @@ const stack = [
   ['Inferencia', 'YOLOv11/v12 · TensorRT + ONNX Runtime GPU', 'Detección con backend acelerado seleccionable'],
   ['Cognición', 'Rust (PyO3) + nalgebra', 'Multi-tracker, Kalman, geometría computacional'],
   ['Captura', 'VPF + NVIDIA Direct Capture', 'Captura acelerada por GPU'],
-  ['Observabilidad', 'Prometheus + Loguru', 'Métricas de producción y logging estructurado'],
+  ['Observabilidad', 'Prometheus + Loguru', 'Métricas de producción y registros estructurados'],
   ['Configuración', 'Hydra + Pydantic V2', 'Configuración jerárquica con validación de esquemas'],
-  ['Respuesta', 'Síntesis de audio + Email/SMS', 'Disuasión activa y notificación remota'],
+  ['Respuesta', 'Síntesis de audio, correo electrónico y SMS', 'Disuasión activa y notificación remota'],
 ];
 const p = getProject('vigilia-edge');
 ---
@@ -22,7 +22,10 @@ const p = getProject('vigilia-edge');
   status={p.status}
   repoUrl={p.repoUrl}
 >
-  <p>Vigilancia local sin dependencia de la nube, con latencia predecible y sin comprometer la privacidad.</p>
+  <p>
+    Vigilia Edge procesa el video en el propio equipo, sin depender de la nube, con latencia predecible y sin
+    comprometer la privacidad.
+  </p>
 
   <h2>El problema</h2>
   <p>
@@ -41,8 +44,8 @@ const p = getProject('vigilia-edge');
     </li>
     <li>Memoria compartida: cada cuadro se escribe una sola vez y todos los procesos lo leen sin copiarlo.</li>
     <li>
-      Iceoryx para los metadatos (cajas, puntajes, marcas de tiempo): publicación y suscripción con latencia bajo
-      el microsegundo y sin locks de Python.
+      Iceoryx para los metadatos (cajas, puntajes, marcas de tiempo): publicación y suscripción con latencia
+      inferior a un microsegundo y sin locks de Python.
     </li>
     <li>
       Un núcleo en Rust (PyO3 y Maturin) que decodifica, reparte el trabajo entre procesos y recoge métricas fuera
@@ -61,8 +64,8 @@ const p = getProject('vigilia-edge');
   <p>
     El núcleo en Rust convierte detecciones sueltas en eventos: tres algoritmos de seguimiento elegibles desde la
     configuración (BoT-SORT, ByteTrack e Hybrid-SORT), un filtro de Kalman que sostiene el rastro en oclusiones
-    breves y la validación de zonas y cruces de línea en cada cuadro, sin pasar por Python. Con SAHI divide el cuadro
-    en ventanas para detectar objetos pequeños.
+    breves y la validación de zonas y cruces de línea en cada cuadro, sin pasar por Python. Además, SAHI divide el
+    cuadro en ventanas para detectar objetos pequeños.
   </p>
 
   <h2>Stack</h2>
@@ -79,21 +82,20 @@ const p = getProject('vigilia-edge');
 
   <h2>Sistema de respuesta activa</h2>
   <p>
-    Vigilia Edge no es un visualizador pasivo. Cuando el motor de reglas confirma una amenaza, el sistema
-    activa dos mecanismos de respuesta:
+    Cuando el motor de reglas confirma una amenaza, Vigilia Edge activa dos mecanismos de respuesta:
   </p>
   <ul>
     <li>
-      <strong>Audio disuasorio</strong>: síntesis y reproducción de alarmas sonoras para disuadir al intruso en
-      el momento de la detección.
+      <strong>Audio disuasorio</strong>: genera y reproduce alarmas sonoras en el momento de la detección.
     </li>
     <li>
-      <strong>Notificaciones remotas</strong>: integración con Email y SMS para alertar al operador desde
-      cualquier ubicación cuando la amenaza se confirma.
+      <strong>Notificaciones remotas</strong>: alerta al operador por correo electrónico y SMS en cuanto se
+      confirma la amenaza.
     </li>
   </ul>
   <p>
-    La arquitectura completa está descrita en el
-    <a href="https://github.com/Bajmein/vigilia-edge-showcase/blob/main/architecture_overview.md">architecture_overview del repositorio vitrina</a>.
+    La arquitectura completa está documentada en el
+    <a href="https://github.com/Bajmein/vigilia-edge-showcase/blob/main/architecture_overview.md">repositorio vitrina</a>
+    (<code>architecture_overview.md</code>).
   </p>
 </Project>

@@ -1,10 +1,10 @@
 export const site = {
   name: 'Benjamín Criado',
   fullName: 'Benjamín Ignacio Criado Rossa',
-  jobTitle: 'Ingeniero Informático',
+  jobTitle: 'Ingeniero informático',
   location: 'La Serena, Chile',
   description:
-    'Ingeniero Informático en La Serena, Chile: software en Python y agentes de IA, automatización e integraciones. Trabajo remoto, en español e inglés.',
+    'Ingeniero informático en La Serena, Chile: software en Python y agentes de IA, automatización e integraciones. Trabajo remoto en español e inglés.',
   email: 'kenno13@proton.me',
   github: 'https://github.com/Bajmein',
   linkedin: 'https://www.linkedin.com/in/benjamin-criado-rossa/',
@@ -20,5 +20,5 @@ export const nav = [
 export const cv = {
   title: 'Currículum — Benjamín Criado',
   description:
-    'Currículum de Benjamín Criado, Ingeniero Informático en La Serena, Chile: experiencia, proyectos, stack técnico, formación e idiomas.',
+    'Currículum de Benjamín Criado, ingeniero informático en La Serena, Chile: experiencia, proyectos, stack técnico, formación e idiomas.',
 };

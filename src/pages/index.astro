@@ -8,7 +8,7 @@ import ProjectIcon from '../components/ProjectIcon.astro';
 const now = [
   {
     label: 'En foco',
-    text: 'En mi tiempo libre desarrollo episteme: memoria persistente para agentes de IA, servida por MCP, que uso a diario.',
+    text: 'Fuera de mi jornada laboral desarrollo episteme: memoria persistente para agentes de IA, servida por MCP, que uso a diario.',
   },
   {
     label: 'En uso',
@@ -19,7 +19,7 @@ const now = [
 const areas = [
   {
     title: 'Agentes de IA con método',
-    text: 'Flujos con agentes de código (Claude Code, Codex CLI) que parten de una especificación, se verifican con comandos y guardan lo aprendido. También agentes aplicados a los procesos de una empresa.',
+    text: 'Flujos con agentes de código (Claude Code, Codex CLI) que parten de una especificación, se verifican con comandos y guardan lo aprendido. También integro agentes en los procesos de una empresa.',
     evidence: [
       { label: 'pulse', href: '/pulse/' },
       { label: 'episteme', href: '/episteme/' },
@@ -27,7 +27,7 @@ const areas = [
   },
   {
     title: 'Software en Python',
-    text: 'Mi dominio más fuerte: servicios, APIs, CLI y aplicaciones de escritorio con Pydantic, FastAPI, Typer y PySide6, probados con pytest y Ruff. Rust donde la latencia es crítica.',
+    text: 'Mi lenguaje principal: servicios, API, CLI y aplicaciones de escritorio con Pydantic, FastAPI, Typer y PySide6, con pruebas en pytest y análisis estático con Ruff. Uso Rust cuando la latencia es crítica.',
     evidence: [
       { label: 'pulse: 244 tests', href: '/pulse/' },
       { label: 'Vigilia Edge: núcleo en Rust', href: '/vigilia-edge/' },
@@ -35,7 +35,7 @@ const areas = [
   },
   {
     title: 'Automatización e integraciones',
-    text: 'Procesos que dejan de ser manuales: integraciones por API y webhooks, CI/CD con GitHub Actions y servicios en AWS y Azure sobre Linux y Docker.',
+    text: 'Automatizo procesos manuales con integraciones por API y webhooks, CI/CD en GitHub Actions y servicios en AWS y Azure sobre Linux y Docker.',
     evidence: [
       { label: 'Este sitio: tests en cada PR y despliegue automático', href: 'https://github.com/Bajmein/locus' },
     ],
@@ -44,16 +44,16 @@ const areas = [
 
 const experience = [
   {
-    date: 'oct. 2026 — hoy',
+    date: 'oct. 2026 – actualidad',
     role: 'Encargado de TI',
     org: 'Grupo de empresas (remoto)',
     text: 'Responsable del área de tecnología: sitios y plataformas web, datos e integraciones, IA y automatización, soporte y estándares de desarrollo.',
   },
   {
-    date: '2021 — 2025',
+    date: '2021–2025',
     role: 'Ingeniería en Informática',
     org: 'INACAP',
-    text: 'Proyecto de título: Vigilia.',
+    text: 'Titulado. Proyecto de título: Vigilia Reforged.',
   },
 ];
 
@@ -61,15 +61,15 @@ const experience = [
 const trail = [
   {
     name: 'Forge',
-    period: 'Abril — julio de 2026',
-    text: 'Pipeline guiado por especificaciones: cada cambio avanza por fases con artefactos validados por esquemas, con cualquier agente.',
+    period: 'Abril – julio de 2026',
+    text: 'Pipeline guiado por especificaciones: cada cambio avanza por fases con artefactos validados por esquemas, compatible con cualquier agente.',
     commits: 304,
     prs: 38,
   },
   {
     slug: 'pulse',
     name: 'pulse',
-    period: 'Mayo — julio de 2026',
+    period: 'Mayo – julio de 2026',
     text: 'Motor de estados servido por MCP: compuertas entre fases, revisión automática y escenarios Dado/Cuando/Entonces, para varios agentes de código.',
     commits: 270,
     prs: 50,
@@ -77,15 +77,15 @@ const trail = [
   },
   {
     name: 'fabrik',
-    period: 'Octubre de 2026 — hoy',
-    text: 'Plugin de Claude Code: un orquestador con cinco subagentes acotados; los hooks impiden editar sin especificación y cada verificación es un comando.',
+    period: 'Octubre de 2026 – actualidad',
+    text: 'Plugin de Claude Code: un orquestador con cinco subagentes acotados; los hooks impiden editar sin especificación y cada verificación se ejecuta como un comando.',
     commits: 72,
     prs: 46,
   },
   {
     slug: 'episteme',
     name: 'episteme',
-    period: 'Octubre de 2026 — hoy',
+    period: 'Octubre de 2026 – actualidad',
     text: 'Memoria persistente servida por MCP: decisiones y lecciones que el agente consulta y completa en cada sesión.',
     commits: 336,
     prs: 121,
@@ -96,27 +96,27 @@ const trail = [
 const method = [
   {
     title: 'Especificar antes de implementar',
-    text: 'Cada cambio parte de una especificación verificable; los agentes ejecutan y los artefactos mandan.',
+    text: 'Cada cambio parte de una especificación verificable; los agentes ejecutan y los artefactos son la fuente de verdad.',
   },
   {
     title: 'Verificar con comandos',
-    text: 'Una tarea está lista cuando un test, el lint o el chequeo de tipos lo demuestra, no cuando el modelo lo afirma.',
+    text: 'Una tarea está lista cuando una prueba, el lint o la verificación de tipos lo demuestran, no cuando el modelo lo afirma.',
   },
   {
-    title: 'Memoria que es del usuario',
-    text: 'Decisiones y lecciones quedan en notas Markdown locales que cualquier agente puede consultar.',
+    title: 'La memoria es del usuario',
+    text: 'Las decisiones y las lecciones quedan en notas Markdown locales que cualquier agente puede consultar.',
   },
   {
-    title: 'Planes que se ejecutan en limpio',
+    title: 'Planes autosuficientes',
     text: 'Cada plan lleva sus fuentes, sus decisiones cerradas y su verificación, para que otro agente lo ejecute sin la conversación previa.',
   },
   {
     title: 'Las personas deciden',
-    text: 'Los agentes proponen y ejecutan; las decisiones de producto y el merge los toma una persona.',
+    text: 'Los agentes proponen y ejecutan; las decisiones de producto y la fusión de cada cambio quedan en manos de una persona.',
   },
   {
-    title: 'La herramienta correcta',
-    text: 'Rust donde la latencia es crítica, Python para orquestar. La tecnología se elige por el problema.',
+    title: 'La tecnología según el problema',
+    text: 'Cada lenguaje y cada herramienta se eligen por lo que exige el problema: latencia, ecosistema y mantenimiento.',
   },
 ];
 
@@ -146,7 +146,7 @@ const cycle = [
 const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as const;
 ---
 
-<Base title="Benjamín Criado — Ingeniero de software Python y agentes de IA" description={site.description}>
+<Base title="Benjamín Criado — Ingeniero informático: Python y agentes de IA" description={site.description}>
   <section class="container hero" aria-labelledby="hero-title">
     <div class="hero-main">
       <p class="label eyebrow">Ingeniero informático · Python y agentes de IA · La Serena, Chile</p>
@@ -158,16 +158,16 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
         </span>
       </div>
       <p class="lead">
-        Desarrollo software en Python y pongo a trabajar agentes de IA con método: especificación, verificación con
-        comandos y memoria.
+        Desarrollo software en Python e integro agentes de IA con un método verificable: especificación previa,
+        verificación automatizada y memoria entre sesiones.
       </p>
       <p class="lead-sub">
-        Hoy estoy a cargo del área de TI de un grupo de empresas: sitios web, integraciones y automatización. Por mi
-        cuenta construyo las herramientas con que trabajo con agentes de código.
+        Actualmente soy responsable del área de TI de un grupo de empresas: sitios web, integraciones y automatización.
+        En paralelo, desarrollo mis propias herramientas para trabajar con agentes de código.
       </p>
       <ul class="facts mono" aria-label="Disponibilidad">
         <li>Trabajo remoto</li>
-        <li>Español e inglés avanzado</li>
+        <li>Inglés avanzado</li>
         <li>Autorización de trabajo en la UE</li>
       </ul>
       <div class="actions">
@@ -222,7 +222,9 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
         <p class="label">Qué hago</p>
         <h2 id="areas-title">En qué puedo aportar</h2>
       </div>
-      <p class="muted">A un equipo que contrata o a una empresa con un proyecto: tres áreas, cada una con evidencia pública.</p>
+      <p class="muted">
+        Tres áreas en las que puedo aportar a un equipo o a un proyecto, cada una respaldada por trabajo público.
+      </p>
     </div>
     <ul class="method">
       {
@@ -252,8 +254,8 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
         <h2 id="proyectos-title">Proyectos</h2>
       </div>
       <p class="muted">
-        Software que diseño y mantengo por mi cuenta. Cada página cuenta el problema, las decisiones técnicas y el
-        estado; el código es privado y tres tienen repositorio vitrina.
+        Software que diseño y mantengo de forma independiente. Cada página expone el problema, las decisiones técnicas
+        y el estado del proyecto. El código fuente es privado; tres proyectos tienen un repositorio vitrina público.
       </p>
     </div>
     <ol class="projects">
@@ -296,9 +298,8 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
         <h2 id="agentes-title">Cómo trabajo con agentes de IA</h2>
       </div>
       <p class="muted">
-        Desde abril de 2026 construyo las herramientas con que trabajo con agentes de código. Cada una resolvió
-        lo que la anterior dejaba abierto: entre las cuatro suman <strong>{totalCommits} commits</strong> y
-        <strong>{totalPrs} pull requests</strong> fusionados.
+        Desde abril de 2026 desarrollo mis propias herramientas para trabajar con agentes de código; cada una
+        resolvió lo que la anterior dejaba pendiente.
       </p>
     </div>
     <div class="trail-wrap">
@@ -385,8 +386,9 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
     <div class="contact-row">
       <div>
         <p class="muted">
-          Si buscas a alguien para tu equipo, el CV tiene el detalle. Si tienes un proyecto de automatización,
-          integraciones o agentes de IA, cuéntame qué necesitas. Respondo en español o inglés.
+          Si buscas incorporar a alguien a tu equipo, en el CV encontrarás mi experiencia completa. Si tienes un
+          proyecto de automatización, integraciones o agentes de IA, escríbeme con los detalles. Respondo en español y
+          en inglés.
         </p>
         <a class="mail" href={`mailto:${site.email}`}><Icon name="mail" />{site.email}</a>
       </div>
