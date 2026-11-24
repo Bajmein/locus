@@ -193,6 +193,7 @@ test('portada: agentes primero, con ícono y tono', () => {
     const slug = hrefs[i].replaceAll('/', '');
     assert.ok(card.includes('class="project-icon'), `${hrefs[i]}: falta el ícono`);
     assert.match(card, new RegExp(`--accent:\\s?var\\(--tone-${slug}\\)`), `${hrefs[i]}: falta su tono`);
+    assert.ok(card.includes('class="mono proof"'), `${hrefs[i]}: falta su prueba`);
   }
 });
 
@@ -348,7 +349,7 @@ test('portada: contacto con copiar correo y CV, sin redes repetidas', () => {
 
 test('portada: antetítulos en las secciones', () => {
   const html = read('index.html');
-  for (const id of ['areas', 'ti', 'proyectos', 'agentes', 'experiencia', 'contacto']) {
+  for (const id of ['areas', 'proyectos', 'agentes', 'experiencia', 'contacto']) {
     const start = html.indexOf(`id="${id}"`);
     assert.ok(start > -1, `falta la sección #${id}`);
     const head = html.slice(start, html.indexOf('<h2', start));
@@ -356,7 +357,7 @@ test('portada: antetítulos en las secciones', () => {
   }
 });
 
-test('portada: fortalezas y trabajo actual', () => {
+test('portada: qué hago con evidencia y sin sección de TI', () => {
   const html = read('index.html');
   const section = (id) => {
     const start = html.indexOf(`id="${id}"`);
@@ -366,11 +367,10 @@ test('portada: fortalezas y trabajo actual', () => {
   const areas = section('areas');
   assert.ok(areas.includes('class="method'), '#areas debe usar la lista method');
   assert.equal(areas.match(/<li/g)?.length, 3, '#areas debe tener tres áreas');
-  const ti = section('ti');
-  assert.ok(ti.includes('class="caps'), '#ti debe usar Capabilities');
-  assert.equal(ti.match(/class="cap"/g)?.length, 4, '#ti debe tener cuatro funciones');
+  assert.equal(areas.match(/class="evidence"/g)?.length, 3, 'cada área debe traer su evidencia');
+  assert.ok(!html.includes('id="ti"'), 'la sección #ti ya no va en la portada');
   const pos = (id) => html.indexOf(`id="${id}"`);
-  assert.ok(pos('areas') < pos('ti') && pos('ti') < pos('proyectos'), 'orden: #areas, #ti, #proyectos');
+  assert.ok(pos('areas') < pos('proyectos'), 'orden: #areas, #proyectos');
   const header = html.slice(html.indexOf('<header'), html.indexOf('</header>'));
   assert.ok(header.includes('href="/#areas"'), 'la cabecera debe enlazar a #areas');
   assert.ok(!header.includes('href="/#agentes"'), '#agentes ya no va en la cabecera');
