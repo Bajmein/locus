@@ -4,8 +4,11 @@ import { getProject } from '../data/projects';
 import { epistemePrs, figuresDate, getStep } from '../data/trail';
 import EpistemeDiagram from '../components/diagrams/EpistemeDiagram.astro';
 import Capabilities from '../components/Capabilities.astro';
-import { Image } from 'astro:assets';
-import grafo from '../assets/images/episteme/grafo-vault.png';
+import { getImage } from 'astro:assets';
+import grafoPoster from '../assets/images/episteme/grafo-poster.png';
+
+// Póster del video: su último cuadro (el vault completo), en WebP
+const poster = await getImage({ src: grafoPoster, format: 'webp', width: 960 });
 
 const capabilities = [
   {
@@ -82,16 +85,22 @@ const step = getStep('episteme');
     que se relaciona, y episteme sigue esos enlaces al buscar y al leer.
   </p>
   <figure class="graph glass">
-    <Image
-      src={grafo}
-      alt="Vista de grafo del vault: puntos agrupados en varios núcleos de colores, unidos por líneas finas."
-      widths={[640, 960, 1345]}
-      sizes="(min-width: 48rem) 46rem, 100vw"
-      loading="lazy"
-    />
+    <video
+      src="/assets/video/episteme-grafo.mp4"
+      poster={poster.src}
+      width="960"
+      height="796"
+      muted
+      loop
+      playsinline
+      controls
+      preload="none"
+      aria-label="Vista de grafo del vault que crece desde unos pocos puntos hasta varios núcleos de colores unidos por líneas finas."
+    ></video>
     <figcaption>
-      Vista de grafo del vault que uso a diario, en Obsidian. Cada punto es una nota y cada línea, un enlace entre
-      dos notas; los colores separan grupos de notas y los puntos más grandes son los más enlazados.
+      La historia del vault que uso a diario, acelerada en la vista de grafo de Obsidian: las notas aparecen en el
+      orden en que se crearon. Cada punto es una nota y cada línea, un enlace entre dos notas; los colores separan
+      grupos de notas y los puntos más grandes son los más enlazados.
     </figcaption>
   </figure>
 
@@ -124,11 +133,12 @@ const step = getStep('episteme');
     margin: 2rem 0;
     padding: 0.75rem;
   }
-  .graph img {
+  .graph video {
     display: block;
     width: 100%;
     height: auto;
     border-radius: var(--radius);
+    background: var(--bg);
   }
   .graph figcaption {
     margin-top: 0.75rem;
@@ -137,3 +147,31 @@ const step = getStep('episteme');
     font-size: 0.875rem;
   }
 </style>
+
+<script>
+  // Se reproduce solo mientras está a la vista y sin movimiento reducido; con
+  // movimiento reducido queda el póster (el vault completo) y los controles.
+  const video = document.querySelector<HTMLVideoElement>('.graph video');
+  if (
+    video &&
+    'IntersectionObserver' in window &&
+    !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  ) {
+    let visible = false;
+    let pausedByUser = false;
+    video.addEventListener('pause', () => {
+      if (visible) pausedByUser = true;
+    });
+    video.addEventListener('play', () => {
+      pausedByUser = false;
+    });
+    new IntersectionObserver(
+      ([entry]) => {
+        visible = entry.isIntersecting;
+        if (visible && !pausedByUser) video.play().catch(() => {});
+        else if (!visible) video.pause();
+      },
+      { threshold: 0.4 },
+    ).observe(video);
+  }
+</script>
