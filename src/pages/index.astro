@@ -1327,44 +1327,53 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
     font-size: 0.8125rem;
   }
 
-  @keyframes fill {
-    from {
-      transform: scaleX(0);
-    }
-  }
-
   @keyframes fill-y {
     from {
       transform: scaleY(0);
     }
   }
 
-  @keyframes travel {
-    from {
+  /*
+   * Escritorio: el riel es una línea de 1 px y solo se ve durante unos 800 px de scroll, así que ligado al
+   * scroll se llenaba demasiado rápido. Avanza con duración propia cuando entra en pantalla: el script del
+   * final pone .is-armed (riel vacío, sin transición) y luego .is-in. Sin JS o con movimiento reducido
+   * queda lleno.
+   */
+  @media (prefers-reduced-motion: no-preference) and (min-width: 761px) {
+    .trail-wrap.is-armed .trail::after {
+      transform: scaleX(0);
+    }
+
+    .trail-wrap.is-armed .token {
+      display: block;
       transform: translateX(0);
     }
 
-    to {
+    .trail-wrap.is-armed.is-in .trail::after,
+    .trail-wrap.is-armed.is-in .token {
+      transition: transform 2.8s cubic-bezier(0.45, 0, 0.25, 1);
+    }
+
+    .trail-wrap.is-armed.is-in .trail::after {
+      transform: scaleX(1);
+    }
+
+    .trail-wrap.is-armed.is-in .token {
       transform: translateX(100%);
     }
   }
 
-  @media (prefers-reduced-motion: no-preference) {
+  /* Móvil: el relleno vertical baja con el scroll, a la altura del centro de la pantalla */
+  @media (prefers-reduced-motion: no-preference) and (max-width: 760px) {
     @supports (animation-timeline: view()) {
       .trail::after {
-        animation: fill linear both;
-      }
-
-      .token {
-        display: block;
-        animation: travel linear both;
+        animation: fill-y linear both;
       }
 
       /* Regla aparte: el minificador funde animation-timeline en el atajo animation y lo invalida */
-      [class~='trail']::after,
-      [class~='token'] {
+      [class~='trail']::after {
         animation-timeline: view();
-        animation-range: entry 30% cover 55%;
+        animation-range: cover 22% cover 78%;
       }
     }
   }
@@ -1680,7 +1689,6 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
     /* Relleno vertical del riel: baja con el scroll */
     .trail::after {
       transform-origin: top;
-      animation-name: fill-y;
     }
 
     .token {
@@ -1751,6 +1759,25 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
 </style>
 
 <script>
+  // Riel de #agentes en escritorio: se arma vacío y se llena una vez al entrar en pantalla (CSS en .is-armed)
+  const trailWrap = document.querySelector<HTMLElement>('.trail-wrap');
+  if (
+    trailWrap &&
+    'IntersectionObserver' in window &&
+    window.matchMedia('(prefers-reduced-motion: no-preference)').matches
+  ) {
+    trailWrap.classList.add('is-armed');
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (!entries.some((e) => e.isIntersecting)) return;
+        trailWrap.classList.add('is-in');
+        observer.disconnect();
+      },
+      { rootMargin: '0px 0px -20% 0px', threshold: 0.5 },
+    );
+    observer.observe(trailWrap);
+  }
+
   const button = document.querySelector<HTMLButtonElement>('#contacto [data-copy]');
   const status = document.querySelector<HTMLElement>('#contacto .copy-status');
   if (button && status && navigator.clipboard) {
