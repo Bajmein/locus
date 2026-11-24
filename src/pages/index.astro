@@ -132,7 +132,7 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
 <Base title="Benjamín Criado — Ingeniero Informático" description={site.description}>
   <section class="container hero" aria-labelledby="hero-title">
     <div class="hero-main">
-      <p class="eyebrow">Ingeniero informático en La Serena, Chile</p>
+      <p class="label eyebrow">Ingeniero informático · Agentes de IA y automatización · La Serena, Chile</p>
       <div class="target">
         <h1 id="hero-title" class="name"><span>Benjamín</span> <span>Criado</span></h1>
         <span class="bbox" aria-hidden="true">
@@ -172,7 +172,7 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
   </section>
 
   <section class="container now-strip" aria-labelledby="ahora">
-    <h2 id="ahora"><span class="pulse" aria-hidden="true"></span>Ahora</h2>
+    <h2 id="ahora" class="label"><span class="pulse" aria-hidden="true"></span>Ahora</h2>
     <dl class="now">
       {
         now.map((item) => (
@@ -187,7 +187,10 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
 
   <section class="container section" id="proyectos" aria-labelledby="proyectos-title">
     <div class="section-head split">
-      <h2 id="proyectos-title">Proyectos</h2>
+      <div>
+        <p class="label">Agentes de IA y visión por computador</p>
+        <h2 id="proyectos-title">Proyectos</h2>
+      </div>
       <p class="muted">
         Herramientas para trabajar con agentes de IA y sistemas de visión por computador que corren en tiempo
         real.
@@ -225,7 +228,10 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
 
   <section class="container section" id="agentes" aria-labelledby="agentes-title">
     <div class="section-head split">
-      <h2 id="agentes-title">Cómo trabajo con agentes</h2>
+      <div>
+        <p class="label">Trabajo con agentes</p>
+        <h2 id="agentes-title">De la especificación a la memoria</h2>
+      </div>
       <p class="muted">
         Desde abril de 2026 construyo las herramientas con que trabajo con agentes de código. Cada una resolvió
         lo que la anterior dejaba abierto: entre las cuatro suman <strong>{totalCommits} commits</strong> y
@@ -268,6 +274,7 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
   <div class="container section two-col lazy">
     <section id="experiencia" aria-labelledby="experiencia-title">
       <div class="section-head">
+        <p class="label">Experiencia</p>
         <h2 id="experiencia-title">Trayectoria</h2>
       </div>
       <ol class="timeline">
@@ -289,6 +296,7 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
 
     <section aria-labelledby="tecnologias">
       <div class="section-head">
+        <p class="label">Tecnologías</p>
         <h2 id="tecnologias">Con qué trabajo</h2>
       </div>
       <dl class="tech">
@@ -305,7 +313,10 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
   </div>
 
   <section class="container section contact lazy" id="contacto" aria-labelledby="contacto-title">
-    <h2 id="contacto-title" class="contact-title">Conversemos</h2>
+    <div class="section-head contact-head">
+      <p class="label">Contacto</p>
+      <h2 id="contacto-title" class="contact-title">Conversemos</h2>
+    </div>
     <div class="contact-row">
       <div>
         <p class="muted">Disponible para conversar sobre proyectos y colaboraciones.</p>
@@ -653,9 +664,7 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
     align-items: center;
     gap: 0.6rem;
     margin: 0;
-    font-size: 1rem;
-    font-weight: 600;
-    letter-spacing: 0;
+    color: var(--text);
   }
 
   .pulse {
@@ -705,6 +714,13 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
     align-items: end;
     gap: 1rem 4rem;
     margin-bottom: 3rem;
+  }
+
+  /* Antetítulo y título juntos en la columna izquierda */
+  .split > div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
   }
 
   .split p {

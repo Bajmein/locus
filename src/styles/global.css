@@ -208,13 +208,13 @@ hr {
   color: var(--accent-ink);
 }
 
-/* Etiquetas, numeración, fechas y stack */
-/* Rótulos en tipo de oración, sin mayúsculas forzadas */
+/* Rótulos, antetítulos y fechas: la voz técnica, mono en mayúsculas (el HTML va en tipo de oración) */
 .label {
-  font-size: 0.875rem;
-  font-weight: 500;
-  font-stretch: 100%;
-  letter-spacing: 0;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
   color: var(--muted);
 }
 
@@ -276,6 +276,19 @@ hr {
 .section-head .label {
   margin: 0;
   color: var(--accent);
+}
+
+/* Barra del acento bajo el título; crece al entrar en pantalla. Va en el h2 y no en .section-head,
+   que en la portada es una grilla (.split) y haría del ::after una celda */
+.section-head h2::after {
+  content: '';
+  display: block;
+  width: 3rem;
+  height: 2px;
+  margin-top: 0.9rem;
+  border-radius: 1px;
+  background: var(--accent);
+  transform-origin: left;
 }
 
 /* ---------- Botones ---------- */
@@ -414,6 +427,15 @@ td:first-child {
     [class~='reveal'] {
       animation-timeline: view();
       animation-range: entry 0% entry 40%;
+    }
+
+    .section-head h2::after {
+      animation: grow linear both;
+    }
+
+    [class~='section-head'] h2::after {
+      animation-timeline: view();
+      animation-range: entry 0% entry 60%;
     }
   }
 }
