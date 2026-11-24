@@ -93,7 +93,7 @@ const step = getStep('episteme');
       muted
       loop
       playsinline
-      controls
+      tabindex="0"
       preload="none"
       aria-label="Vista de grafo del vault que crece desde unos pocos puntos hasta varios núcleos de colores unidos por líneas finas."
     ></video>
@@ -139,6 +139,7 @@ const step = getStep('episteme');
     height: auto;
     border-radius: var(--radius);
     background: var(--bg);
+    cursor: pointer;
   }
   .graph figcaption {
     margin-top: 0.75rem;
@@ -149,8 +150,9 @@ const step = getStep('episteme');
 </style>
 
 <script>
-  // Se reproduce solo mientras está a la vista y sin movimiento reducido; con
-  // movimiento reducido queda el póster (el vault completo) y los controles.
+  // Sin reproductor visible: se reproduce solo mientras está a la vista y sin
+  // movimiento reducido (con movimiento reducido queda el póster, el vault
+  // completo). Un clic, Enter o Espacio lo pausa y lo reanuda.
   const video = document.querySelector<HTMLVideoElement>('.graph video');
   if (
     video &&
@@ -164,6 +166,17 @@ const step = getStep('episteme');
     });
     video.addEventListener('play', () => {
       pausedByUser = false;
+    });
+    const toggle = () => {
+      if (video.paused) video.play().catch(() => {});
+      else video.pause();
+    };
+    video.addEventListener('click', toggle);
+    video.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggle();
+      }
     });
     new IntersectionObserver(
       ([entry]) => {

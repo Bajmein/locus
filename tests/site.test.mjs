@@ -340,11 +340,12 @@ test('episteme: video del grafo silenciado, con póster y sin autoplay', () => {
   const html = read('episteme/index.html');
   const video = html.match(/<video[^>]*>/)?.[0];
   assert.ok(video, 'episteme sin el video del grafo');
-  for (const attr of ['muted', 'loop', 'playsinline', 'controls', 'preload="none"', 'aria-label="']) {
+  for (const attr of ['muted', 'loop', 'playsinline', 'preload="none"', 'aria-label="']) {
     assert.ok(video.includes(attr), `el video debe llevar ${attr}`);
   }
   // sin autoplay: lo reproduce el script solo si no hay prefers-reduced-motion
   assert.ok(!video.includes('autoplay'), 'el video no debe llevar autoplay');
+  assert.ok(!video.includes('controls'), 'el video no muestra el reproductor');
   for (const key of ['src', 'poster']) {
     const path = video.match(new RegExp(`${key}="(/[^"]+)"`))?.[1];
     assert.ok(path && existsSync(join(DIST, path)), `${key} del video no existe en dist/: ${path}`);
