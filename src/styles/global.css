@@ -699,7 +699,3 @@ td:first-child {
 main:focus {
   outline: none;
 }
-
-pre.flow {
-  white-space: pre-wrap;
-}

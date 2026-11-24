@@ -145,7 +145,7 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
         <a class="btn btn-primary" href="#proyectos">Ver proyectos</a>
         <a class="btn" href="/cv/">Currículum</a>
       </div>
-      <div class="proof mono" aria-label="Métricas de herramientas para agentes">
+      <p class="proof mono">
         <span class="proof-stats">
           <span><strong>{totalCommits}</strong> commits</span>
           <span class="sep" aria-hidden="true">·</span>
@@ -154,7 +154,7 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
         <span class="proof-note">
           en cuatro herramientas propias desde abr. 2026 — <a href="#agentes">Ver el recorrido →</a>
         </span>
-      </div>
+      </p>
     </div>
 
     <figure class="console glass" aria-labelledby="ciclo">
@@ -1656,6 +1656,10 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
     .is-agentes .project-card {
       min-height: 0;
       padding: 1.5rem;
+    }
+
+    .card-badge {
+      margin-left: 0;
     }
 
     .trail {

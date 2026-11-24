@@ -65,8 +65,8 @@ const schema = {
         <dl class="metrics glass" aria-label="Indicadores clave">
           {metrics.map((m) => (
             <div class="metric">
-              <dt class="mono">{m.value}</dt>
-              <dd>{m.label}</dd>
+              <dt>{m.label}</dt>
+              <dd class="mono">{m.value}</dd>
             </div>
           ))}
         </dl>
@@ -237,17 +237,23 @@ const schema = {
     border-left: 1px solid var(--glass-border);
   }
 
-  .metric dt {
+  .metric {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  .metric dd {
+    margin: 0 0 0.25rem;
     font-size: clamp(1.25rem, 2.2vw, 1.5rem);
     font-weight: 600;
     color: var(--accent);
     line-height: 1.2;
-    margin-bottom: 0.25rem;
   }
 
-  .metric dd {
+  .metric dt {
     margin: 0;
     font-size: 0.875rem;
+    font-weight: 400;
     color: var(--muted);
     line-height: 1.4;
   }
