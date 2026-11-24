@@ -86,7 +86,8 @@ Escala: 13 · 14 · 15,5 · 17 · 20–24 (lead) · 28–44 (tarjetas) · 32–5
   en cada proyecto muestra una firma técnica propia (`mcp · memoria local`, `fsm · 8 fases`,
   `gpu · tiempo real`, `edge · < 80 ms`). Variante `.is-miss` (404, «sin detección»): contorno
   discontinuo y todo en `--muted`.
-- **Consola** (`.console`): panel con el ciclo de un cambio numerado `01`–`06`; verbo en ámbar, estado
+- **Consola** (`.console`): panel con el ciclo de un cambio numerado `01`–`06`, alineado arriba con el
+  antetítulo y el nombre (`align-items: start` en el hero); verbo en ámbar, estado
   en verde; en móvil, verbo, texto y estado van en la misma fila (el texto puede partirse). El punto
   activo lleva un halo del acento (excepción aprobada: es la única sombra difusa de un componente).
 - **Qué hago** (`#areas`): tres tarjetas `.glass` (`.areas-grid`) con ícono lineal Phosphor, índice
