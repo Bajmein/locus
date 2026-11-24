@@ -202,10 +202,10 @@ test('trabajo con agentes: línea de tiempo en orden', () => {
   const start = html.indexOf('id="agentes"');
   assert.ok(start >= 0, 'falta id="agentes"');
   const section = html.slice(start, html.indexOf('</section>', start));
-  assert.equal(count(section, /class="step[\s"]/g), 4, 'la línea de tiempo tiene cuatro pasos');
+  assert.equal(count(section, /class="step[\s"]/g), 3, 'la línea de tiempo tiene tres pasos');
   const trail = section.slice(section.indexOf('class="trail'), section.indexOf('</ol>'));
   const names = [...trail.matchAll(/<h3[^>]*>(?:<a[^>]*>)?([^<]+)/g)].map((m) => m[1].trim());
-  assert.deepEqual(names, ['Forge', 'pulse', 'fabrik', 'episteme'], 'orden de los pasos');
+  assert.deepEqual(names, ['pulse', 'fabrik', 'episteme'], 'orden de los pasos');
   assert.ok(section.includes('href="/pulse/"'), 'falta el enlace a /pulse/');
   assert.ok(!section.includes('href="/forge/"'), 'Forge ya no tiene página');
   assert.ok(section.includes('href="/episteme/"'), 'falta el enlace a /episteme/');
@@ -421,6 +421,6 @@ test('caja de detección en portada, proyectos y 404', () => {
   assert.ok(!toggle.includes('aria-label'), 'episteme: el botón de pausa se nombra con su texto visible, sin aria-label');
   const home = read('index.html');
   const agentes = home.slice(home.indexOf('id="agentes"'), home.indexOf('id="experiencia"'));
-  assert.equal((agentes.match(/class="label nopage"/g) ?? []).length, 4, '#agentes: cada paso lleva su estado');
+  assert.equal((agentes.match(/class="label nopage"/g) ?? []).length, 3, '#agentes: cada paso lleva su estado');
   assert.ok(!read('index.html').includes('Tests, lint'), 'consola del hero: usar «Pruebas» en vez de «Tests»');
 });

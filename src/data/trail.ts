@@ -1,5 +1,5 @@
 /**
- * Trabajo con agentes de IA: las cuatro herramientas de la línea de tiempo de `#agentes`, con sus cifras de GitHub
+ * Trabajo con agentes de IA: las tres herramientas de la línea de tiempo de `#agentes`, con sus cifras de GitHub
  * (commits y pull requests fusionados). Fuente única para la portada, el CV, la página de episteme y su tarjeta: al
  * actualizar las cifras, cambia `figuresDate` y los números de aquí.
  */
@@ -27,18 +27,10 @@ export const epistemePrs = { before: 124, public: 52 };
 
 export const trail: TrailStep[] = [
   {
-    name: 'Forge',
-    period: 'Abril – julio de 2026',
-    text: 'Punto de partida: pipeline por fases con artefactos validados por esquemas. Demostró el método, pero dependía de que el agente respetara las convenciones.',
-    commits: 304,
-    prs: 38,
-    note: 'Ciclo cerrado',
-  },
-  {
     slug: 'pulse',
     name: 'pulse',
     period: 'Mayo – julio de 2026',
-    text: 'Llevó esas convenciones a un motor MCP: compuertas estrictas entre ocho fases y revisión automática para que ningún agente pudiera saltarse un paso.',
+    text: 'Punto de partida: un motor MCP con compuertas estrictas entre ocho fases y revisión automática, para que ningún agente pudiera saltarse un paso.',
     commits: 270,
     prs: 50,
     href: '/pulse/',

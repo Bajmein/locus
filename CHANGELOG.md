@@ -66,6 +66,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+- Forge sale del sitio: la línea de tiempo de `#agentes` queda con tres pasos (pulse, fabrik y episteme) y los totales del hero y del CV cuentan solo esas tres herramientas, desde mayo de 2026. pulse, Vigilia y el README dejan de citarlo.
 - Sección «A cargo del área de TI» (`#ti`) de la portada: sus funciones pasan a la trayectoria.
 - La práctica profesional sale de la portada; sigue en el CV.
 - Página `/forge/` y su diagrama; Forge sigue en la línea de tiempo de `#agentes` y en la página de Vigilia.
