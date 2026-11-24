@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Identidad: el sobrenombre Kenno y el usuario de GitHub Bajmein, visibles en el pie de todas las páginas, en `alternateName` (con `givenName`, `familyName` y `description`) del nodo `Person` y en una línea de `llms.txt`; `/cv/` se declara como `ProfilePage` de la persona. Con sus pruebas, y las de la página de episteme (gráfico, instalación y afirmaciones vetadas).
+- Autoría como Kenno (Bajmein en GitHub): el pie de todas las páginas firma «© 2026 Kenno» y enlaza «GitHub · Bajmein», el nodo `Person` del JSON-LD se llama Kenno (con `alternateName` Bajmein y `description`) y `llms.txt` lo declara como autor; el hero y el CV siguen con el nombre real; `/cv/` se declara como `ProfilePage` de la persona. Con sus pruebas, y las de la página de episteme (gráfico, instalación y afirmaciones vetadas).
 - Página de episteme: secciones «Búsqueda por palabras, no por embeddings», con el gráfico de barras de la medición del 15-11-2026 (`EmbeddingsChart.astro`, tabla semántica), «Instalación» y «Por qué lo construí».
 - Páginas de proyecto: banda superior de tres indicadores clave verificables (`.metrics.glass`), enlace directo al repositorio vitrina en la ficha lateral `.meta` y matriz visual «Límite → Capa» en `Vigilia Edge`.
 - Página de episteme: selector por pestañas («Evolución» / «Vista fija») e indicador interactivo de reproducción/pausa dentro de un único marco `.graph.glass`.

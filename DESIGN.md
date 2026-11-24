@@ -111,8 +111,7 @@ Escala: 13 · 14 · 15,5 · 17 · 20–24 (lead) · 28–44 (tarjetas) · 32–5
   izquierda (12 px de alto, extremo redondeado de 4 px, ancho proporcional al total y un mínimo de 4 px) y la cifra
   mono con su porcentaje. Una sola barra destacada en el acento (el tono de la página); las demás en `--muted` al
   45 %. Sin animación ni leyenda: el rótulo de cada fila nombra la barra.
-- **Pie**: el nombre con el sobrenombre (`© 2026 Benjamín Criado (Kenno)`) y el enlace de GitHub con el usuario
-  (`GitHub · Bajmein`).
+- **Pie**: la autoría como Kenno (`© 2026 Kenno`) y el enlace de GitHub con el usuario (`GitHub · Bajmein`).
 - **Contacto**: dos tarjetas `.glass` en paralelo (`Proyectos e integraciones` con correo y copia;
   `Equipos y contratación` con acceso al CV web y descarga en PDF).
 - **Riel** del trabajo con agentes: subgrid para alinear período, nombre, texto, cifras y el estado de

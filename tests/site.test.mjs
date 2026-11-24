@@ -428,20 +428,21 @@ test('caja de detección en portada, proyectos y 404', () => {
 const jsonLd = (file) =>
   JSON.parse(read(file).match(/<script type="application\/ld\+json">([^<]+)<\/script>/)?.[1] ?? '{"@graph":[]}')['@graph'];
 
-test('identidad: alias Kenno y Bajmein en el JSON-LD, el pie y llms.txt', () => {
+test('identidad: la autoría firma como Kenno (Bajmein en GitHub), sin el nombre completo', () => {
   for (const [url, file] of Object.entries(allPages)) {
     const person = jsonLd(file).find((node) => node['@type'] === 'Person');
     assert.ok(person, `${url}: JSON-LD sin Person`);
-    for (const alias of ['Kenno', 'Bajmein']) {
-      assert.ok(person.alternateName?.includes(alias), `${url}: alternateName sin ${alias}`);
-    }
+    assert.equal(person.name, 'Kenno', `${url}: el Person debe llamarse Kenno`);
+    assert.ok(person.alternateName?.includes('Bajmein'), `${url}: alternateName sin Bajmein`);
+    assert.ok(!JSON.stringify(person).includes('Rossa'), `${url}: el Person no lleva el apellido materno`);
     const html = read(file);
     const footer = html.slice(html.indexOf('class="site-footer'), html.lastIndexOf('</footer>')).replace(/<[^>]+>/g, '');
-    assert.ok(footer.includes('(Kenno)'), `${url}: el pie no muestra «(Kenno)»`);
+    assert.ok(footer.includes('© 2026 Kenno'), `${url}: el pie no firma «© 2026 Kenno»`);
     assert.ok(footer.includes('Bajmein'), `${url}: el pie no muestra «Bajmein»`);
   }
   const llms = read('llms.txt');
   assert.ok(llms.includes('Kenno') && llms.includes('Bajmein'), 'llms.txt sin los alias');
+  assert.ok(!llms.includes('Rossa'), 'llms.txt no lleva el nombre completo');
 });
 
 test('CV: ProfilePage cuya entidad principal es la persona', () => {

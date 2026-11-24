@@ -11,11 +11,11 @@ export const GET: APIRoute = ({ site: base }) => {
     return text.charAt(0).toUpperCase() + text.slice(1);
   };
   const lines = [
-    `# ${site.name}: ${site.jobTitle.toLowerCase()}`,
+    `# ${site.alias}: ${site.jobTitle.toLowerCase()}`,
     '',
     `> ${site.description}`,
     '',
-    `${site.name} (${site.alias}; ${site.handle} en GitHub). Nombre completo: ${site.fullName}.`,
+    `Autor: ${site.alias} (${site.handle} en GitHub).`,
     '',
     '## Páginas',
     '',
