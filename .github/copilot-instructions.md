@@ -19,6 +19,7 @@ npm run preview    # sirve dist/
 - `src/pages/`: una página `.astro` por URL (`index`, `vigilia`, `vigilia-edge`, `pulse`, `episteme`, `cv`, `404`).
 - `src/layouts/Base.astro`: `<head>` (SEO, Open Graph, JSON-LD), cabecera y pie. `Project.astro`: páginas de proyecto. `Base` recibe la prop `tone` (slug del proyecto) y fija `--accent: var(--tone-<slug>)` en `<html>`.
 - `src/components/`: `Header`, `Footer`, `Diagram` (marco de los diagramas SVG en línea, con una composición ancha de hasta 640 y otra angosta de hasta 280 unidades; cada diagrama vive en `diagrams/` y usa `diagrams/Node.astro`), `Capabilities`, `ProjectIcon` (íconos SVG en línea por proyecto, props `slug` y `size`; animados al pasar el cursor por la tarjeta y estáticos con `prefers-reduced-motion`).
+- Imágenes en `src/assets/images/<proyecto>/`, con `<Image>` de `astro:assets` (WebP en varios anchos, `widths` y `sizes`) y texto alternativo; hoy solo el grafo del vault en `episteme.astro` (figura `.graph.glass` con `figcaption`).
 - `src/styles/global.css`: tokens de diseño (`--bg`, `--accent`, …) y estilos base, incluida la impresión del CV.
 - `src/data/site.ts`: nombre, correo, enlaces sociales y metadescripciones del sitio y del CV.
 - `src/data/projects.ts`: datos de los proyectos (metadescripción, ficha, tarjeta de la portada, `group` y `period`; agentes primero); lo usan las páginas de proyecto, la portada y `llms.txt`.
