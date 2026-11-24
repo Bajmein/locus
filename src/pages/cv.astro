@@ -16,13 +16,13 @@ const projects = [
     ],
   },
   {
-    name: 'Forge',
-    meta: 'Desarrollo guiado por especificaciones (SDD) para agentes de IA',
-    href: '/forge/',
+    name: 'pulse',
+    meta: 'Motor de desarrollo guiado por especificaciones (SDD) · Python, FastMCP, Pydantic',
+    href: '/pulse/',
     items: [
-      'Pipeline con estados estrictos (propuesta, especificación, diseño, tareas, implementación, verificación y archivo) y artefactos validados contra esquemas YAML.',
-      'Agnóstico al agente: compatible con Claude Code, Gemini CLI y GitHub Copilot.',
-      'Validaciones locales (Ruff, pytest) y revisión humana.',
+      'Máquina de estados de ocho fases con compuertas declarativas y aprobación humana del diseño antes de implementar.',
+      'Arquitectura hexagonal con contratos en Pydantic v2; un servidor MCP para Claude Code, Codex CLI y otros agentes.',
+      'Revisión automática al cerrar (ruff, bandit, pytest, ty) y 244 tests, incluidos tests basados en propiedades.',
     ],
   },
   {

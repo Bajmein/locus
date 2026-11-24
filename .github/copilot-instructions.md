@@ -16,7 +16,7 @@ npm run preview    # sirve dist/
 
 ## Estructura
 
-- `src/pages/`: una página `.astro` por URL (`index`, `vigilia`, `vigilia-edge`, `forge`, `episteme`, `cv`, `404`).
+- `src/pages/`: una página `.astro` por URL (`index`, `vigilia`, `vigilia-edge`, `pulse`, `episteme`, `cv`, `404`).
 - `src/layouts/Base.astro`: `<head>` (SEO, Open Graph, JSON-LD), cabecera y pie. `Project.astro`: páginas de proyecto. `Base` recibe la prop `tone` (slug del proyecto) y fija `--accent: var(--tone-<slug>)` en `<html>`.
 - `src/components/`: `Header`, `Footer`, `Diagram` (marco de los diagramas SVG en línea, con una composición ancha de hasta 640 y otra angosta de hasta 280 unidades; cada diagrama vive en `diagrams/` y usa `diagrams/Node.astro`), `Capabilities`, `ProjectIcon` (íconos SVG en línea por proyecto, props `slug` y `size`; animados al pasar el cursor por la tarjeta y estáticos con `prefers-reduced-motion`).
 - `src/styles/global.css`: tokens de diseño (`--bg`, `--accent`, …) y estilos base, incluida la impresión del CV.

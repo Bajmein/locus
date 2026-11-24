@@ -12,7 +12,7 @@ const pages = {
   '/': 'index.html',
   '/vigilia/': 'vigilia/index.html',
   '/vigilia-edge/': 'vigilia-edge/index.html',
-  '/forge/': 'forge/index.html',
+  '/pulse/': 'pulse/index.html',
   '/episteme/': 'episteme/index.html',
   '/cv/': 'cv/index.html',
 };
@@ -108,7 +108,7 @@ test('imagen social de 1200×630 y menos de 300 KB', () => {
 });
 
 test('JSON-LD con Person, WebSite y SoftwareSourceCode en los proyectos', () => {
-  const projectPages = ['/vigilia/', '/vigilia-edge/', '/episteme/', '/forge/'];
+  const projectPages = ['/vigilia/', '/vigilia-edge/', '/episteme/', '/pulse/'];
   for (const [url, file] of Object.entries(allPages)) {
     const raw = read(file).match(/<script type="application\/ld\+json">([^<]+)<\/script>/)?.[1];
     assert.ok(raw, `${url}: falta JSON-LD`);
@@ -158,7 +158,7 @@ test('tipografía: ningún texto bajo 12 px', () => {
 
 test('diagramas: dos composiciones que nunca se dibujan por debajo de 1:1', () => {
   const limits = { wide: 640, narrow: 280 };
-  for (const file of ['vigilia/index.html', 'forge/index.html', 'episteme/index.html']) {
+  for (const file of ['vigilia/index.html', 'pulse/index.html', 'episteme/index.html']) {
     const html = read(file);
     const layouts = [...html.matchAll(/<svg class="layout is-(wide|narrow)"[^>]*>/g)];
     assert.deepEqual(layouts.map((m) => m[1]), ['wide', 'narrow'], `${file}: composiciones ancha y angosta`);
@@ -188,7 +188,7 @@ test('portada: agentes primero, con ícono y tono', () => {
   const html = read('index.html');
   const cards = [...html.matchAll(/<a[^>]*class="project-card[^"]*"[^>]*>[\s\S]*?<\/a>/g)].map((m) => m[0]);
   const hrefs = cards.map((card) => card.match(/^<a[^>]*>/)[0].match(/href="([^"]+)"/)?.[1]);
-  assert.deepEqual(hrefs, ['/episteme/', '/forge/', '/vigilia/', '/vigilia-edge/'], 'orden de las tarjetas');
+  assert.deepEqual(hrefs, ['/episteme/', '/pulse/', '/vigilia/', '/vigilia-edge/'], 'orden de las tarjetas');
   for (const [i, card] of cards.entries()) {
     const slug = hrefs[i].replaceAll('/', '');
     assert.ok(card.includes('class="project-icon'), `${hrefs[i]}: falta el ícono`);
@@ -205,7 +205,8 @@ test('trabajo con agentes: línea de tiempo en orden', () => {
   const trail = section.slice(section.indexOf('class="trail'), section.indexOf('</ol>'));
   const names = [...trail.matchAll(/<h3[^>]*>(?:<a[^>]*>)?([^<]+)/g)].map((m) => m[1].trim());
   assert.deepEqual(names, ['Forge', 'pulse', 'fabrik', 'episteme'], 'orden de los pasos');
-  assert.ok(section.includes('href="/forge/"'), 'falta el enlace a /forge/');
+  assert.ok(section.includes('href="/pulse/"'), 'falta el enlace a /pulse/');
+  assert.ok(!section.includes('href="/forge/"'), 'Forge ya no tiene página');
   assert.ok(section.includes('href="/episteme/"'), 'falta el enlace a /episteme/');
 });
 
@@ -221,7 +222,7 @@ test('portada: método en #agentes y sin sección Enfoque', () => {
 });
 
 test('tono por proyecto en su página', () => {
-  for (const slug of ['vigilia', 'vigilia-edge', 'forge', 'episteme']) {
+  for (const slug of ['vigilia', 'vigilia-edge', 'pulse', 'episteme']) {
     const html = read(`${slug}/index.html`);
     assert.match(
       html,
@@ -234,15 +235,15 @@ test('tono por proyecto en su página', () => {
     assert.ok(!tag.includes('--tone-'), `${file}: no debe fijar un tono`);
   }
   const css = builtCss();
-  for (const slug of ['forge', 'episteme', 'vigilia', 'vigilia-edge']) {
+  for (const slug of ['pulse', 'episteme', 'vigilia', 'vigilia-edge']) {
     assert.match(css, new RegExp(`--tone-${slug}:\\s*#`), `falta --tone-${slug}`);
   }
 });
 
 test('página de proyecto: enlaza al proyecto siguiente', () => {
   const pares = [
-    ['episteme', 'forge'],
-    ['forge', 'vigilia'],
+    ['episteme', 'pulse'],
+    ['pulse', 'vigilia'],
     ['vigilia', 'vigilia-edge'],
     ['vigilia-edge', 'episteme'],
   ];
@@ -312,7 +313,7 @@ test('enlaces a vitrinas y enlaces internos válidos', () => {
   const showcases = {
     'vigilia/index.html': 'vigilia-reforged-showcase',
     'vigilia-edge/index.html': 'vigilia-edge-showcase',
-    'forge/index.html': 'forge-showcase',
+    'pulse/index.html': 'pulse-showcase',
   };
   for (const [file, repo] of Object.entries(showcases)) {
     assert.ok(read(file).includes(`https://github.com/Bajmein/${repo}`), `${file} no enlaza ${repo}`);
@@ -376,7 +377,7 @@ test('portada: fortalezas y trabajo actual', () => {
 });
 
 test('caja de detección en portada, proyectos y 404', () => {
-  const files = ['index.html', 'vigilia/index.html', 'vigilia-edge/index.html', 'forge/index.html', 'episteme/index.html', '404.html'];
+  const files = ['index.html', 'vigilia/index.html', 'vigilia-edge/index.html', 'pulse/index.html', 'episteme/index.html', '404.html'];
   for (const file of files) {
     assert.ok(read(file).includes('class="bbox'), `${file}: falta la caja de detección`);
   }

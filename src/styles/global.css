@@ -5,7 +5,7 @@
  *   --muted sobre --bg       7,71:1   sobre --surface  7,09:1
  *   --accent sobre --bg      9,30:1   --accent-ink sobre --accent 9,30:1
  * Tonos por proyecto (sobre --bg / sobre --surface):
- *   --tone-forge        #e8a33d  8,67:1 / 7,98:1
+ *   --tone-pulse        #e8a33d  8,67:1 / 7,98:1
  *   --tone-episteme     #b49cf2  7,99:1 / 7,35:1
  *   --tone-vigilia      #5fc896  9,07:1 / 8,35:1
  *   --tone-vigilia-edge #6fb0ee  8,12:1 / 7,47:1
@@ -20,7 +20,7 @@
   --accent: #f0a93b;
   --accent-ink: #0c1220;
   /* Tono por proyecto: en su página reemplaza a --accent (Base.astro, prop tone) */
-  --tone-forge: #e8a33d;
+  --tone-pulse: #e8a33d;
   --tone-episteme: #b49cf2;
   --tone-vigilia: #5fc896;
   --tone-vigilia-edge: #6fb0ee;

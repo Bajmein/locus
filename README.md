@@ -19,8 +19,8 @@ Agentes de IA primero y visión por computador después, en el mismo orden que l
 ### [episteme](https://benjamincriado.dev/episteme/)
 Memoria y documentación persistente para agentes de IA, servida por MCP desde un vault de notas Markdown que el usuario controla. En uso diario desde octubre de 2026; código privado.
 
-### [Forge](https://benjamincriado.dev/forge/)
-Desarrollo guiado por especificaciones (SDD) para agentes de IA: un pipeline de artefactos validados con esquemas YAML que convierte ideas en código verificado. Ciclo cerrado (abril a julio de 2026). Vitrina: [forge-showcase](https://github.com/Bajmein/forge-showcase).
+### [pulse](https://benjamincriado.dev/pulse/)
+Motor en Python que lleva cada cambio de software por ocho fases con compuertas verificables y lo expone a los agentes de IA por MCP (FastMCP, Pydantic v2, arquitectura hexagonal). Ciclo cerrado (mayo a julio de 2026); sucedió a Forge. Vitrina: [pulse-showcase](https://github.com/Bajmein/pulse-showcase).
 
 ### [Vigilia Reforged](https://benjamincriado.dev/vigilia/)
 Segunda generación de Vigilia (2026): monitoreo inteligente con análisis de video en tiempo real, arquitectura híbrida Python-Rust, decodificación NVDEC por hardware, zonas de seguridad configurables y alertas multicanal. Vitrina: [vigilia-reforged-showcase](https://github.com/Bajmein/vigilia-reforged-showcase).

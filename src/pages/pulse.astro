@@ -1,0 +1,98 @@
+---
+import Project from '../layouts/Project.astro';
+import { getProject } from '../data/projects';
+import PulseDiagram from '../components/diagrams/PulseDiagram.astro';
+import Capabilities from '../components/Capabilities.astro';
+
+const capabilities = [
+  {
+    title: 'Compuertas entre fases',
+    text: 'Cada fase exige su artefacto (idea.md, proposal.md, spec.md, design.md, tasks.md) antes de avanzar, y apply exige además que una persona apruebe el diseño.',
+  },
+  {
+    title: 'Contratos tipados',
+    text: 'Cada herramienta recibe un modelo de Pydantic. Su esquema llega al agente como JSON Schema y los errores de validación vuelven para que se corrija.',
+  },
+  {
+    title: 'Revisión automática al cerrar',
+    text: 'Cerrar un cambio corre ruff, bandit, vulture, deptry, pytest y ty; solo si todo pasa sube la versión y hace el commit de release.',
+  },
+  {
+    title: 'Escritura vigilada',
+    text: 'Un hook consulta al motor antes de cada herramienta y bloquea las escrituras fuera de los archivos de la fase actual. Si no hay respuesta, bloquea.',
+  },
+  {
+    title: 'Varios agentes, un motor',
+    text: 'Claude Code, Antigravity, Codex CLI y Serena usan el mismo servidor MCP, distribuido como imagen Docker.',
+  },
+];
+
+const stack = [
+  ['Motor', 'Python 3.14+, Pydantic v2, pydantic-settings'],
+  ['Servidor', 'FastMCP'],
+  ['Persistencia', 'SQLite y sistema de archivos'],
+  ['Calidad', 'pytest, hypothesis, ruff, ty, bandit, vulture, deptry'],
+  ['Distribución', 'Docker, uv, mise'],
+];
+const p = getProject('pulse');
+---
+
+<Project
+  title={p.title}
+  description={p.description}
+  tagline={p.tagline}
+  stack={p.stack}
+  status={p.status}
+  repoUrl={p.repoUrl}
+>
+  <h2>El problema</h2>
+  <p>
+    Un flujo guiado por especificaciones que vive solo en convenciones depende de que el agente las respete. Si
+    se salta una fase o edita antes de tener el diseño aprobado, nada lo detiene.
+  </p>
+
+  <h2>La solución</h2>
+  <p>
+    pulse lleva las reglas del flujo a un motor. Una máquina de estados guarda en qué fase está cada cambio y
+    decide qué puede hacer el agente en ella. El agente pide cada transición por MCP, y el motor la acepta solo
+    si están las pruebas que exige esa fase. El estado y las reglas quedan del lado del motor, no del modelo.
+  </p>
+
+  <h2>Las fases de un cambio</h2>
+  <p>Cada cambio nace de un issue de GitHub y recorre ocho fases:</p>
+  <PulseDiagram />
+  <p>
+    El diseño necesita la aprobación de una persona antes de implementar. Al cerrar, la revisión automática
+    decide si el cambio se publica.
+  </p>
+
+  <h2>Arquitectura</h2>
+  <p>
+    Arquitectura hexagonal con diseño guiado por el dominio. El núcleo usa solo la biblioteca estándar y
+    Pydantic, con entidades inmutables. La aplicación define puertos y la infraestructura los implementa:
+    SQLite para el estado, el sistema de archivos para el historial de cambios, git para el release. FastMCP es
+    solo un adaptador de entrada. La configuración se valida al arrancar: si falta algo, el motor no inicia.
+  </p>
+
+  <h2>Capacidades</h2>
+  <Capabilities items={capabilities} />
+
+  <h2>Stack</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th scope="col">Componente</th><th scope="col">Tecnología</th></tr>
+      </thead>
+      <tbody>
+        {stack.map(([k, v]) => <tr><td>{k}</td><td>{v}</td></tr>)}
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Estado del proyecto</h2>
+  <p>
+    <strong>Ciclo cerrado — v0.13.6.</strong> pulse sucedió a Forge: el pipeline de convenciones pasó a ser un
+    motor que las hace cumplir. La versión final tiene 244 tests en verde, incluidos tests basados en
+    propiedades del dominio. Su disciplina continúa en fabrik, la herramienta que uso hoy.
+  </p>
+</Project>

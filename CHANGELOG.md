@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Página de pulse (`/pulse/`), el motor de estados en Python que sucedió a Forge, con diagrama de sus ocho fases, ícono y tono propios, y enlace a su vitrina `pulse-showcase`.
 - Test de privacidad que impide publicar procesos internos de la empresa.
 - Portada: secciones «Qué hago» (tres fortalezas) y «A cargo del área de TI» (el trabajo actual, sin nombrar la empresa), con su test.
 - Caja de detección en el título de cada página de proyecto (con la clase de su grupo y un rótulo encima) y, sin detección, en la 404.
@@ -20,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- pulse reemplaza a Forge en las tarjetas de la portada y en el CV; Forge queda en la línea de tiempo de `#agentes`, sin página propia. El período de pulse se corrige a mayo — julio de 2026.
 - El trabajo actual se describe en términos generales, sin procesos internos ni datos comerciales de la empresa; la consola del hero vuelve al ciclo de un cambio.
 - Perfil general de Encargado de TI en el hero, la metadescripción, el JSON-LD (`knowsAbout`) y el CV, con Python como lenguaje principal.
 - `#agentes` pasa a rotularse «Especialidad» y sale del menú, que ahora dice «Qué hago»; los proyectos se presentan como personales.
@@ -37,6 +39,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Páginas de proyecto: la ficha lateral muestra el período en vez de repetir el stack.
 - Contacto sin los enlaces a GitHub y LinkedIn, que ya están en el pie.
 - README: proyectos con enlace a su página y a su vitrina, descripciones alineadas con el sitio, validación y CI/CD al día.
+
+### Removed
+
+- Página `/forge/` y su diagrama; Forge sigue en la línea de tiempo de `#agentes` y en la página de Vigilia.
 
 ### Fixed
 
