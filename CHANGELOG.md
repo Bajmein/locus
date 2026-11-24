@@ -22,6 +22,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Posicionamiento Python y agentes de IA en el hero, el título de la portada, la metadescripción, el JSON-LD (`knowsAbout`) y la imagen social, para dos audiencias: equipos que contratan y empresas con un proyecto. El hero suma la disponibilidad (trabajo remoto, inglés avanzado, autorización de trabajo en la UE) y la cifra del trabajo con agentes.
+- «Qué hago» (`#areas`) pasa a «En qué puedo aportar»: agentes de IA con método, software en Python y automatización e integraciones, cada una con su evidencia enlazada. El menú sigue el orden de la página.
+- Tarjetas de proyecto con una prueba breve y verificable; textos de las tarjetas centrados en lo que logra cada proyecto.
+- `#agentes` se titula «Cómo trabajo con agentes de IA».
+- Vigilia Edge cuenta su ingeniería (el problema del GIL y del hilo de Qt, las cuatro capas y el resultado de menos de dos cuadros de latencia) y pasa a v1.1.0; Vigilia suma sus decisiones técnicas y deja las frases sin respaldo. Ambas con datos de sus vitrinas.
+- episteme suma el estado del proyecto con sus cifras; el pie de las páginas de proyecto invita a escribir por un proyecto parecido.
+- Contacto con un texto para cada audiencia; la trayectoria fecha el cargo actual desde octubre de 2026.
+- CV con el perfil nuevo, los proyectos en el orden de la portada y la certificación PCEP; PDF regenerado.
 - «Ahora» pone a episteme como el foco del tiempo libre y deja a fabrik como la herramienta en uso; sale la tercera versión de Vigilia.
 - pulse reemplaza a Forge en las tarjetas de la portada y en el CV; Forge queda en la línea de tiempo de `#agentes`, sin página propia. El período de pulse se corrige a mayo — julio de 2026.
 - El trabajo actual se describe en términos generales, sin procesos internos ni datos comerciales de la empresa; la consola del hero vuelve al ciclo de un cambio.
@@ -44,6 +52,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+- Sección «A cargo del área de TI» (`#ti`) de la portada: sus funciones pasan a la trayectoria.
+- La práctica profesional sale de la portada; sigue en el CV.
 - Página `/forge/` y su diagrama; Forge sigue en la línea de tiempo de `#agentes` y en la página de Vigilia.
 
 ### Fixed

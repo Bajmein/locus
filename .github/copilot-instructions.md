@@ -22,12 +22,12 @@ npm run preview    # sirve dist/
 - Imágenes en `src/assets/images/<proyecto>/`, con `<Image>` de `astro:assets` (WebP en varios anchos, `widths` y `sizes`) y texto alternativo; hoy solo el grafo del vault en `episteme.astro` (figura `.graph.glass` con `figcaption`).
 - `src/styles/global.css`: tokens de diseño (`--bg`, `--accent`, …) y estilos base, incluida la impresión del CV.
 - `src/data/site.ts`: nombre, correo, enlaces sociales y metadescripciones del sitio y del CV.
-- `src/data/projects.ts`: datos de los proyectos (metadescripción, ficha, tarjeta de la portada, `group` y `period`; agentes primero); lo usan las páginas de proyecto, la portada y `llms.txt`.
-- Portada (`src/pages/index.astro`), en orden: hero (consola «Ciclo de un cambio»), «Ahora», «Qué hago» (`#areas`, lista `.method`), «A cargo del área de TI» (`#ti`, `Capabilities`), «Proyectos», «Especialidad» (`#agentes`), trayectoria y tecnologías, contacto. La navegación dice «Qué hago» para `/#areas`; `#agentes` no va en el menú.
+- `src/data/projects.ts`: datos de los proyectos (metadescripción, ficha, tarjeta de la portada con su prueba `card.proof`, `group` y `period`; agentes primero); lo usan las páginas de proyecto, la portada y `llms.txt`.
+- Portada (`src/pages/index.astro`), en orden: hero (disponibilidad en `.facts`, cifra del trabajo con agentes en `.proof` y consola «Ciclo de un cambio»), «Ahora», «En qué puedo aportar» (`#areas`, lista `.method` con `.evidence`), «Proyectos» (cada tarjeta con su prueba), «Cómo trabajo con agentes de IA» (`#agentes`), trayectoria y tecnologías, contacto para dos audiencias (equipos que contratan y empresas con un proyecto). La navegación dice «Qué hago» para `/#areas`; `#agentes` no va en el menú.
 - `src/pages/llms.txt.ts`: genera `/llms.txt` en el build a partir de esos datos.
 - `public/`: archivos servidos tal cual (`CNAME`, `robots.txt`, `og.png`, PDF del CV).
 - `DESIGN.md`: dirección visual y tokens.
-- `tests/site.test.mjs`: páginas, SEO (metadescripción de 50 a 160 caracteres, canonical, `noindex` de la 404, precarga de fuente), JSON-LD, sitemap, `llms.txt`, imagen social, piso de 12 px en la tipografía, privacidad (datos vetados y procesos internos de la empresa), enlaces internos y portada (antetítulos de cada sección; `#areas` con tres áreas, `#ti` con cuatro funciones, en ese orden antes de `#proyectos`, y la cabecera con `/#areas`).
+- `tests/site.test.mjs`: páginas, SEO (metadescripción de 50 a 160 caracteres, canonical, `noindex` de la 404, precarga de fuente), JSON-LD, sitemap, `llms.txt`, imagen social, piso de 12 px en la tipografía, privacidad (datos vetados y procesos internos de la empresa), enlaces internos y portada (antetítulos de cada sección; `#areas` con tres áreas, cada una con su evidencia, antes de `#proyectos`, sin sección `#ti`; tarjetas con su prueba; la cabecera con `/#areas`).
 - `tools/og.html`: fuente de `public/og.png` (no se despliega).
 
 ## Diseño

@@ -85,8 +85,12 @@ Escala: 13 · 14 · 15,5 · 17 · 20–24 (lead) · 28–44 (tarjetas) · 32–5
   salirse del gutter. Variante `.is-miss` (404, «sin detección»): contorno discontinuo y todo en
   `--muted`.
 - **Consola** (`.console`): panel con el ciclo de un cambio; verbo en ámbar, estado en verde.
-- **Qué hago** (`#areas`): tres fortalezas en la lista `.method` (tres columnas con líneas de 1 px, `h3`).
-- **Trabajo actual** (`#ti`): funciones del cargo con `Capabilities` (`dl.caps`, dos columnas).
+- **Qué hago** (`#areas`): tres áreas en la lista `.method` (tres columnas con líneas de 1 px, `h3`); cada
+  una cierra con `.evidence`: rótulo «Evidencia» y enlaces en el acento, a 13 px.
+- **Pruebas** (`.proof`, mono a 13 px): en el hero, bajo los botones, la cifra del trabajo con agentes
+  (atenuada, con las cifras en `--text`); en cada tarjeta de proyecto, una línea en el tono del
+  proyecto. En el hero, `.facts` lista la disponibilidad en mono atenuado, separada por puntos medios
+  (en móvil, solo con espacio).
 - **Tarjeta de proyecto**: superficie sólida (no glass: la marca de agua necesita un fondo parejo),
   tono del proyecto, ícono, marca de agua del ícono en la esquina (12rem, 15rem en agentes; 6 %, 14 %
   al pasar el cursor) con el texto fuera de ella, filo superior que crece, elevación de 3 px y «Ver
