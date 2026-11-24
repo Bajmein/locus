@@ -47,6 +47,12 @@ La dirección completa (tokens, tipografía, componentes y movimiento) está en 
 - El cargo actual se describe como «Encargado de TI en un grupo de empresas», sin nombrar la empresa ni a personas.
 - No publicar el teléfono. No escribir «estudiante», «egresado» ni «junior».
 - No inventar cifras, clientes ni fechas.
+- Registro profesional y tuteo («Escríbeme», «Si buscas»): sin giros coloquiales («por mi cuenta», «pongo a
+  trabajar»), anglicismos con equivalente («corre» por «se ejecuta», «Email», «hosting», «APIs») ni adjetivos sin
+  respaldo («inteligente», «de alto rendimiento», «proactivo»).
+- «Ingeniero informático» con minúscula salvo al inicio. Rangos de fecha con semirraya y «actualidad»
+  («oct. 2026 – actualidad», «2021–2025»). El proyecto de título, Vigilia Reforged, es de 2025.
 - No describir procesos internos de la empresa (tickets, gerencia, aprobaciones, clientes ni prospectos): el cargo se cuenta en términos generales.
 - El CV en PDF (`public/assets/pdf/cv_benjamin_criado.pdf`) se genera desde `/cv/` con Chrome headless
-  (`--print-to-pdf`); debe caber en dos páginas.
+  (`--print-to-pdf`); debe caber en dos páginas. En impresión, una sección con varias entradas puede seguir en la
+  página siguiente, pero ninguna entrada se parte.

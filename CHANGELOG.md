@@ -22,6 +22,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Redacción de todo el sitio en registro profesional, con tuteo: sin giros coloquiales, anglicismos evitables ni frases de folleto; «ingeniero informático» en minúscula, rangos de fecha con semirraya y «actualidad», y las capacidades de episteme nombradas como sustantivos.
+- Vigilia Reforged, el proyecto de título, se fecha en 2025.
+- CV alineado con la portada: el perfil nombra las cuatro herramientas, cada proyecto lleva su período, suma Vigilia Edge, el stack separa visión por computador y la formación cita el proyecto de título. Las secciones con varias entradas pueden seguir en la página siguiente para que el PDF quede en dos páginas.
 - Posicionamiento Python y agentes de IA en el hero, el título de la portada, la metadescripción, el JSON-LD (`knowsAbout`) y la imagen social, para dos audiencias: equipos que contratan y empresas con un proyecto. El hero suma la disponibilidad (trabajo remoto, inglés avanzado, autorización de trabajo en la UE) y la cifra del trabajo con agentes.
 - «Qué hago» (`#areas`) pasa a «En qué puedo aportar»: agentes de IA con método, software en Python y automatización e integraciones, cada una con su evidencia enlazada. El menú sigue el orden de la página.
 - Tarjetas de proyecto con una prueba breve y verificable; textos de las tarjetas centrados en lo que logra cada proyecto.
