@@ -1,10 +1,14 @@
 # Locus | Portafolio de Ingeniería
 
-**Benjamín Criado (Bajmein)** — Ingeniero Informático. Agentes de IA y automatización.
+**Benjamín Criado (Bajmein)** — Ingeniero Informático y Encargado de TI. Desarrollo de software, nube, automatización e IA aplicada.
 
-Código fuente de [benjamincriado.dev](https://benjamincriado.dev): trabajo con agentes, proyectos, experiencia y currículum.
+Código fuente de [benjamincriado.dev](https://benjamincriado.dev): qué hago, trabajo actual, proyectos, especialidad en agentes de IA, experiencia y currículum.
 
-## Trabajo con agentes
+## Qué hago y trabajo actual
+
+La portada parte por tres fortalezas («Qué hago»: desarrollo de software en Python, nube y automatización, e IA aplicada) y por el trabajo actual («A cargo del área de TI» de un grupo de empresas: sitios web, datos e integraciones, IA y automatización, y gestión del área), sin nombrar la empresa.
+
+## Especialidad: trabajo con agentes
 
 Desde abril de 2026 construyo las herramientas con que trabajo con agentes de código: Forge, pulse, fabrik y episteme. Cada una resolvió lo que la anterior dejaba abierto, del pipeline guiado por especificaciones a la memoria persistente. Las cuatro y el método están en [benjamincriado.dev/#agentes](https://benjamincriado.dev/#agentes).
 

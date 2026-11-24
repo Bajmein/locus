@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Portada: secciones «Qué hago» (tres fortalezas) y «A cargo del área de TI» (el trabajo actual, sin nombrar la empresa), con su test.
 - Caja de detección en el título de cada página de proyecto (con la clase de su grupo y un rótulo encima) y, sin detección, en la 404.
 - Contacto: «Conversemos» cierra con el cursor del logo y entra con un barrido ligado al scroll.
 - Tests de los antetítulos de la portada y de la caja de detección en portada, proyectos y 404.
@@ -18,9 +19,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Perfil general de Encargado de TI en el hero, la metadescripción, el JSON-LD (`knowsAbout`) y el CV, con Python como lenguaje principal.
+- La consola del hero muestra el ciclo de un requerimiento del área de TI.
+- `#agentes` pasa a rotularse «Especialidad» y sale del menú, que ahora dice «Qué hago»; los proyectos se presentan como personales.
+- Tecnologías de la portada y del CV reagrupadas (Python, otros lenguajes, web, nube, datos, integraciones, IA aplicada y visión).
+- PDF del CV regenerado; viñetas de proyectos más cortas para que siga en dos páginas.
 - Rediseño «Vigilia nocturna» (azul noche, titular ancho en Archivo, caja de detección sobre el nombre, consola del ciclo de un cambio y tarjetas en mosaico con marca de agua), integrado con la voz técnica del diseño anterior.
 - Tipografía: Archivo solo en display y títulos; vuelve Geist para el texto y la interfaz; rótulos en Geist Mono y en mayúsculas.
-- Títulos de sección con antetítulo y una barra del acento que crece al entrar en pantalla; el de `#agentes` vuelve a «De la especificación a la memoria» y la navegación dice «Agentes».
+- Títulos de sección con antetítulo y una barra del acento que crece al entrar en pantalla; el de `#agentes` vuelve a «De la especificación a la memoria».
 - Paneles glass translúcidos (consola, «Ahora», ficha de proyecto, diagramas, 404) con respaldo sólido, cabecera glass al 85 % y grilla fina en el hero.
 - Tarjetas que aparecen al hacer scroll, se elevan al pasar el cursor y muestran «Ver proyecto →» con la flecha que avanza; marca de agua más chica y tenue.
 - Páginas de proyecto: `h2` del cuerpo en el tipo de los titulares, con la barra del tono.

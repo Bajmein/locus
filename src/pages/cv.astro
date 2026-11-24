@@ -12,7 +12,7 @@ const projects = [
     items: [
       'Procesamiento de video cuadro a cuadro en Rust con decodificación por hardware (NVDEC), para tiempos de respuesta críticos en hardware local.',
       'Arquitectura de monitoreo autónomo sin dependencia de la nube: zonas de seguridad configurables, alertas multicanal e integración con sistemas VMS.',
-      'Capa de comunicación por memoria compartida entre el núcleo en Rust y la orquestación en Python.',
+      'Memoria compartida entre el núcleo en Rust y Python.',
     ],
   },
   {
@@ -22,7 +22,7 @@ const projects = [
     items: [
       'Pipeline con estados estrictos (propuesta, especificación, diseño, tareas, implementación, verificación y archivo) y artefactos validados contra esquemas YAML.',
       'Agnóstico al agente: compatible con Claude Code, Gemini CLI y GitHub Copilot.',
-      'Validaciones locales deterministas (Ruff, Pytest) y revisión humana antes de cada cambio.',
+      'Validaciones locales (Ruff, pytest) y revisión humana.',
     ],
   },
   {
@@ -32,16 +32,18 @@ const projects = [
     items: [
       'Servidor MCP local que guarda decisiones, lecciones y documentación de proyectos en un vault Markdown compatible con Obsidian.',
       'Búsqueda de texto completo en español con SQLite FTS5 y avisos de normas antes de editar cada archivo.',
-      'Mantención automática: detecta duplicados, memorias vencidas y enlaces rotos; rechaza guardar credenciales.',
+      'Detecta duplicados y enlaces rotos; rechaza credenciales.',
     ],
   },
 ];
 
 const stack = [
-  ['Lenguajes', 'Python (Pydantic v2, Typer, Hydra), Rust (sistemas de tiempo real), SQL (PostgreSQL), JavaScript.'],
-  ['IA y orquestación', 'Agentes de IA, Model Context Protocol (MCP), ingeniería de contexto, gestión de artefactos y estados de pipeline.'],
+  ['Python', 'Lenguaje principal: Pydantic v2, FastAPI, Typer, Hydra, PySide6, OpenCV; pytest, Ruff y uv.'],
+  ['Otros lenguajes', 'Rust (sistemas de tiempo real), JavaScript y TypeScript, SQL (PostgreSQL).'],
+  ['Web e integraciones', 'WordPress y su REST API, Astro, HTML y CSS; WhatsApp Business API, CRM y webhooks.'],
+  ['Nube e infraestructura', 'AWS, Azure, Linux (Fedora), Docker, CI/CD (GitHub Actions), Edge AI.'],
+  ['IA aplicada', 'Agentes de IA, Model Context Protocol (MCP), ingeniería de contexto, visión por computador (YOLO, TensorRT).'],
   ['Arquitectura y calidad', 'Spec-Driven Development (SDD), Test-Driven Development (TDD), arquitectura hexagonal, Domain-Driven Design (DDD).'],
-  ['Infraestructura', 'Linux (Fedora), Docker, CI/CD (GitHub Actions), Edge AI, AWS, Azure.'],
 ];
 ---
 
@@ -51,7 +53,7 @@ const stack = [
       <div>
         <p class="label">Currículum</p>
         <h1>{site.fullName}</h1>
-        <p class="role">Ingeniero Informático · Desarrollo de software y automatización con IA</p>
+        <p class="role">Ingeniero Informático · Encargado de TI</p>
         <ul class="contact">
           <li>{site.location}</li>
           <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
@@ -66,10 +68,11 @@ const stack = [
       <h2 class="label">Perfil</h2>
       <div>
         <p>
-          Ingeniero Informático enfocado en desarrollo de software y automatización con IA. Trabajo con la
-          herramienta adecuada para cada problema: Rust para latencia crítica y Python para orquestación.
-          Diseño flujos de trabajo con agentes de IA apoyados en especificaciones formales. Tres años de
-          residencia y trabajo en el extranjero respaldan mi autonomía y un inglés avanzado.
+          Ingeniero Informático a cargo del área de TI de un grupo de empresas. Desarrollo software, automatizo
+          procesos e integro IA: sitios y aplicaciones web, integraciones por API, nube y agentes de IA. Python es
+          mi lenguaje principal y conozco a fondo su ecosistema. Elijo la tecnología por el problema, de Rust para
+          latencia crítica a Python para orquestar. Tres años de residencia y trabajo en el extranjero respaldan mi
+          autonomía y un inglés avanzado.
         </p>
       </div>
     </section>
@@ -84,10 +87,16 @@ const stack = [
           </div>
           <p>Responsable del área de tecnología, con dependencia de gerencia general.</p>
           <ul>
-            <li>Desarrollo y mantención de los sitios web corporativos.</li>
-            <li>Integraciones entre sistemas y automatización de procesos.</li>
-            <li>Diseño e implementación de agentes de IA.</li>
-            <li>Gestión de requerimientos, proveedores y reportes de avance.</li>
+            <li>
+              Desarrollo y mantención de los sitios web corporativos: dominios, hosting, certificados, rendimiento y
+              seguridad.
+            </li>
+            <li>Bases de datos e integraciones por API entre sitios, formularios, CRM y WhatsApp Business.</li>
+            <li>Agentes de IA y automatización de las comunicaciones y del seguimiento de prospectos.</li>
+            <li>
+              Gestión del área: solicitudes por tickets, prioridades con gerencia, reportes, proveedores, costos,
+              accesos y soporte.
+            </li>
           </ul>
         </div>
         <div class="entry">
