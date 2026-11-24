@@ -86,7 +86,8 @@ Escala: 13 · 14 · 15,5 · 17 · 20–24 (lead) · 28–44 (tarjetas) · 32–5
   en cada proyecto muestra una firma técnica propia (`mcp · memoria local`, `fsm · 8 fases`,
   `gpu · tiempo real`, `edge · < 80 ms`). Variante `.is-miss` (404, «sin detección»): contorno
   discontinuo y todo en `--muted`.
-- **Consola** (`.console`): panel con el ciclo de un cambio numerado `01`–`06`; verbo en ámbar, estado
+- **Consola** (`.console`): panel con el ciclo de un cambio numerado `01`–`06`, alineado arriba con el
+  antetítulo y el nombre (`align-items: start` en el hero); verbo en ámbar, estado
   en verde; en móvil, verbo, texto y estado van en la misma fila (el texto puede partirse). El punto
   activo lleva un halo del acento (excepción aprobada: es la única sombra difusa de un componente).
 - **Qué hago** (`#areas`): tres tarjetas `.glass` (`.areas-grid`) con ícono lineal Phosphor, índice
@@ -108,8 +109,11 @@ Escala: 13 · 14 · 15,5 · 17 · 20–24 (lead) · 28–44 (tarjetas) · 32–5
   `Equipos y contratación` con acceso al CV web y descarga en PDF).
 - **Riel** del trabajo con agentes: subgrid para alinear período, nombre, texto, cifras y el estado de
   cada paso (`Ciclo cerrado` / `En uso diario`) en escritorio;
-  en móvil, una columna sin subgrid. El relleno (horizontal o vertical) y la ficha avanzan con el
-  scroll.
+  en móvil, una columna sin subgrid. En escritorio, el relleno y la ficha recorren el riel una vez, en
+  2,8 s, cuando entra en pantalla (`.is-armed` / `.is-in`, puestas por un script): ligados al scroll iban
+  demasiado rápido, porque una línea de 1 px solo se ve unos 800 px. En móvil, el relleno vertical baja con
+  el scroll a la altura del centro de la pantalla (`cover 22% cover 78%`), sin ficha. Sin JS o con
+  movimiento reducido, el riel se ve lleno.
 
 ## Movimiento
 
@@ -119,7 +123,8 @@ Escala: 13 · 14 · 15,5 · 17 · 20–24 (lead) · 28–44 (tarjetas) · 32–5
 | Caja de detección en proyectos y 404 | Carga (una vez) | 0,3–1,05 s |
 | Aparición de tarjetas, pasos del riel y principios | Scroll (`animation-timeline: view()`) | Ligado al scroll |
 | Barra bajo el título | Scroll | Ligado al scroll |
-| Riel y ficha (relleno vertical en móvil, sin ficha) | Scroll | Ligado al scroll |
+| Riel y ficha en escritorio | Entrada en pantalla (una vez) | 2,8 s |
+| Relleno vertical del riel en móvil (sin ficha) | Scroll | Ligado al scroll |
 | Cierre de «Conversemos» (barrido) | Scroll | Ligado al scroll |
 | Filo, elevación, marca de agua, flecha e ícono de la tarjeta | Cursor o foco | 0,2–0,45 s |
 | Punto «Ahora» | Bucle | 2,4 s |
