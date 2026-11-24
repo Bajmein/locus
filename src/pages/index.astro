@@ -151,7 +151,7 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
       </div>
     </div>
 
-    <figure class="console" aria-labelledby="ciclo">
+    <figure class="console glass" aria-labelledby="ciclo">
       <figcaption id="ciclo">
         <span>Ciclo de un cambio</span>
         <span class="mono muted">fabrik + episteme</span>
@@ -171,18 +171,20 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
     </figure>
   </section>
 
-  <section class="container now-strip" aria-labelledby="ahora">
-    <h2 id="ahora" class="label"><span class="pulse" aria-hidden="true"></span>Ahora</h2>
-    <dl class="now">
-      {
-        now.map((item) => (
-          <div class="now-row">
-            <dt class="label">{item.label}</dt>
-            <dd>{item.text}</dd>
-          </div>
-        ))
-      }
-    </dl>
+  <section class="container now-wrap" aria-labelledby="ahora">
+    <div class="glass now-strip">
+      <h2 id="ahora" class="label"><span class="pulse" aria-hidden="true"></span>Ahora</h2>
+      <dl class="now">
+        {
+          now.map((item) => (
+            <div class="now-row">
+              <dt class="label">{item.label}</dt>
+              <dd>{item.text}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
   </section>
 
   <section class="container section" id="proyectos" aria-labelledby="proyectos-title">
@@ -335,6 +337,7 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
   /* ---------- Hero: el nombre como objeto detectado ---------- */
   .hero {
     position: relative;
+    isolation: isolate;
     display: grid;
     grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.95fr);
     gap: clamp(2rem, 5vw, 5rem);
@@ -354,6 +357,21 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
     box-shadow: 0 0 18px 2px color-mix(in srgb, var(--accent) 45%, transparent);
     opacity: 0;
     pointer-events: none;
+  }
+
+  /* Grilla fina de sensor, solo en el hero y desvanecida hacia la lámpara */
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image:
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 56px 56px;
+    -webkit-mask-image: radial-gradient(ellipse 80% 70% at 75% 20%, #000, transparent 75%);
+    mask-image: radial-gradient(ellipse 80% 70% at 75% 20%, #000, transparent 75%);
   }
 
   .eyebrow {
@@ -452,9 +470,6 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
   .console {
     margin: 0;
     padding: 1.5rem 1.75rem 1.75rem;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
   }
 
   .console figcaption {
@@ -651,12 +666,16 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
   }
 
   /* ---------- Ahora ---------- */
+  .now-wrap {
+    padding-block: 0.5rem 4rem;
+  }
+
   .now-strip {
     display: grid;
     grid-template-columns: 8rem minmax(0, 1fr);
     align-items: start;
     gap: 2rem;
-    padding-block: 1.75rem 4rem;
+    padding: 1.5rem 1.75rem;
   }
 
   .now-strip h2 {

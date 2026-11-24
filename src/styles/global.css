@@ -34,7 +34,7 @@
   --radius: 6px;
   --gutter: clamp(1rem, 4vw, 2rem);
   --radius-lg: 10px;
-  --glass-bg: color-mix(in srgb, var(--surface) 62%, transparent);
+  --glass-bg: color-mix(in srgb, var(--surface) 78%, transparent);
   --glass-border: color-mix(in srgb, var(--text) 9%, transparent);
   --glass-hi: color-mix(in srgb, var(--text) 7%, transparent);
   --glass-blur: 16px;
@@ -372,12 +372,28 @@ td:first-child {
 
 /* ---------- Glass ---------- */
 
-/* Panel: superficie sólida con borde de 1 px (sin desenfoque: el texto siempre se lee) */
+/* Panel translúcido: superficie al 78 % y desenfoque; sólido sin backdrop-filter o con transparencia reducida */
 .glass {
-  background: var(--surface);
-  border: 1px solid var(--border);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
   border-radius: var(--radius-lg);
   box-shadow: inset 0 1px 0 var(--glass-hi);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(140%);
+  backdrop-filter: blur(var(--glass-blur)) saturate(140%);
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass {
+    background: var(--surface);
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .glass {
+    background: var(--surface);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
 }
 
 /* Foco de luz que sigue al cursor (variables --mx/--my desde Base.astro) */
