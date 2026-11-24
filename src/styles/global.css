@@ -24,10 +24,13 @@
   --tone-episteme: #b49cf2;
   --tone-vigilia: #5fc896;
   --tone-vigilia-edge: #6fb0ee;
-  --font-sans: 'Archivo Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
+  /* Titulares: Archivo ancha (112–118 %); el texto y la interfaz van en Geist */
+  --font-display: 'Archivo Variable', 'Geist Variable', ui-sans-serif, sans-serif;
   --font-mono: 'Geist Mono Variable', ui-monospace, monospace;
   --w-page: 1200px;
-  --w-prose: 68ch;
+  /* En rem, no en ch: la columna no depende de la fuente y los diagramas caben en su composición ancha */
+  --w-prose: 46rem;
   --radius: 6px;
   --gutter: clamp(1rem, 4vw, 2rem);
   --radius-lg: 10px;
@@ -115,6 +118,11 @@ h4 {
   line-height: 1.2;
   font-weight: 600;
   letter-spacing: -0.015em;
+}
+
+h1,
+h2 {
+  font-family: var(--font-display);
 }
 
 h1 {
@@ -251,6 +259,7 @@ hr {
 
 .section-head h2 {
   margin: 0;
+  font-family: var(--font-display);
   font-size: clamp(2rem, 4.2vw, 3.25rem);
   font-stretch: 118%;
   font-weight: 700;
