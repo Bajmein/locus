@@ -42,6 +42,7 @@ export const trail: TrailStep[] = [
     commits: 270,
     prs: 50,
     href: '/pulse/',
+    note: 'Ciclo cerrado',
   },
   {
     name: 'fabrik',
@@ -59,6 +60,7 @@ export const trail: TrailStep[] = [
     commits: 390,
     prs: epistemePrs.before + epistemePrs.public,
     href: '/episteme/',
+    note: 'En uso diario',
   },
 ];
 

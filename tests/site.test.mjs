@@ -410,5 +410,17 @@ test('caja de detección en portada, proyectos y 404', () => {
     assert.ok(!html.includes('>agentes de IA<') && !html.includes('>visión por computador<'), `/${slug}/: bbox repite el grupo`);
   }
   assert.ok(read('episteme/index.html').includes('role="tablist"'), 'episteme: faltan las pestañas del grafo');
+  const episteme = read('episteme/index.html');
+  const start = episteme.indexOf('data-graph-viewer');
+  const viewer = episteme.slice(start, episteme.indexOf('<h2', start));
+  const count = (re) => (viewer.match(re) ?? []).length;
+  assert.ok(count(/<figcaption\b/g) > 0, 'episteme: el visor del grafo no tiene figcaption');
+  assert.equal(count(/<figcaption\b/g), count(/<figure\b/g), 'episteme: cada figcaption del visor va en su propia figure');
+  const toggle = viewer.match(/<button[^>]*data-video-toggle[^>]*>/)?.[0] ?? '';
+  assert.ok(toggle, 'episteme: falta el botón de pausa del visor');
+  assert.ok(!toggle.includes('aria-label'), 'episteme: el botón de pausa se nombra con su texto visible, sin aria-label');
+  const home = read('index.html');
+  const agentes = home.slice(home.indexOf('id="agentes"'), home.indexOf('id="experiencia"'));
+  assert.equal((agentes.match(/class="label nopage"/g) ?? []).length, 4, '#agentes: cada paso lleva su estado');
   assert.ok(!read('index.html').includes('Tests, lint'), 'consola del hero: usar «Pruebas» en vez de «Tests»');
 });
