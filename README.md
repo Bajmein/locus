@@ -10,23 +10,26 @@ Desde abril de 2026 construyo las herramientas con que trabajo con agentes de c�
 
 ## Proyectos
 
-### episteme
-Memoria y documentación persistente para agentes de IA, servida por MCP desde un vault de notas Markdown compatible con Obsidian.
+Agentes de IA primero y visión por computador después, en el mismo orden que la portada.
 
-### Forge
-Infraestructura de orquestación para el desarrollo guiado por especificaciones (SDD). Proporciona un pipeline estandarizado que garantiza la trazabilidad y calidad del código mediante la validación de artefactos con esquemas YAML.
+### [episteme](https://benjamincriado.dev/episteme/)
+Memoria y documentación persistente para agentes de IA, servida por MCP desde un vault de notas Markdown que el usuario controla. En uso diario desde octubre de 2026; código privado.
 
-### Vigilia Reforged
-Sistema de videovigilancia de alto rendimiento con arquitectura híbrida Python-Rust. Utiliza decodificación NVDEC por hardware y memoria compartida (IPC) para procesamiento de video en tiempo real con latencia mínima.
+### [Forge](https://benjamincriado.dev/forge/)
+Desarrollo guiado por especificaciones (SDD) para agentes de IA: un pipeline de artefactos validados con esquemas YAML que convierte ideas en código verificado. Ciclo cerrado (abril a julio de 2026). Vitrina: [forge-showcase](https://github.com/Bajmein/forge-showcase).
 
-### Vigilia Edge
-Solución de vigilancia inteligente diseñada para entornos locales con latencia predecible. Implementa inferencia en el borde (YOLOv11/v12) y optimización mediante TensorRT para máxima eficiencia sin dependencia de nube.
+### [Vigilia Reforged](https://benjamincriado.dev/vigilia/)
+Segunda generación de Vigilia (2026): monitoreo inteligente con análisis de video en tiempo real, arquitectura híbrida Python-Rust, decodificación NVDEC por hardware, zonas de seguridad configurables y alertas multicanal. Vitrina: [vigilia-reforged-showcase](https://github.com/Bajmein/vigilia-reforged-showcase).
+
+### [Vigilia Edge](https://benjamincriado.dev/vigilia-edge/)
+Primera generación de Vigilia (2025): vigilancia de escritorio con inferencia local (YOLO y TensorRT), núcleo en Rust e interfaz PySide6, sin nube. Vitrina: [vigilia-edge-showcase](https://github.com/Bajmein/vigilia-edge-showcase).
 
 ## Stack
 
 - **Sitio**: Astro (estático), GitHub Pages
 - **Diseño**: tema oscuro «Vigilia nocturna» ([DESIGN.md](DESIGN.md)), Archivo, Geist y Geist Mono, un tono por proyecto, íconos y animaciones en CSS nativo y diagramas SVG en línea, sin librerías en el cliente
-- **Validación**: `astro check` y `node:test` (páginas, SEO, JSON-LD, sitemap, `llms.txt`, imagen social, tipografía, orden y tono de los proyectos, privacidad, enlaces)
+- **Validación**: `astro check` y `node:test` sobre `dist/` (páginas, SEO, JSON-LD, sitemap, `llms.txt`, imagen social, piso de 12 px en la tipografía, diagramas, orden y tono de los proyectos, cabecera, contacto, caja de detección, privacidad y enlaces)
+- **CI/CD**: GitHub Actions valida cada PR a `main` y despliega a GitHub Pages al fusionar; Dependabot semanal para npm y las acciones
 - **Tooling**: Node 24, npm
 
 ## Desarrollo local
@@ -34,8 +37,11 @@ Solución de vigilancia inteligente diseñada para entornos locales con latencia
 ```bash
 npm install
 npm run dev        # http://localhost:4321
+npm run check      # tipos
 npm run build && npm test
 ```
+
+Los cambios se registran en [CHANGELOG.md](CHANGELOG.md).
 
 ## Contacto
 
