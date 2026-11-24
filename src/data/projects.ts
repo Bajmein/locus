@@ -15,6 +15,12 @@ export interface Project {
   sourceUrl?: string;
   /** Grupo de la portada: agentes de IA o visión por computador */
   group: 'agentes' | 'vision';
+  /** Etiqueta técnica de la caja de detección en la cabecera de su página */
+  detected: string;
+  /** Insignia destacada opcional en la tarjeta de la portada */
+  badge?: string;
+  /** Indicadores verificables para la banda superior de su página */
+  metrics: { value: string; label: string }[];
   /** Período de trabajo, para la tarjeta */
   period: string;
   /** Tarjeta de la portada; context aclara la línea de tiempo cuando hace falta (Vigilia) */
@@ -39,9 +45,16 @@ export const projects: Project[] = [
     stack: ['Python', 'MCP', 'SQLite FTS5', 'Markdown'],
     sourceUrl: 'https://github.com/Bajmein/episteme',
     group: 'agentes',
+    detected: 'mcp · memoria local',
+    badge: 'MIT · Código abierto',
+    metrics: [
+      { value: `${getStep('episteme').commits} commits`, label: 'Desarrollo activo desde oct. 2026' },
+      { value: `${getStep('episteme').prs} PR`, label: 'Fusionados en la historia del proyecto' },
+      { value: 'SQLite FTS5', label: 'Búsqueda local sin tildes ni nube' },
+    ],
     period: 'Octubre de 2026 – actualidad',
     card: {
-      text: 'Los agentes de código recuerdan decisiones y lecciones entre sesiones, en notas Markdown del usuario.',
+      text: 'Memoria persistente y búsqueda de texto completo por MCP para que los agentes conserven decisiones, normas y contexto entre sesiones.',
       stack: ['Python', 'MCP', 'SQLite FTS5'],
       proof: `Código abierto · en uso diario · ${getStep('episteme').commits} commits`,
     },
@@ -56,6 +69,12 @@ export const projects: Project[] = [
     stack: ['Python', 'FastMCP', 'Pydantic', 'SQLite', 'Docker'],
     repoUrl: 'https://github.com/Bajmein/pulse-showcase',
     group: 'agentes',
+    detected: 'fsm · 8 fases',
+    metrics: [
+      { value: '8 fases', label: 'Compuertas declarativas por cambio' },
+      { value: '244 pruebas', label: 'Incluidas propiedades del dominio' },
+      { value: '6 chequeos', label: 'Revisión automática antes de cerrar' },
+    ],
     period: 'Mayo – julio de 2026',
     card: {
       text: 'Un motor que no deja al agente saltarse fases: cada cambio avanza solo con su especificación, su diseño aprobado y sus pruebas.',
@@ -73,12 +92,18 @@ export const projects: Project[] = [
     stack: ['Rust', 'Python', 'ONNX Runtime', 'NVDEC', 'PySide6'],
     repoUrl: 'https://github.com/Bajmein/vigilia-reforged-showcase',
     group: 'vision',
+    detected: 'gpu · tiempo real',
+    metrics: [
+      { value: '0 copias CPU', label: 'Decodificación NVDEC y PTX en GPU' },
+      { value: '192 bytes', label: 'Mensajes de ABI fija en Iceoryx2' },
+      { value: 'Tiempo real', label: 'Eventos ONVIF Profile M y WebRTC' },
+    ],
     period: '2025',
     card: {
       text: 'Análisis de video en tiempo real que detecta y responde a incidentes mientras ocurren.',
       stack: ['Rust', 'Python', 'NVDEC'],
       context: 'Segunda generación de Vigilia, 2025',
-      proof: 'Proyecto de título · decodificación por GPU en Rust',
+      proof: 'Proyecto de título · 0 copias en CPU (NVDEC + Iceoryx2)',
     },
   },
   {
@@ -91,6 +116,12 @@ export const projects: Project[] = [
     stack: ['YOLO', 'TensorRT', 'Rust', 'PySide6'],
     repoUrl: 'https://github.com/Bajmein/vigilia-edge-showcase',
     group: 'vision',
+    detected: 'edge · < 80 ms',
+    metrics: [
+      { value: '< 80 ms', label: 'Menos de dos cuadros a 25 fps' },
+      { value: '4 capas', label: 'Procesos aislados fuera del GIL' },
+      { value: '3 trackers', label: 'Seguimiento y zonas en Rust' },
+    ],
     period: '2025',
     card: {
       text: 'Detección y seguimiento de objetos en tiempo real en un PC de escritorio, sin nube.',

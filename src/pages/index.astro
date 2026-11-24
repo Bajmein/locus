@@ -5,28 +5,34 @@ import { projects } from '../data/projects';
 import { trail, totalCommits, totalPrs, figuresDate } from '../data/trail';
 import Icon from '../components/Icon.astro';
 import ProjectIcon from '../components/ProjectIcon.astro';
+import { getImage } from 'astro:assets';
+import grafoPoster from '../assets/images/episteme/grafo-poster.png';
+
+const epistemeThumb = await getImage({ src: grafoPoster, format: 'webp', width: 520 });
 
 const now = [
   {
     label: 'En foco',
-    text: 'Fuera de mi jornada laboral desarrollo episteme: memoria persistente para agentes de IA, servida por MCP, que uso a diario.',
+    text: 'episteme (v0.21, MIT): servidor MCP de memoria y documentación persistente sobre Markdown y SQLite FTS5, en uso diario.',
   },
   {
     label: 'En uso',
-    text: 'fabrik, mi flujo de desarrollo guiado por especificaciones para Claude Code.',
+    text: 'fabrik: orquestación guiada por especificaciones con subagentes acotados y verificación por comandos en Claude Code.',
   },
 ];
 
 const areas = [
   {
+    icon: 'terminal' as const,
     title: 'Agentes de IA con método',
-    text: 'Flujos con agentes de código (Claude Code, Codex CLI) que parten de una especificación, se verifican con comandos y guardan lo aprendido. También integro agentes en los procesos de una empresa.',
+    text: 'Flujos con agentes de código (Claude Code, Codex CLI) que parten de una especificación, se verifican con comandos y conservan decisiones entre sesiones, tanto en ingeniería como en procesos de negocio.',
     evidence: [
       { label: 'pulse', href: '/pulse/' },
       { label: 'episteme', href: '/episteme/' },
     ],
   },
   {
+    icon: 'code' as const,
     title: 'Software en Python',
     text: 'Mi lenguaje principal: servicios, API, CLI y aplicaciones de escritorio con Pydantic, FastAPI, Typer y PySide6, con pruebas en pytest y análisis estático con Ruff. Uso Rust cuando la latencia es crítica.',
     evidence: [
@@ -35,10 +41,12 @@ const areas = [
     ],
   },
   {
+    icon: 'flow' as const,
     title: 'Automatización e integraciones',
     text: 'Automatizo procesos manuales con integraciones por API y webhooks, CI/CD en GitHub Actions y servicios en AWS y Azure sobre Linux y Docker.',
     evidence: [
-      { label: 'Este sitio: pruebas en cada PR y despliegue automático', href: 'https://github.com/Bajmein/locus' },
+      { label: 'Vigilia: eventos ONVIF y MQTT', href: '/vigilia/' },
+      { label: 'Este sitio: CI/CD en cada PR', href: 'https://github.com/Bajmein/locus' },
     ],
   },
 ];
@@ -101,7 +109,7 @@ const cycle = [
   { verb: 'especificar', text: 'Especificación verificable', state: 'ok' },
   { verb: 'planificar', text: 'Fuentes y decisiones cerradas', state: 'ok' },
   { verb: 'implementar', text: 'Subagentes con tareas acotadas', state: 'ok' },
-  { verb: 'verificar', text: 'Tests, lint y tipos en verde', state: 'ok' },
+  { verb: 'verificar', text: 'Pruebas, lint y tipos en verde', state: 'ok' },
   { verb: 'recordar', text: 'Decisión guardada en episteme', state: 'ok' },
   { verb: 'fusionar', text: 'Lo decide una persona', state: 'espera' },
 ];
@@ -121,12 +129,12 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
         </span>
       </div>
       <p class="lead">
-        Desarrollo software en Python e integro agentes de IA con un método verificable: especificación previa,
-        verificación automatizada y memoria entre sesiones.
+        Construyo software en Python y sistemas con agentes de IA pensados para producción: contratos tipados,
+        verificación automatizada y memoria persistente.
       </p>
       <p class="lead-sub">
-        Actualmente soy responsable del área de TI de un grupo de empresas: sitios web, integraciones y automatización.
-        En paralelo, desarrollo mis propias herramientas para trabajar con agentes de código.
+        Lidero el área de TI de un grupo de empresas —plataformas web, integraciones y automatización— y diseño
+        servidores MCP y herramientas abiertas para ingeniería asistida por agentes.
       </p>
       <ul class="facts mono" aria-label="Disponibilidad">
         <li>Trabajo remoto</li>
@@ -137,22 +145,28 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
         <a class="btn btn-primary" href="#proyectos">Ver proyectos</a>
         <a class="btn" href="/cv/">Currículum</a>
       </div>
-      <p class="proof mono">
-        <strong>{totalCommits} commits</strong> y <strong>{totalPrs} PR</strong> fusionados en cuatro herramientas para
-        agentes, desde abril de 2026. <a href="#agentes">Ver el recorrido</a>
-      </p>
+      <div class="proof mono" aria-label="Métricas de herramientas para agentes">
+        <span class="proof-stats">
+          <span><strong>{totalCommits}</strong> commits</span>
+          <span class="sep" aria-hidden="true">·</span>
+          <span><strong>{totalPrs}</strong> PR fusionados</span>
+        </span>
+        <span class="proof-note">
+          en cuatro herramientas propias desde abr. 2026 — <a href="#agentes">Ver el recorrido →</a>
+        </span>
+      </div>
     </div>
 
     <figure class="console glass" aria-labelledby="ciclo">
       <figcaption id="ciclo">
-        <span>Ciclo de un cambio</span>
+        <span class="console-head"><span class="console-dot" aria-hidden="true"></span>Ciclo de un cambio</span>
         <span class="mono muted">fabrik + episteme</span>
       </figcaption>
       <ol class="log mono">
         {
           cycle.map((c, i) => (
             <li class={`is-${c.state}`} style={`--i: ${i}`}>
-              <span class="verb">{c.verb}</span>
+              <span class="verb"><span class="idx">0{i + 1}</span>{c.verb}</span>
               <span class="what">{c.text}</span>
               <span class="state">{c.state}</span>
             </li>
@@ -186,24 +200,30 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
         <h2 id="areas-title">En qué puedo aportar</h2>
       </div>
       <p class="muted">
-        Tres áreas en las que puedo aportar a un equipo o a un proyecto, cada una respaldada por trabajo público.
+        Tres frentes para integrarme a un equipo de ingeniería o ejecutar un proyecto de principio a fin, respaldados
+        por software verificable.
       </p>
     </div>
-    <ul class="method">
+    <ul class="areas-grid">
       {
-        areas.map((a) => (
-          <li class="reveal">
+        areas.map((a, i) => (
+          <li class="area-card glass spot reveal">
+            <div class="area-top">
+              <span class="area-icon"><Icon name={a.icon} /></span>
+              <span class="mono area-num">0{i + 1}</span>
+            </div>
             <h3>{a.title}</h3>
             <p>{a.text}</p>
-            <p class="evidence">
-              <span class="label">Evidencia</span>{' '}
-              {a.evidence.map((e, i) => (
-                <>
-                  {i > 0 && ' · '}
-                  <a href={e.href}>{e.label}</a>
-                </>
-              ))}
-            </p>
+            <div class="evidence">
+              <span class="label">Evidencia</span>
+              <div class="evidence-chips">
+                {a.evidence.map((e) => (
+                  <a class="mono ev-chip" href={e.href}>
+                    {e.label} <span aria-hidden="true">→</span>
+                  </a>
+                ))}
+              </div>
+            </div>
           </li>
         ))
       }
@@ -217,9 +237,8 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
         <h2 id="proyectos-title">Proyectos</h2>
       </div>
       <p class="muted">
-        Software que diseño y mantengo de forma independiente. Cada página expone el problema, las decisiones técnicas
-        y el estado del proyecto. El código de episteme es abierto; el de los otros tres es privado, y cada uno tiene un
-        repositorio vitrina público.
+        Sistemas diseñados y mantenidos de principio a fin: problema real, decisiones de arquitectura y resultados
+        medidos. Código abierto en episteme y vitrinas técnicas en el resto.
       </p>
     </div>
     <ol class="projects">
@@ -230,6 +249,7 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
               <span class="card-top">
                 <ProjectIcon slug={p.slug} />
                 <span class="label kind">{kind[p.group]}</span>
+                {p.badge && <span class="mono card-badge">{p.badge}</span>}
               </span>
               <span class="project-name" style={`view-transition-name: proyecto-${p.slug}`}>
                 {p.title}
@@ -237,17 +257,31 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
               <span class="label context">{p.card.context ?? p.period}</span>
               <span class="project-text">{p.card.text}</span>
               <span class="mono proof">{p.card.proof}</span>
-              <span class="chips">
-                {p.card.stack.map((s) => (
-                  <span class="mono chip">{s}</span>
-                ))}
+              <span class="card-foot">
+                <span class="chips">
+                  {p.card.stack.map((s) => (
+                    <span class="mono chip">{s}</span>
+                  ))}
+                </span>
+                <span class="go" aria-hidden="true">
+                  Ver proyecto <span class="go-arrow">→</span>
+                </span>
               </span>
-              <span class="go" aria-hidden="true">
-                Ver proyecto <span class="go-arrow">→</span>
-              </span>
-              <span class="mark">
-                <ProjectIcon slug={p.slug} size="xl" />
-              </span>
+              {p.slug === 'episteme' ? (
+                <img
+                  class="card-preview"
+                  src={epistemeThumb.src}
+                  width={epistemeThumb.attributes.width}
+                  height={epistemeThumb.attributes.height}
+                  alt=""
+                  aria-hidden="true"
+                  loading="lazy"
+                />
+              ) : (
+                <span class="mark">
+                  <ProjectIcon slug={p.slug} size="xl" />
+                </span>
+              )}
             </a>
           </li>
         ))
@@ -279,7 +313,7 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
               <span class="mono figures">
                 {t.commits} commits, {t.prs} PR
               </span>
-              {!t.href && <span class="label nopage">Sin página propia</span>}
+              {t.note && <span class="label nopage">{t.note}</span>}
             </li>
           ))
         }
@@ -347,19 +381,29 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
         Conversemos<span class="cursor" aria-hidden="true">_</span>
       </h2>
     </div>
-    <div class="contact-row">
-      <div>
+    <div class="contact-lanes">
+      <div class="contact-card glass is-primary">
+        <p class="label">Proyectos e integraciones</p>
         <p class="muted">
-          Si buscas incorporar a alguien a tu equipo, en el CV encontrarás mi experiencia completa. Si tienes un
-          proyecto de automatización, integraciones o agentes de IA, escríbeme con los detalles. Respondo en español y
-          en inglés.
+          Si tienes un proyecto de software en Python, automatización, integraciones o agentes de IA, escríbeme con los
+          detalles. Respondo en español y en inglés.
         </p>
         <a class="mail" href={`mailto:${site.email}`}><Icon name="mail" />{site.email}</a>
+        <div class="contact-actions">
+          <button type="button" class="btn copy" data-copy={site.email} hidden>Copiar correo</button>
+          <span class="label copy-status" role="status" aria-live="polite"></span>
+        </div>
       </div>
-      <div class="contact-actions">
-        <button type="button" class="btn copy" data-copy={site.email} hidden>Copiar correo</button>
-        <a class="btn" href="/assets/pdf/cv_benjamin_criado.pdf" download>Descargar CV (PDF)</a>
-        <span class="label copy-status" role="status" aria-live="polite"></span>
+      <div class="contact-card glass">
+        <p class="label">Equipos y contratación</p>
+        <p class="muted">
+          Si buscas incorporar a alguien a tu equipo, en el currículum encontrarás mi experiencia completa, stack
+          detallado, formación e idiomas.
+        </p>
+        <div class="contact-actions">
+          <a class="btn btn-primary" href="/cv/">Ver currículum</a>
+          <a class="btn" href="/assets/pdf/cv_benjamin_criado.pdf" download>Descargar CV (PDF)</a>
+        </div>
       </div>
     </div>
   </section>
@@ -446,42 +490,58 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
     margin-bottom: 2.25rem;
   }
 
-  /* Disponibilidad: datos cortos bajo el texto, separados por puntos medios */
+  /* Disponibilidad: pastillas sutiles bajo el texto */
   .lead-sub:has(+ .facts) {
-    margin-bottom: 1rem;
+    margin-bottom: 1.15rem;
   }
 
   .facts {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.4rem 0;
+    gap: 0.5rem;
     list-style: none;
     padding: 0;
-    margin: 0 0 2.25rem;
+    margin: 0 0 2rem;
     font-size: 0.8125rem;
-    color: var(--muted);
+    color: var(--text);
   }
 
   .facts li {
     margin: 0;
+    padding: 0.25rem 0.65rem;
+    border-radius: 999px;
+    border: 1px solid var(--glass-border);
+    background: color-mix(in srgb, var(--surface) 70%, transparent);
   }
 
-  .facts li + li::before {
-    content: '·';
-    margin-inline: 0.75rem;
-    color: var(--accent);
-  }
-
-  /* Prueba bajo los botones: la cifra que respalda la especialidad */
+  /* Prueba bajo los botones: métricas destacadas que respaldan la especialidad */
   .hero .proof {
-    max-width: 36rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.35rem 0.6rem;
+    max-width: 38rem;
     margin: 1.5rem 0 0;
+    padding-top: 1.15rem;
+    border-top: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
     font-size: 0.8125rem;
     color: var(--muted);
   }
 
-  .hero .proof strong {
+  .proof-stats {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.45rem;
     color: var(--text);
+  }
+
+  .proof-stats .sep {
+    color: var(--accent);
+  }
+
+  .hero .proof strong {
+    color: var(--accent);
+    font-size: 0.9375rem;
     font-weight: 600;
   }
 
@@ -493,19 +553,33 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
   /* Consola: el método como un registro que avanza */
   .console {
     margin: 0;
-    padding: 1.5rem 1.75rem 1.75rem;
+    padding: 1.4rem 1.65rem 1.65rem;
   }
 
   .console figcaption {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    align-items: baseline;
+    align-items: center;
     gap: 1rem;
-    padding-bottom: 1rem;
-    margin-bottom: 0.5rem;
+    padding-bottom: 0.95rem;
+    margin-bottom: 0.35rem;
     border-bottom: 1px solid var(--border);
     font-weight: 600;
+  }
+
+  .console-head {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+  }
+
+  .console-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 20%, transparent);
   }
 
   .console figcaption .mono {
@@ -515,20 +589,30 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
   .log {
     list-style: none;
     padding: 0;
-    margin: 0 0 1.25rem;
+    margin: 0 0 1.15rem;
   }
 
   .log li {
     display: grid;
-    grid-template-columns: 7.5rem minmax(0, 1fr) auto;
+    grid-template-columns: 8.75rem minmax(0, 1fr) auto;
     gap: 0.75rem;
     align-items: baseline;
     margin: 0;
     padding: 0.55rem 0;
   }
 
+  .log li + li {
+    border-top: 1px solid color-mix(in srgb, var(--border) 45%, transparent);
+  }
+
   .verb {
     color: var(--accent);
+  }
+
+  .verb .idx {
+    color: var(--muted);
+    margin-right: 0.45rem;
+    font-size: 0.75rem;
   }
 
   .what {
@@ -677,15 +761,15 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
 
   /* ---------- Ahora ---------- */
   .now-wrap {
-    padding-block: 0.5rem 4rem;
+    padding-block: 0.5rem 3.5rem;
   }
 
   .now-strip {
     display: grid;
-    grid-template-columns: 8rem minmax(0, 1fr);
-    align-items: start;
-    gap: 2rem;
-    padding: 1.5rem 1.75rem;
+    grid-template-columns: 7rem minmax(0, 1fr);
+    align-items: center;
+    gap: 1.75rem;
+    padding: 1.25rem 1.75rem;
   }
 
   .now-strip h2 {
@@ -721,13 +805,19 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
 
   .now {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 2.5rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem;
     margin: 0;
   }
 
+  .now-row + .now-row {
+    padding-left: 2rem;
+    border-left: 1px solid var(--glass-border);
+  }
+
   .now-row dt {
-    margin-bottom: 0.35rem;
+    margin-bottom: 0.3rem;
+    color: var(--accent);
   }
 
   .now-row dd {
@@ -761,6 +851,113 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
     color: var(--text);
   }
 
+  /* ---------- Qué hago (#areas) ---------- */
+  .areas-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .area-card {
+    display: flex;
+    flex-direction: column;
+    padding: 1.75rem;
+    margin: 0;
+    transition:
+      border-color 0.25s ease,
+      transform 0.3s var(--ease-out);
+  }
+
+  .area-card:hover {
+    border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+    transform: translateY(-2px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .area-card:hover {
+      transform: none;
+    }
+  }
+
+  .area-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.25rem;
+  }
+
+  .area-icon {
+    display: inline-grid;
+    place-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: var(--radius);
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
+    border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+    color: var(--accent);
+    font-size: 1.25rem;
+  }
+
+  .area-num {
+    color: var(--muted);
+    font-size: 0.8125rem;
+  }
+
+  .area-card h3 {
+    font-family: var(--font-display);
+    font-stretch: 112%;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+  }
+
+  .area-card p {
+    color: var(--muted);
+    font-size: 0.9688rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .area-card .evidence {
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid var(--glass-border);
+  }
+
+  .area-card .evidence .label {
+    display: block;
+    font-size: 0.75rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .evidence-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .ev-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--border));
+    background: color-mix(in srgb, var(--accent) 8%, transparent);
+    color: var(--text);
+    font-size: 0.8125rem;
+    text-decoration: none;
+    transition: border-color 0.15s ease, color 0.15s ease, background-color 0.15s ease;
+  }
+
+  .ev-chip:hover {
+    border-color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 16%, transparent);
+    color: var(--accent);
+  }
+
   /* ---------- Proyectos ---------- */
   .projects {
     list-style: none;
@@ -790,11 +987,14 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
     flex-direction: column;
     gap: 0.6rem;
     height: 100%;
-    min-height: 17rem;
+    min-height: 17.5rem;
     padding: 2rem 2.25rem;
     overflow: hidden;
-    background: var(--surface);
+    background:
+      radial-gradient(24rem circle at 92% 96%, color-mix(in srgb, var(--accent) 9%, transparent), transparent 68%),
+      var(--surface);
     border: 1px solid var(--border);
+    border-top-color: color-mix(in srgb, var(--accent) 32%, var(--border));
     border-radius: var(--radius-lg);
     text-decoration: none;
     color: var(--text);
@@ -840,13 +1040,25 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
 
   .card-top {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 1rem;
-    margin-bottom: 1rem;
+    gap: 0.75rem 1rem;
+    margin-bottom: 0.85rem;
   }
 
   .kind {
     color: var(--accent);
+  }
+
+  .card-badge {
+    margin-left: auto;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    border: 1px solid color-mix(in srgb, var(--accent) 38%, transparent);
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
+    color: var(--accent);
+    font-size: 0.75rem;
+    font-weight: 500;
   }
 
   .project-name {
@@ -876,12 +1088,23 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
     color: var(--accent);
   }
 
+  .card-foot {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem 1rem;
+    margin-top: auto;
+    padding-top: 1.1rem;
+    border-top: 1px solid color-mix(in srgb, var(--border) 65%, transparent);
+  }
+
   .chips {
     display: flex;
     flex-wrap: wrap;
     gap: 0.4rem;
-    margin-top: auto;
-    padding-top: 1rem;
   }
 
   .chip {
@@ -890,23 +1113,14 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
     border-radius: 999px;
     font-size: 0.8125rem;
     color: var(--muted);
+    background: color-mix(in srgb, var(--bg) 45%, transparent);
   }
 
   .go {
-    align-self: flex-start;
-    margin-top: 0.75rem;
+    font-size: 0.9375rem;
     font-weight: 600;
     color: var(--accent);
-    text-decoration: underline;
-    text-decoration-color: color-mix(in srgb, var(--accent) 35%, transparent);
-    text-decoration-thickness: 1px;
-    text-underline-offset: 0.3em;
-    transition: text-decoration-color 0.2s ease;
-  }
-
-  .project-card:hover .go,
-  .project-card:focus-visible .go {
-    text-decoration-color: var(--accent);
+    white-space: nowrap;
   }
 
   .go-arrow {
@@ -922,6 +1136,36 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
   @media (prefers-reduced-motion: reduce) {
     .project-card:hover .go-arrow,
     .project-card:focus-visible .go-arrow {
+      transform: none;
+    }
+  }
+
+  /* Vista previa atmosférica del grafo en la tarjeta principal de episteme */
+  .card-preview {
+    position: absolute;
+    right: -1.5rem;
+    top: 2.75rem;
+    width: 17.5rem;
+    height: auto;
+    opacity: 0.34;
+    pointer-events: none;
+    border-radius: var(--radius);
+    -webkit-mask-image: radial-gradient(circle at 68% 48%, #000 18%, transparent 74%);
+    mask-image: radial-gradient(circle at 68% 48%, #000 18%, transparent 74%);
+    transition:
+      opacity 0.4s ease,
+      transform 0.45s var(--ease-out);
+  }
+
+  .project-card:hover .card-preview,
+  .project-card:focus-visible .card-preview {
+    opacity: 0.55;
+    transform: scale(1.03);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .project-card:hover .card-preview,
+    .project-card:focus-visible .card-preview {
       transform: none;
     }
   }
@@ -1310,25 +1554,38 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
     }
   }
 
-  .contact-row {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: end;
-    justify-content: space-between;
-    gap: 1.5rem 3rem;
-    padding-top: 2rem;
-    border-top: 1px solid var(--border);
+  .contact-lanes {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    gap: 1.25rem;
   }
 
-  .contact .muted {
-    margin-bottom: 0.75rem;
+  .contact-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    padding: 1.75rem 2rem;
+  }
+
+  .contact-card.is-primary {
+    border-color: color-mix(in srgb, var(--accent) 32%, var(--glass-border));
+  }
+
+  .contact-card .label:first-child {
+    margin: 0;
+    color: var(--accent);
+  }
+
+  .contact-card .muted {
+    margin: 0;
+    font-size: 0.9688rem;
   }
 
   .mail {
     display: inline-flex;
     align-items: center;
     gap: 0.5em;
-    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+    font-size: clamp(1.1875rem, 2.2vw, 1.5rem);
     font-weight: 600;
     letter-spacing: -0.01em;
     text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent);
@@ -1339,6 +1596,8 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
     flex-wrap: wrap;
     align-items: center;
     gap: 0.75rem 1rem;
+    margin-top: auto;
+    padding-top: 0.5rem;
   }
 
   .copy {
@@ -1358,8 +1617,14 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
   @media (max-width: 960px) {
     .hero,
     .split,
-    .two-col {
+    .two-col,
+    .areas-grid,
+    .contact-lanes {
       grid-template-columns: minmax(0, 1fr);
+    }
+
+    .card-preview {
+      display: none;
     }
 
     .now-strip {
@@ -1370,6 +1635,13 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
     .now {
       grid-template-columns: minmax(0, 1fr);
       gap: 1.25rem;
+    }
+
+    .now-row + .now-row {
+      padding-left: 0;
+      padding-top: 1.1rem;
+      border-left: 0;
+      border-top: 1px solid var(--glass-border);
     }
   }
 
@@ -1439,21 +1711,26 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
       border-left: 0;
     }
 
-    /* Sin puntos medios: al partirse la línea quedarían al inicio */
-    .facts {
-      gap: 0.4rem 1rem;
-    }
-
-    .facts li + li::before {
-      content: none;
+    .console {
+      padding: 1.15rem 1.15rem 1.35rem;
     }
 
     .log li {
-      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-columns: 6.5rem minmax(0, 1fr) auto;
+      gap: 0.5rem;
+      font-size: 0.8125rem;
     }
 
-    .verb {
-      grid-column: 1 / -1;
+    .verb .idx {
+      display: none;
+    }
+
+    .what {
+      font-size: 0.8125rem;
+    }
+
+    .contact-card {
+      padding: 1.5rem;
     }
 
     .tl-row,

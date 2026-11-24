@@ -387,7 +387,7 @@ test('portada: qué hago con evidencia y sin sección de TI', () => {
     return html.slice(start, html.indexOf('</section>', start));
   };
   const areas = section('areas');
-  assert.ok(areas.includes('class="method'), '#areas debe usar la lista method');
+  assert.ok(areas.includes('class="areas-grid'), '#areas debe usar la grilla areas-grid');
   assert.equal(areas.match(/<li/g)?.length, 3, '#areas debe tener tres áreas');
   assert.equal(areas.match(/class="evidence"/g)?.length, 3, 'cada área debe traer su evidencia');
   assert.ok(!html.includes('id="ti"'), 'la sección #ti ya no va en la portada');
@@ -404,4 +404,11 @@ test('caja de detección en portada, proyectos y 404', () => {
     assert.ok(read(file).includes('class="bbox'), `${file}: falta la caja de detección`);
   }
   assert.match(read('404.html'), /class="bbox[^"]*\bis-miss\b/, '404: la caja debe ser .is-miss');
+  for (const slug of ['vigilia', 'vigilia-edge', 'pulse', 'episteme']) {
+    const html = read(`${slug}/index.html`);
+    assert.ok(html.includes('aria-label="Indicadores clave"'), `/${slug}/: faltan los indicadores clave`);
+    assert.ok(!html.includes('>agentes de IA<') && !html.includes('>visión por computador<'), `/${slug}/: bbox repite el grupo`);
+  }
+  assert.ok(read('episteme/index.html').includes('role="tablist"'), 'episteme: faltan las pestañas del grafo');
+  assert.ok(!read('index.html').includes('Tests, lint'), 'consola del hero: usar «Pruebas» en vez de «Tests»');
 });

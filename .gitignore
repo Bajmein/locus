@@ -34,6 +34,7 @@ Thumbs.db
 .worktrees/
 .cache/
 CLAUDE.md
+GEMINI.md
 AGENTS.md
 copier.yml
 dprint.json

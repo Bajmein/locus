@@ -35,6 +35,44 @@ function actual(href: string) {
   </div>
 </header>
 
+<script>
+  if (window.location.pathname === '/' && 'IntersectionObserver' in window) {
+    const links = new Map<string, HTMLAnchorElement>();
+    for (const a of document.querySelectorAll<HTMLAnchorElement>('.site-header nav a[href^="/#"]')) {
+      const id = a.getAttribute('href')?.slice(2);
+      if (id) links.set(id, a);
+    }
+    const visible = new Set<string>();
+    const sync = () => {
+      let current: string | undefined;
+      for (const id of ['contacto', 'proyectos', 'areas']) {
+        if (visible.has(id)) {
+          current = id;
+          break;
+        }
+      }
+      for (const [id, a] of links) {
+        if (id === current) a.setAttribute('aria-current', 'location');
+        else a.removeAttribute('aria-current');
+      }
+    };
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) visible.add(e.target.id);
+          else visible.delete(e.target.id);
+        }
+        sync();
+      },
+      { rootMargin: '-25% 0px -55% 0px' },
+    );
+    for (const id of links.keys()) {
+      const el = document.getElementById(id);
+      if (el) io.observe(el);
+    }
+  }
+</script>
+
 <style>
   .site-header {
     border-bottom: 1px solid var(--border);

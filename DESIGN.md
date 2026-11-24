@@ -73,28 +73,36 @@ Escala: 13 · 14 · 15,5 · 17 · 20–24 (lead) · 28–44 (tarjetas) · 32–5
 
 - **Paneles glass** (`.glass`): superficie al 78 %, borde de 1 px, desenfoque de 16 px (10 en móvil);
   sólidos (`--surface`) sin `backdrop-filter` o con `prefers-reduced-transparency`. Los usan la
-  consola, «Ahora», la ficha y «Siguiente proyecto» de cada proyecto, los diagramas y la 404.
-- **Cabecera**: glass sobre `--bg` al 85 % (opaca con transparencia reducida), borde inferior de 1 px y
-  línea de progreso de lectura en el acento.
+  consola, «Ahora», las tres tarjetas de «Qué hago», los indicadores clave, la ficha y «Siguiente
+  proyecto» de cada proyecto, la matriz de capas de Vigilia Edge, el contacto, los diagramas y la 404.
+- **Cabecera**: glass sobre `--bg` al 85 % (opaca con transparencia reducida), borde inferior de 1 px,
+  sección activa actualizada al hacer scroll en la portada y línea de progreso de lectura en el acento.
 - **Título de sección**: antetítulo `.label` en el acento, título en display y una barra del acento de
   3rem × 2 px debajo, que crece al entrar en pantalla.
 - **Botón primario**: fondo ámbar, texto `--accent-ink`; hover más claro; `:active` escala 0,98.
   Secundario: borde `--border`. Foco: contorno de 2 px en el acento.
 - **Caja de detección** (`.target` + `.bbox`, en `global.css`): cuatro esquinas de 2 px, contorno de
-  1 px al 22 % y etiqueta mono sobre el acento; se fija al cargar. En móvil sobresale menos para no
-  salirse del gutter. Variante `.is-miss` (404, «sin detección»): contorno discontinuo y todo en
-  `--muted`.
-- **Consola** (`.console`): panel con el ciclo de un cambio; verbo en ámbar, estado en verde.
-- **Qué hago** (`#areas`): tres áreas en la lista `.method` (tres columnas con líneas de 1 px, `h3`); cada
-  una cierra con `.evidence`: rótulo «Evidencia» y enlaces en el acento, a 13 px.
-- **Pruebas** (`.proof`, mono a 13 px): en el hero, bajo los botones, la cifra del trabajo con agentes
-  (atenuada, con las cifras en `--text`); en cada tarjeta de proyecto, una línea en el tono del
-  proyecto. En el hero, `.facts` lista la disponibilidad en mono atenuado, separada por puntos medios
-  (en móvil, solo con espacio).
-- **Tarjeta de proyecto**: superficie sólida (no glass: la marca de agua necesita un fondo parejo),
-  tono del proyecto, ícono, marca de agua del ícono en la esquina (12rem, 15rem en agentes; 6 %, 14 %
-  al pasar el cursor) con el texto fuera de ella, filo superior que crece, elevación de 3 px y «Ver
-  proyecto →» con la flecha que avanza. Mosaico 7/5 para agentes y 6/6 para visión.
+  1 px al 22 % y etiqueta mono sobre el acento; se fija al cargar. En el hero detecta `persona 0,99` y
+  en cada proyecto muestra una firma técnica propia (`mcp · memoria local`, `fsm · 8 fases`,
+  `gpu · tiempo real`, `edge · < 80 ms`). Variante `.is-miss` (404, «sin detección»): contorno
+  discontinuo y todo en `--muted`.
+- **Consola** (`.console`): panel con el ciclo de un cambio numerado `01`–`06`; verbo en ámbar, estado
+  en verde; en móvil mantiene cada paso en una sola línea.
+- **Qué hago** (`#areas`): tres tarjetas `.glass` (`.areas-grid`) con ícono lineal Phosphor, índice
+  mono `01`–`03`, título en display y pie con chips clicables de evidencia (`.ev-chip`).
+- **Pruebas** (`.proof`, mono a 13 px): en el hero, bajo los botones, métricas destacadas de commits y
+  PR fusionados; en cada tarjeta de proyecto, una línea en el tono del proyecto. En el hero, `.facts`
+  presenta la disponibilidad en pastillas sutiles.
+- **Tarjeta de proyecto**: superficie sólida con resplandor radial tenue (9 %) de su tono en la esquina
+  inferior derecha y borde superior atenuado, insignia `MIT · Código abierto` y vista previa
+  desvanecida del grafo en `episteme`, marca de agua del ícono en el resto, pie en una sola fila
+  (`chips` a la izquierda y «Ver proyecto →» a la derecha), filo superior que crece y elevación de 3 px.
+  Mosaico 7/5 para agentes y 6/6 para visión.
+- **Páginas de proyecto**: banda superior de tres indicadores clave (`.metrics.glass`), ficha lateral
+  con enlace al código abierto o al repositorio vitrina, pestañas «Evolución» / «Vista fija» con control
+  de pausa en el grafo de `episteme`, y matriz «Límite → Capa» en `Vigilia Edge`.
+- **Contacto**: dos tarjetas `.glass` en paralelo (`Proyectos e integraciones` con correo y copia;
+  `Equipos y contratación` con acceso al CV web y descarga en PDF).
 - **Riel** del trabajo con agentes: subgrid para alinear período, nombre, texto y cifras en escritorio;
   en móvil, una columna sin subgrid. El relleno (horizontal o vertical) y la ficha avanzan con el
   scroll.

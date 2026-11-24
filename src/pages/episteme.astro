@@ -85,34 +85,77 @@ const step = getStep('episteme');
     Las notas no quedan sueltas: cada memoria se enlaza con las decisiones, los proyectos y la documentación con
     que se relaciona, y episteme sigue esos enlaces al buscar y al leer.
   </p>
-  <figure class="graph glass">
-    <video
-      src="/assets/video/episteme-grafo.mp4"
-      poster={poster.src}
-      width="960"
-      height="796"
-      muted
-      loop
-      playsinline
-      tabindex="0"
-      preload="none"
-      aria-label="Vista de grafo del vault que crece desde unos pocos puntos hasta varios núcleos de colores unidos por líneas finas."
-    ></video>
-    <figcaption>
-      La historia del vault que uso a diario, acelerada en la vista de grafo de Obsidian: las notas aparecen en el
-      orden en que se crearon. Cada punto es una nota y cada línea, un enlace entre dos notas; los colores separan
-      grupos de notas y los puntos más grandes son los más enlazados.
-    </figcaption>
-  </figure>
-  <figure class="graph glass">
-    <Image
-      src={grafoVault}
-      alt="Vista de grafo del vault: puntos agrupados en varios núcleos de colores, unidos por líneas finas."
-      widths={[640, 960, 1345]}
-      sizes="(min-width: 48rem) 46rem, 100vw"
-      loading="lazy"
-    />
-    <figcaption>El mismo grafo en una vista fija, sin la animación: los grupos de notas quedan a la vista.</figcaption>
+  <figure class="graph glass" data-graph-viewer>
+    <div class="graph-bar">
+      <div class="graph-tabs" role="tablist" aria-label="Vista del grafo del vault">
+        <button
+          type="button"
+          class="graph-tab mono"
+          role="tab"
+          id="tab-evolucion"
+          aria-controls="panel-evolucion"
+          aria-selected="true"
+          data-tab="evolucion"
+        >
+          Evolución
+        </button>
+        <button
+          type="button"
+          class="graph-tab mono"
+          role="tab"
+          id="tab-fija"
+          aria-controls="panel-fija"
+          aria-selected="false"
+          tabindex="-1"
+          data-tab="fija"
+        >
+          Vista fija
+        </button>
+      </div>
+      <button
+        type="button"
+        class="graph-toggle mono"
+        data-video-toggle
+        aria-label="Pausar o reproducir la evolución del grafo"
+      >
+        <span class="toggle-dot" aria-hidden="true"></span>
+        <span data-toggle-label>Pausado</span>
+      </button>
+    </div>
+
+    <div class="graph-panel" id="panel-evolucion" role="tabpanel" aria-labelledby="tab-evolucion" data-panel="evolucion">
+      <video
+        src="/assets/video/episteme-grafo.mp4"
+        poster={poster.src}
+        width="960"
+        height="796"
+        muted
+        loop
+        playsinline
+        tabindex="0"
+        preload="none"
+        aria-label="Vista de grafo del vault que crece desde unos pocos puntos hasta varios núcleos de colores unidos por líneas finas."
+      ></video>
+      <figcaption>
+        La historia del vault que uso a diario, acelerada en la vista de grafo de Obsidian: las notas aparecen en el
+        orden en que se crearon. Cada punto es una nota y cada línea, un enlace entre dos notas; los colores separan
+        grupos de notas y los puntos más grandes son los más enlazados.
+      </figcaption>
+    </div>
+
+    <div class="graph-panel" id="panel-fija" role="tabpanel" aria-labelledby="tab-fija" data-panel="fija" hidden>
+      <Image
+        src={grafoVault}
+        alt="Vista de grafo del vault: puntos agrupados en varios núcleos de colores, unidos por líneas finas."
+        widths={[640, 960, 1345]}
+        sizes="(min-width: 48rem) 46rem, 100vw"
+        loading="lazy"
+      />
+      <figcaption>
+        El mismo grafo completo en una vista fija de alta resolución: los núcleos por proyecto y la densidad de enlaces
+        quedan detenidos para inspeccionarlos con calma.
+      </figcaption>
+    </div>
   </figure>
 
   <h2>Capacidades</h2>
@@ -142,8 +185,87 @@ const step = getStep('episteme');
 <style>
   .graph {
     margin: 2rem 0;
-    padding: 0.75rem;
+    padding: 0.85rem;
   }
+
+  .graph-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem 1rem;
+    margin-bottom: 0.75rem;
+    padding-inline: 0.15rem;
+  }
+
+  .graph-tabs {
+    display: inline-flex;
+    padding: 0.2rem;
+    border-radius: var(--radius);
+    background: color-mix(in srgb, var(--bg) 70%, transparent);
+    border: 1px solid var(--border);
+  }
+
+  .graph-tab {
+    appearance: none;
+    border: 0;
+    background: transparent;
+    color: var(--muted);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    padding: 0.35rem 0.75rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: color 0.15s ease, background-color 0.15s ease;
+  }
+
+  .graph-tab:hover {
+    color: var(--text);
+  }
+
+  .graph-tab[aria-selected='true'] {
+    background: color-mix(in srgb, var(--accent) 18%, var(--surface));
+    color: var(--text);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 45%, transparent);
+  }
+
+  .graph-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    appearance: none;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--bg) 55%, transparent);
+    color: var(--muted);
+    font-size: 0.75rem;
+    padding: 0.3rem 0.7rem;
+    cursor: pointer;
+    transition: border-color 0.15s ease, color 0.15s ease;
+  }
+
+  .graph-toggle:hover {
+    border-color: var(--accent);
+    color: var(--text);
+  }
+
+  .graph-toggle[hidden],
+  .graph-panel[hidden] {
+    display: none;
+  }
+
+  .toggle-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--muted);
+    transition: background-color 0.15s ease;
+  }
+
+  .graph-toggle.is-playing .toggle-dot {
+    background: var(--tone-vigilia);
+  }
+
   .graph video,
   .graph img {
     display: block;
@@ -152,9 +274,11 @@ const step = getStep('episteme');
     border-radius: var(--radius);
     background: var(--bg);
   }
+
   .graph video {
     cursor: pointer;
   }
+
   .graph figcaption {
     margin-top: 0.75rem;
     padding-inline: 0.25rem;
@@ -164,41 +288,93 @@ const step = getStep('episteme');
 </style>
 
 <script>
-  // Sin reproductor visible: se reproduce solo mientras está a la vista y sin
-  // movimiento reducido (con movimiento reducido queda el póster, el vault
-  // completo). Un clic, Enter o Espacio lo pausa y lo reanuda.
-  const video = document.querySelector<HTMLVideoElement>('.graph video');
-  if (
-    video &&
-    'IntersectionObserver' in window &&
-    !window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  ) {
+  const viewer = document.querySelector<HTMLElement>('[data-graph-viewer]');
+  if (viewer) {
+    const video = viewer.querySelector<HTMLVideoElement>('video');
+    const toggleBtn = viewer.querySelector<HTMLButtonElement>('[data-video-toggle]');
+    const toggleLabel = viewer.querySelector<HTMLElement>('[data-toggle-label]');
+    const tabs = [...viewer.querySelectorAll<HTMLButtonElement>('[role="tab"]')];
+    const panels = [...viewer.querySelectorAll<HTMLElement>('[role="tabpanel"]')];
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    let activeTab = 'evolucion';
     let visible = false;
     let pausedByUser = false;
-    video.addEventListener('pause', () => {
-      if (visible) pausedByUser = true;
-    });
-    video.addEventListener('play', () => {
-      pausedByUser = false;
-    });
-    const toggle = () => {
-      if (video.paused) video.play().catch(() => {});
-      else video.pause();
+
+    const syncToggle = () => {
+      if (!video || !toggleBtn || !toggleLabel) return;
+      const playing = !video.paused && !video.ended;
+      toggleBtn.classList.toggle('is-playing', playing);
+      toggleLabel.textContent = playing ? 'En reproducción · Pausar' : 'En pausa · Reproducir';
     };
-    video.addEventListener('click', toggle);
-    video.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        toggle();
+
+    const setTab = (id: string, focus = false) => {
+      activeTab = id;
+      for (const t of tabs) {
+        const selected = t.dataset.tab === id;
+        t.setAttribute('aria-selected', String(selected));
+        t.tabIndex = selected ? 0 : -1;
+        if (selected && focus) t.focus();
       }
-    });
-    new IntersectionObserver(
-      ([entry]) => {
-        visible = entry.isIntersecting;
-        if (visible && !pausedByUser) video.play().catch(() => {});
-        else if (!visible) video.pause();
-      },
-      { threshold: 0.4 },
-    ).observe(video);
+      for (const p of panels) {
+        p.hidden = p.dataset.panel !== id;
+      }
+      if (toggleBtn) toggleBtn.hidden = id !== 'evolucion';
+      if (video) {
+        if (id !== 'evolucion') video.pause();
+        else if (visible && !pausedByUser && !reducedMotion) video.play().catch(() => {});
+      }
+      syncToggle();
+    };
+
+    for (const [idx, tab] of tabs.entries()) {
+      tab.addEventListener('click', () => setTab(tab.dataset.tab ?? 'evolucion'));
+      tab.addEventListener('keydown', (e) => {
+        if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+        e.preventDefault();
+        const next = tabs[(idx + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length];
+        if (next?.dataset.tab) setTab(next.dataset.tab, true);
+      });
+    }
+
+    if (video) {
+      const toggleVideo = () => {
+        if (video.paused) {
+          pausedByUser = false;
+          video.play().catch(() => {});
+        } else {
+          pausedByUser = true;
+          video.pause();
+        }
+        syncToggle();
+      };
+
+      video.addEventListener('play', syncToggle);
+      video.addEventListener('pause', syncToggle);
+      video.addEventListener('click', toggleVideo);
+      video.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          toggleVideo();
+        }
+      });
+      toggleBtn?.addEventListener('click', toggleVideo);
+
+      if ('IntersectionObserver' in window && !reducedMotion) {
+        new IntersectionObserver(
+          ([entry]) => {
+            visible = entry.isIntersecting;
+            if (visible && activeTab === 'evolucion' && !pausedByUser) {
+              video.play().catch(() => {});
+            } else if (!visible) {
+              video.pause();
+            }
+            syncToggle();
+          },
+          { threshold: 0.4 },
+        ).observe(video);
+      }
+      syncToggle();
+    }
   }
 </script>

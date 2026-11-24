@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Páginas de proyecto: banda superior de tres indicadores clave verificables (`.metrics.glass`), enlace directo al repositorio vitrina en la ficha lateral `.meta` y matriz visual «Límite → Capa» en `Vigilia Edge`.
+- Página de episteme: selector por pestañas («Evolución» / «Vista fija») e indicador interactivo de reproducción/pausa dentro de un único marco `.graph.glass`.
+- Cabecera: resaltado dinámico de la sección visible al recorrer la portada (`IntersectionObserver` con `aria-current="location"`).
+- Íconos lineales Phosphor (`terminal`, `code`, `flow`) en `src/assets/icons/` para las tarjetas de `#areas`.
 - Página de episteme: su repositorio de código abierto (`Bajmein/episteme`, licencia MIT) en la ficha, con el ícono de GitHub, y como `codeRepository` en el JSON-LD; también en `llms.txt`, en el CV y en su test. Los textos que decían que su código era privado se corrigen.
 - Página de episteme: sección «El vault en uso» con la historia del vault acelerada en la vista de grafo de Obsidian (video H.264 de 20 s y 2,6 MB, póster WebP, sin autoplay con movimiento reducido), con su test.
 - Página de pulse (`/pulse/`), el motor de estados en Python que sucedió a Forge, con diagrama de sus ocho fases, ícono y tono propios, y enlace a su vitrina `pulse-showcase`.
@@ -23,6 +27,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Portada y sistema visual: tira «Ahora» equilibrada en dos columnas con divisor; disponibilidad en pastillas `.facts`, métricas destacadas en el hero y pasos de la consola numerados en una sola línea en móvil; `#areas` transformada en tres tarjetas `.glass` con ícono, índice y chips de evidencia; tarjetas de proyecto con resplandor tonal en reposo, pie en una sola fila e insignia + vista previa del grafo en `episteme`; contacto dividido en dos tarjetas por audiencia.
+- Activos de marca (`public/og.png`, `tools/og.html` y `public/favicon.svg`) rediseñados bajo la dirección «Vigilia nocturna» (`#0c1220`, Archivo Variable, grilla de sensor y caja `persona 0,99`).
+- Páginas de proyecto: etiquetas técnicas propias en `.bbox` (`mcp · memoria local`, `fsm · 8 fases`, `gpu · tiempo real`, `edge · < 80 ms`) para no repetir el antetítulo del grupo, e inicio unificado en `Vigilia Reforged` y `Vigilia Edge` sin párrafos duplicados.
+- Redacción y CV: textos del hero y «Ahora» sin repeticiones, hilo causal explícito entre Forge, pulse, fabrik y episteme en `#agentes`, «Pruebas» en la consola del hero y descripción añadida en la entrada de práctica profesional del CV (con PDF regenerado en dos páginas).
 - Redacción de todo el sitio en registro profesional, con tuteo: sin giros coloquiales, anglicismos evitables ni frases de folleto; «ingeniero informático» en minúscula, rangos de fecha con semirraya y «actualidad», y las capacidades de episteme nombradas como sustantivos.
 - Vigilia Reforged, el proyecto de título, se fecha en 2025; su página cuenta que el desarrollo siguió con Forge después de la titulación (Forge es de 2026).
 - Cifras del trabajo con agentes al 24 de noviembre de 2026: episteme en v0.21, con 390 commits y 176 pull requests (124 del repositorio anterior y 52 del público); 1036 commits y 310 pull requests entre las cuatro herramientas. Las cifras y la línea de tiempo de `#agentes` pasan a `src/data/trail.ts`, la fuente única de la portada, el CV, la página de episteme y su tarjeta.
