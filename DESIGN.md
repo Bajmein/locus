@@ -87,23 +87,27 @@ Escala: 13 · 14 · 15,5 · 17 · 20–24 (lead) · 28–44 (tarjetas) · 32–5
   `gpu · tiempo real`, `edge · < 80 ms`). Variante `.is-miss` (404, «sin detección»): contorno
   discontinuo y todo en `--muted`.
 - **Consola** (`.console`): panel con el ciclo de un cambio numerado `01`–`06`; verbo en ámbar, estado
-  en verde; en móvil mantiene cada paso en una sola línea.
+  en verde; en móvil, verbo, texto y estado van en la misma fila (el texto puede partirse). El punto
+  activo lleva un halo del acento (excepción aprobada: es la única sombra difusa de un componente).
 - **Qué hago** (`#areas`): tres tarjetas `.glass` (`.areas-grid`) con ícono lineal Phosphor, índice
   mono `01`–`03`, título en display y pie con chips clicables de evidencia (`.ev-chip`).
 - **Pruebas** (`.proof`, mono a 13 px): en el hero, bajo los botones, métricas destacadas de commits y
   PR fusionados; en cada tarjeta de proyecto, una línea en el tono del proyecto. En el hero, `.facts`
   presenta la disponibilidad en pastillas sutiles.
 - **Tarjeta de proyecto**: superficie sólida con resplandor radial tenue (9 %) de su tono en la esquina
-  inferior derecha y borde superior atenuado, insignia `MIT · Código abierto` y vista previa
+  inferior derecha (excepción aprobada a la regla de gradientes) y borde superior atenuado, insignia `MIT · Código abierto` y vista previa
   desvanecida del grafo en `episteme`, marca de agua del ícono en el resto, pie en una sola fila
   (`chips` a la izquierda y «Ver proyecto →» a la derecha), filo superior que crece y elevación de 3 px.
   Mosaico 7/5 para agentes y 6/6 para visión.
 - **Páginas de proyecto**: banda superior de tres indicadores clave (`.metrics.glass`), ficha lateral
   con enlace al código abierto o al repositorio vitrina, pestañas «Evolución» / «Vista fija» con control
-  de pausa en el grafo de `episteme`, y matriz «Límite → Capa» en `Vigilia Edge`.
+  de pausa en el grafo de `episteme` (cada panel es una `figure` con su pie; la barra queda oculta sin JS
+  y entonces se ven las dos vistas), y matriz «Límite → Capa» en `Vigilia Edge` (lista ordenada sin viñetas).
+  En la banda, la cifra va arriba en el tono y la descripción debajo en `--muted`.
 - **Contacto**: dos tarjetas `.glass` en paralelo (`Proyectos e integraciones` con correo y copia;
   `Equipos y contratación` con acceso al CV web y descarga en PDF).
-- **Riel** del trabajo con agentes: subgrid para alinear período, nombre, texto y cifras en escritorio;
+- **Riel** del trabajo con agentes: subgrid para alinear período, nombre, texto, cifras y el estado de
+  cada paso (`Ciclo cerrado` / `En uso diario`) en escritorio;
   en móvil, una columna sin subgrid. El relleno (horizontal o vertical) y la ficha avanzan con el
   scroll.
 
