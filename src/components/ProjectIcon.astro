@@ -7,7 +7,7 @@ interface Props {
 
 const { slug, size = 'md' } = Astro.props;
 const transition = size === 'xl' ? undefined : `view-transition-name: icono-${slug}`;
-const slugs = ['episteme', 'forge', 'vigilia', 'vigilia-edge'];
+const slugs = ['episteme', 'pulse', 'vigilia', 'vigilia-edge'];
 if (!slugs.includes(slug)) {
   throw new Error(`ProjectIcon: slug desconocido «${slug}»`);
 }
@@ -32,13 +32,10 @@ if (!slugs.includes(slug)) {
         <path class="i-write" pathLength="1" d="M88 184h48" />
       </>
     )}
-    {slug === 'forge' && (
+    {slug === 'pulse' && (
       <>
-        <rect x="24" y="40" width="56" height="40" rx="8" />
-        <rect x="100" y="108" width="56" height="40" rx="8" />
-        <rect x="176" y="176" width="56" height="40" rx="8" />
-        <path d="M80 60h48v48" />
-        <path d="M156 128h48v48" />
+        <rect x="24" y="48" width="208" height="160" rx="12" />
+        <path d="M48 128h40l20-40 40 80 20-40h40" />
         <circle
           class="i-token"
           cx="0"
@@ -46,7 +43,7 @@ if (!slugs.includes(slug)) {
           r="12"
           fill="currentColor"
           stroke="none"
-          style="offset-path: path('M52 60H128V128H204V196')"
+          style="offset-path: path('M48 128H88L108 88L148 168L168 128H208')"
         />
       </>
     )}

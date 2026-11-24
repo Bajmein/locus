@@ -1,0 +1,108 @@
+---
+import Diagram from '../Diagram.astro';
+import Node from './Node.astro';
+
+const W = 132;
+const H = 44;
+
+// Las ocho fases de SddPhase (src/pulse/domain/workflow_types.py); `gate` marca la compuerta para entrar
+const phases = [
+  { name: 'explore', gate: null },
+  { name: 'propose', gate: null },
+  { name: 'specify', gate: null },
+  { name: 'design', gate: null },
+  { name: 'break-to-tasks', gate: null },
+  { name: 'apply', gate: 'aprobación humana' },
+  { name: 'review', gate: null },
+  { name: 'close', gate: 'revisión automática' },
+];
+
+// Ancha: serpiente de dos filas; la primera de izquierda a derecha, la segunda de vuelta
+const xs = [8, 172, 336, 500];
+const R1 = 40;
+const R2 = 144;
+const snake = phases.map((p, i) => ({ ...p, x: i < 4 ? xs[i] : xs[7 - i], y: i < 4 ? R1 : R2 }));
+const C1 = R1 + H / 2;
+const C2 = R2 + H / 2;
+const first = xs[0] + W / 2;
+const last = xs[3] + W / 2;
+
+// Angosta: lista vertical con la compuerta junto a la flecha
+const STEP = 64;
+const list = phases.map((p, i) => ({ ...p, x: 8, y: 40 + i * STEP, h: 40 }));
+const LX = 8 + W / 2;
+const end = list[7].y + 40;
+---
+
+<Diagram
+  id="pulse"
+  title="Fases de un cambio en pulse"
+  desc="Un cambio recorre ocho fases: explore, propose, specify, design, break-to-tasks, apply, review y close. Para entrar a apply hace falta la aprobación humana del diseño, y close solo ocurre si la revisión automática (ruff, bandit, vulture, deptry, pytest y ty) pasa."
+  wide={{ width: 640, height: 240 }}
+  narrow={{ width: 240, height: 576 }}
+>
+  <Fragment slot="wide">
+    <line class="d-line" x1={first} y1="18" x2={first} y2={R1}></line>
+    {
+      snake.slice(0, 3).map((s) => <line class="d-line" x1={s.x + W} y1={C1} x2={s.x + 164} y2={C1} />)
+    }
+    <line class="d-line" x1={last} y1={R1 + H} x2={last} y2={R2}></line>
+    {
+      snake
+        .slice(4, 7)
+        .map((s, i) => (
+          <line class:list={['d-line', { 'is-accent': snake[i + 5].gate }]} x1={s.x} y1={C2} x2={s.x - 32} y2={C2} />
+        ))
+    }
+    <text class="d-cmd" x="484" y="212" text-anchor="middle">aprobación humana</text>
+    <text class="d-cmd" x="156" y="212" text-anchor="middle">revisión automática</text>
+    <line class="d-line" x1={first} y1={R2 + H} x2={first} y2="216"></line>
+
+    <circle
+      class="d-token"
+      r="4"
+      aria-hidden="true"
+      style={`offset-path: path('M${first} 18 V${C1} H${last} V${C2} H${first} V216'); --d-dur: 10s`}
+    ></circle>
+
+    <circle class="d-dot" cx={first} cy="12" r="6"></circle>
+    {snake.map((s, i) => <Node x={s.x} y={s.y} w={W} h={H} rx={8} name={s.name} focal={i === 7} />)}
+    <circle class="d-ring" cx={first} cy="224" r="8"></circle>
+    <circle class="d-dot" cx={first} cy="224" r="4.5"></circle>
+  </Fragment>
+
+  <Fragment slot="narrow">
+    <line class="d-line" x1={LX} y1="18" x2={LX} y2="40"></line>
+    {
+      list.slice(0, 7).map((s, i) => (
+        <>
+          <line
+            class:list={['d-line', { 'is-accent': list[i + 1].gate }]}
+            x1={LX}
+            y1={s.y + s.h}
+            x2={LX}
+            y2={s.y + STEP}
+          />
+          {list[i + 1].gate && (
+            <text class="d-cmd" x={LX + 12} y={s.y + s.h + 16}>
+              {list[i + 1].gate}
+            </text>
+          )}
+        </>
+      ))
+    }
+    <line class="d-line" x1={LX} y1={end} x2={LX} y2={end + 24}></line>
+
+    <circle
+      class="d-token"
+      r="4"
+      aria-hidden="true"
+      style={`offset-path: path('M${LX} 18 V${end + 24}'); --d-dur: 10s`}
+    ></circle>
+
+    <circle class="d-dot" cx={LX} cy="12" r="6"></circle>
+    {list.map((s, i) => <Node x={s.x} y={s.y} w={W} h={s.h} rx={8} name={s.name} focal={i === 7} />)}
+    <circle class="d-ring" cx={LX} cy={end + 32} r="8"></circle>
+    <circle class="d-dot" cx={LX} cy={end + 32} r="4.5"></circle>
+  </Fragment>
+</Diagram>
