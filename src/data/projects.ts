@@ -13,7 +13,13 @@ export interface Project {
   /** Período de trabajo, para la tarjeta */
   period: string;
   /** Tarjeta de la portada; context aclara la línea de tiempo cuando hace falta (Vigilia) */
-  card: { text: string; stack: string[]; context?: string };
+  card: {
+    text: string;
+    stack: string[];
+    context?: string;
+    /** Prueba breve con fuente: cifra o hecho verificable */
+    proof: string;
+  };
 }
 
 // Orden de la portada: agentes primero
@@ -29,8 +35,9 @@ export const projects: Project[] = [
     group: 'agentes',
     period: 'Octubre de 2026 — hoy',
     card: {
-      text: 'Memoria y documentación persistente para agentes de IA, servida por MCP.',
+      text: 'Los agentes de código recuerdan decisiones y lecciones entre sesiones, en notas Markdown del usuario.',
       stack: ['Python', 'MCP', 'SQLite FTS5'],
+      proof: 'En uso diario · v0.13 · 336 commits',
     },
   },
   {
@@ -45,8 +52,9 @@ export const projects: Project[] = [
     group: 'agentes',
     period: 'Mayo — julio de 2026',
     card: {
-      text: 'Máquina de estados que gobierna cada cambio, con compuertas entre fases y revisión automática.',
+      text: 'Un motor que no deja al agente saltarse fases: cada cambio avanza solo con su especificación, su diseño aprobado y sus pruebas.',
       stack: ['Python', 'FastMCP', 'Pydantic'],
+      proof: '244 tests · ocho fases con compuertas',
     },
   },
   {
@@ -64,6 +72,7 @@ export const projects: Project[] = [
       text: 'Análisis de video en tiempo real que detecta y responde a incidentes mientras ocurren.',
       stack: ['Rust', 'Python', 'NVDEC'],
       context: 'Segunda generación de Vigilia, 2026',
+      proof: 'Proyecto de título · decodificación por GPU en Rust',
     },
   },
   {
@@ -72,15 +81,16 @@ export const projects: Project[] = [
     description:
       'Vigilia Edge: vigilancia inteligente de escritorio con inferencia local, núcleo en Rust, interfaz PySide6 y pipeline de video de alto rendimiento.',
     tagline: 'Sistema de vigilancia inteligente que corre completamente en local: sin nube y sin latencia de red.',
-    status: 'v1.0 — operativa en estaciones de trabajo locales',
+    status: 'v1.1.0 — operativa en estaciones de trabajo locales',
     stack: ['YOLO', 'TensorRT', 'Rust', 'PySide6'],
     repoUrl: 'https://github.com/Bajmein/vigilia-edge-showcase',
     group: 'vision',
     period: '2025',
     card: {
-      text: 'Vigilancia inteligente de escritorio con inferencia local, sin nube.',
+      text: 'Detección y seguimiento de objetos en tiempo real en un PC de escritorio, sin nube.',
       stack: ['YOLO', 'TensorRT', 'PySide6'],
       context: 'Primera generación de Vigilia, 2025',
+      proof: 'Menos de dos cuadros (≈ 80 ms) de la cámara a la pantalla',
     },
   },
 ];
