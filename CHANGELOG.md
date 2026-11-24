@@ -22,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- «Ahora» pone a episteme como el foco del tiempo libre y deja a fabrik como la herramienta en uso; sale la tercera versión de Vigilia.
 - pulse reemplaza a Forge en las tarjetas de la portada y en el CV; Forge queda en la línea de tiempo de `#agentes`, sin página propia. El período de pulse se corrige a mayo — julio de 2026.
 - El trabajo actual se describe en términos generales, sin procesos internos ni datos comerciales de la empresa; la consola del hero vuelve al ciclo de un cambio.
 - Perfil general de Encargado de TI en el hero, la metadescripción, el JSON-LD (`knowsAbout`) y el CV, con Python como lenguaje principal.
