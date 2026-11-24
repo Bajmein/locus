@@ -1,12 +1,15 @@
 ---
-// Íconos de línea de Phosphor Icons (vía IconScout, licencia libre para uso comercial), en src/assets/icons/.
-// Astro los incrusta como SVG en línea; el trazo usa currentColor y hereda el color del enlace.
-// Son decorativos: el texto del enlace da el nombre accesible.
+// Íconos de línea de Phosphor Icons, en src/assets/icons/.
+// Astro los incrusta como SVG en línea; el trazo usa currentColor y hereda el color del contenedor.
+// Son decorativos: el texto adyacente da el nombre accesible.
+import code from '../assets/icons/code.svg';
+import flow from '../assets/icons/flow.svg';
 import github from '../assets/icons/github.svg';
 import linkedin from '../assets/icons/linkedin.svg';
 import mail from '../assets/icons/mail.svg';
+import terminal from '../assets/icons/terminal.svg';
 
-const icons = { github, linkedin, mail };
+const icons = { code, flow, github, linkedin, mail, terminal };
 
 interface Props {
   name: keyof typeof icons;

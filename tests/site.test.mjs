@@ -387,7 +387,7 @@ test('portada: qué hago con evidencia y sin sección de TI', () => {
     return html.slice(start, html.indexOf('</section>', start));
   };
   const areas = section('areas');
-  assert.ok(areas.includes('class="method'), '#areas debe usar la lista method');
+  assert.ok(areas.includes('class="areas-grid'), '#areas debe usar la grilla areas-grid');
   assert.equal(areas.match(/<li/g)?.length, 3, '#areas debe tener tres áreas');
   assert.equal(areas.match(/class="evidence"/g)?.length, 3, 'cada área debe traer su evidencia');
   assert.ok(!html.includes('id="ti"'), 'la sección #ti ya no va en la portada');

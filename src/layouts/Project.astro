@@ -22,6 +22,7 @@ const period = projects[index]?.period;
 const group = projects[index]?.group ?? 'agentes';
 // Código abierto: enlace al repositorio en la ficha, con el ícono de GitHub
 const source = projects[index]?.sourceUrl;
+const metrics = projects[index]?.metrics ?? [];
 // Rótulo sobre el título (como en la tarjeta) y firma técnica que detecta la caja
 const groupLabel = { agentes: 'Agentes de IA', vision: 'Visión por computador' }[group];
 const detected =
@@ -59,6 +60,19 @@ const schema = {
       <p class="tagline">{tagline}</p>
     </header>
 
+    {
+      metrics.length > 0 && (
+        <dl class="metrics glass" aria-label="Indicadores clave">
+          {metrics.map((m) => (
+            <div class="metric">
+              <dt class="mono">{m.value}</dt>
+              <dd>{m.label}</dd>
+            </div>
+          ))}
+        </dl>
+      )
+    }
+
     <div class="project-grid">
       <aside class="glass meta" aria-label="Ficha del proyecto">
         <p class="label">Estado</p>
@@ -73,6 +87,19 @@ const schema = {
                 <a class="repo mono" href={source}>
                   <Icon name="github" />
                   {source.replace('https://github.com/', '')}
+                </a>
+              </p>
+            </>
+          )
+        }
+        {
+          !source && repoUrl && (
+            <>
+              <p class="label">Vitrina técnica</p>
+              <p class="status">
+                <a class="repo mono" href={repoUrl}>
+                  <Icon name="github" />
+                  {repoUrl.replace('https://github.com/', '')}
                 </a>
               </p>
             </>
@@ -99,7 +126,7 @@ const schema = {
       <div>
         <p class="label">Contacto</p>
         <p>¿Te interesa una solución similar para tu equipo o tu empresa? Escríbeme.</p>
-        <a class="btn" href={`mailto:${site.email}`}>{site.email}</a>
+        <a class="btn" href={`mailto:${site.email}`}><Icon name="mail" />{site.email}</a>
       </div>
     </footer>
 
@@ -195,6 +222,48 @@ const schema = {
     color: var(--muted);
     max-width: var(--w-prose);
     margin-bottom: 0;
+  }
+
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+    padding: 1.25rem 1.5rem;
+    margin: 0 0 2.75rem;
+  }
+
+  .metric + .metric {
+    padding-left: 1.5rem;
+    border-left: 1px solid var(--glass-border);
+  }
+
+  .metric dt {
+    font-size: clamp(1.25rem, 2.2vw, 1.5rem);
+    font-weight: 600;
+    color: var(--accent);
+    line-height: 1.2;
+    margin-bottom: 0.25rem;
+  }
+
+  .metric dd {
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  @media (max-width: 680px) {
+    .metrics {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1rem;
+    }
+
+    .metric + .metric {
+      padding-left: 0;
+      padding-top: 1rem;
+      border-left: 0;
+      border-top: 1px solid var(--glass-border);
+    }
   }
 
   .project-grid {
