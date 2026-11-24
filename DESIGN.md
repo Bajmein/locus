@@ -84,7 +84,7 @@ Escala: 13 · 14 · 15,5 · 17 · 20–24 (lead) · 28–44 (tarjetas) · 32–5
   1 px al 22 % y etiqueta mono sobre el acento; se fija al cargar. En móvil sobresale menos para no
   salirse del gutter. Variante `.is-miss` (404, «sin detección»): contorno discontinuo y todo en
   `--muted`.
-- **Consola** (`.console`): panel con el ciclo de un requerimiento; verbo en ámbar, estado en verde.
+- **Consola** (`.console`): panel con el ciclo de un cambio; verbo en ámbar, estado en verde.
 - **Qué hago** (`#areas`): tres fortalezas en la lista `.method` (tres columnas con líneas de 1 px, `h3`).
 - **Trabajo actual** (`#ti`): funciones del cargo con `Capabilities` (`dl.caps`, dos columnas).
 - **Tarjeta de proyecto**: superficie sólida (no glass: la marca de agua necesita un fondo parejo),

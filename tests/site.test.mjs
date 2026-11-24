@@ -283,6 +283,16 @@ test('privacidad: ningún HTML ni texto filtra datos que no deben publicarse', (
   }
 });
 
+test('privacidad: sin procesos internos de la empresa', () => {
+  const internal = ['ticket', 'gerencia', 'prospecto', 'clientes internos', 'teletrabajo', 'conversiones'];
+  for (const file of [...htmlFiles(), ...distFiles('.txt')]) {
+    const text = readFileSync(file, 'utf8').toLowerCase();
+    for (const word of internal) {
+      assert.ok(!text.includes(word), `${file} contiene «${word}»`);
+    }
+  }
+});
+
 test('cabecera: sección activa y logo con nombre accesible', () => {
   assert.match(
     read('episteme/index.html'),

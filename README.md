@@ -6,7 +6,7 @@ Código fuente de [benjamincriado.dev](https://benjamincriado.dev): qué hago, t
 
 ## Qué hago y trabajo actual
 
-La portada parte por tres fortalezas («Qué hago»: desarrollo de software en Python, nube y automatización, e IA aplicada) y por el trabajo actual («A cargo del área de TI» de un grupo de empresas: sitios web, datos e integraciones, IA y automatización, y gestión del área), sin nombrar la empresa.
+La portada parte por tres fortalezas («Qué hago»: desarrollo de software en Python, nube y automatización, e IA aplicada) y por el trabajo actual («A cargo del área de TI» de un grupo de empresas: sitios web, datos e integraciones, IA y automatización, y soporte), sin nombrar la empresa.
 
 ## Especialidad: trabajo con agentes
 

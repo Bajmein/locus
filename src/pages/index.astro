@@ -28,26 +28,26 @@ const areas = [
   },
   {
     title: 'IA aplicada',
-    text: 'Agentes de IA para atención y operación, herramientas propias para trabajar con agentes de código y visión por computador en tiempo real.',
+    text: 'Agentes de IA aplicados a procesos de negocio, herramientas propias para trabajar con agentes de código y visión por computador en tiempo real.',
   },
 ];
 
 const work = [
   {
     title: 'Sitios y plataformas web',
-    text: 'Desarrollo y mantención de los sitios corporativos: dominios, hosting, certificados, rendimiento, seguridad y medición de conversiones.',
+    text: 'Desarrollo y mantención de los sitios corporativos: dominios, hosting, certificados, rendimiento y seguridad.',
   },
   {
     title: 'Datos e integraciones',
-    text: 'Bases de datos de clientes y prospectos con permisos y respaldos; integraciones por API entre sitios, formularios, CRM y WhatsApp Business.',
+    text: 'Bases de datos con permisos y respaldos, e integraciones por API entre sitios y sistemas.',
   },
   {
     title: 'IA y automatización',
-    text: 'Agentes de IA para atención de clientes y automatización de las comunicaciones y del seguimiento de prospectos.',
+    text: 'Agentes de IA y automatización de procesos que antes eran manuales.',
   },
   {
-    title: 'Gestión del área',
-    text: 'Solicitudes por tickets, prioridades acordadas con gerencia, reportes de avance, proveedores y costos, accesos, estándares técnicos, documentación y soporte.',
+    title: 'Soporte y estándares',
+    text: 'Soporte técnico, estándares de desarrollo y documentación técnica.',
   },
 ];
 
@@ -56,7 +56,7 @@ const experience = [
     date: '2026 — hoy',
     role: 'Encargado de TI',
     org: 'Grupo de empresas (remoto)',
-    text: 'Responsable del área de tecnología, con dependencia de gerencia general: sitios web, datos e integraciones, automatización, agentes de IA y soporte.',
+    text: 'Responsable del área de tecnología: sitios web, datos e integraciones, automatización, agentes de IA y soporte.',
   },
   {
     date: '2026',
@@ -147,14 +147,14 @@ const tech = [
 const totalCommits = trail.reduce((n, t) => n + t.commits, 0);
 const totalPrs = trail.reduce((n, t) => n + t.prs, 0);
 
-// Ciclo de un requerimiento (consola del hero): bloque K del cargo, sin cifras
+// Ciclo de un cambio (consola del hero): el método de fabrik y episteme, sin cifras inventadas
 const cycle = [
-  { verb: 'recibir', text: 'Solicitud por ticket', state: 'ok' },
-  { verb: 'priorizar', text: 'Acordado con gerencia', state: 'ok' },
-  { verb: 'estimar', text: 'Tiempos, costos y riesgos', state: 'ok' },
-  { verb: 'implementar', text: 'Especificación y tests', state: 'ok' },
-  { verb: 'documentar', text: 'Configuración y decisiones', state: 'ok' },
-  { verb: 'entregar', text: 'Lo aprueba gerencia', state: 'espera' },
+  { verb: 'especificar', text: 'Especificación verificable', state: 'ok' },
+  { verb: 'planificar', text: 'Fuentes y decisiones cerradas', state: 'ok' },
+  { verb: 'implementar', text: 'Subagentes con tareas acotadas', state: 'ok' },
+  { verb: 'verificar', text: 'Tests, lint y tipos en verde', state: 'ok' },
+  { verb: 'recordar', text: 'Decisión guardada en episteme', state: 'ok' },
+  { verb: 'fusionar', text: 'Lo decide una persona', state: 'espera' },
 ];
 
 const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as const;
@@ -185,8 +185,8 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
 
     <figure class="console glass" aria-labelledby="ciclo">
       <figcaption id="ciclo">
-        <span>Ciclo de un requerimiento</span>
-        <span class="mono muted">área de TI</span>
+        <span>Ciclo de un cambio</span>
+        <span class="mono muted">fabrik + episteme</span>
       </figcaption>
       <ol class="log mono">
         {
@@ -246,8 +246,8 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
         <h2 id="ti-title">A cargo del área de TI</h2>
       </div>
       <p class="muted">
-        En un grupo de empresas, con dependencia de gerencia general y teletrabajo desde La Serena. Las demás áreas
-        son clientes internos y piden por tickets.
+        Soy responsable de la tecnología de un grupo de empresas: lo que se construye, se integra, se automatiza y se
+        mantiene.
       </p>
     </div>
     <Capabilities items={work} />
