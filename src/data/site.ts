@@ -1,6 +1,12 @@
 export const site = {
   name: 'Benjamín Criado',
   fullName: 'Benjamín Ignacio Criado Rossa',
+  /** Sobrenombre con que también me conocen */
+  alias: 'Kenno',
+  /** Usuario de GitHub */
+  handle: 'Bajmein',
+  /** Otras formas del nombre, para el JSON-LD (`alternateName`) */
+  alternateNames: ['Benjamín Ignacio Criado Rossa', 'Benjamín Criado Rossa', 'Benjamín C. Rossa', 'Kenno', 'Bajmein'],
   jobTitle: 'Ingeniero informático',
   location: 'La Serena, Chile',
   description:

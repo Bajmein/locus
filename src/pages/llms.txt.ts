@@ -15,6 +15,8 @@ export const GET: APIRoute = ({ site: base }) => {
     '',
     `> ${site.description}`,
     '',
+    `${site.name} (${site.alias}; ${site.handle} en GitHub). Nombre completo: ${site.fullName}.`,
+    '',
     '## Páginas',
     '',
     `- [Inicio](${url('/')})`,

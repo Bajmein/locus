@@ -424,3 +424,42 @@ test('caja de detección en portada, proyectos y 404', () => {
   assert.equal((agentes.match(/class="label nopage"/g) ?? []).length, 3, '#agentes: cada paso lleva su estado');
   assert.ok(!read('index.html').includes('Tests, lint'), 'consola del hero: usar «Pruebas» en vez de «Tests»');
 });
+
+const jsonLd = (file) =>
+  JSON.parse(read(file).match(/<script type="application\/ld\+json">([^<]+)<\/script>/)?.[1] ?? '{"@graph":[]}')['@graph'];
+
+test('identidad: alias Kenno y Bajmein en el JSON-LD, el pie y llms.txt', () => {
+  for (const [url, file] of Object.entries(allPages)) {
+    const person = jsonLd(file).find((node) => node['@type'] === 'Person');
+    assert.ok(person, `${url}: JSON-LD sin Person`);
+    for (const alias of ['Kenno', 'Bajmein']) {
+      assert.ok(person.alternateName?.includes(alias), `${url}: alternateName sin ${alias}`);
+    }
+    const html = read(file);
+    const footer = html.slice(html.indexOf('class="site-footer'), html.lastIndexOf('</footer>')).replace(/<[^>]+>/g, '');
+    assert.ok(footer.includes('(Kenno)'), `${url}: el pie no muestra «(Kenno)»`);
+    assert.ok(footer.includes('Bajmein'), `${url}: el pie no muestra «Bajmein»`);
+  }
+  const llms = read('llms.txt');
+  assert.ok(llms.includes('Kenno') && llms.includes('Bajmein'), 'llms.txt sin los alias');
+});
+
+test('CV: ProfilePage cuya entidad principal es la persona', () => {
+  const profile = jsonLd('cv/index.html').find((node) => node['@type'] === 'ProfilePage');
+  assert.ok(profile, '/cv/: JSON-LD sin ProfilePage');
+  assert.ok(profile.mainEntity?.['@id']?.endsWith('#persona'), '/cv/: mainEntity no apunta a #persona');
+});
+
+test('episteme: medición de embeddings, instalación y sin afirmaciones vetadas', () => {
+  const html = read('episteme/index.html');
+  const bars = html.slice(html.indexOf('class="bars'), html.indexOf('</table>', html.indexOf('class="bars')));
+  assert.ok(html.includes('class="bars'), 'episteme: falta el gráfico de barras');
+  assert.equal(count(bars, /<th scope="row"/g), 3, 'episteme: el gráfico tiene tres filas');
+  assert.ok(html.includes('scripts/measure_semantic.py'), 'episteme: falta el enlace a measure_semantic.py');
+  assert.ok(html.includes('claude plugin marketplace add Bajmein/episteme'), 'episteme: falta el comando de instalación');
+  const caps = html.slice(html.indexOf('class="caps'), html.indexOf('</dl>', html.indexOf('class="caps')));
+  assert.equal(count(caps, /<dt\b/g), 6, 'episteme: seis capacidades');
+  for (const banned of ['no salen de la máquina', 'Codex', 'Copilot', '<!--']) {
+    assert.ok(!html.includes(banned), `episteme: no debe contener «${banned}»`);
+  }
+});

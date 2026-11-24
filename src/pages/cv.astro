@@ -65,7 +65,16 @@ const stack = [
 ];
 ---
 
-<Base title={cv.title} description={cv.description}>
+<Base
+  title={cv.title}
+  description={cv.description}
+  schema={{
+    '@type': 'ProfilePage',
+    '@id': new URL('/cv/#perfil', Astro.site).href,
+    url: new URL('/cv/', Astro.site).href,
+    mainEntity: { '@id': new URL('/#persona', Astro.site).href },
+  }}
+>
   <article class="container cv">
     <header class="cv-head">
       <div>

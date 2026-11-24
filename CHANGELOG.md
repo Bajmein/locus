@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Identidad: el sobrenombre Kenno y el usuario de GitHub Bajmein, visibles en el pie de todas las páginas, en `alternateName` (con `givenName`, `familyName` y `description`) del nodo `Person` y en una línea de `llms.txt`; `/cv/` se declara como `ProfilePage` de la persona. Con sus pruebas, y las de la página de episteme (gráfico, instalación y afirmaciones vetadas).
 - Página de episteme: secciones «Búsqueda por palabras, no por embeddings», con el gráfico de barras de la medición del 15-11-2026 (`EmbeddingsChart.astro`, tabla semántica), «Instalación» y «Por qué lo construí».
 - Páginas de proyecto: banda superior de tres indicadores clave verificables (`.metrics.glass`), enlace directo al repositorio vitrina en la ficha lateral `.meta` y matriz visual «Límite → Capa» en `Vigilia Edge`.
 - Página de episteme: selector por pestañas («Evolución» / «Vista fija») e indicador interactivo de reproducción/pausa dentro de un único marco `.graph.glass`.
@@ -75,6 +76,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- El comentario de `Diagram.astro` ya no se publica en el HTML (comentario de JSX en vez de HTML).
 - Portada: la consola «Ciclo de un cambio» se alinea arriba con el antetítulo y el nombre; en escritorio, el relleno del riel de `#agentes` recorre la línea en 2,8 s al entrar en pantalla en lugar de completarse con unos pocos giros de rueda, y en móvil baja a la altura del centro de la pantalla.
 - Revisión del rediseño: textos sin respaldo corregidos en el hero (cargo y herramientas propias), la introducción de «Proyectos» y los indicadores de episteme, Vigilia y Vigilia Edge (sin «trackers»); el problema de Vigilia Edge nombra los cuatro límites de su matriz, que pasa a ser una lista ordenada; los cuatro pasos de `#agentes` muestran su estado; el visor del grafo de episteme tiene HTML válido (cada pie en su `figure`), un botón de pausa nombrado por su texto visible y las dos vistas visibles sin JavaScript; los indicadores usan `dt` para la descripción y `dd` para la cifra; la insignia de episteme se alinea a la izquierda en móvil; la práctica profesional del CV queda sin la descripción que no tenía fuente (PDF regenerado en dos páginas), y se quita la regla `pre.flow` sin uso. Tests del visor y del estado de cada paso.
 - Diagramas en su composición ancha en escritorio: la columna de prosa mide 46rem y ya no depende de la fuente.
