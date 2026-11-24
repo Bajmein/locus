@@ -2,7 +2,8 @@
 /**
  * Gráfico de barras horizontales de la medición de embeddings de episteme. Es una tabla semántica: cada fila lleva
  * su rótulo, la barra (decorativa, `aria-hidden`) y la cifra con su porcentaje, así que se lee igual sin la barra.
- * La fila `strong` va en el acento (el tono de la página); las demás, en gris.
+ * La fila `strong` va en el acento (el tono de la página); las demás, en gris. Los roles ARIA explícitos mantienen la
+ * semántica de tabla cuando, en móvil, las filas pasan a rejilla.
  */
 interface Row {
   label: string;
@@ -21,22 +22,31 @@ const share = (v: number) => (v / total) * 100;
 ---
 
 <figure class="chart glass">
-  <table class="bars">
+  <table class="bars" role="table">
     <caption>
       {total} consultas reales sobre 523 memorias; bge-m3 en Ollama, solo CPU, {date}
     </caption>
-    <thead class="sr-only">
-      <tr><th scope="col">Resultado</th><th scope="col">Proporción</th><th scope="col">Consultas</th></tr>
+    <colgroup>
+      <col class="col-label" />
+      <col />
+      <col class="col-value" />
+    </colgroup>
+    <thead class="sr-only" role="rowgroup">
+      <tr role="row">
+        <th scope="col" role="columnheader">Resultado</th>
+        <th scope="col" role="columnheader">Proporción</th>
+        <th scope="col" role="columnheader">Consultas</th>
+      </tr>
     </thead>
-    <tbody>
+    <tbody role="rowgroup">
       {
         rows.map((r) => (
-          <tr class:list={{ 'is-strong': r.strong }}>
-            <th scope="row">{r.label}</th>
-            <td class="bar-cell">
+          <tr role="row" class:list={{ 'is-strong': r.strong }}>
+            <th scope="row" role="rowheader">{r.label}</th>
+            <td class="bar-cell" role="cell">
               <span class="bar" style={`--v: ${share(r.value).toFixed(1)}%`} aria-hidden="true" />
             </td>
-            <td class="mono value">
+            <td class="mono value" role="cell">
               {r.value} ({Math.round(share(r.value))} %)
             </td>
           </tr>
@@ -78,8 +88,16 @@ const share = (v: number) => (v / total) * 100;
     border-bottom: 0;
   }
 
+  /* Con table-layout: fixed, el ancho de las columnas sale del colgroup */
+  .col-label {
+    width: 34%;
+  }
+
+  .col-value {
+    width: 5.5rem;
+  }
+
   .bars th[scope='row'] {
-    width: 42%;
     color: var(--muted);
     font-size: 0.875rem;
     font-weight: 400;
@@ -87,16 +105,11 @@ const share = (v: number) => (v / total) * 100;
   }
 
   .bars .value {
-    width: 6.5rem;
     padding-right: 0;
     text-align: right;
     white-space: nowrap;
     color: var(--muted);
     font-size: 0.8125rem;
-  }
-
-  .bars .bar-cell {
-    width: auto;
   }
 
   /* Barra anclada a la izquierda, con el extremo de datos redondeado y un mínimo visible para las cifras chicas */
@@ -117,17 +130,47 @@ const share = (v: number) => (v / total) * 100;
     background: var(--accent);
   }
 
-  @media (max-width: 30rem) {
+  /* En móvil, el rótulo ocupa su propia línea y la barra y la cifra van debajo */
+  @media (max-width: 36rem) {
     .chart {
       padding-inline: 0.85rem;
     }
 
-    .bars th[scope='row'] {
-      width: 45%;
+    .bars,
+    .bars tbody {
+      display: block;
     }
 
-    .bars .value {
-      width: 5.25rem;
+    .bars colgroup {
+      display: none;
+    }
+
+    .bars caption {
+      display: block;
+    }
+
+    .bars tbody tr {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      column-gap: 0.75rem;
+      padding: 0.65rem 0;
+      border-bottom: 1px solid var(--glass-border);
+    }
+
+    .bars tbody tr:last-child {
+      border-bottom: 0;
+    }
+
+    .bars tbody th[scope='row'] {
+      grid-column: 1 / -1;
+      padding: 0 0 0.4rem;
+      border: 0;
+    }
+
+    .bars tbody td {
+      padding: 0;
+      border: 0;
     }
   }
 
