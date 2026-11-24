@@ -33,7 +33,7 @@ export const projects: Project[] = [
     description:
       'episteme: memoria y documentación persistentes para agentes de IA, servidas por MCP desde un vault de notas Markdown que el usuario controla.',
     tagline: 'Documentación y memoria de proyectos para agentes, servida por MCP desde un vault Markdown.',
-    status: 'En uso diario — v0.13 (noviembre de 2026). Linux, macOS y Windows. Código abierto con licencia MIT.',
+    status: 'En uso diario — v0.21 (noviembre de 2026). Linux, macOS y Windows. Código abierto con licencia MIT.',
     stack: ['Python', 'MCP', 'SQLite FTS5', 'Markdown'],
     sourceUrl: 'https://github.com/Bajmein/episteme',
     group: 'agentes',
@@ -41,7 +41,7 @@ export const projects: Project[] = [
     card: {
       text: 'Los agentes de código recuerdan decisiones y lecciones entre sesiones, en notas Markdown del usuario.',
       stack: ['Python', 'MCP', 'SQLite FTS5'],
-      proof: 'Código abierto · en uso diario · 336 commits',
+      proof: 'Código abierto · en uso diario · 390 commits',
     },
   },
   {
