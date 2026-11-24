@@ -7,7 +7,7 @@ import Capabilities from '../components/Capabilities.astro';
 const capabilities = [
   {
     title: 'Detección en tiempo real',
-    text: 'Análisis continuo de video con aceleración GPU. Baja latencia desde la captura hasta la decisión, diseñado para entornos donde cada segundo cuenta.',
+    text: 'Análisis continuo de video con decodificación e inferencia aceleradas por GPU, desde la captura hasta la decisión.',
   },
   {
     title: 'Zonas de seguridad configurables',
@@ -19,11 +19,11 @@ const capabilities = [
   },
   {
     title: 'Integración con ecosistemas VMS',
-    text: 'Exporta metadatos de analítica hacia sistemas de gestión de video (VMS) mediante protocolos estándar de la industria, sin dependencia de un proveedor específico.',
+    text: 'Exporta metadatos de analítica a sistemas de gestión de video (VMS) por ONVIF Profile M y MQTT, sin atarse a un proveedor.',
   },
   {
     title: 'Acceso remoto seguro',
-    text: 'Monitoreo en tiempo real desde cualquier ubicación con acceso cifrado de extremo a extremo. Sin necesidad de exponer puertos ni depender de servicios en la nube de terceros.',
+    text: 'Monitoreo en vivo desde cualquier lugar por Tailscale y WebRTC (WHEP), sin exponer puertos ni depender de una nube de terceros.',
   },
   {
     title: 'Interfaz de escritorio nativa',
@@ -56,16 +56,14 @@ const p = getProject('vigilia');
   repoUrl={p.repoUrl}
 >
   <p>
-    Vigilia es una plataforma de seguridad que transforma flujos de video en inteligencia operativa en tiempo
-    real. En lugar de grabar para revisar después de un incidente, Vigilia analiza, decide y actúa mientras
-    los eventos ocurren.
+    Vigilia es una plataforma de monitoreo que analiza video en tiempo real y responde a los eventos mientras
+    ocurren, en lugar de grabar para revisar después.
   </p>
 
   <h2>El problema</h2>
   <p>
-    Los sistemas de CCTV tradicionales son reactivos por diseño: almacenan video que alguien revisa después.
-    Esto tiene un costo operativo alto y una tasa de respuesta baja. La mayoría de los incidentes no se
-    detectan a tiempo no por falta de cámaras, sino por falta de capacidad para procesar lo que capturan.
+    Un sistema de CCTV tradicional graba para que alguien revise después. Con varias cámaras, nadie alcanza a
+    mirarlo todo a tiempo: el límite no es la cantidad de cámaras, sino la capacidad de procesar lo que capturan.
   </p>
 
   <h2>La solución</h2>
@@ -81,6 +79,24 @@ const p = getProject('vigilia');
     Vigilia se construyó con Forge, mi primer pipeline de desarrollo guiado por especificaciones, antecesor de
     <a href="/pulse/">pulse</a>.
   </p>
+
+  <h2>Decisiones técnicas</h2>
+  <ul>
+    <li>
+      Decodificación en la GPU: un módulo en Rust usa NVDEC y convierte el color con PTX, sin pasar los cuadros por
+      la CPU.
+    </li>
+    <li>
+      Un bus de memoria compartida en Rust (Iceoryx2) comunica los módulos sin copiar datos, con mensajes de ABI fija
+      de 192 bytes.
+    </li>
+    <li>Un watchdog en Rust gestiona el ciclo de vida de la memoria de video.</li>
+    <li>
+      Python orquesta con asyncio y Pydantic: el motor de reglas usa una cola de prioridad para que una alarma más
+      grave se adelante a otra.
+    </li>
+    <li>Grabación por GPU con NvEnc y visor de escritorio en PySide6 con un puente CUDA-GL.</li>
+  </ul>
 
   <h2>Capacidades</h2>
   <Capabilities items={capabilities} />

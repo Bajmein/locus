@@ -22,19 +22,50 @@ const p = getProject('vigilia-edge');
   status={p.status}
   repoUrl={p.repoUrl}
 >
-  <h2>Qué hace</h2>
   <p>Vigilancia local sin dependencia de la nube, con latencia predecible y sin comprometer la privacidad.</p>
-  <ul>
-    <li>
-      Detecta y rastrea objetos en video en tiempo real mediante inferencia local (YOLOv11/v12), con backend
-      acelerado seleccionable: TensorRT para máximo rendimiento u ONNX Runtime GPU como alternativa portable.
-    </li>
-    <li>Renderiza las detecciones sobre el video en una interfaz nativa de escritorio PySide6 (Qt 6).</li>
-    <li>Mueve los cuadros de la cámara a la pantalla con baja latencia mediante un pipeline de alto rendimiento.</li>
-    <li>Gestiona todo el procesamiento a través de un núcleo en Rust compilado como extensión nativa.</li>
-  </ul>
 
-  <h2>Stack técnico</h2>
+  <h2>El problema</h2>
+  <p>
+    Procesar video en tiempo real con Python choca con tres límites. A 25 cuadros por segundo hay 40 ms por cuadro,
+    y cada copia de un cuadro Full HD (unos 6 MB) gasta parte de ese presupuesto. PySide6 exige dibujar en el hilo
+    principal de Qt, así que la inferencia no puede correr ahí. Y el GIL de CPython impide el paralelismo real entre
+    hilos.
+  </p>
+
+  <h2>La solución</h2>
+  <p>Cuatro capas, cada una contra uno de esos límites:</p>
+  <ol>
+    <li>
+      Procesos separados (<code>multiprocessing</code>) para detección, seguimiento e interfaz, cada uno con su
+      propio GIL.
+    </li>
+    <li>Memoria compartida: cada cuadro se escribe una sola vez y todos los procesos lo leen sin copiarlo.</li>
+    <li>
+      Iceoryx para los metadatos (cajas, puntajes, marcas de tiempo): publicación y suscripción con latencia bajo
+      el microsegundo y sin locks de Python.
+    </li>
+    <li>
+      Un núcleo en Rust (PyO3 y Maturin) que decodifica, reparte el trabajo entre procesos y recoge métricas fuera
+      del GIL.
+    </li>
+  </ol>
+
+  <h2>Resultado</h2>
+  <p>
+    Menos de dos cuadros de latencia de extremo a extremo (≈ 80 ms a 25 fps), desde la cámara hasta el recuadro
+    dibujado en pantalla, sin copiar el cuadro entre procesos. Prometheus expone los fps de cada proceso y la
+    latencia de inferencia por cuadro.
+  </p>
+
+  <h2>Del cuadro al evento</h2>
+  <p>
+    El núcleo en Rust convierte detecciones sueltas en eventos: tres algoritmos de seguimiento elegibles desde la
+    configuración (BoT-SORT, ByteTrack e Hybrid-SORT), un filtro de Kalman que sostiene el rastro en oclusiones
+    breves y la validación de zonas y cruces de línea en cada cuadro, sin pasar por Python. Con SAHI divide el cuadro
+    en ventanas para detectar objetos pequeños.
+  </p>
+
+  <h2>Stack</h2>
   <div class="table-wrap">
     <table>
       <thead>
