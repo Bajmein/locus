@@ -9,12 +9,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Caja de detección en el título de cada página de proyecto (con la clase de su grupo y un rótulo encima) y, sin detección, en la 404.
+- Contacto: «Conversemos» cierra con el cursor del logo y entra con un barrido ligado al scroll.
+- Tests de los antetítulos de la portada y de la caja de detección en portada, proyectos y 404.
 - Páginas de proyecto: tarjeta «Siguiente proyecto» al final, en orden cíclico y con el tono e ícono del proyecto siguiente.
 - Contacto: botón «Copiar correo» (solo con JavaScript y portapapeles disponibles, con aviso accesible) y enlace para descargar el CV en PDF.
 - Tests del enlace al proyecto siguiente, la sección activa y el logo de la cabecera, el método de `#agentes`, el contacto y los títulos en español.
 
 ### Changed
 
+- Rediseño «Vigilia nocturna» (azul noche, titular ancho en Archivo, caja de detección sobre el nombre, consola del ciclo de un cambio y tarjetas en mosaico con marca de agua), integrado con la voz técnica del diseño anterior.
+- Tipografía: Archivo solo en display y títulos; vuelve Geist para el texto y la interfaz; rótulos en Geist Mono y en mayúsculas.
+- Títulos de sección con antetítulo y una barra del acento que crece al entrar en pantalla; el de `#agentes` vuelve a «De la especificación a la memoria» y la navegación dice «Agentes».
+- Paneles glass translúcidos (consola, «Ahora», ficha de proyecto, diagramas, 404) con respaldo sólido, cabecera glass al 85 % y grilla fina en el hero.
+- Tarjetas que aparecen al hacer scroll, se elevan al pasar el cursor y muestran «Ver proyecto →» con la flecha que avanza; marca de agua más chica y tenue.
+- Páginas de proyecto: `h2` del cuerpo en el tipo de los titulares, con la barra del tono.
+- CV en PDF regenerado con la nueva tipografía.
 - Portada: la sección «Cómo decido» se integra en el método de `#agentes`, que pasa a seis ítems en tres columnas; las cifras de la línea de tiempo quedan alineadas al pie.
 - Hero con jerarquía en dos párrafos (titular en el color del texto y bajada atenuada); tarjetas de proyecto con íconos más grandes, «Ver proyecto» en lugar de la flecha sola y más aire en las de agentes.
 - Páginas de proyecto: la ficha lateral muestra el período en vez de repetir el stack.
@@ -22,6 +32,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Diagramas en su composición ancha en escritorio: la columna de prosa mide 46rem y ya no depende de la fuente.
+- Móvil: el riel de `#agentes` sin huecos y con su relleno vertical, la caja de detección dentro del margen lateral y «fabrik + episteme» en una sola línea en la consola.
+- Marca de agua de las tarjetas fuera del texto y más tenue al pasar el cursor.
 - Cabecera: enlaces con 44 px de alto como objetivo táctil, «Proyectos» marcado como sección activa en las páginas de proyecto y logo con nombre accesible que incluye su texto visible.
 - Títulos de las páginas de proyecto con mayúsculas en español («El problema», «La solución», «El ciclo de vida», «Estado del proyecto», «Stack técnico»).
 
