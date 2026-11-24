@@ -1,8 +1,8 @@
 # DESIGN.md — Locus
 
 Dirección «Vigilia nocturna»: el cielo de noche de La Serena y una lámpara ámbar encendida. El sitio
-muestra a un ingeniero que construye herramientas para agentes de IA y sistemas de visión por
-computador; el diseño toma su vocabulario de esos dos mundos (la caja de detección y el registro de
+muestra a un ingeniero a cargo del área de TI de un grupo de empresas, con especialidad en agentes de IA
+y visión por computador; el diseño toma su vocabulario de esos dos mundos (la caja de detección y el registro de
 un agente) en vez de decorar con recursos genéricos.
 
 Esta dirección no se basó en ejemplos de sitios reales (la biblioteca UXKIN no estaba conectada):
@@ -84,7 +84,9 @@ Escala: 13 · 14 · 15,5 · 17 · 20–24 (lead) · 28–44 (tarjetas) · 32–5
   1 px al 22 % y etiqueta mono sobre el acento; se fija al cargar. En móvil sobresale menos para no
   salirse del gutter. Variante `.is-miss` (404, «sin detección»): contorno discontinuo y todo en
   `--muted`.
-- **Consola** (`.console`): panel con el ciclo de un cambio; verbo en ámbar, estado en verde.
+- **Consola** (`.console`): panel con el ciclo de un requerimiento; verbo en ámbar, estado en verde.
+- **Qué hago** (`#areas`): tres fortalezas en la lista `.method` (tres columnas con líneas de 1 px, `h3`).
+- **Trabajo actual** (`#ti`): funciones del cargo con `Capabilities` (`dl.caps`, dos columnas).
 - **Tarjeta de proyecto**: superficie sólida (no glass: la marca de agua necesita un fondo parejo),
   tono del proyecto, ícono, marca de agua del ícono en la esquina (12rem, 15rem en agentes; 6 %, 14 %
   al pasar el cursor) con el texto fuera de ella, filo superior que crece, elevación de 3 px y «Ver
