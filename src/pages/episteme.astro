@@ -3,6 +3,8 @@ import Project from '../layouts/Project.astro';
 import { getProject } from '../data/projects';
 import EpistemeDiagram from '../components/diagrams/EpistemeDiagram.astro';
 import Capabilities from '../components/Capabilities.astro';
+import { Image } from 'astro:assets';
+import grafo from '../assets/images/episteme/grafo-vault.png';
 
 const capabilities = [
   {
@@ -72,6 +74,25 @@ const p = getProject('episteme');
     <li>El vault es una carpeta de notas Markdown que el usuario puede leer y editar.</li>
   </ol>
 
+  <h2>El vault en uso</h2>
+  <p>
+    Las notas no quedan sueltas: cada memoria se enlaza con las decisiones, los proyectos y la documentación con
+    que se relaciona, y episteme sigue esos enlaces al buscar y al leer.
+  </p>
+  <figure class="graph glass">
+    <Image
+      src={grafo}
+      alt="Vista de grafo del vault: puntos agrupados en varios núcleos de colores, unidos por líneas finas."
+      widths={[640, 960, 1345]}
+      sizes="(min-width: 48rem) 46rem, 100vw"
+      loading="lazy"
+    />
+    <figcaption>
+      Vista de grafo del vault que uso a diario, en Obsidian. Cada punto es una nota y cada línea, un enlace entre
+      dos notas; los colores separan grupos de notas y los puntos más grandes son los más enlazados.
+    </figcaption>
+  </figure>
+
   <h2>Capacidades</h2>
   <Capabilities items={capabilities} />
 
@@ -87,3 +108,22 @@ const p = getProject('episteme');
     </table>
   </div>
 </Project>
+
+<style>
+  .graph {
+    margin: 2rem 0;
+    padding: 0.75rem;
+  }
+  .graph img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius);
+  }
+  .graph figcaption {
+    margin-top: 0.75rem;
+    padding-inline: 0.25rem;
+    color: var(--muted);
+    font-size: 0.875rem;
+  }
+</style>
