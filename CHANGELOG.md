@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Portada: sin el espacio sobrante sobre «Conversemos» ni saltos al hacer scroll. Se quita la carga diferida
+  (`content-visibility: auto` con `contain-intrinsic-size: 36rem`) de Trayectoria y Contacto, que reservaba una altura
+  distinta de la real.
+
 ## [0.4.0] - 2026-11-24
 
 ### Added
