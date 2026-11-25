@@ -1237,13 +1237,14 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
     transform-origin: left;
   }
 
-  /* Ficha que viaja por el riel con el scroll */
+  /* Ficha que viaja por el riel: caja de ancho 0 que avanza con left (un translateX(100%) sobre una caja del
+     ancho del riel la dejaba fuera de la página y creaba scroll horizontal) */
   .token {
     position: absolute;
     top: 0.5rem;
     left: 0;
-    right: 0;
     z-index: 2;
+    width: 0;
     height: 0;
     pointer-events: none;
     display: none;
@@ -1346,20 +1347,16 @@ const kind = { agentes: 'Agentes de IA', vision: 'Visión por computador' } as c
 
     .trail-wrap.is-armed .token {
       display: block;
-      transform: translateX(0);
-    }
-
-    .trail-wrap.is-armed.is-in .trail::after,
-    .trail-wrap.is-armed.is-in .token {
-      transition: transform 2.8s cubic-bezier(0.45, 0, 0.25, 1);
     }
 
     .trail-wrap.is-armed.is-in .trail::after {
       transform: scaleX(1);
+      transition: transform 2.8s cubic-bezier(0.45, 0, 0.25, 1);
     }
 
     .trail-wrap.is-armed.is-in .token {
-      transform: translateX(100%);
+      left: 100%;
+      transition: left 2.8s cubic-bezier(0.45, 0, 0.25, 1);
     }
   }
 
