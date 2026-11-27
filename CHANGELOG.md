@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- episteme al día con su v0.23.0: la comparten Claude Code, Gemini (con agy) y GitHub Copilot CLI. Cambian la
+  metadescripción, el tagline, la tarjeta, el texto del riel, «La solución», las capacidades (cada memoria anota qué
+  agente la guardó, las normas antes de editar son de Claude Code y cada plan aprobado queda copiado) e «Instalación»,
+  que suma `/episteme:copilot`. La versión pasa a v0.23 en la página, la portada («Ahora») y el CV. La prueba de la
+  página exige `/episteme:copilot` y ya no veta «Copilot» (sí «Codex»).
+- Cifras del trabajo con agentes al 27 de noviembre de 2026: episteme con 412 commits y 198 pull requests (124 del
+  repositorio anterior y 74 del público); 754 commits y 294 pull requests entre las tres herramientas. PDF del CV
+  regenerado.
+
 ### Fixed
 
 - Portada: sin scroll horizontal en escritorio. El punto que recorre el riel de «Cómo trabajo con agentes de IA»

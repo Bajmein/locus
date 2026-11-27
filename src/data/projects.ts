@@ -39,9 +39,9 @@ export const projects: Project[] = [
     slug: 'episteme',
     title: 'episteme',
     description:
-      'episteme: una memoria de proyecto curada que comparten tus agentes de IA (Claude Code y Gemini), servida por MCP desde notas Markdown locales.',
-    tagline: 'Una sola memoria de proyecto, curada, que comparten tus agentes: lo que decide Claude lo sabe Gemini en la sesión siguiente.',
-    status: 'En uso diario — v0.21 (noviembre de 2026). Linux, macOS y Windows. Código abierto con licencia MIT.',
+      'episteme: una memoria de proyecto curada que comparten Claude Code, Gemini y Copilot CLI, servida por MCP desde notas Markdown locales.',
+    tagline: 'Una sola memoria de proyecto, curada, para todos tus agentes: lo que se decide con Claude Code lo saben Gemini y Copilot CLI en la sesión siguiente.',
+    status: 'En uso diario — v0.23 (noviembre de 2026). Linux, macOS y Windows. Código abierto con licencia MIT.',
     stack: ['Python', 'MCP', 'SQLite FTS5', 'Markdown'],
     sourceUrl: 'https://github.com/Bajmein/episteme',
     group: 'agentes',
@@ -54,9 +54,9 @@ export const projects: Project[] = [
     ],
     period: 'Octubre de 2026 – actualidad',
     card: {
-      text: 'Una memoria de proyecto curada que comparten Claude Code y Gemini: decisiones, normas y estado del trabajo entre sesiones, en Markdown local.',
+      text: 'Una memoria de proyecto curada que comparten Claude Code, Gemini y Copilot CLI: decisiones, normas y estado del trabajo entre sesiones, en Markdown local.',
       stack: ['Python', 'MCP', 'SQLite FTS5'],
-      proof: `Código abierto · Claude Code y Gemini · ${getStep('episteme').commits} commits`,
+      proof: `Código abierto · Claude Code, Gemini y Copilot · ${getStep('episteme').commits} commits`,
     },
   },
   {
