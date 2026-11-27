@@ -17,13 +17,13 @@ export interface TrailStep {
 }
 
 /** Fecha de las cifras, tal como se cita en el sitio */
-export const figuresDate = '24 de noviembre de 2026';
+export const figuresDate = '27 de noviembre de 2026';
 
 /**
  * episteme abrió su código en un repositorio nuevo: sus PR suman los del repositorio anterior (privado) y los del
  * público; sus commits son los del público, que conserva la historia.
  */
-export const epistemePrs = { before: 124, public: 52 };
+export const epistemePrs = { before: 124, public: 74 };
 
 export const trail: TrailStep[] = [
   {
@@ -48,8 +48,8 @@ export const trail: TrailStep[] = [
     slug: 'episteme',
     name: 'episteme',
     period: 'Octubre de 2026 – actualidad',
-    text: 'Resolvió lo que seguía faltando entre cambios: una memoria curada, con normas por archivo, que comparten Claude Code y Gemini desde notas Markdown locales.',
-    commits: 390,
+    text: 'Resolvió lo que seguía faltando entre cambios: una memoria curada, con normas por archivo, que comparten Claude Code, Gemini y Copilot CLI desde notas Markdown locales.',
+    commits: 412,
     prs: epistemePrs.before + epistemePrs.public,
     href: '/episteme/',
     note: 'En uso diario',

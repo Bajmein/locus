@@ -458,9 +458,10 @@ test('episteme: medición de embeddings, instalación y sin afirmaciones vetadas
   assert.equal(count(bars, /<th scope="row"/g), 3, 'episteme: el gráfico tiene tres filas');
   assert.ok(html.includes('scripts/measure_semantic.py'), 'episteme: falta el enlace a measure_semantic.py');
   assert.ok(html.includes('claude plugin marketplace add Bajmein/episteme'), 'episteme: falta el comando de instalación');
+  assert.ok(html.includes('/episteme:copilot'), 'episteme: falta la activación de Copilot CLI');
   const caps = html.slice(html.indexOf('class="caps'), html.indexOf('</dl>', html.indexOf('class="caps')));
   assert.equal(count(caps, /<dt\b/g), 6, 'episteme: seis capacidades');
-  for (const banned of ['no salen de la máquina', 'Codex', 'Copilot', '<!--']) {
+  for (const banned of ['no salen de la máquina', 'Codex', '<!--']) {
     assert.ok(!html.includes(banned), `episteme: no debe contener «${banned}»`);
   }
 });

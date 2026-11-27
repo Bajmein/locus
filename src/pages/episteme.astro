@@ -15,11 +15,11 @@ const poster = await getImage({ src: grafoPoster, format: 'webp', width: 960 });
 const capabilities = [
   {
     title: 'Memoria compartida entre agentes',
-    text: 'Claude Code y Gemini consultan y amplían la misma memoria del proyecto: lo que decide uno, el otro lo sabe en la sesión siguiente.',
+    text: 'Claude Code, Gemini (con agy) y GitHub Copilot CLI consultan y amplían la misma memoria del proyecto, y cada memoria anota qué agente la guardó.',
   },
   {
     title: 'Normas antes de editar',
-    text: 'Antes de editar un archivo, el agente ve las normas que le aplican y, después, lo que ya se sabe de él.',
+    text: 'En Claude Code, antes de editar un archivo, el agente ve las normas que le aplican y, después, lo que ya se sabe de él.',
   },
   {
     title: 'Memoria curada',
@@ -27,7 +27,7 @@ const capabilities = [
   },
   {
     title: 'Continuidad del trabajo',
-    text: 'El estado del trabajo sobrevive a /compact y a /clear: se guarda al compactar y se recupera al seguir.',
+    text: 'El estado del trabajo sobrevive a /compact y a /clear: se guarda al compactar y se recupera al seguir. Cada plan aprobado queda copiado en el vault.',
   },
   {
     title: 'Local y legible',
@@ -74,8 +74,9 @@ const step = getStep('episteme');
   <p>
     episteme da a tus agentes una sola memoria de proyecto, curada: una carpeta de notas Markdown, el vault, con las
     decisiones, las lecciones, las normas y la documentación de cada proyecto. Claude Code la usa completa, con hooks
-    que la consultan en momentos fijos de la sesión; Gemini, con agy, usa las mismas herramientas, sin automatismos.
-    Lo que decide Claude lo sabe Gemini en la sesión siguiente. Las notas son archivos del usuario: se abren con
+    que la consultan en momentos fijos de la sesión; Gemini, con agy, y GitHub Copilot CLI usan las mismas
+    herramientas y reciben la bienvenida al empezar y el contexto de cada mensaje. Lo que se decide con Claude Code lo
+    saben los otros en la sesión siguiente. Las notas son archivos del usuario: se abren con
     Obsidian o con cualquier editor, y episteme no usa servicios en la nube.
   </p>
 
@@ -202,7 +203,8 @@ claude plugin install episteme@episteme</code></pre>
     Después, en cada proyecto, <code>/episteme:setup</code> registra el servidor, configura los hooks y los permisos
     y añade la regla al CLAUDE.md; antes de escribir, muestra los cambios para que los apruebes. También se puede
     registrar a mano con <code>claude mcp add</code>, fijado a una versión. Con Gemini, <code>/episteme:agy</code>
-    activa agy en el proyecto.
+    activa agy en el proyecto, y <code>/episteme:copilot</code> hace lo mismo con GitHub Copilot CLI: los dos conectan
+    el servidor y dejan los hooks de bienvenida y de contexto por mensaje.
   </p>
 
   <h2>Stack</h2>
@@ -226,7 +228,7 @@ claude plugin install episteme@episteme</code></pre>
 
   <h2>Estado del proyecto</h2>
   <p>
-    <strong>En uso diario — v0.21.</strong> Entre octubre y noviembre de 2026 sumó {step.commits} commits y
+    <strong>En uso diario — v0.23.</strong> Entre octubre y noviembre de 2026 sumó {step.commits} commits y
     {step.prs} pull requests fusionados: {epistemePrs.before} antes de abrir el código y {epistemePrs.public} en el
     repositorio público (cifras de GitHub al {figuresDate}). Es también la memoria de este sitio: las decisiones de su
     diseño y de su contenido están guardadas en el vault.
