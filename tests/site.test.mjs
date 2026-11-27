@@ -310,6 +310,7 @@ test('cabecera: sección activa y logo con nombre accesible', () => {
     const brand = read(rel).match(/<a class="brand"[^>]*>/)?.[0];
     assert.ok(brand, `${rel}: falta el logo`);
     assert.doesNotMatch(brand, /aria-label/, `${rel}: el logo no usa aria-label`);
+    assert.match(brand, /data-nosnippet/, `${rel}: el logo lleva data-nosnippet`);
   }
 });
 
@@ -405,6 +406,7 @@ test('caja de detección en portada, proyectos y 404', () => {
   const files = ['index.html', 'vigilia/index.html', 'vigilia-edge/index.html', 'pulse/index.html', 'episteme/index.html', '404.html'];
   for (const file of files) {
     assert.ok(read(file).includes('class="bbox'), `${file}: falta la caja de detección`);
+    assert.match(read(file), /<span class="bbox[^"]*"[^>]*data-nosnippet/, `${file}: la caja lleva data-nosnippet`);
   }
   assert.match(read('404.html'), /class="bbox[^"]*\bis-miss\b/, '404: la caja debe ser .is-miss');
   for (const slug of ['vigilia', 'vigilia-edge', 'pulse', 'episteme']) {

@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Fragmento en los buscadores: el logo y la caja de detección llevan `data-nosnippet`, para que el resultado no empiece con «bc_ Benjamín Criado, inicio» ni «persona 0,99».
 - Favicon en `/favicon.ico` (16, 32 y 48 px) y `apple-touch-icon.png`, para que Google y Brave muestren el logo
   en los resultados.
 - Portada: sin scroll horizontal en escritorio. El punto que recorre el riel de «Cómo trabajo con agentes de IA»
