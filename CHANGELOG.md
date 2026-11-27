@@ -20,6 +20,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Favicon en `/favicon.ico` (16, 32 y 48 px) y `apple-touch-icon.png`, para que Google y Brave muestren el logo
+  en los resultados.
 - Portada: sin scroll horizontal en escritorio. El punto que recorre el riel de «Cómo trabajo con agentes de IA»
   avanzaba con `translateX(100%)` sobre una caja del ancho del riel, que al terminar quedaba fuera de la página y la
   ensanchaba (de 1835 a 2711 px en una ventana de 1850). Ahora es una caja de ancho 0 que avanza con `left`.

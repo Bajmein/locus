@@ -260,6 +260,9 @@ test('página de proyecto: enlaza al proyecto siguiente', () => {
 test('CNAME y robots.txt', () => {
   assert.equal(read('CNAME').trim(), 'benjamincriado.dev');
   assert.match(read('robots.txt'), /Sitemap: https:\/\/benjamincriado\.dev\/sitemap-index\.xml/);
+  for (const icon of ['favicon.ico', 'favicon.svg', 'apple-touch-icon.png']) {
+    assert.ok(existsSync(join(DIST, icon)), `falta ${icon}`);
+  }
 });
 
 test('privacidad: ningún HTML ni texto filtra datos que no deben publicarse', () => {
