@@ -39,7 +39,7 @@ La dirección completa (tokens, tipografía, componentes y movimiento) está en 
 - Paneles glass (`.glass`: superficie al 78 %, borde de 1 px, `--radius-lg`, desenfoque) con respaldo sólido sin `backdrop-filter` o con `prefers-reduced-transparency`; la cabecera, glass al 85 %. Las tarjetas de proyecto siguen sólidas. El resto se separa con líneas de 1 px. Sin sombras exteriores. Grilla fina solo en el hero.
 - Movimiento con CSS nativo y como mejora progresiva (`animation-timeline`, `@view-transition`): una sola secuencia de carga en el hero (y la caja de detección en proyectos y 404); el resto responde al scroll o al cursor. Todo debe verse completo con `prefers-reduced-motion`.
 - Tipografía: Archivo Variable (`--font-display`, ancho 112–118 %) solo en display y títulos; Geist Variable en texto e interfaz; Geist Mono en rótulos (`.label`, mayúsculas, 13 px) y en cifras, stack y código. Autoalojadas (`@fontsource-variable`); solo se precarga Archivo.
-- Títulos de sección con antetítulo `.label` y barra del acento debajo. La caja de detección (`.target` + `.bbox`, variante `.is-miss`) está en `global.css` y marca el hero, los títulos de proyecto y la 404.
+- Títulos de sección con antetítulo `.label` y barra del acento debajo. La caja de detección (`.target` + `.bbox`, variante `.is-miss`) está en `global.css` y marca el hero, los títulos de proyecto y la 404; lleva `data-nosnippet` (igual que el logo de la cabecera) para no entrar en el fragmento de los buscadores.
 - Sin scroll horizontal en móvil; sin menú hamburguesa.
 
 ## Reglas de contenido
